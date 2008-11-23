@@ -1,0 +1,21 @@
+{
+    IBClasses = (
+        {CLASS = CoverArtView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {buy = id; }; 
+            CLASS = CoverViewerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mAlbum = NSTextField; 
+                mArtist = NSTextField; 
+                mBuyButton = NSButton; 
+                mCoverArtView = CoverArtView; 
+                mWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PWMusicTextField; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }
+    ); 
+    IBVersion = 1; 
+}

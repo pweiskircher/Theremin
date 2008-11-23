@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>autoreconnect</key>
+	<true/>
+	<key>coverArtLocale</key>
+	<string>de</string>
+	<key>enableCoverArt</key>
+	<false/>
+	<key>pauseOnSleep</key>
+	<false/>
+	<key>mpdPort</key>
+	<integer>6600</integer>
+	<key>mpdServer</key>
+	<string>localhost</string>
+	<key>NoConfirmationNeededForDeletionOfPlaylist</key>
+	<false/>
+	<key>appleRemoteMode</key>
+	<integer>1</integer>
+	<key>playlistDrawerOpen</key>
+	<false/>
+	<key>playlistDrawerWidth</key>
+	<real>160</real>
+	<key>libraryDoubleClickAction</key>
+	<integer>0</integer>
+	<key>showGenreInLibrary</key>
+	<false/>
+	<key>SongLibraryTableInfos Customizable Columns</key>
+	<array>
+		<dict>
+			<key>identifier</key>
+			<string>disc</string>
+			<key>state</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>playlistTableInfos Customizable Columns</key>
+	<array>
+		<dict>
+			<key>identifier</key>
+			<string>disc</string>
+			<key>state</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

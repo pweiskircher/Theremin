@@ -1,0 +1,3 @@
+#ifndef LIBMPD_VERSION
+#define LIBMPD_VERSION "@VERSION@"
+#endif

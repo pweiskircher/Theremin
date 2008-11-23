@@ -1,0 +1,170 @@
+  Thermein 0.5.3.2:
+    * fixed memory leaks.
+    * keyboard shortcuts in library work again.
+
+  Theremin 0.5.3.1:
+    * Batch re-setting of compilation info on import. This fixes a crash on startup experienced by some users.
+
+  Theremin 0.5.3:
+    * More code cleanup.
+    * Added a 'Unknown Genre'.
+    * Context Menu in Library works again. Also fixed some bugs concerning the Library.
+    * Volume Slider can be changed using mousewheel now.
+    * Clicking on the icon next to the volume slider now mutes MPD.
+    * Added a 'x songs, xx:xx total time' label to the main Theremin window.
+    * Performance for large libraries should be back to pre-0.5.2 speeds.
+    * Various bugfixes regarding the library.
+    * Added Cut, Copy and Paste back to the Edit menu.
+
+  Theremin 0.5.2:
+    * Added optional Genre browser to Library
+    * Removing columns works on Leopard again.
+      Due to this change, all the table customizations are lost.
+      There was unfortunately no easy way to keep them.
+    * Lot of code refactoring.
+
+  Theremin 0.5.1.1:
+    * Apple Remote works on Leopard. Couldn't test it on Tiger.
+    * Volume Slider fixes.
+    * Song information fixes.
+
+  Theremin 0.5.1:
+    * If no title is set, title search will match the filename.
+    * Scrollbars in Library will not automatically hide.
+    * Searching now works keyword based. If you want to search for multiple words in the correct order, use 
+      double-quotes.
+    * Added Setting to choose if double click in the Library appends or replaces.
+    * You can now drag and drop a named playlist to append the named playlist to your playlist.
+    * Many bugfixes concerning the new Library.
+    * Select All in the Library Album/Artist view now just selects the first row (like iTunes)
+    * Don't display growl notifications for the same song. This was a problem with unstable connections to the mpd server.
+      Patch came from sfiera <chpickel@stwing.upenn.edu> - thanks.
+    * Don't delay growl notices if cover art is disabled. Patch again from sfiera <chpickel@stwing.upenn.edu> - thanks.
+    * The Song-Info window now works more like a mac dialog. OK button is gone. And you can open as many as you like.
+
+  Theremin 0.5.0.1:
+    * Fixed a serious bug while importing the Library (Library was empty after Theremin restart).
+
+  Theremin 0.5.0:
+    * Rewrite of the Library code. It is now based on SQLite3. Should perform much better, especially while importing.
+	* Added Disc column.
+	* If no Title is set, use last component of filename.
+	* Prepared Theremin for localization.
+	* Fixed some serious bugs.
+	* Theremin can now detect Compilations to group them like iTunes. It is also configurable in the Library by
+	  right clicking on Songs.
+	* Select All works correct again.
+	* If playing a song without correct time tags (f.e. a webstream) don't show some invalid values.
+	* If library changes, the selection for artist and album are kept.
+	* Use new implementation of Amazon Web Services. Should be much more robust now.
+	* Delete key works again to delete songs in the playlist.
+	* Try to fetch coverart before sending notice to Growl.
+	* Don't try to fetch coverart if no artist or album is set.
+
+  Theremin 0.4.0:
+    * Theremin now got an icon! Thanks to Jonas Ohlsson.
+	* Many icons are a bit cleaner than before. Also, thanks to Jonas Ohlsson.
+	* Added Volume Control into Menu with Shortcut Command-Up and Command-Down.
+	* If you click on a Growl notification, Theremin is activated and
+	  the player window appears.
+	* Save playlist drawer state and width.
+	* Get Info window for songs in Library and Playlist.
+	* Cover Art images can be dragged to iTunes.
+	* Columns in Playlist and Library are now configurable.
+	* Added Progress indicator to Cover View.
+	* Space now works alost everywhere to Play/Pause.
+	* Fixed order in which Widgets get focused on pressing Tab.
+	* Pressing Left/Right skips to the Previous/Next song.
+	* On Searching in the Library, focus the Songview. Pressing Escape
+	  Cancels search.
+	* On Connect, the currently playing song will be selected and scrolled to.
+	* On Randomize, the currently playing song will be selected and scrolled to.
+	* If you replace all files in the playlist, the new currently playing song
+	  will be selected.
+	* On skipping to next/previous album, the new currently playing song will
+	  be selected and scrolled to.
+
+  Theremin 0.3.6:
+    * Pressing Escape after searching in the playlist cancels the search.
+	* Don't nag about reading the password on entering preferences
+	* Apple Remote support changes: added options to control when
+	  apple remote support is enabled (when focused, always, never).
+	  If you press and hold the volume key, it behaves correctly now
+	* Support for Saving/Loading/Deleting playlists
+	* Support for randomizing current playlist. Advantage over using Shuffle
+	  is that you know which song will play next and can also change it.
+	* Fixed notification when database is updated remotely.
+
+  Theremin 0.3.5:
+    * Preliminary Growl support
+	* Play/Pause with Spacebar works again
+	* If Albums are selected, keep the selection if the artist changes.
+	  This is currently limited to 20 albums - otherwise its too slow.
+	* If you right-click in the library the entry under the mouse cursor
+	  will be selected now.
+	* Using Option-Enter in Library appends Songs to the Playlist
+
+  Theremin 0.3.4:
+    * Fixed major bug: if you unfocused Theremin and focused it again, the status update timer was started
+	  in the wrong thread.
+	* Added Alexis ROBERT's Apple Remote patch.
+	* Using http://www.chatkit.net's UnifiedToolbar for the Mail.app like toolbar buttons instead of my own
+	  implementation
+	* Cover Artwork support
+	* Added option 'Pause on Sleep': Theremin will pause music playback when the Mac goes to sleep and resume
+	  playback after it wakes up again.
+
+  Theremin 0.3.3.1:
+    * Fixed a crash on disconnect/server shutdown.
+
+  Theremin 0.3.3:
+    * Massive code-cleanup
+	* Added support for updating the remote database (Edit -> Update Database)
+
+  Theremin 0.3.2:
+    * After pressing enter in the search field in the playlist, focus the playlist
+	* Pressing Enter on a Song in the playlist starts playing that song
+	* on action characters, don't beep after executing action
+	* Added Select All and Delete into menu
+	* Added Password support
+	* Added Drag and Drop support inside Playlist
+	* Added Drag and Drop support between Library and Playlist
+
+  Theremin 0.3.1:
+    * Added 'Append to Playlist' context menu in Library
+	* Searching in Playlist is now a lot faster
+	* Fixed some big memory leaks
+	* Fixed a bug while searching in Playlist (untagged songs were always found)
+	* Fixed a bug with double clicking on multiple artists if you had many songs with no album tag set.
+
+  Theremin 0.3:
+    * if database updates, update the local library - this doesn't work for me, but seems like a mpd bug on my side.
+	* added search for playlist and library
+	* added 'Show Current Song' menu item with Command-L shortcut
+	* added 'Next Album' and 'Previous Album' Control menu items with Shortcuts Option-Command-Right and Option-Command-Left
+	* if you change songs and the song isn't visible in the playlist, it now scrolls to the song
+
+  Theremin 0.2.1:
+    * Show a Progress Dialog while Library is imported
+	* Added Sparkle Auto Update mechanism
+	* Added Command-K shortcut for 'Connect'
+	* Added Command-D shortcut for 'Disconnect'
+	* Show a bit better what Theremin is doing
+	* Added Shuffle and Repeat menu items (not in status bar due to
+      lack of icons.)
+	* Updated Library Icons so it looks a little bit better. Not perfect yet.
+	  (YES, I'm in need of a icon designer ;)
+
+  Theremin 0.2:
+    * Added Library. You can access it using Command-2 or the Note-Button
+	  in the Playlist window.
+	  To add something from the Library to the playlist, either double-click
+	  on it or press Enter.
+	  Currently its only 'live-searchable' - you focus one list and type
+	  what you want to find.
+	* You can remove songs from the Playlist using Backspace now.
+	* Some volume slider bugs fixed:
+      . Doesn't jump around like crazy while dragging it.
+	  . Set the correct pixmap on connect.
+    * Added seek-slider.
+    * Columns positions are remembered now.	

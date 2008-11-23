@@ -1,0 +1,30 @@
+{
+    IBClasses = (
+        {CLASS = CoverArtView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PWMusicTextField; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
+        {
+            ACTIONS = {close = id; nextSong = id; previousSong = id; }; 
+            CLASS = SongInfoController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mAlbum = NSTextField; 
+                mArtist = NSTextField; 
+                mComment = NSTextField; 
+                mComposer = NSTextField; 
+                mCoverView = CoverArtView; 
+                mDate = NSTextField; 
+                mDisc = NSTextField; 
+                mFilename = NSTextField; 
+                mGenre = NSTextField; 
+                mNextButton = NSButton; 
+                mPanel = NSWindow; 
+                mPreviousButton = NSButton; 
+                mTitle = NSTextField; 
+                mTrackNumber = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

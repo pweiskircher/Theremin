@@ -1,0 +1,2 @@
+SUBDIRS=testcase
+EXTRA_DIST=README
