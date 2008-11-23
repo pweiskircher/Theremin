@@ -1,0 +1,31 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PWTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {
+            ACTIONS = {
+                deleteConfirmationButtonClicked = id; 
+                deleteSelectedPlaylist = id; 
+                loadSelectedPlaylist = id; 
+                refresh = id; 
+                savePlayListAction = id; 
+            }; 
+            CLASS = PlayListFilesController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mDeleteButton = NSButton; 
+                mDeleteConfirmationDoNotAskMeAgainCheckbox = NSButton; 
+                mDeleteConfirmationLabel = NSTextField; 
+                mDeleteConfirmationPanel = NSPanel; 
+                mDrawer = NSDrawer; 
+                mPlayListFilesView = NSTableView; 
+                mProgress = NSProgressIndicator; 
+                mRefresh = NSButton; 
+                mSavePlayListAsPanel = NSPanel; 
+                mSavePlayListName = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }
+    ); 
+    IBVersion = 1; 
+}

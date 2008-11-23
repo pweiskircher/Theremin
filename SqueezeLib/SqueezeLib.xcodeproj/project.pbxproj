@@ -1,0 +1,532 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		431EA5FF0E4F799900062BCD /* SLCLIConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5D40E4F799900062BCD /* SLCLIConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6000E4F799900062BCD /* SLCLIConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5D50E4F799900062BCD /* SLCLIConnection.m */; };
+		431EA6010E4F799900062BCD /* SLAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5D70E4F799900062BCD /* SLAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6020E4F799900062BCD /* SLAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5D80E4F799900062BCD /* SLAlbum.m */; };
+		431EA6030E4F799900062BCD /* SLArtist.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5D90E4F799900062BCD /* SLArtist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6040E4F799900062BCD /* SLArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5DA0E4F799900062BCD /* SLArtist.m */; };
+		431EA6050E4F799900062BCD /* SLPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5DB0E4F799900062BCD /* SLPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6060E4F799900062BCD /* SLPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5DC0E4F799900062BCD /* SLPlayer.m */; };
+		431EA6070E4F799900062BCD /* SLServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5DD0E4F799900062BCD /* SLServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6080E4F799900062BCD /* SLServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5DE0E4F799900062BCD /* SLServer.m */; };
+		431EA6090E4F799900062BCD /* SLTitle.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5DF0E4F799900062BCD /* SLTitle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA60A0E4F799900062BCD /* SLTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5E00E4F799900062BCD /* SLTitle.m */; };
+		431EA60B0E4F799900062BCD /* NSString+CLI.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5E10E4F799900062BCD /* NSString+CLI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA60C0E4F799900062BCD /* NSString+CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5E20E4F799900062BCD /* NSString+CLI.m */; };
+		431EA60D0E4F799900062BCD /* SLCLIAlbumListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5E40E4F799900062BCD /* SLCLIAlbumListRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA60E0E4F799900062BCD /* SLCLIAlbumListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5E50E4F799900062BCD /* SLCLIAlbumListRequest.m */; };
+		431EA60F0E4F799900062BCD /* SLCLIArtistListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5E60E4F799900062BCD /* SLCLIArtistListRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6100E4F799900062BCD /* SLCLIArtistListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5E70E4F799900062BCD /* SLCLIArtistListRequest.m */; };
+		431EA6110E4F799900062BCD /* SLCLICurrentPlaylistListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5E80E4F799900062BCD /* SLCLICurrentPlaylistListRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6120E4F799900062BCD /* SLCLICurrentPlaylistListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5E90E4F799900062BCD /* SLCLICurrentPlaylistListRequest.m */; };
+		431EA6130E4F799900062BCD /* SLCLIListenRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5EA0E4F799900062BCD /* SLCLIListenRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6140E4F799900062BCD /* SLCLIListenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5EB0E4F799900062BCD /* SLCLIListenRequest.m */; };
+		431EA6150E4F799900062BCD /* SLCLIOffsetRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5EC0E4F799900062BCD /* SLCLIOffsetRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6160E4F799900062BCD /* SLCLIOffsetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5ED0E4F799900062BCD /* SLCLIOffsetRequest.m */; };
+		431EA6170E4F799900062BCD /* SLCLIPlayAlbumRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5EE0E4F799900062BCD /* SLCLIPlayAlbumRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6180E4F799900062BCD /* SLCLIPlayAlbumRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5EF0E4F799900062BCD /* SLCLIPlayAlbumRequest.m */; };
+		431EA6190E4F799900062BCD /* SLCLIPlayerListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5F00E4F799900062BCD /* SLCLIPlayerListRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA61A0E4F799900062BCD /* SLCLIPlayerListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5F10E4F799900062BCD /* SLCLIPlayerListRequest.m */; };
+		431EA61B0E4F799900062BCD /* SLCLIPlayerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5F20E4F799900062BCD /* SLCLIPlayerRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA61C0E4F799900062BCD /* SLCLIPlayerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5F30E4F799900062BCD /* SLCLIPlayerRequest.m */; };
+		431EA61D0E4F799900062BCD /* SLCLIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5F40E4F799900062BCD /* SLCLIRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA61E0E4F799900062BCD /* SLCLIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5F50E4F799900062BCD /* SLCLIRequest.m */; };
+		431EA61F0E4F799900062BCD /* SLCLISongInfoRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5F60E4F799900062BCD /* SLCLISongInfoRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6200E4F799900062BCD /* SLCLISongInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5F70E4F799900062BCD /* SLCLISongInfoRequest.m */; };
+		431EA6210E4F799900062BCD /* SLCLITitleListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5F80E4F799900062BCD /* SLCLITitleListRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6220E4F799900062BCD /* SLCLITitleListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5F90E4F799900062BCD /* SLCLITitleListRequest.m */; };
+		431EA6230E4F799900062BCD /* SLSqueezeEventServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5FB0E4F799900062BCD /* SLSqueezeEventServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6240E4F799900062BCD /* SLSqueezeEventServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5FC0E4F799900062BCD /* SLSqueezeEventServer.m */; };
+		431EA6250E4F799900062BCD /* SLSqueezeServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 431EA5FD0E4F799900062BCD /* SLSqueezeServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		431EA6260E4F799900062BCD /* SLSqueezeServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 431EA5FE0E4F799900062BCD /* SLSqueezeServer.m */; };
+		437DEBE30E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 437DEBE10E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.h */; };
+		437DEBE40E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 437DEBE20E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.m */; };
+		439C4FF70E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 439C4FF50E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.h */; };
+		439C4FF80E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 439C4FF60E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.m */; };
+		43A38C130E5468FB00E814F8 /* SLCLICredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A38C110E5468FB00E814F8 /* SLCLICredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A38C140E5468FB00E814F8 /* SLCLICredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A38C120E5468FB00E814F8 /* SLCLICredentials.m */; };
+		43A38C2C0E546A3100E814F8 /* SLCLILoginRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 43A38C2A0E546A3100E814F8 /* SLCLILoginRequest.h */; };
+		43A38C2D0E546A3100E814F8 /* SLCLILoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A38C2B0E546A3100E814F8 /* SLCLILoginRequest.m */; };
+		43E6B4310E51D5D000D141D3 /* SLCLIVolumeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 43E6B42F0E51D5D000D141D3 /* SLCLIVolumeRequest.h */; };
+		43E6B4320E51D5D000D141D3 /* SLCLIVolumeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E6B4300E51D5D000D141D3 /* SLCLIVolumeRequest.m */; };
+		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
+		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		0867D6A5FE840307C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		32DBCF5E0370ADEE00C91783 /* SqueezeLib_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqueezeLib_Prefix.pch; sourceTree = "<group>"; };
+		431EA5D40E4F799900062BCD /* SLCLIConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIConnection.h; sourceTree = "<group>"; };
+		431EA5D50E4F799900062BCD /* SLCLIConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIConnection.m; sourceTree = "<group>"; };
+		431EA5D70E4F799900062BCD /* SLAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAlbum.h; sourceTree = "<group>"; };
+		431EA5D80E4F799900062BCD /* SLAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAlbum.m; sourceTree = "<group>"; };
+		431EA5D90E4F799900062BCD /* SLArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLArtist.h; sourceTree = "<group>"; };
+		431EA5DA0E4F799900062BCD /* SLArtist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLArtist.m; sourceTree = "<group>"; };
+		431EA5DB0E4F799900062BCD /* SLPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPlayer.h; sourceTree = "<group>"; };
+		431EA5DC0E4F799900062BCD /* SLPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPlayer.m; sourceTree = "<group>"; };
+		431EA5DD0E4F799900062BCD /* SLServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLServer.h; sourceTree = "<group>"; };
+		431EA5DE0E4F799900062BCD /* SLServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLServer.m; sourceTree = "<group>"; };
+		431EA5DF0E4F799900062BCD /* SLTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTitle.h; sourceTree = "<group>"; };
+		431EA5E00E4F799900062BCD /* SLTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTitle.m; sourceTree = "<group>"; };
+		431EA5E10E4F799900062BCD /* NSString+CLI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CLI.h"; sourceTree = "<group>"; };
+		431EA5E20E4F799900062BCD /* NSString+CLI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CLI.m"; sourceTree = "<group>"; };
+		431EA5E40E4F799900062BCD /* SLCLIAlbumListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIAlbumListRequest.h; sourceTree = "<group>"; };
+		431EA5E50E4F799900062BCD /* SLCLIAlbumListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIAlbumListRequest.m; sourceTree = "<group>"; };
+		431EA5E60E4F799900062BCD /* SLCLIArtistListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIArtistListRequest.h; sourceTree = "<group>"; };
+		431EA5E70E4F799900062BCD /* SLCLIArtistListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIArtistListRequest.m; sourceTree = "<group>"; };
+		431EA5E80E4F799900062BCD /* SLCLICurrentPlaylistListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLICurrentPlaylistListRequest.h; sourceTree = "<group>"; };
+		431EA5E90E4F799900062BCD /* SLCLICurrentPlaylistListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLICurrentPlaylistListRequest.m; sourceTree = "<group>"; };
+		431EA5EA0E4F799900062BCD /* SLCLIListenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIListenRequest.h; sourceTree = "<group>"; };
+		431EA5EB0E4F799900062BCD /* SLCLIListenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIListenRequest.m; sourceTree = "<group>"; };
+		431EA5EC0E4F799900062BCD /* SLCLIOffsetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIOffsetRequest.h; sourceTree = "<group>"; };
+		431EA5ED0E4F799900062BCD /* SLCLIOffsetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIOffsetRequest.m; sourceTree = "<group>"; };
+		431EA5EE0E4F799900062BCD /* SLCLIPlayAlbumRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIPlayAlbumRequest.h; sourceTree = "<group>"; };
+		431EA5EF0E4F799900062BCD /* SLCLIPlayAlbumRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIPlayAlbumRequest.m; sourceTree = "<group>"; };
+		431EA5F00E4F799900062BCD /* SLCLIPlayerListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIPlayerListRequest.h; sourceTree = "<group>"; };
+		431EA5F10E4F799900062BCD /* SLCLIPlayerListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIPlayerListRequest.m; sourceTree = "<group>"; };
+		431EA5F20E4F799900062BCD /* SLCLIPlayerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIPlayerRequest.h; sourceTree = "<group>"; };
+		431EA5F30E4F799900062BCD /* SLCLIPlayerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIPlayerRequest.m; sourceTree = "<group>"; };
+		431EA5F40E4F799900062BCD /* SLCLIRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIRequest.h; sourceTree = "<group>"; };
+		431EA5F50E4F799900062BCD /* SLCLIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIRequest.m; sourceTree = "<group>"; };
+		431EA5F60E4F799900062BCD /* SLCLISongInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLISongInfoRequest.h; sourceTree = "<group>"; };
+		431EA5F70E4F799900062BCD /* SLCLISongInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLISongInfoRequest.m; sourceTree = "<group>"; };
+		431EA5F80E4F799900062BCD /* SLCLITitleListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLITitleListRequest.h; sourceTree = "<group>"; };
+		431EA5F90E4F799900062BCD /* SLCLITitleListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLITitleListRequest.m; sourceTree = "<group>"; };
+		431EA5FB0E4F799900062BCD /* SLSqueezeEventServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSqueezeEventServer.h; sourceTree = "<group>"; };
+		431EA5FC0E4F799900062BCD /* SLSqueezeEventServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSqueezeEventServer.m; sourceTree = "<group>"; };
+		431EA5FD0E4F799900062BCD /* SLSqueezeServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSqueezeServer.h; sourceTree = "<group>"; };
+		431EA5FE0E4F799900062BCD /* SLSqueezeServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSqueezeServer.m; sourceTree = "<group>"; };
+		437DEBE10E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLICurrentTitleTimeRequest.h; sourceTree = "<group>"; };
+		437DEBE20E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLICurrentTitleTimeRequest.m; sourceTree = "<group>"; };
+		439C4FF50E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIPlayerPlaylistControlTrackIdRequest.h; sourceTree = "<group>"; };
+		439C4FF60E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIPlayerPlaylistControlTrackIdRequest.m; sourceTree = "<group>"; };
+		43A38C110E5468FB00E814F8 /* SLCLICredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLICredentials.h; sourceTree = "<group>"; };
+		43A38C120E5468FB00E814F8 /* SLCLICredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLICredentials.m; sourceTree = "<group>"; };
+		43A38C2A0E546A3100E814F8 /* SLCLILoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLILoginRequest.h; sourceTree = "<group>"; };
+		43A38C2B0E546A3100E814F8 /* SLCLILoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLILoginRequest.m; sourceTree = "<group>"; };
+		43E6B42F0E51D5D000D141D3 /* SLCLIVolumeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLCLIVolumeRequest.h; sourceTree = "<group>"; };
+		43E6B4300E51D5D000D141D3 /* SLCLIVolumeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLCLIVolumeRequest.m; sourceTree = "<group>"; };
+		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DC2EF5B0486A6940098B216 /* SqueezeLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SqueezeLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DC2EF560486A6940098B216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5B0486A6940098B216 /* SqueezeLib.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* SqueezeLib */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				089C1665FE841158C02AAC07 /* Resources */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = SqueezeLib;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */,
+				1058C7B2FEA5585E11CA2CBB /* Other Frameworks */,
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C1665FE841158C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8DC2EF5A0486A6940098B216 /* Info.plist */,
+				089C1666FE841158C02AAC07 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				431EA5D30E4F799900062BCD /* SqueezeBox CLI */,
+				431EA5FA0E4F799900062BCD /* SqueezeServer */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7B0FEA5585E11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7B2FEA5585E11CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0867D6A5FE840307C02AAC07 /* AppKit.framework */,
+				D2F7E79907B2D74100F64583 /* CoreData.framework */,
+				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF5E0370ADEE00C91783 /* SqueezeLib_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		431EA5D30E4F799900062BCD /* SqueezeBox CLI */ = {
+			isa = PBXGroup;
+			children = (
+				431EA5D40E4F799900062BCD /* SLCLIConnection.h */,
+				431EA5D50E4F799900062BCD /* SLCLIConnection.m */,
+				43A38C110E5468FB00E814F8 /* SLCLICredentials.h */,
+				43A38C120E5468FB00E814F8 /* SLCLICredentials.m */,
+				431EA5D60E4F799900062BCD /* Items */,
+				431EA5E10E4F799900062BCD /* NSString+CLI.h */,
+				431EA5E20E4F799900062BCD /* NSString+CLI.m */,
+				431EA5E30E4F799900062BCD /* Requests */,
+			);
+			path = "SqueezeBox CLI";
+			sourceTree = "<group>";
+		};
+		431EA5D60E4F799900062BCD /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				431EA5D70E4F799900062BCD /* SLAlbum.h */,
+				431EA5D80E4F799900062BCD /* SLAlbum.m */,
+				431EA5D90E4F799900062BCD /* SLArtist.h */,
+				431EA5DA0E4F799900062BCD /* SLArtist.m */,
+				431EA5DB0E4F799900062BCD /* SLPlayer.h */,
+				431EA5DC0E4F799900062BCD /* SLPlayer.m */,
+				431EA5DD0E4F799900062BCD /* SLServer.h */,
+				431EA5DE0E4F799900062BCD /* SLServer.m */,
+				431EA5DF0E4F799900062BCD /* SLTitle.h */,
+				431EA5E00E4F799900062BCD /* SLTitle.m */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		431EA5E30E4F799900062BCD /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				43E6B4FE0E51DC5E00D141D3 /* Offset Requests */,
+				43E6B4FD0E51DC3400D141D3 /* Player Requests */,
+				431EA5EA0E4F799900062BCD /* SLCLIListenRequest.h */,
+				431EA5EB0E4F799900062BCD /* SLCLIListenRequest.m */,
+				431EA5F00E4F799900062BCD /* SLCLIPlayerListRequest.h */,
+				431EA5F10E4F799900062BCD /* SLCLIPlayerListRequest.m */,
+				431EA5F40E4F799900062BCD /* SLCLIRequest.h */,
+				431EA5F50E4F799900062BCD /* SLCLIRequest.m */,
+				431EA5F60E4F799900062BCD /* SLCLISongInfoRequest.h */,
+				431EA5F70E4F799900062BCD /* SLCLISongInfoRequest.m */,
+				43A38C2A0E546A3100E814F8 /* SLCLILoginRequest.h */,
+				43A38C2B0E546A3100E814F8 /* SLCLILoginRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		431EA5FA0E4F799900062BCD /* SqueezeServer */ = {
+			isa = PBXGroup;
+			children = (
+				431EA5FB0E4F799900062BCD /* SLSqueezeEventServer.h */,
+				431EA5FC0E4F799900062BCD /* SLSqueezeEventServer.m */,
+				431EA5FD0E4F799900062BCD /* SLSqueezeServer.h */,
+				431EA5FE0E4F799900062BCD /* SLSqueezeServer.m */,
+			);
+			path = SqueezeServer;
+			sourceTree = "<group>";
+		};
+		43E6B4FD0E51DC3400D141D3 /* Player Requests */ = {
+			isa = PBXGroup;
+			children = (
+				437DEBE10E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.h */,
+				437DEBE20E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.m */,
+				431EA5E80E4F799900062BCD /* SLCLICurrentPlaylistListRequest.h */,
+				431EA5E90E4F799900062BCD /* SLCLICurrentPlaylistListRequest.m */,
+				431EA5EE0E4F799900062BCD /* SLCLIPlayAlbumRequest.h */,
+				431EA5EF0E4F799900062BCD /* SLCLIPlayAlbumRequest.m */,
+				431EA5F20E4F799900062BCD /* SLCLIPlayerRequest.h */,
+				431EA5F30E4F799900062BCD /* SLCLIPlayerRequest.m */,
+				439C4FF50E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.h */,
+				439C4FF60E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.m */,
+				43E6B42F0E51D5D000D141D3 /* SLCLIVolumeRequest.h */,
+				43E6B4300E51D5D000D141D3 /* SLCLIVolumeRequest.m */,
+			);
+			name = "Player Requests";
+			sourceTree = "<group>";
+		};
+		43E6B4FE0E51DC5E00D141D3 /* Offset Requests */ = {
+			isa = PBXGroup;
+			children = (
+				431EA5E40E4F799900062BCD /* SLCLIAlbumListRequest.h */,
+				431EA5E50E4F799900062BCD /* SLCLIAlbumListRequest.m */,
+				431EA5E60E4F799900062BCD /* SLCLIArtistListRequest.h */,
+				431EA5E70E4F799900062BCD /* SLCLIArtistListRequest.m */,
+				431EA5EC0E4F799900062BCD /* SLCLIOffsetRequest.h */,
+				431EA5ED0E4F799900062BCD /* SLCLIOffsetRequest.m */,
+				431EA5F80E4F799900062BCD /* SLCLITitleListRequest.h */,
+				431EA5F90E4F799900062BCD /* SLCLITitleListRequest.m */,
+			);
+			name = "Offset Requests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8DC2EF500486A6940098B216 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				431EA5FF0E4F799900062BCD /* SLCLIConnection.h in Headers */,
+				431EA6010E4F799900062BCD /* SLAlbum.h in Headers */,
+				431EA6030E4F799900062BCD /* SLArtist.h in Headers */,
+				431EA6050E4F799900062BCD /* SLPlayer.h in Headers */,
+				431EA6070E4F799900062BCD /* SLServer.h in Headers */,
+				431EA6090E4F799900062BCD /* SLTitle.h in Headers */,
+				431EA60B0E4F799900062BCD /* NSString+CLI.h in Headers */,
+				431EA60D0E4F799900062BCD /* SLCLIAlbumListRequest.h in Headers */,
+				431EA60F0E4F799900062BCD /* SLCLIArtistListRequest.h in Headers */,
+				431EA6110E4F799900062BCD /* SLCLICurrentPlaylistListRequest.h in Headers */,
+				431EA6130E4F799900062BCD /* SLCLIListenRequest.h in Headers */,
+				431EA6150E4F799900062BCD /* SLCLIOffsetRequest.h in Headers */,
+				431EA6170E4F799900062BCD /* SLCLIPlayAlbumRequest.h in Headers */,
+				431EA6190E4F799900062BCD /* SLCLIPlayerListRequest.h in Headers */,
+				431EA61B0E4F799900062BCD /* SLCLIPlayerRequest.h in Headers */,
+				431EA61D0E4F799900062BCD /* SLCLIRequest.h in Headers */,
+				431EA61F0E4F799900062BCD /* SLCLISongInfoRequest.h in Headers */,
+				431EA6210E4F799900062BCD /* SLCLITitleListRequest.h in Headers */,
+				431EA6230E4F799900062BCD /* SLSqueezeEventServer.h in Headers */,
+				431EA6250E4F799900062BCD /* SLSqueezeServer.h in Headers */,
+				439C4FF70E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.h in Headers */,
+				43E6B4310E51D5D000D141D3 /* SLCLIVolumeRequest.h in Headers */,
+				437DEBE30E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.h in Headers */,
+				43A38C130E5468FB00E814F8 /* SLCLICredentials.h in Headers */,
+				43A38C2C0E546A3100E814F8 /* SLCLILoginRequest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DC2EF4F0486A6940098B216 /* SqueezeLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "SqueezeLib" */;
+			buildPhases = (
+				8DC2EF500486A6940098B216 /* Headers */,
+				8DC2EF520486A6940098B216 /* Resources */,
+				8DC2EF540486A6940098B216 /* Sources */,
+				8DC2EF560486A6940098B216 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SqueezeLib;
+			productInstallPath = "$(HOME)/Library/Frameworks";
+			productName = SqueezeLib;
+			productReference = 8DC2EF5B0486A6940098B216 /* SqueezeLib.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "SqueezeLib" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* SqueezeLib */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DC2EF4F0486A6940098B216 /* SqueezeLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8DC2EF520486A6940098B216 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DC2EF540486A6940098B216 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				431EA6000E4F799900062BCD /* SLCLIConnection.m in Sources */,
+				431EA6020E4F799900062BCD /* SLAlbum.m in Sources */,
+				431EA6040E4F799900062BCD /* SLArtist.m in Sources */,
+				431EA6060E4F799900062BCD /* SLPlayer.m in Sources */,
+				431EA6080E4F799900062BCD /* SLServer.m in Sources */,
+				431EA60A0E4F799900062BCD /* SLTitle.m in Sources */,
+				431EA60C0E4F799900062BCD /* NSString+CLI.m in Sources */,
+				431EA60E0E4F799900062BCD /* SLCLIAlbumListRequest.m in Sources */,
+				431EA6100E4F799900062BCD /* SLCLIArtistListRequest.m in Sources */,
+				431EA6120E4F799900062BCD /* SLCLICurrentPlaylistListRequest.m in Sources */,
+				431EA6140E4F799900062BCD /* SLCLIListenRequest.m in Sources */,
+				431EA6160E4F799900062BCD /* SLCLIOffsetRequest.m in Sources */,
+				431EA6180E4F799900062BCD /* SLCLIPlayAlbumRequest.m in Sources */,
+				431EA61A0E4F799900062BCD /* SLCLIPlayerListRequest.m in Sources */,
+				431EA61C0E4F799900062BCD /* SLCLIPlayerRequest.m in Sources */,
+				431EA61E0E4F799900062BCD /* SLCLIRequest.m in Sources */,
+				431EA6200E4F799900062BCD /* SLCLISongInfoRequest.m in Sources */,
+				431EA6220E4F799900062BCD /* SLCLITitleListRequest.m in Sources */,
+				431EA6240E4F799900062BCD /* SLSqueezeEventServer.m in Sources */,
+				431EA6260E4F799900062BCD /* SLSqueezeServer.m in Sources */,
+				439C4FF80E4F9F0B009AA0C6 /* SLCLIPlayerPlaylistControlTrackIdRequest.m in Sources */,
+				43E6B4320E51D5D000D141D3 /* SLCLIVolumeRequest.m in Sources */,
+				437DEBE40E51E335005E5EA8 /* SLCLICurrentTitleTimeRequest.m in Sources */,
+				43A38C140E5468FB00E814F8 /* SLCLICredentials.m in Sources */,
+				43A38C2D0E546A3100E814F8 /* SLCLILoginRequest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C1666FE841158C02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C1667FE841158C02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91AE08733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SqueezeLib_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = SqueezeLib;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		1DEB91AF08733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SqueezeLib_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				PRODUCT_NAME = SqueezeLib;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		1DEB91B208733DA50010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.4;
+				SYMROOT = ../build;
+			};
+			name = Debug;
+		};
+		1DEB91B308733DA50010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.4;
+				SYMROOT = ../build;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "SqueezeLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91AE08733DA50010E9CD /* Debug */,
+				1DEB91AF08733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "SqueezeLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91B208733DA50010E9CD /* Debug */,
+				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
