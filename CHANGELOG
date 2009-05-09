@@ -3,6 +3,9 @@
     * A lot of refactoring - consider this a beta release.
     * Hidden option: defaults write at.justp.theremin squeezeboxSupportEnabled true
         This enables very, very experimental squeezebox support.
+    * Removed amazon cover art support. As of August 15, one is required to
+      sign the requests using their private key, which I am not willing to embed
+      into an open source app.
 
 
   Theremin 0.5.3.1:
