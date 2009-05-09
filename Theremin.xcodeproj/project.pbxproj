@@ -24,6 +24,8 @@
 		43341FAA0B8BA22500B8804A /* UnifiedToolbarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43341F980B8BA22500B8804A /* UnifiedToolbarItemView.m */; };
 		43341FAC0B8BA22500B8804A /* UnifiedToolbarLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43341F9A0B8BA22500B8804A /* UnifiedToolbarLabelCell.m */; };
 		433FC5ED0B4080F60082058A /* PWWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 433FC5EC0B4080F60082058A /* PWWindow.m */; };
+		4349F3150FB6249300EBB890 /* SqueezeLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
+		4349F3180FB624A800EBB890 /* SqueezeLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
 		434B8BBC0DF154F500B4BD16 /* MultiClickRemoteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BBB0DF154F500B4BD16 /* MultiClickRemoteBehavior.m */; };
 		434B8BE20DF1560F00B4BD16 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BE10DF1560F00B4BD16 /* RemoteControlContainer.m */; };
 		434BBB690C0A42870022E296 /* AWSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 434BBB670C0A42860022E296 /* AWSRequest.m */; };
@@ -92,10 +94,8 @@
 		43B0F92E0B7F412E00F3A951 /* Directory.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F92C0B7F412E00F3A951 /* Directory.m */; };
 		43BF73C90F06F72A00420B56 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73C80F06F72A00420B56 /* Growl.framework */; };
 		43BF73CD0F06F73300420B56 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
-		43BF73FF0F06FA1400420B56 /* SqueezeLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73FA0F06F97A00420B56 /* SqueezeLib.framework */; };
 		43BF74190F06FA5800420B56 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
 		43BF741A0F06FA5800420B56 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73C80F06F72A00420B56 /* Growl.framework */; };
-		43BF741B0F06FA6D00420B56 /* SqueezeLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73FA0F06F97A00420B56 /* SqueezeLib.framework */; };
 		43BF744C0F06FFB000420B56 /* LicenseWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF744A0F06FFB000420B56 /* LicenseWindow.nib */; };
 		43BF74750F0701EB00420B56 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF74730F0701EB00420B56 /* Preferences.nib */; };
 		43BF77780BB52CCD00715336 /* CoverViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF776E0BB52CCD00715336 /* CoverViewer.nib */; };
@@ -177,18 +177,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4365494B0F07B7F5007B0B29 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = SqueezeLib;
-		};
-		43BF73F90F06F97A00420B56 /* PBXContainerItemProxy */ = {
+		4349F2E70FB623E500EBB890 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* SqueezeLib.framework */;
+			remoteInfo = SqueezeLib;
+		};
+		4349F3120FB6247400EBB890 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* SqueezeLib */;
 			remoteInfo = SqueezeLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -200,7 +200,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				43BF741B0F06FA6D00420B56 /* SqueezeLib.framework in CopyFiles */,
+				4349F3150FB6249300EBB890 /* SqueezeLib.framework in CopyFiles */,
 				43BF74190F06FA5800420B56 /* Sparkle.framework in CopyFiles */,
 				43BF741A0F06FA5800420B56 /* Growl.framework in CopyFiles */,
 				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
@@ -377,7 +377,7 @@
 		43B0F92C0B7F412E00F3A951 /* Directory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Directory.m; path = Source/MusicServer/Directory.m; sourceTree = "<group>"; };
 		43BF73C80F06F72A00420B56 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		43BF73CC0F06F73300420B56 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SqueezeLib.xcodeproj; path = ../../../squeezelib/trunk/SqueezeLib.xcodeproj; sourceTree = SOURCE_ROOT; };
+		43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SqueezeLib.xcodeproj; path = ../../squeezelib/trunk/SqueezeLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		43BF744B0F06FFB000420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/LicenseWindow.nib; sourceTree = "<group>"; };
 		43BF74740F0701EB00420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		43BF776F0BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CoverViewer.nib; sourceTree = "<group>"; };
@@ -482,7 +482,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43BF73FF0F06FA1400420B56 /* SqueezeLib.framework in Frameworks */,
+				4349F3180FB624A800EBB890 /* SqueezeLib.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				437BDB270B74F42E001C1057 /* Security.framework in Frameworks */,
 				43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */,
@@ -650,6 +650,14 @@
 			name = UnifiedToolbar;
 			sourceTree = "<group>";
 		};
+		4349F2E40FB623E500EBB890 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4349F2E80FB623E500EBB890 /* SqueezeLib.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4350A2C80B47E6A300EFAE2A /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,14 +802,6 @@
 				43A016910E571A4700AA8198 /* LibrarySongSubController.m */,
 			);
 			path = SubController;
-			sourceTree = "<group>";
-		};
-		43BF73F30F06F97A00420B56 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				43BF73FA0F06F97A00420B56 /* SqueezeLib.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		43BF776D0BB52CB600715336 /* Nib Files */ = {
@@ -1088,7 +1088,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4365494C0F07B7F5007B0B29 /* PBXTargetDependency */,
+				4349F3130FB6247400EBB890 /* PBXTargetDependency */,
 			);
 			name = Theremin;
 			productInstallPath = "$(HOME)/Applications";
@@ -1108,7 +1108,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 43BF73F30F06F97A00420B56 /* Products */;
+					ProductGroup = 4349F2E40FB623E500EBB890 /* Products */;
 					ProjectRef = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
 				},
 			);
@@ -1120,11 +1120,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		43BF73FA0F06F97A00420B56 /* SqueezeLib.framework */ = {
+		4349F2E80FB623E500EBB890 /* SqueezeLib.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SqueezeLib.framework;
-			remoteRef = 43BF73F90F06F97A00420B56 /* PBXContainerItemProxy */;
+			remoteRef = 4349F2E70FB623E500EBB890 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1304,10 +1304,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4365494C0F07B7F5007B0B29 /* PBXTargetDependency */ = {
+		4349F3130FB6247400EBB890 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SqueezeLib;
-			targetProxy = 4365494B0F07B7F5007B0B29 /* PBXContainerItemProxy */;
+			targetProxy = 4349F3120FB6247400EBB890 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1402,7 +1402,7 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../../squeezelib/build/Debug\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../squeezelib/build/Debug\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
