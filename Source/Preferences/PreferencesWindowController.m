@@ -44,7 +44,6 @@
 
 - (void)showPreferences {
 	[mUpdatePopup selectItemWithTag:[_preferencesController updateInterval]];
-	[mCoverArtPopup selectItemWithTag:[_preferencesController coverArtProvider]];
 	
 	[mPreferencesWindow makeKeyAndOrderFront:self];
 }
@@ -58,17 +57,6 @@
 	int tag = [[sender selectedItem] tag];
 	
 	[_preferencesController setUpdateInterval:tag];
-}
-
-- (IBAction) coverArtPopupMenuChanged:(id)sender {
-	int tag = [[sender selectedItem] tag];
-	
-	[_preferencesController setCoverArtProvider:tag];
-	
-	// we have to clear the cache manually as otherwise we don't know if the CoverArtView or the CoverArtCache notification
-	// will be recevied at first..
-	//[[CoverArtCache defaultCache] invalidateCache];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nCoverArtLocaleChanged object:self];
 }
 
 @end

@@ -23,9 +23,6 @@
 #import "MusicServerClient.h"
 #import "ProfileRepository.h"
 
-NSString *nCoverArtLocaleChanged = @"nCoverArtLocaleChanged";
-NSString *nCoverArtEnabledChanged = @"nCoverArtEnabledChanged";
-
 NSString *cImportedOldSettings = @"cImportedOldSettings";
 
 @implementation PreferencesController
@@ -34,11 +31,6 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	self = [super init];
 	if (self != nil) {
 		mUpdater = [aSparkleUpdater retain];
-		
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-																  forKeyPath:@"values.enableCoverArt"
-																	 options:NSKeyValueObservingOptionNew
-																	 context:NULL];		
 	}
 	return self;
 }
@@ -68,14 +60,6 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	[[NSUserDefaultsController sharedUserDefaultsController] commitEditing];
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"values.enableCoverArt"]) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:nCoverArtEnabledChanged
-															object:self];
-	}
-}
-
-
 - (Profile *) currentProfile {
 	if (_currentProfile == nil) {
 		Profile *profile = [ProfileRepository defaultProfile];
@@ -98,50 +82,6 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	_currentProfile = [aProfile retain];
 }
 
-
-- (PWPreferencesCoverArtProvider) coverArtProvider {
-	NSString *coverArtLocale = [self coverArtLocale];
-	if ([coverArtLocale isEqualToString:@"de"])
-		return CoverArtProviderAmazonDe;
-	else if ([coverArtLocale isEqualToString:@"fr"])
-		return CoverArtProviderAmazonFr;
-	else if ([coverArtLocale isEqualToString:@"jp"])
-		return CoverArtProviderAmazonJp;
-	else if ([coverArtLocale isEqualToString:@"uk"])
-		return CoverArtProviderAmazonUk;
-	else if ([coverArtLocale isEqualToString:@"us"])
-		return CoverArtProviderAmazonUs;
-	
-	[NSException raise:NSInternalInconsistencyException format:@"Unknown cover art provider %@", coverArtLocale];
-	return -1;
-}
-
-- (void) setCoverArtProvider:(PWPreferencesCoverArtProvider) aCoverArtProvider {
-	NSString *setting;
-	switch (aCoverArtProvider) {
-		case CoverArtProviderAmazonDe:
-			setting = @"de";
-			break;
-			
-		case CoverArtProviderAmazonFr:
-			setting = @"fr";
-			break;
-			
-		case CoverArtProviderAmazonJp:
-			setting = @"jp";
-			break;
-			
-		case CoverArtProviderAmazonUk:
-			setting = @"uk";
-			break;
-			
-		case CoverArtProviderAmazonUs:
-			setting = @"us";
-			break;
-	}
-	
-	[[NSUserDefaults standardUserDefaults] setValue:setting forKey:@"coverArtLocale"];
-}
 
 - (PWPreferencesUpdateInterval) updateInterval {
 	int checkInterval = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SUScheduledCheckInterval"] intValue];
@@ -187,31 +127,8 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 }
 
 
-- (NSString *) coverArtLocale {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"coverArtLocale"];
-}
-
-
-- (BOOL) coverArtEnabled {
-	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"enableCoverArt"] boolValue];
-}
-
-- (void) setCoverArtEnabled:(BOOL)aValue {
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"enableCoverArt"];
-}
-
-
 - (NSString *) currentServerNameWithPort {
 	return [NSString stringWithFormat:@"%@:%d", [[self currentProfile] hostname], [[self currentProfile] port]];
-}
-
-
-- (BOOL) askedAboutCoverArt {
-	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"askedCoverArt"] boolValue];
-}
-
-- (void) setAskedAboutCoverArt {
-	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"askedCoverArt"];
 }
 
 

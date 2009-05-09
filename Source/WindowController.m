@@ -252,6 +252,7 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) awakeFromNib {
+	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]];
 	[[self preferences] importOldSettings];
 	[self setupProfilesMenu];
 	
@@ -596,7 +597,7 @@ const NSString *dProfile = @"dProfile";
 #pragma mark Actions.
 
 - (IBAction) preferencesClicked:(id)sender {
-	[[[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]] showPreferences];
+	[preferencesWindowController showPreferences];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {

@@ -13,8 +13,6 @@
 #import "Song.h"
 #import "NSStringAdditions.h"
 
-#import "CoverArtView.h"
-#import "AWSController.h"
 
 NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 
@@ -41,16 +39,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 												 selector:@selector(clientDisconnected:)
 													 name:nMusicServerClientDisconnected
 												   object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(coverArtEnabledChanged:)
-													 name:nCoverArtEnabledChanged
-												   object:nil];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(fetchedImageForGrowl:)
-													 name:nFetchedSmallImageForSong
-												   object:nil];
 	}
 	return self;
 }
@@ -66,27 +54,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	mOriginalOriginTitle = [mTitle frame].origin;
 	mOriginalOriginArtist = [mArtist frame].origin;
 	mOriginalOriginProgressLabel = [mProgressLabel frame].origin;
-	
-	if ([[[WindowController instance] preferences] askedAboutCoverArt] == NO) {
-		[[[WindowController instance] preferences] setAskedAboutCoverArt];
-		
-		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Display Album Artwork.", @"First startup dialog asking about enabling of cover art: Title")
-										 defaultButton:NSLocalizedString(@"Enable Album Artwork", @"First startup dialog asking about enabling of cover art: Default Button")
-									   alternateButton:NSLocalizedString(@"Disable Album Artwork", @"First startup dialog asking about enabling of cover art: Alternate Button")
-										   otherButton:nil
-							 informativeTextWithFormat:NSLocalizedString(@"Theremin can automatically show album artwork. Theremin needs to submit information about the currently playing album to Amazon to show the album artwork.", @"First startup dialog asking about enabling of cover art: Informative Text")];
-		int result = [alert runModal];
-		if (result == NSAlertDefaultReturn) {
-			[[[WindowController instance] preferences] setCoverArtEnabled:YES];
-		} else if (result == NSAlertAlternateReturn) {
-			[[[WindowController instance] preferences] setCoverArtEnabled:NO];
-		}
-	}
-	
-	if ([[[WindowController instance] preferences] coverArtEnabled] == NO)
-		[self enableCoverArt:NO];
-	
-	[mCoverArtView setIsClickable:YES];
 }
 
 - (void) growlNotificationWasClicked:(id)clickContext {
@@ -101,45 +68,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 		mGrowlDictionary = [[NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:nGrowlNotificationPlaying], GROWL_NOTIFICATIONS_ALL, [NSArray arrayWithObject:nGrowlNotificationPlaying], GROWL_NOTIFICATIONS_DEFAULT, nil] retain];
 	}
 	return mGrowlDictionary;
-}
-
-- (void) coverArtEnabledChanged:(NSNotification *)notification {
-	if ([[[WindowController instance] preferences] coverArtEnabled] == NO)
-		[self enableCoverArt:NO];
-	else {
-		[self enableCoverArt:YES];
-		[self scheduleUpdate];
-	}
-}
-
-- (void) enableCoverArt:(BOOL)aValue {
-	if (aValue == NO) {
-		[mCoverArtView setHidden:YES];
-		
-		NSPoint point = [mTitle frame].origin;
-		point.x = [mCoverArtView frame].origin.x;
-		[mTitle setFrameOrigin:point];
-		
-		point = [mArtist frame].origin;
-		point.x = [mCoverArtView frame].origin.x;
-		[mArtist setFrameOrigin:point];
-		
-		point = [mProgressLabel frame].origin;
-		point.x = [mCoverArtView frame].origin.x;
-		[mProgressLabel setFrameOrigin:point];
-	} else {
-		[mCoverArtView setHidden:NO];
-		
-		[mTitle setFrameOrigin:mOriginalOriginTitle];
-		[mArtist setFrameOrigin:mOriginalOriginArtist];
-		[mProgressLabel setFrameOrigin:mOriginalOriginProgressLabel];
-		
-		[[mTitle window] display];
-	}
-	
-	[mTitle setNeedsDisplay];
-	[mArtist setNeedsDisplay];
-	[mProgressLabel setNeedsDisplay];
 }
 
 - (void) updateWithTimer:(NSTimer *)timer {
@@ -165,8 +93,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 			[mAlbum setStringValue:@""];
 			[self updateSeekBarWithTotalTime:0];
 			[self updateSeekBarWithElapsedTime:0];
-			
-			[mCoverArtView showCoverForSong:nil];
 			[mLastNotifiedSongIdentifier release], mLastNotifiedSongIdentifier = nil;
 		} else if ([mCurrentSong valid]) {
 			if ([mCurrentSong title] == nil || [[mCurrentSong title] length] == 0) {
@@ -187,14 +113,11 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 				[mAlbum setStringValue:[mCurrentSong album]];
 			else
 				[mAlbum setStringValue:@""];
-			
-			[mCoverArtView showCoverForSong:mCurrentSong];
+
 		} else {
 			[mTitle setStringValue:@""];
 			[mArtist setStringValue:@""];
 			[mAlbum setStringValue:@""];
-			
-			[mCoverArtView showCoverForSong:nil];
 		}
 	} else {
 		[mTitle setStringValue:NSLocalizedString(@"Not connected.", @"Info Area Status Text")];
@@ -203,8 +126,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 
 		[self updateSeekBarWithTotalTime:0];
 		[self updateSeekBarWithElapsedTime:0];
-		
-		[mCoverArtView showCoverForSong:nil];
 	}
 }
 
@@ -291,27 +212,10 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 			[mGrowlTimer release], mGrowlTimer = nil;
 			[mGrowlImage release], mGrowlImage = nil;
 			[mLastNotifiedSongIdentifier release], mLastNotifiedSongIdentifier = nil;
-		
-			if ([[[WindowController instance] preferences] coverArtEnabled]) {
-				[[AWSController defaultController] fetchSmallImageForSong:mCurrentSong];
-		
-				mGrowlTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(sendGrowlInfo:)
-																userInfo:nil repeats:NO] retain];
-			} else {
-				[self sendGrowlInfo:nil];
-			}
+			[self sendGrowlInfo:nil];
 
 			mLastNotifiedSongIdentifier = [[mCurrentSong uniqueIdentifier] copy];
 		}
-	}
-}
-
-- (void) fetchedImageForGrowl:(NSNotification *)notification {
-	// we are too late
-	if (mGrowlTimer == nil) return;
-	
-	if ([[[[notification userInfo] objectForKey:nAWSSongEntry] albumIdentifier] isEqualTo:[mCurrentSong albumIdentifier]]) {
-		[mGrowlImage release], mGrowlImage = [[[notification userInfo] objectForKey:nAWSImageEntry] retain];
 	}
 }
 

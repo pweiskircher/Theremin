@@ -4,10 +4,6 @@
 <dict>
 	<key>squeezeboxSupportEnabled</key>
 	<false/>
-	<key>coverArtLocale</key>
-	<string>de</string>
-	<key>enableCoverArt</key>
-	<false/>
 	<key>pauseOnSleep</key>
 	<false/>
 	<key>NoConfirmationNeededForDeletionOfPlaylist</key>

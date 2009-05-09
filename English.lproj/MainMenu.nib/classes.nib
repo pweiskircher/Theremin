@@ -67,6 +67,35 @@
 			<string>ObjC</string>
 		</dict>
 		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>checkForUpdates</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>SUUpdater</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>MPSlider</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSSlider</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>CoverArtView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
 			<key>CLASS</key>
 			<string>InfoAreaController</string>
 			<key>LANGUAGE</key>
@@ -96,19 +125,6 @@
 			<string>NSObject</string>
 		</dict>
 		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>checkForUpdates</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>SUUpdater</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
 			<key>CLASS</key>
 			<string>PWWindow</string>
 			<key>LANGUAGE</key>
@@ -120,14 +136,6 @@
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSWindow</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>MPSlider</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSSlider</string>
 		</dict>
 		<dict>
 			<key>ACTIONS</key>
@@ -242,14 +250,6 @@
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>CoverArtView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>

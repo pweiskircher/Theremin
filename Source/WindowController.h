@@ -21,6 +21,7 @@
 #import "MusicServerClient.h"
 #import "AppleRemote.h"
 #import "LibraryDataSource.h"
+#import "PreferencesWindowController.h"
 
 @class PreferencesController, PlayListController, PWWindow;
 @class LicenseController, PWVolumeSlider, LibraryController, PWTableView, PWMusicSearchField;
@@ -91,6 +92,8 @@ extern const NSString *dProfile;
 	BOOL mAppleRemoteButtonHeld;
 	
 	RemoteControl *mAppleRemote;
+	
+	PreferencesWindowController *preferencesWindowController;
 }
 
 + (id) instance;

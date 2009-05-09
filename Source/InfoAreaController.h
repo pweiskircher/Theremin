@@ -20,7 +20,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Growl/GrowlApplicationBridge.h"
 
-@class WindowController, Song, CoverArtView;
+@class WindowController, Song;
 
 @interface InfoAreaController : NSObject <GrowlApplicationBridgeDelegate> {
 	IBOutlet NSTextField *mTitle;
@@ -30,8 +30,6 @@
 	IBOutlet NSTextField *mElapsedTime;
 	IBOutlet NSTextField *mRemainingTime;
 	IBOutlet NSSlider *mSeekSlider;
-	
-	IBOutlet CoverArtView *mCoverArtView;
 	
 	IBOutlet NSProgressIndicator *mProgressIndicator;
 	IBOutlet NSTextField *mProgressLabel;
@@ -56,8 +54,6 @@
 - (void) dealloc;
 
 - (NSDictionary *) registrationDictionaryForGrowl;
-
-- (void) enableCoverArt:(BOOL)aValue;
 
 - (void) scheduleUpdate;
 - (void) update;

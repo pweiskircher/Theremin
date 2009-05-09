@@ -18,7 +18,6 @@
  */
 
 #import "SongInfoController.h"
-#import "CoverArtView.h"
 #import "Song.h"
 #import "WindowController.h"
 #import "MusicServerClient.h"
@@ -46,7 +45,6 @@
 }
 
 - (void) awakeFromNib {
-	[mCoverView setIsClickable:YES];
 }
 
 - (void) showSongIndex:(int)index {
@@ -65,8 +63,6 @@
 		NSBeep();
 		return;
 	}
-	
-	[mCoverView showCoverForSong:song];
 	
 	[mAlbum setStringValue:[song album]];
 	[mArtist setStringValue:[song artist]];

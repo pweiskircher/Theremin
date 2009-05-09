@@ -28,7 +28,6 @@
 		4349F3980FB626F200EBB890 /* SqueezeLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
 		434B8BBC0DF154F500B4BD16 /* MultiClickRemoteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BBB0DF154F500B4BD16 /* MultiClickRemoteBehavior.m */; };
 		434B8BE20DF1560F00B4BD16 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BE10DF1560F00B4BD16 /* RemoteControlContainer.m */; };
-		434BBB690C0A42870022E296 /* AWSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 434BBB670C0A42860022E296 /* AWSRequest.m */; };
 		4350F0780F079D4F00FB6EDF /* PreferencesWindowController.m in Resources */ = {isa = PBXBuildFile; fileRef = 4350F0770F079D4F00FB6EDF /* PreferencesWindowController.m */; };
 		4350F0840F07A51100FB6EDF /* ProfileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350F0830F07A51100FB6EDF /* ProfileRepository.m */; };
 		4350F0D90F07A90100FB6EDF /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350F0770F079D4F00FB6EDF /* PreferencesWindowController.m */; };
@@ -106,9 +105,6 @@
 		43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D0126C0B8B66BA00711A1B /* IOKit.framework */; };
 		43D0C8B70C13F25900940B39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D0C8B50C13F25900940B39 /* Localizable.strings */; };
 		43D254AA0B4D80F200660DD9 /* MPSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D254A90B4D80F200660DD9 /* MPSlider.m */; };
-		43D8DDE80B94D116004CEAF9 /* AWSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D8DDE60B94D116004CEAF9 /* AWSController.m */; };
-		43D8DDF10B94D4B4004CEAF9 /* AWSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D8DDEF0B94D4B4004CEAF9 /* AWSEntry.m */; };
-		43D8DE020B94D6D9004CEAF9 /* AWSServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D8DE000B94D6D9004CEAF9 /* AWSServiceRequest.m */; };
 		43DEB58B0F082F3800A791A0 /* SqueezeLibDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DEB58A0F082F3800A791A0 /* SqueezeLibDataSource.m */; };
 		43E03F4C0E509116009358D9 /* SqueezeLibMusicServerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E03F4B0E509116009358D9 /* SqueezeLibMusicServerClient.m */; };
 		43E24D0D0D21FA7300D882B1 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E24D0C0D21FA7300D882B1 /* Carbon.framework */; };
@@ -169,8 +165,6 @@
 		43F0BB100BBE9A3700018704 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BB0E0BBE9A3700018704 /* COPYING */; };
 		43F3446E0E5343AD007E72E1 /* ProfileMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F3446D0E5343AD007E72E1 /* ProfileMenuItem.m */; };
 		43F5BA4F0E5219EB00655E7B /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F5BA4E0E5219EB00655E7B /* addButton.png */; };
-		43F7EBC80B90DAFC008663E9 /* CoverArtView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F7EBC60B90DAFC008663E9 /* CoverArtView.m */; };
-		43F7ECE50B90EFBD008663E9 /* CoverViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F7ECE30B90EFBD008663E9 /* CoverViewerController.m */; };
 		43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */; };
 		43FDCC450B7E0F840015CD57 /* InfoAreaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FDCC430B7E0F840015CD57 /* InfoAreaController.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -181,14 +175,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* SqueezeLib.framework */;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
 			remoteInfo = SqueezeLib;
 		};
 		4349F3120FB6247400EBB890 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216 /* SqueezeLib */;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = SqueezeLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -252,8 +246,6 @@
 		434B8BBB0DF154F500B4BD16 /* MultiClickRemoteBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiClickRemoteBehavior.m; path = Source/AppleRemote/MultiClickRemoteBehavior.m; sourceTree = "<group>"; };
 		434B8BE00DF1560F00B4BD16 /* RemoteControlContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoteControlContainer.h; path = Source/AppleRemote/RemoteControlContainer.h; sourceTree = "<group>"; };
 		434B8BE10DF1560F00B4BD16 /* RemoteControlContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoteControlContainer.m; path = Source/AppleRemote/RemoteControlContainer.m; sourceTree = "<group>"; };
-		434BBB660C0A42860022E296 /* AWSRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSRequest.h; path = Source/AmazonWebServices/AWSRequest.h; sourceTree = "<group>"; };
-		434BBB670C0A42860022E296 /* AWSRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AWSRequest.m; path = Source/AmazonWebServices/AWSRequest.m; sourceTree = "<group>"; };
 		4350F0760F079D4F00FB6EDF /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
 		4350F0770F079D4F00FB6EDF /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
 		4350F0820F07A51100FB6EDF /* ProfileRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileRepository.h; sourceTree = "<group>"; };
@@ -390,12 +382,6 @@
 		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D2549B0B4D80B900660DD9 /* MPSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPSlider.h; path = Source/subclasses/MPSlider.h; sourceTree = "<group>"; };
 		43D254A90B4D80F200660DD9 /* MPSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = MPSlider.m; path = Source/subclasses/MPSlider.m; sourceTree = "<group>"; };
-		43D8DDE50B94D116004CEAF9 /* AWSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSController.h; path = Source/AmazonWebServices/AWSController.h; sourceTree = "<group>"; };
-		43D8DDE60B94D116004CEAF9 /* AWSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AWSController.m; path = Source/AmazonWebServices/AWSController.m; sourceTree = "<group>"; };
-		43D8DDEE0B94D4B4004CEAF9 /* AWSEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSEntry.h; path = Source/AmazonWebServices/AWSEntry.h; sourceTree = "<group>"; };
-		43D8DDEF0B94D4B4004CEAF9 /* AWSEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AWSEntry.m; path = Source/AmazonWebServices/AWSEntry.m; sourceTree = "<group>"; };
-		43D8DDFF0B94D6D9004CEAF9 /* AWSServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSServiceRequest.h; path = Source/AmazonWebServices/AWSServiceRequest.h; sourceTree = "<group>"; };
-		43D8DE000B94D6D9004CEAF9 /* AWSServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AWSServiceRequest.m; path = Source/AmazonWebServices/AWSServiceRequest.m; sourceTree = "<group>"; };
 		43DEB5890F082F3800A791A0 /* SqueezeLibDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqueezeLibDataSource.h; sourceTree = "<group>"; };
 		43DEB58A0F082F3800A791A0 /* SqueezeLibDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqueezeLibDataSource.m; sourceTree = "<group>"; };
 		43E03F4A0E509116009358D9 /* SqueezeLibMusicServerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqueezeLibMusicServerClient.h; path = Source/MusicServer/SqueezeLibMusicServerClient.h; sourceTree = "<group>"; };
@@ -467,10 +453,6 @@
 		43F3446C0E5343AD007E72E1 /* ProfileMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileMenuItem.h; path = Source/subclasses/ProfileMenuItem.h; sourceTree = "<group>"; };
 		43F3446D0E5343AD007E72E1 /* ProfileMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileMenuItem.m; path = Source/subclasses/ProfileMenuItem.m; sourceTree = "<group>"; };
 		43F5BA4E0E5219EB00655E7B /* addButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addButton.png; sourceTree = "<group>"; };
-		43F7EBC50B90DAFC008663E9 /* CoverArtView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoverArtView.h; path = Source/CoverArt/CoverArtView.h; sourceTree = "<group>"; };
-		43F7EBC60B90DAFC008663E9 /* CoverArtView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoverArtView.m; path = Source/CoverArt/CoverArtView.m; sourceTree = "<group>"; };
-		43F7ECE20B90EFBD008663E9 /* CoverViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoverViewerController.h; path = Source/CoverArt/CoverViewerController.h; sourceTree = "<group>"; };
-		43F7ECE30B90EFBD008663E9 /* CoverViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoverViewerController.m; path = Source/CoverArt/CoverViewerController.m; sourceTree = "<group>"; };
 		43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
 		43FDCC420B7E0F840015CD57 /* InfoAreaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoAreaController.h; path = Source/InfoAreaController.h; sourceTree = "<group>"; };
 		43FDCC430B7E0F840015CD57 /* InfoAreaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoAreaController.m; path = Source/InfoAreaController.m; sourceTree = "<group>"; };
@@ -504,10 +486,8 @@
 				438DC17C0DFD10120055BD4C /* VolumeSlider */,
 				43858D6D0DFB430F00FEFB5E /* TableView */,
 				43215B710BCA393C009E4C18 /* App Global Hotkeys */,
-				43D8DDE20B94D08C004CEAF9 /* Amazon Web Services */,
 				43D012650B8B65ED00711A1B /* AppleRemote */,
 				432531960B7A6C7400DF9E7E /* MusicServer */,
-				43F21F7A0B76834000FE8213 /* CoverArt */,
 				4350A2C80B47E6A300EFAE2A /* Library */,
 				43C1285C0B3DF859003AB26A /* Categories */,
 				437C68860B407C33008B8DEC /* Subclasses */,
@@ -878,21 +858,6 @@
 			name = AppleRemote;
 			sourceTree = "<group>";
 		};
-		43D8DDE20B94D08C004CEAF9 /* Amazon Web Services */ = {
-			isa = PBXGroup;
-			children = (
-				43D8DDE50B94D116004CEAF9 /* AWSController.h */,
-				43D8DDE60B94D116004CEAF9 /* AWSController.m */,
-				43D8DDEE0B94D4B4004CEAF9 /* AWSEntry.h */,
-				43D8DDEF0B94D4B4004CEAF9 /* AWSEntry.m */,
-				43D8DDFF0B94D6D9004CEAF9 /* AWSServiceRequest.h */,
-				43D8DE000B94D6D9004CEAF9 /* AWSServiceRequest.m */,
-				434BBB660C0A42860022E296 /* AWSRequest.h */,
-				434BBB670C0A42860022E296 /* AWSRequest.m */,
-			);
-			name = "Amazon Web Services";
-			sourceTree = "<group>";
-		};
 		43DEB5560F082B8200A791A0 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -1050,17 +1015,6 @@
 			);
 			name = Volume;
 			path = Resources/Volume;
-			sourceTree = "<group>";
-		};
-		43F21F7A0B76834000FE8213 /* CoverArt */ = {
-			isa = PBXGroup;
-			children = (
-				43F7EBC50B90DAFC008663E9 /* CoverArtView.h */,
-				43F7EBC60B90DAFC008663E9 /* CoverArtView.m */,
-				43F7ECE20B90EFBD008663E9 /* CoverViewerController.h */,
-				43F7ECE30B90EFBD008663E9 /* CoverViewerController.m */,
-			);
-			name = CoverArt;
 			sourceTree = "<group>";
 		};
 		43FB61B00B3D39CA00C1CA22 /* UI */ = {
@@ -1242,11 +1196,6 @@
 				43341FA80B8BA22500B8804A /* UnifiedToolbarItemSegment.m in Sources */,
 				43341FAA0B8BA22500B8804A /* UnifiedToolbarItemView.m in Sources */,
 				43341FAC0B8BA22500B8804A /* UnifiedToolbarLabelCell.m in Sources */,
-				43F7EBC80B90DAFC008663E9 /* CoverArtView.m in Sources */,
-				43F7ECE50B90EFBD008663E9 /* CoverViewerController.m in Sources */,
-				43D8DDE80B94D116004CEAF9 /* AWSController.m in Sources */,
-				43D8DDF10B94D4B4004CEAF9 /* AWSEntry.m in Sources */,
-				43D8DE020B94D6D9004CEAF9 /* AWSServiceRequest.m in Sources */,
 				43A5D1AE0BAC2F7100C29E17 /* PlayListFilesController.m in Sources */,
 				43A5D31A0BAC512F00C29E17 /* PlayListFile.m in Sources */,
 				437EB6A20BBDBA480033AE88 /* SongInfoController.m in Sources */,
@@ -1255,7 +1204,6 @@
 				43A8E9B50BE4A8A40078DBD7 /* PWMusicTextField.m in Sources */,
 				43A8E9CD0BE4A9BA0078DBD7 /* Artist.m in Sources */,
 				43A8E9F40BE4AC230078DBD7 /* Album.m in Sources */,
-				434BBB690C0A42870022E296 /* AWSRequest.m in Sources */,
 				43E24D180D21FB3300D882B1 /* RemoteControl.m in Sources */,
 				43E24D190D21FB3300D882B1 /* HIDRemoteControlDevice.m in Sources */,
 				43E24D1A0D21FB3300D882B1 /* AppleRemote.m in Sources */,

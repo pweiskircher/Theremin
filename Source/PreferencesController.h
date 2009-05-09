@@ -29,14 +29,6 @@ typedef enum {
 } PWPreferencesUpdateInterval;
 
 typedef enum {
-	CoverArtProviderAmazonDe = 0,
-	CoverArtProviderAmazonFr = 1,
-	CoverArtProviderAmazonJp = 2,
-	CoverArtProviderAmazonUk = 3,
-	CoverArtProviderAmazonUs = 4
-} PWPreferencesCoverArtProvider;
-
-typedef enum {
 	eAppleRemoteModeAlways		= 0,
 	eAppleRemoteModeWhenFocused = 1,
 	eAppleRemoteModeNever		= 2
@@ -46,9 +38,6 @@ typedef enum {
 	eLibraryDoubleClickReplaces = 0,
 	eLibraryDoubleClickAppends = 1,
 } LibraryDoubleClickMode;
-
-extern NSString *nCoverArtLocaleChanged;
-extern NSString *nCoverArtEnabledChanged;
 
 @interface PreferencesController : NSObject {	
 	SUUpdater *mUpdater;
@@ -65,24 +54,13 @@ extern NSString *nCoverArtEnabledChanged;
 
 // settings getters ( / setters )
 
-- (PWPreferencesCoverArtProvider) coverArtProvider;
-- (void) setCoverArtProvider:(PWPreferencesCoverArtProvider) aCoverArtProvider;
-
 - (PWPreferencesUpdateInterval) updateInterval;
 - (void) setUpdateInterval:(PWPreferencesUpdateInterval) aUpdateInterval;
 
 - (void) setNoConfirmationNeededForDeletionOfPlaylist:(BOOL)aValue;
 - (BOOL) noConfirmationNeededForDeletionOfPlaylist;
 
-- (NSString *) coverArtLocale;
-
 - (LibraryDoubleClickMode) libraryDoubleClickAction;
-
-- (BOOL) coverArtEnabled;
-- (void) setCoverArtEnabled:(BOOL)aValue;
-
-- (BOOL) askedAboutCoverArt;
-- (void) setAskedAboutCoverArt;
 
 - (BOOL) pauseOnSleep;
 

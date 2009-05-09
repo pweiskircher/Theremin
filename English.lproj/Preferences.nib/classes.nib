@@ -13,8 +13,6 @@
 		<dict>
 			<key>ACTIONS</key>
 			<dict>
-				<key>coverArtPopupMenuChanged</key>
-				<string>id</string>
 				<key>updatePopupMenuChanged</key>
 				<string>id</string>
 			</dict>
@@ -26,8 +24,6 @@
 			<dict>
 				<key>_profileController</key>
 				<string>ProfileController</string>
-				<key>mCoverArtPopup</key>
-				<string>NSPopUpButton</string>
 				<key>mPreferencesWindow</key>
 				<string>NSWindow</string>
 				<key>mUpdatePopup</key>

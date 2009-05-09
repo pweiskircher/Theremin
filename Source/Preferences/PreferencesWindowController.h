@@ -27,7 +27,6 @@
 	
 	IBOutlet NSWindow *mPreferencesWindow;
 	IBOutlet NSPopUpButton *mUpdatePopup;
-	IBOutlet NSPopUpButton *mCoverArtPopup;
 	
 	IBOutlet ProfileController *_profileController;
 }
@@ -37,5 +36,4 @@
 - (void)showPreferences;
 
 - (IBAction) updatePopupMenuChanged:(id)sender;
-- (IBAction) coverArtPopupMenuChanged:(id)sender;
 @end
