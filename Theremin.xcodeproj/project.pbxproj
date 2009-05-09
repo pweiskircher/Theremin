@@ -24,8 +24,8 @@
 		43341FAA0B8BA22500B8804A /* UnifiedToolbarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43341F980B8BA22500B8804A /* UnifiedToolbarItemView.m */; };
 		43341FAC0B8BA22500B8804A /* UnifiedToolbarLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43341F9A0B8BA22500B8804A /* UnifiedToolbarLabelCell.m */; };
 		433FC5ED0B4080F60082058A /* PWWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 433FC5EC0B4080F60082058A /* PWWindow.m */; };
-		4349F3150FB6249300EBB890 /* SqueezeLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
-		4349F3180FB624A800EBB890 /* SqueezeLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
+		4349F3970FB626EE00EBB890 /* SqueezeLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
+		4349F3980FB626F200EBB890 /* SqueezeLib.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4349F2E80FB623E500EBB890 /* SqueezeLib.framework */; };
 		434B8BBC0DF154F500B4BD16 /* MultiClickRemoteBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BBB0DF154F500B4BD16 /* MultiClickRemoteBehavior.m */; };
 		434B8BE20DF1560F00B4BD16 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 434B8BE10DF1560F00B4BD16 /* RemoteControlContainer.m */; };
 		434BBB690C0A42870022E296 /* AWSRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 434BBB670C0A42860022E296 /* AWSRequest.m */; };
@@ -200,7 +200,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4349F3150FB6249300EBB890 /* SqueezeLib.framework in CopyFiles */,
+				4349F3980FB626F200EBB890 /* SqueezeLib.framework in CopyFiles */,
 				43BF74190F06FA5800420B56 /* Sparkle.framework in CopyFiles */,
 				43BF741A0F06FA5800420B56 /* Growl.framework in CopyFiles */,
 				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
@@ -482,7 +482,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4349F3180FB624A800EBB890 /* SqueezeLib.framework in Frameworks */,
+				4349F3970FB626EE00EBB890 /* SqueezeLib.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				437BDB270B74F42E001C1057 /* Security.framework in Frameworks */,
 				43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */,

@@ -21,6 +21,7 @@
 
 #import <SqueezeLib/SLServer.h>
 #import <SqueezeLib/SLCLICredentials.h>
+#import <SqueezeLib/PWDatabaseQuery.h>
 
 #import "SqueezeLibToThereminTransformer.h"
 #import "NSArray+Transformations.h"
