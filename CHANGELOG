@@ -1,3 +1,10 @@
+  Theremin 0.6.0:
+    * Profile support.
+    * A lot of refactoring - consider this a beta release.
+    * Hidden option: defaults write at.justp.theremin squeezeboxSupportEnabled true
+        This enables very, very experimental squeezebox support.
+
+
   Theremin 0.5.3.1:
     * Batch re-setting of compilation info on import. This fixes a crash on startup experienced by some users.
 
