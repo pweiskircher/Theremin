@@ -74,9 +74,10 @@
 	return result;
 }
 
-+ (void) detectCompilations {
-	NSArray *songs = [[[SQLController defaultController] songsWithFilters:nil] sortedArrayUsingDescriptors:[NSArray arrayWithObject:
-																											[[[NSSortDescriptor alloc] initWithKey:@"album" ascending:YES] autorelease]]];
++ (void) detectCompilationsUsingDataSource:(id<LibraryDataSourceProtocol>)aDataSource {
+#warning FIXME
+/*	NSArray *songs = [[aDataSource songsWithFilters:nil] sortedArrayUsingDescriptors:
+					  [NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"album" ascending:YES] autorelease]]];
 	Song *song;
 	NSString *previousAlbum = nil;
 	NSEnumerator *enumerator = [songs objectEnumerator];
@@ -121,7 +122,7 @@
 		[array removeAllObjects];
 	}
 	
-	[[SQLController defaultController] setSongsAsCompilation:result];
+	[aDataSource setSongsAsCompilation:result]; */
 }
 
 @end

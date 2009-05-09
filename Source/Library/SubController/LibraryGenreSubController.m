@@ -7,7 +7,7 @@
 //
 
 #import "LibraryGenreSubController.h"
-#import "SQLiteFilter.h"
+#import "LibraryIdFilter.h"
 #import "SQLController.h"
 
 @implementation LibraryGenreSubController
@@ -15,17 +15,13 @@
 	BOOL allGenresSelected = NO;
 	NSArray *genres = [self getSelected:&allGenresSelected];
 	
-	if (allGenresSelected == NO && [genres count] > 0) {
-		SQLiteFilter *filter = [SQLiteFilter filterWithKey:@"songs.genre" andMethod:eFilterIsEqual usingFilter:genres];
-		[filter setFilterAndOr:eFilterOr];
-		[filter setFilterSelector:@selector(CocoaSQLIdentifier)];
-		
-		[filters addObject:filter];		
-	}
+	if (allGenresSelected == NO && [genres count] > 0)
+		[filters addObject:[[[LibraryIdFilter alloc] initWithType:eLibraryIdFilterGenre
+														   andIds:genres] autorelease]];
 }
 
-- (NSArray *) getFilteredItems:(NSArray *)filters {
-	return [[SQLController defaultController] genresWithFilters:filters];
+- (void) requestFilteredItems:(NSArray *)filters {
+	[[self libraryDataSource] requestGenresWithFilters:filters];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

@@ -226,7 +226,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 	NSEnumerator *enumerator = [data objectEnumerator];
 	NSDictionary *dictionary;
 	while (dictionary = [enumerator nextObject]) {
-		BOOL hide = [[dictionary objectForKey:@"state"] intValue] == NSOffState;
+		BOOL hide = [[dictionary objectForKey:dState] intValue] == NSOffState;
 		if (hide) {
 			NSString *identifier = [dictionary objectForKey:@"identifier"];			
 			NSTableColumn *column = [self tableColumnWithIdentifier:identifier];
@@ -243,7 +243,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 	NSMutableArray *data = [NSMutableArray array];
 	PWTableViewMenuItem *item;
 	while (item = [enumerator nextObject]) {
-		[data addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:[item state]], @"state",
+		[data addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:[item state]], dState,
 						  [[item tableColumn] identifier], @"identifier", nil]];
 	}
 	

@@ -25,43 +25,53 @@
 #import "Song.h"
 #import "Artist.h"
 #import "Album.h"
-#import "SQLiteFilter.h"
 #import "Genre.h"
+#import "SQLUniqueIdentifiersFilter.h"
 
-static SQLController *gSQLController;
+#import "Profile.h"
 
 #define THEREMIN_DATABASE_FILENAME "theremin.db"
 #define THEREMIN_SQLITE_DATABASE_VERSION	6
 
 int CompilationSQLIdentifier = -54551;
 
+const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
+
 @interface SQLController (PrivateMethods)
 - (BOOL) _setCompilationByUniqueIdentifiers:(NSArray *)array;
+- (void) needImport;
+
+- (void) startup;
+- (BOOL) createTables;
+
+- (BOOL) setSongAsCompilation:(Song *)aSong;
+- (BOOL) removeSongAsCompilation:(Song *)aSong;
+
+- (NSMutableDictionary *) metaData;
 @end
 
 @implementation SQLController
-+ (id) defaultController {
-	if (!gSQLController) {
-		NSString *filename = [NSString stringWithFormat:@"%@/%s",
-			[[WindowController instance] applicationSupportFolder], THEREMIN_DATABASE_FILENAME];
-		gSQLController = [[SQLController alloc] initWithFile:filename];
-		[gSQLController startup];
-	}
-	
-	return gSQLController;
-}
-
-- (id) initWithFile:(NSString *)filename {
+- (id) initWithProfile:(Profile *)aProfile {
 	self = [super init];
 	if (self != nil) {
+		NSString *filename = [NSString stringWithFormat:@"%@/%@-%d.db", 
+				  [[WindowController instance] applicationSupportFolder],
+							  [aProfile hostname], [aProfile port]];
+		
 		mDatabase = [[SQLiteDatabase databaseWithFilename:filename] retain];
 		mIdInsertQueries = [[NSMutableDictionary dictionary] retain];
 		mIdSelectQueries = [[NSMutableDictionary dictionary] retain];
+		
+		_profile = [aProfile retain];
+		
+		[self startup];
 	}
 	return self;
 }
 
 - (void) dealloc {
+	[_profile release];
+	
 	[mSongInsertQuery release], mSongInsertQuery = nil;
 	[mIdInsertQueries release], mIdInsertQueries = nil;
 	[mIdSelectQueries release], mIdSelectQueries = nil;
@@ -70,16 +80,26 @@ int CompilationSQLIdentifier = -54551;
 	[super dealloc];
 }
 
-- (NSDictionary *) metaData {
+- (int) supportsDataSourceCapabilities {
+	return eLibraryDataSourceSupportsCustomCompilations |
+		   eLibraryDataSourceSupportsImportingSongs | 
+		   eLibraryDataSourceSupportsMultipleSelection;
+}
+
+- (Profile *) profile {
+	return [[_profile retain] autorelease];
+}
+
+- (NSMutableDictionary *) metaData {
 	SQLiteQuery *query = [mDatabase query:@"SELECT metaData FROM metaData ORDER BY id"];
 	if (query && [query exec] && [query state] == eSQLiteQueryStateHasData) {
 		NSData *data = [query dataFromColumnIndex:0];
 		[query invalidate];
 		
-		return [NSPropertyListSerialization propertyListFromData:data 
+		return [NSMutableDictionary dictionaryWithDictionary:[NSPropertyListSerialization propertyListFromData:data 
 												mutabilityOption:NSPropertyListImmutable 
 														  format:NULL 
-												errorDescription:NULL];
+												errorDescription:NULL]];
 	}
 	
 	return nil;
@@ -95,11 +115,25 @@ int CompilationSQLIdentifier = -54551;
 	return [query exec];
 }
 
+- (void) needImport {
+	_needImport = YES;
+}
+
+- (BOOL) needsImport {
+	if (_needImport)
+		return YES;
+	
+	NSData *databaseIdentifier = [[self metaData] objectForKey:gDatabaseIdentifier];
+	if ([databaseIdentifier isEqualToData:[[[WindowController instance] musicClient] databaseIdentifier]] == NO)
+		return YES;
+	
+	return NO;
+}
+
 - (void) startup {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[mDatabase filename]] == NO) {
 		// if the database doesn't exist, force a import on next connect
-		[[[WindowController instance] preferences] setLastDatabaseFetchedFromServer:@""];
-		[[[WindowController instance] preferences] setDatabaseIdentifier:[NSData data]];
+		[self needImport];
 	}
 	
 	if ([mDatabase open] != YES) {
@@ -203,7 +237,7 @@ int CompilationSQLIdentifier = -54551;
 	do {
 		Artist *artist = [[[Artist alloc] init] autorelease];
 		[artist setName:[theQuery stringFromColumnIndex:0]];
-		[artist setSQLIdentifier:[theQuery intFromColumnIndex:1]];
+		[artist setIdentifier:[theQuery intFromColumnIndex:1]];
 		
 		if ([theQuery intFromColumnIndex:2] == 1)
 			includesCompilations = YES;
@@ -214,58 +248,73 @@ int CompilationSQLIdentifier = -54551;
 	if (includesCompilations) {
 		Artist *artist = [[[Artist alloc] init] autorelease];
 		[artist setName:TR_S_COMPILATION];
-		[artist setSQLIdentifier:CompilationSQLIdentifier];
+		[artist setIdentifier:CompilationSQLIdentifier];
 		[array addObject:artist];
 	}
 	
 	return array;
 }
 
-- (NSArray *) genresWithFilters:(NSArray *)theFilters {
-	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS SQLIdentifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
+- (void) requestGenresWithFilters:(NSArray *)theFilters {
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS identifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
-		return nil;
+		[NSException raise:NSGenericException format:@"Couldn't get genres."];
 	
-	return [self resultFromQueryUsingClass:[Genre class] andQuery:query];
+	NSArray *results = [self resultFromQueryUsingClass:[Genre class] andQuery:query];
+	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedGenres
+														object:nil
+													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
 }
 
-- (NSArray *) albumsWithFilters:(NSArray *)theFilters {
-	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS SQLIdentifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
+- (void) requestAlbumsWithFilters:(NSArray *)theFilters {
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS identifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
-		return nil;
+		[NSException raise:NSGenericException format:@"Couldn't get albums."];
 	
-	return [self resultFromQueryUsingClass:[Album class] andQuery:query];
+	NSArray *results = [self resultFromQueryUsingClass:[Album class] andQuery:query];
+	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedAlbums
+														object:nil
+													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
+	
 }
 
-- (NSArray *) songsWithFilters:(NSArray *)theFilters {
+- (void) requestSongsWithFilters:(NSArray *)theFilters {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT songs.file AS file, songs.title AS title, songs.track AS track,"
 							@"songs.name AS name, songs.date AS date, songs.composer AS composer, songs.disc AS disc,"
 							@"songs.comment AS comment, songs.time AS time, songs.uniqueIdentifier AS uniqueIdentifier,"
-							@"artists.name AS artist, albums.name AS album, songs.id AS SQLIdentifier, "
+							@"artists.name AS artist, albums.name AS album, songs.id AS identifier, "
 							@"songs.isCompilation AS isCompilation, genres.name AS genre "
 							@"FROM songs LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN genres ON songs.genre = genres.id"];
 
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
-		return nil;
+		[NSException raise:NSGenericException format:@"Couldn't get songs."];
 	
-	return [self resultFromQueryUsingClass:[Song class] andQuery:query];
+	NSArray *results = [self resultFromQueryUsingClass:[Song class] andQuery:query];
+	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedSongs
+														object:nil
+													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
+	
 }
 
-- (NSArray *) artistsWithFilters:(NSArray *)theFilters {
-	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT artists.name AS name, songs.artist AS SQLIdentifier, songs.isCompilation FROM songs "
+- (void) requestArtistsWithFilters:(NSArray *)theFilters {
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT artists.name AS name, songs.artist AS identifier, songs.isCompilation FROM songs "
 		                                                     @"LEFT JOIN artists ON songs.artist = artists.id "
 		                                                     @"LEFT JOIN albums ON songs.album = albums.id"];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
-		return nil;
+		[NSException raise:NSGenericException format:@"Couldn't get artists."];
 	
-	return [self artistsFromQuery:query];
+	NSArray *results = [self artistsFromQuery:query];
+	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedArtists
+														object:nil
+													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
+	
 }
 
 - (int) getIdFromTable:(NSString *)table forItem:(id)item usingKey:(NSString *)key andFallbackIfKeyUnknown:(NSString *)fallback {
@@ -345,7 +394,7 @@ int CompilationSQLIdentifier = -54551;
 	return [mSongInsertQuery exec];
 }
 
-- (BOOL) insertSongs:(NSArray *)aArray {
+- (BOOL) insertSongs:(NSArray *)aArray withDatabaseIdentifier:(NSData *)aIdentifier {
 	NSEnumerator *songenum = [aArray objectEnumerator];
 	Song *song;
 	
@@ -357,6 +406,9 @@ int CompilationSQLIdentifier = -54551;
 		}
 	}
 
+	NSMutableDictionary *metaData = [self metaData];
+	[metaData setObject:aIdentifier forKey:gDatabaseIdentifier];
+	[self setMetaData:metaData];
 	return [mDatabase commitTransaction];
 }
 
@@ -378,7 +430,7 @@ int CompilationSQLIdentifier = -54551;
 
 - (BOOL) setSongAsCompilation:(Song *)aSong {
 	SQLiteQuery *query = [mDatabase query:@"UPDATE songs SET isCompilation = 1 WHERE songs.id = :ID"];
-	[query bindInteger:[aSong SQLIdentifier] toName:@":ID"];
+	[query bindInteger:[aSong identifier] toName:@":ID"];
 	return [query exec];
 }
 
@@ -404,7 +456,7 @@ int CompilationSQLIdentifier = -54551;
 
 - (BOOL) removeSongAsCompilation:(Song *)aSong {
 	SQLiteQuery *query = [mDatabase query:@"UPDATE songs SET isCompilation = 0 WHERE songs.id = :ID"];
-	[query bindInteger:[aSong SQLIdentifier] toName:@":ID"];
+	[query bindInteger:[aSong identifier] toName:@":ID"];
 	return [query exec];
 }
 
@@ -447,8 +499,8 @@ int CompilationSQLIdentifier = -54551;
 
 - (BOOL) _setCompilationByUniqueIdentifiers:(NSArray *)array {
 	SQLiteQuery *query = [mDatabase query:@"UPDATE songs SET isCompilation = 1"];
-	SQLiteFilter *filter = [SQLiteFilter filterWithKey:@"uniqueIdentifier" andMethod:eFilterOr usingFilter:array];
-	return [query execWithFilters:[NSArray arrayWithObject:filter]];
+	return [query execWithFilters:
+				[NSArray arrayWithObject:[[[SQLUniqueIdentifiersFilter alloc] initWithUniqueIdentifiers:array] autorelease]]];
 }
 
 - (void) clear {

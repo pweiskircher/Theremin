@@ -19,7 +19,10 @@
 
 #import "WindowController.h"
 #import "InfoAreaController.h"
+
 #import "MpdMusicServerClient.h"
+#import "SqueezeLibMusicServerClient.h"
+
 #import "PreferencesController.h"
 #import "Song.h"
 #import "PlayListController.h"
@@ -47,6 +50,9 @@
 
 #import "CompilationDetector.h"
 
+#import "ProfileMenuItem.h"
+#import "ProfileRepository.h"
+#import "PreferencesWindowController.h"
 
 WindowController *globalWindowController = nil;
 
@@ -61,9 +67,23 @@ NSString *tSearchField = @"tSearchField";
 #define TR_S_TOOLBAR_LABEL_PAUSE	NSLocalizedString(@"Pause", @"Main Window toolbar items label")
 #define TR_S_TOOLBAR_LABEL_STOP		NSLocalizedString(@"Stop", @"Main Window toolbar items label")
 
+const NSString *nProfileSwitched = @"nProfileSwitched";
+const NSString *dProfile = @"dProfile";
+
 @interface WindowController (PrivateMethods)
 - (PWMusicSearchField *)musicSearchField;
 - (RemoteControl *)appleRemote;
+- (void) setupNotificationObservers;
+- (void) setupProfilesMenu;
+
+// callback when profiles in settings changed.
+- (void) profilesChanged:(NSNotification *)aNotification;
+
+// callback when we switched profile
+- (void) switchedProfile;
+
+- (NSMenuItem *) profilesMenuItem;
+- (NSMenu *) newProfilesMenu;
 @end
 
 @implementation WindowController
@@ -84,38 +104,58 @@ NSString *tSearchField = @"tSearchField";
 	return globalWindowController;
 }
 
+- (id<LibraryDataSourceProtocol>) currentLibraryDataSource {
+	return [LibraryDataSource libraryDataSourceForProfile:[[self preferences] currentProfile]];
+}
+
 - (void) setupConnectionWithMusicClient {
 	NSPort *port1, *port2;
 	
 	port1 = [NSPort port];
 	port2 = [NSPort port];
+	
+	[(MusicServerClient*)mClient stop];
+	[mClient release];
+	mClient = nil;
+	
+	[mConnectionToMpdClient release];
+	
 	mConnectionToMpdClient = [[NSConnection alloc] initWithReceivePort:port1 sendPort:port2];
 	[mConnectionToMpdClient setRootObject:self];
-	mClient = nil;
+
+	
+	NSString *musicClientClass = NSStringFromClass([MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]]);
 
 	NSDictionary *infos = [NSDictionary dictionaryWithObjectsAndKeys:port2, nMusicServerClientPort0,
 																	port1, nMusicServerClientPort1,
-																	NSStringFromClass([MpdMusicServerClient class]), nMusicServerClientClass,
+																	musicClientClass, nMusicServerClientClass,
 						   nil];
 	[NSThread detachNewThreadSelector:@selector(connectWithPorts:)
 							 toTarget:[MusicServerClient class]
-						   withObject:infos];	
+						   withObject:infos];
 	
+	[self switchedProfile];
+}
+
+- (void) setupNotificationObservers {
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientConnected:) name:nMusicServerClientConnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientDisconnected:) name:nMusicServerClientDisconnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRequiredAuthentication:) name:nMusicServerClientRequiresAuthentication object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientStateChanged:) name:nMusicServerClientStateChanged object:nil];	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeSliderChanged:) name:nVolumeSliderUpdated object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientElapsedAndTotalTimeChanged:) name:nMusicServerClientElapsedAndTotalTimeChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientShuffleChanged:) name:nMusicServerClientShuffleOptionChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRepeatChanged:) name:nMusicServerClientRepeatOptionChanged object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(elapsedTimeChanged:) name:nMusicServerClientElapsedTimeChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(totalTimeChanged:) name:nMusicServerClientTotalTimeChanged object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilesChanged:) name:(NSString *)nProfileControllerUpdatedProfiles object:nil];
 }
 
 - (void) setupToolbar {
 	mToolbarItems = [[NSMutableDictionary alloc] init];
 	mToolbar = [[UnifiedToolbar alloc] initWithIdentifier:@"mpdToolbar"];
 	[mToolbar setDelegate:self];
-//	[mToolbar setSizeMode:NSToolbarSizeModeSmall];
 	[mToolbar setDisplayMode:NSToolbarDisplayModeIconOnly];	
 	[mToolbar setAllowsUserCustomization:YES];
 	[mToolbar setAutosavesConfiguration:YES];
@@ -176,15 +216,14 @@ NSString *tSearchField = @"tSearchField";
 	self = [super init];
 	if (self != nil) {
 		globalWindowController = self;
+		
+		mPreferencesController = [[PreferencesController alloc] initWithSparkleUpdater:mUpdater];
 
 		[NSApp setDelegate:self];
 	
-		[self setupConnectionWithMusicClient];
+		[self setupNotificationObservers];
 		[self setupToolbar];
 		
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.mpdServer" options:NSKeyValueObservingOptionNew context:NULL];
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.mpdPort" options:NSKeyValueObservingOptionNew context:NULL];
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.autoreconnect" options:NSKeyValueObservingOptionNew context:NULL];
 		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.appleRemoteMode" options:NSKeyValueObservingOptionNew context:NULL];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self
@@ -213,7 +252,8 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (void) awakeFromNib {
-	[SQLController defaultController];
+	[[self preferences] importOldSettings];
+	[self setupProfilesMenu];
 	
 	[mWindow setToolbar:mToolbar];
 	[mPlaylistController setupSearchField:[self musicSearchField]];
@@ -222,6 +262,8 @@ NSString *tSearchField = @"tSearchField";
 	mPlayListFilesController = [[PlayListFilesController alloc] init];
 	mLibraryController = [[LibraryController alloc] init];
 	mUpdateDatabaseController = [[UpdateDatabaseController alloc] init];
+	
+	[self setupConnectionWithMusicClient];
 	
 	if ([[self preferences] appleRemoteMode] == eAppleRemoteModeAlways)
 		[[self appleRemote] startListening:self];
@@ -234,26 +276,93 @@ NSString *tSearchField = @"tSearchField";
 	[mToolbar release];
 	[mConnectionToMpdClient release];
 	[mLibraryController release];
-	[mLicenseController release];
 	[mMusicSearch release];
 	[mUpdateDatabaseController release];
 	[mPlayListFilesController release], mPlayListFilesController = nil;
+	[mPreferencesController release];
 	
 	[[self appleRemote] stopListening:self];
 	
 	[super dealloc];
 }
 
+#pragma mark -
+#pragma mark Profiles
+
+- (void) setupProfilesMenu {
+	NSMenuItem *profilesMenu = [self profilesMenuItem];
+
+	[_profileChooser setMenu:[self newProfilesMenu]];
+	[profilesMenu setSubmenu:[self newProfilesMenu]];
+}
+
+- (NSMenu *) newProfilesMenu {
+	NSMenu *subMenu = [[[NSMenu alloc] initWithTitle:@"Profiles"] autorelease];
+	
+	NSArray *profiles = [ProfileRepository profiles];
+	for (int i = 0; i < [profiles count]; i++) {
+		Profile *profile = [profiles objectAtIndex:i];
+		ProfileMenuItem *item = [[[ProfileMenuItem alloc] initWithTitle:[profile description]
+																 action:@selector(selectProfile:)
+														  keyEquivalent:@""] autorelease];
+		[item setProfile:profile];
+		[subMenu addItem:item];
+	}
+
+	return subMenu;
+}
+
+- (NSMenuItem *) profilesMenuItem {
+	return [_fileMenu itemWithTag:9999];
+}
+
+- (void) profilesChanged:(NSNotification *)aNotification {
+	int profilesCount = [[ProfileRepository profiles] count];
+	[_profileChooser setHidden:profilesCount == 1];
+	[self setupProfilesMenu];
+	[self switchedProfile];
+}
+
+- (IBAction) selectProfile:(id)sender {
+	[[self preferences] setCurrentProfile:[(ProfileMenuItem *)sender profile]];
+	[self setupConnectionWithMusicClient];
+}
+
+- (void) switchedProfile {
+	NSMenu *profilesMenu = [[self profilesMenuItem] submenu];
+	Profile *currentProfile = [[self preferences] currentProfile];
+
+	for (int i = 0; i < [[profilesMenu itemArray] count]; i++) {
+		ProfileMenuItem *item = [profilesMenu itemAtIndex:i];
+		if ([[item profile] isEqualToProfile:currentProfile])
+			[item setState:NSOnState];
+		else
+			[item setState:NSOffState];
+	}
+	
+	for (int i = 0; i < [[[_profileChooser menu] itemArray] count]; i++) {
+		ProfileMenuItem *item = [[_profileChooser menu] itemAtIndex:i];
+		if ([[item profile] isEqualToProfile:currentProfile]) {
+			[_profileChooser selectItem:item];
+			break;
+		}
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)nProfileSwitched 
+														object:self
+													  userInfo:[NSDictionary dictionaryWithObject:currentProfile forKey:dProfile]];
+}
+
+#pragma mark -
+
 - (void)setMusicClient:(id)inClient {
 	[inClient setProtocolForProxy:@protocol(MusicServerClientInterface)];
-	[inClient retain];
-	mClient = inClient;
+	mClient = [inClient retain];
 
 	[mInfoAreaController scheduleUpdate];
 	[mClient initialize];
-	[mClient connectToServer:[[self preferences] mpdServer]
-					withPort:[[self preferences] mpdPort]
-				 andPassword:[[self preferences] mpdPassword]];
+	
+	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
 }
 
 - (id)musicClient {
@@ -311,23 +420,6 @@ NSString *tSearchField = @"tSearchField";
 
 #pragma mark Configuration Stuff
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"values.mpdServer"] || [keyPath isEqualToString:@"values.mpdPort"]) {
-		[mClient disconnectWithReason:@""];
-		[mClient connectToServer:[[self preferences] mpdServer] withPort:[[self preferences] mpdPort] andPassword:[[self preferences] mpdPassword]];
-	}
-	
-	if ([keyPath isEqualToString:@"values.autoreconnect"]) {
-		if ([[self preferences] autoreconnectEnabled] == NO) {
-			if (mAutoreconnectTimer != nil) {
-				[mAutoreconnectTimer invalidate];
-				mAutoreconnectTimer = nil;
-			}
-		} else {
-			if ([mClient isConnected] == NO)
-				[mClient connectToServer:[[self preferences] mpdServer] withPort:[[self preferences] mpdPort] andPassword:[[self preferences] mpdPassword]];
-		}
-	}
-	
 	if ([keyPath isEqualToString:@"values.appleRemoteMode"]) {
 		switch ([[self preferences] appleRemoteMode]) {
 			case eAppleRemoteModeAlways:
@@ -348,48 +440,52 @@ NSString *tSearchField = @"tSearchField";
 
 - (void) autoreconnectTimerTriggered:(NSTimer *)timer {
 	mAutoreconnectTimer = nil;
-	[mClient connectToServer:[[self preferences] mpdServer] withPort:[[self preferences] mpdPort] andPassword:[[self preferences] mpdPassword]];
+	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
 }
 
 - (void) volumeSliderChanged:(NSNotification *)notification {
-	int volume = [[[notification userInfo] objectForKey:@"volume"] intValue];
+	int volume = [[[notification userInfo] objectForKey:dVolume] intValue];
 	[mClient setPlaybackVolume:volume];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
-	BOOL ret = NO;
+	BOOL connected = [[self musicClient] isConnected];
 	
-	if ([item isEnabled])
-		ret = YES;
-	
-	if ([item tag] == 111) {
-		// 111 is our special tag! if its set, item should be disabled if we are not connected.
+	if ([item action] == @selector(connect:)) return !connected;
+	else if ([item action] == @selector(disconnect:) ||
+		     [item action] == @selector(saveCurrentPlaylist:) ||
+			 [item action] == @selector(scrollToCurrentSong:) ||
+			 [item action] == @selector(deleteSelectedSongs:) ||
+			 [item action] == @selector(togglePlayPause:) ||
+			 [item action] == @selector(stop:) ||
+			 [item action] == @selector(nextSong:) ||
+			 [item action] == @selector(previousSong:) ||
+			 [item action] == @selector(nextAlbum:) ||
+			 [item action] == @selector(prevAlbum:) ||
+			 [item action] == @selector(toggleShuffle:) ||
+			 [item action] == @selector(toggleRepeat:) ||
+			 [item action] == @selector(increaseVolume:) ||
+			 [item action] == @selector(decreaseVolume:) ||
+			 [item action] == @selector(find:))
+		return connected;
 
-		if ([[self musicClient] isConnected] == YES) {
-			ret = YES;
-			
-			if ([item action] == @selector(getInfoOnKeyWindow:)) {
-				ret = NO;
-				
-				if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist) {
-					ret = YES;
-				} else if ([NSApp keyWindow] == [mLibraryController window]) {
-					if ([mLibraryController isGetInfoAllowed])
-						ret = YES;
-				}
-			}
-		} else
-			ret = NO;
-	} else if ([item tag] == 222) {
-		// 222 is the inverse of 111 - its enabled if we are disconnected
-
-		if ([[self musicClient] isConnected] == YES)
-			ret = NO;
-		else
-			ret = YES;
+	if ([item action] == @selector(getInfoOnKeyWindow:)) {
+		if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist)
+			return connected;
+		else if ([NSApp keyWindow] == [mLibraryController window] && [mLibraryController isGetInfoAllowed])
+			return connected;
+		return NO;
 	}
 	
-	return ret;
+	if ([item action] == @selector(updateCompleteDatabase:) ||
+		[item action] == @selector(showUpdateDatabase:))
+		return connected && [[self currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs;
+	else if ([item action] == @selector(detectCompilations:))
+		return connected && [[self currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations;
+	else if ([item action] == @selector(randomizePlaylist:))
+		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] == eMusicClientCapabilitiesRandomizePlaylist;
+	
+	return [item isEnabled];
 }
 
 #pragma mark MusicClient notification handlers
@@ -412,7 +508,7 @@ NSString *tSearchField = @"tSearchField";
 	[mVolumeSlider setEnabled:NO];
 	[[self musicSearchField] setEnabled:NO];
 
-	if ([[self preferences] autoreconnectEnabled] == YES) {
+	if ([[[self preferences] currentProfile] autoreconnect] == YES) {
 		if (mDisableAutoreconnectOnce == YES) {
 			mDisableAutoreconnectOnce = NO;
 		} else {
@@ -433,7 +529,7 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (void) clientStateChanged:(NSNotification *)notification {
-	int state = [[[notification userInfo] objectForKey:@"state"] intValue];
+	int state = [[[notification userInfo] objectForKey:dState] intValue];
 
 	mCurrentState = state;
 	
@@ -465,15 +561,18 @@ NSString *tSearchField = @"tSearchField";
 	[mPlaylistController updateCurrentSongMarker];
 }
 
-- (void) clientElapsedAndTotalTimeChanged:(NSNotification *)notification {
+- (void) elapsedTimeChanged:(NSNotification *)aNotification {
 	if ([[[NSRunLoop currentRunLoop] currentMode] isEqualTo:NSEventTrackingRunLoopMode] == YES) {
 		return;
 	}
-	
-	int elapsed = [[[notification userInfo] objectForKey:@"elapsed"] intValue];
-	int total = [[[notification userInfo] objectForKey:@"total"] intValue];
 
-	[mInfoAreaController updateSeekBarWithSongLength:total andElapsedTime:elapsed];
+	int elapsed = [[[aNotification userInfo] objectForKey:dElapsedTime] intValue];
+	[mInfoAreaController updateSeekBarWithElapsedTime:elapsed];
+}
+
+- (void) totalTimeChanged:(NSNotification *)aNotification {
+	int total = [[[aNotification userInfo] objectForKey:dTotalTime] intValue];
+	[mInfoAreaController updateSeekBarWithTotalTime:total];
 }
 
 - (void) clientShuffleChanged:(NSNotification *)notification {
@@ -497,7 +596,7 @@ NSString *tSearchField = @"tSearchField";
 #pragma mark Actions.
 
 - (IBAction) preferencesClicked:(id)sender {
-	[[self preferences] showPreferences];
+	[[[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]] showPreferences];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
@@ -590,7 +689,8 @@ NSString *tSearchField = @"tSearchField";
 			
 		case 1: // authenticate
 			if ([mAuthenticationSavePassword state] == NSOnState) {
-				[[self preferences] setMpdPassword:[mAuthenticationPassword stringValue]];
+				[[[self preferences] currentProfile] setPassword:[mAuthenticationPassword stringValue]];
+				[[[self preferences] currentProfile] savePassword];
 			}
 			[mClient setAuthenticationInformation:[NSDictionary dictionaryWithObject:[mAuthenticationPassword stringValue] forKey:@"password"]];
 			break;
@@ -734,7 +834,7 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (IBAction) showLicense:(id)sender {
-	[mLicenseController show];
+	[[[LicenseController alloc] init] show];
 }
 
 - (IBAction) showLibrary:(id)sender {
@@ -754,14 +854,15 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (IBAction) seekSliderChanged:(id)sender {
-	[mInfoAreaController updateSeekBarWithSongLength:[sender maxValue] andElapsedTime:[sender intValue]];
+	[mInfoAreaController updateSeekBarWithTotalTime:[sender maxValue]];
+	[mInfoAreaController updateSeekBarWithElapsedTime:[sender intValue]];
 
 	[mClient scheduleSeek:[sender intValue] withDelay:0.1];
 }
 
 - (IBAction) connect:(id)sender {
 	[mAutoreconnectTimer invalidate], mAutoreconnectTimer = nil;
-	[mClient connectToServer:[[self preferences] mpdServer] withPort:[[self preferences] mpdPort] andPassword:[[self preferences] mpdPassword]];
+	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
 }
 
 - (IBAction) disconnect:(id)sender {
@@ -805,11 +906,11 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (IBAction) increaseVolume:(id)sender {
-	[[self musicClient] changePlaybackVolume:5];
+	[mClient setPlaybackVolume:([mVolumeSlider intValue]+5)];
 }
 
 - (IBAction) decreaseVolume:(id)sender {
-	[[self musicClient] changePlaybackVolume:-5];
+	[mClient setPlaybackVolume:([mVolumeSlider intValue]-5)];
 }
 
 - (IBAction) getInfo:(id)sender {
@@ -829,7 +930,7 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (IBAction) detectCompilations:(id)sender {
-	[CompilationDetector detectCompilations];
+	[CompilationDetector detectCompilationsUsingDataSource:[self currentLibraryDataSource]];
 	[mLibraryController reloadAll];
 }
 

@@ -21,6 +21,24 @@
 
 
 @implementation LicenseController
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		[NSBundle loadNibNamed:@"LicenseWindow" owner:self];		
+	}
+	return self;
+}
+
+- (void)windowWillClose:(NSNotification *)notification {
+	[self release];
+}
+
+- (void) dealloc
+{
+	[super dealloc];
+}
+
+
 - (void) show {
 	if (mLoaded == NO) {
 		NSString *filename = [[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@""];

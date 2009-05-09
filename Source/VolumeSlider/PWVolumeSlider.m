@@ -98,7 +98,7 @@ NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
 }
 
 - (void) volumeChanged:(NSNotification *)notification {
-	int volume = [[[notification userInfo] objectForKey:@"volume"] intValue];
+	int volume = [[[notification userInfo] objectForKey:dVolume] intValue];
 	
 	if ([[[NSRunLoop currentRunLoop] currentMode] isEqualTo:NSEventTrackingRunLoopMode] == YES) {
 		return;

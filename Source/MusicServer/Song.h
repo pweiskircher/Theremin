@@ -18,7 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-
+#import "ThereminEntity.h"
 #include <libmpdclient.h>
 
 extern NSString *gSongPropertyFile;
@@ -55,7 +55,7 @@ typedef enum {
 	eUniqueIdentifier = 0x00004000,
 } fieldFlags;
 
-@interface Song : NSObject {	
+@interface Song : NSObject <ThereminEntity> {	
 	NSMutableDictionary *mValues;
 	BOOL mValid;
 }
@@ -88,9 +88,9 @@ typedef enum {
 - (NSString *) disc;
 - (NSString *) comment;
 - (int) time;
-- (int) identifier;
+- (int) remoteIdentifier;
 - (NSData *) uniqueIdentifier;
-- (int) SQLIdentifier;
+- (int) identifier;
 - (BOOL) isCompilation;
 - (NSString *) albumIdentifier;
 
@@ -106,9 +106,10 @@ typedef enum {
 - (void) setDisc:(NSString *)aString;
 - (void) setComment:(NSString *)aString;
 - (void) setTime:(int)aInteger;
-- (void) setIdentifier:(int)aInteger;
+- (void) setRemoteIdentifier:(int)aInteger;
 - (void) setUniqueIdentifier:(NSData *)aData;
-- (void) setSQLIdentifier:(int)aInteger;
+- (void) setIdentifier:(int)aInteger;
 - (void) setIsCompilation:(BOOL)aBool;
 
+- (BOOL)isEqualToSong:(Song *)aSong;
 @end

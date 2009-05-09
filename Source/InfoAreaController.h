@@ -49,6 +49,8 @@
 	NSDictionary *mGrowlDictionary;
 	NSTimer *mGrowlTimer;
 	NSImage *mGrowlImage;
+	
+	int _total;
 }
 - (id) init;
 - (void) dealloc;
@@ -60,5 +62,6 @@
 - (void) scheduleUpdate;
 - (void) update;
 
-- (void) updateSeekBarWithSongLength:(int)songLength andElapsedTime:(int)elapsed;
+- (void) updateSeekBarWithTotalTime:(int)total;
+- (void) updateSeekBarWithElapsedTime:(int)elapsed;
 @end

@@ -75,6 +75,11 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 													 name:nFinishedLibraryImport
 												   object:nil];
 		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(profileSwitched:)
+													 name:(NSString *)nProfileSwitched
+												   object:nil];
+		
 		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
 																  forKeyPath:@"values.showGenreInLibrary" 
 																	 options:NSKeyValueObservingOptionNew 
@@ -99,6 +104,8 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 }
 
 - (void) awakeFromNib {	
+	_dividerImage = [[mSplitView divider] retain];
+	
 	[mWindow setToolbar:mToolbar];
 	
 	[self clientDisconnected:nil];
@@ -107,16 +114,17 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 	
 	[self showGenreView:[[[WindowController instance] preferences] showGenreInLibrary]];
 	
-	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES];
-	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES];
-	mSongController = [[LibrarySongSubController alloc] initWithTableView:mSongView andLibraryController:self andHasAllEntry:NO];
-	mGenreController = [[LibraryGenreSubController alloc] initWithTableView:mGenreView andLibraryController:self andHasAllEntry:YES];
+	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedArtists];
+	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedAlbums];
+	mSongController = [[LibrarySongSubController alloc] initWithTableView:mSongView andLibraryController:self andHasAllEntry:NO usingReceiveNotification:nLibraryDataSourceReceivedSongs];
+	mGenreController = [[LibraryGenreSubController alloc] initWithTableView:mGenreView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedGenres];
 }
 
 - (void) dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
 	
+	[_dividerImage release];
 	[mToolbar release];
 	[mImportController release];
 	[mArtistController release];
@@ -143,6 +151,9 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
 	if ([menuItem action] != @selector(setToggleIsPartOfCompilation:))
 		return YES;
+	
+	if (_titleShown == NO)
+		return NO;
 	
 	NSArray *songs = [mSongController getSelected:NULL];
 	int state = NSOffState;
@@ -190,7 +201,10 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 }
 
 - (void) clientConnected:(NSNotification *)notification {
-	if ([[[WindowController instance] preferences] isLibraryOutdated] == NO) {
+	id<LibraryDataSourceProtocol> dataSource = [[WindowController instance] currentLibraryDataSource];
+	if (
+		([dataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs && [dataSource needsImport] == NO) ||
+		!([dataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs)) {
 		[[self getOrderedListOfSubControllers] makeObjectsPerformSelector:@selector(enable)];
 		[self reloadAll];
 	}
@@ -217,6 +231,22 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 		[[scrollers objectAtIndex:i] setFrame:NSMakeRect(i*width, 0, width, height)];
 	
 	[mGenreScroller setHidden:!show];
+}
+
+- (void) showTitleView:(BOOL)show {
+	_titleShown = show;
+	
+	if (show) {
+		[mTitleSplitView expand];
+		[mSplitView setDivider:_dividerImage];
+	} else {
+		[mTitleSplitView collapse];
+		[mSplitView setDivider:nil];
+	}
+}
+
+- (void) profileSwitched:(NSNotification *)aNotification {
+//	[self showTitleView:[[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsTitleList];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -321,15 +351,16 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 
 - (IBAction) setToggleIsPartOfCompilation:(id)sender {
 	NSArray *songs = [mSongController getSelected:NULL];
-	
+
+	id<LibraryDataSourceProtocol> dataSource = [[WindowController instance] currentLibraryDataSource];
 	switch ([sender state]) {
 		case NSMixedState:
 		case NSOffState:
-			[[SQLController defaultController] setSongsAsCompilation:songs];
+			[dataSource setSongsAsCompilation:songs];
 			break;
 			
 		case NSOnState:
-			[[SQLController defaultController] removeSongsAsCompilation:songs];
+			[dataSource removeSongsAsCompilation:songs];
 			break;
 	}
 	

@@ -21,145 +21,164 @@
 #import <Security/Security.h>
 #import "WindowController.h"
 #import "MusicServerClient.h"
-
-const char *gKeychainServiceName = "Theremin";
+#import "ProfileRepository.h"
 
 NSString *nCoverArtLocaleChanged = @"nCoverArtLocaleChanged";
 NSString *nCoverArtEnabledChanged = @"nCoverArtEnabledChanged";
 
+NSString *cImportedOldSettings = @"cImportedOldSettings";
+
 @implementation PreferencesController
 
-- (void) awakeFromNib {
-	[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-															  forKeyPath:@"values.enableCoverArt"
-																 options:NSKeyValueObservingOptionNew
-																 context:NULL];
+- (id) initWithSparkleUpdater:(SUUpdater *)aSparkleUpdater {
+	self = [super init];
+	if (self != nil) {
+		mUpdater = [aSparkleUpdater retain];
+		
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+																  forKeyPath:@"values.enableCoverArt"
+																	 options:NSKeyValueObservingOptionNew
+																	 context:NULL];		
+	}
+	return self;
 }
 
-static NSString *dummyMpdPassword = @"ThErP4SS!";
+- (void) dealloc
+{
+	[mUpdater release];
+	[_currentProfile release];
+	[super dealloc];
+}
 
-- (void)showPreferences {
+- (void) importOldSettings {
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:cImportedOldSettings])
+		return;
+	
+	Profile *profile = [Profile importedFromOldSettings];
+	
+	NSMutableArray *profiles = [NSMutableArray arrayWithArray:[ProfileRepository profiles]];
+	[profiles addObject:profile];
+	
+	[ProfileRepository saveProfiles:profiles];
+	
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:cImportedOldSettings];
+}
+
+- (void) save {
+	[[NSUserDefaultsController sharedUserDefaultsController] commitEditing];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	if ([keyPath isEqualToString:@"values.enableCoverArt"]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:nCoverArtEnabledChanged
+															object:self];
+	}
+}
+
+
+- (Profile *) currentProfile {
+	if (_currentProfile == nil) {
+		Profile *profile = [ProfileRepository defaultProfile];
+		if (profile == nil) {
+			profile = [[[Profile alloc] initWithDescription:@"Local MPD"] autorelease];
+			[profile setHostname:@"localhost"];
+			[profile setPort:6600];
+			[profile setAutoreconnect:NO];
+			[profile setMode:eModeMPD];
+		}
+		
+		return profile;
+	}
+		
+	return [[_currentProfile retain] autorelease];
+}
+
+- (void) setCurrentProfile:(Profile *)aProfile {
+	[_currentProfile release];
+	_currentProfile = [aProfile retain];
+}
+
+
+- (PWPreferencesCoverArtProvider) coverArtProvider {
+	NSString *coverArtLocale = [self coverArtLocale];
+	if ([coverArtLocale isEqualToString:@"de"])
+		return CoverArtProviderAmazonDe;
+	else if ([coverArtLocale isEqualToString:@"fr"])
+		return CoverArtProviderAmazonFr;
+	else if ([coverArtLocale isEqualToString:@"jp"])
+		return CoverArtProviderAmazonJp;
+	else if ([coverArtLocale isEqualToString:@"uk"])
+		return CoverArtProviderAmazonUk;
+	else if ([coverArtLocale isEqualToString:@"us"])
+		return CoverArtProviderAmazonUs;
+	
+	[NSException raise:NSInternalInconsistencyException format:@"Unknown cover art provider %@", coverArtLocale];
+	return -1;
+}
+
+- (void) setCoverArtProvider:(PWPreferencesCoverArtProvider) aCoverArtProvider {
+	NSString *setting;
+	switch (aCoverArtProvider) {
+		case CoverArtProviderAmazonDe:
+			setting = @"de";
+			break;
+			
+		case CoverArtProviderAmazonFr:
+			setting = @"fr";
+			break;
+			
+		case CoverArtProviderAmazonJp:
+			setting = @"jp";
+			break;
+			
+		case CoverArtProviderAmazonUk:
+			setting = @"uk";
+			break;
+			
+		case CoverArtProviderAmazonUs:
+			setting = @"us";
+			break;
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setValue:setting forKey:@"coverArtLocale"];
+}
+
+- (PWPreferencesUpdateInterval) updateInterval {
 	int checkInterval = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SUScheduledCheckInterval"] intValue];
 	BOOL checkAtStartup = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SUCheckAtStartup"] boolValue];
 	
 	if (checkAtStartup) {
-		[mUpdatePopup selectItemWithTag:UPDATE_ONLY_AT_STARTUP];
+		return UpdateIntervalOnlyAtStartup;
 	} else if (checkInterval == 0) {
-		[mUpdatePopup selectItemWithTag:UPDATE_NEVER];
+		return UpdateIntervalNever;
 	} else if (checkInterval == 24*60*60) {
-		[mUpdatePopup selectItemWithTag:UPDATE_ONCE_A_DAY];
+		return UpdateIntervalOnceADay;
 	} else if (checkInterval == 7*24*60*60) {
-		[mUpdatePopup selectItemWithTag:UPDATE_ONCE_A_WEEK];
-	} else {
-		[mUpdatePopup selectItemWithTag:UPDATE_NEVER];
-	}
-
-	[mPassword setDelegate:self];
-	
-	if ([self mpdPasswordExists])
-		[mPassword setStringValue:dummyMpdPassword];
-	else
-		[mPassword setStringValue:@""];
-	
-	[mPreferencesWindow makeKeyAndOrderFront:self];
-
-	NSString *coverArtLocale = [[NSUserDefaults standardUserDefaults] objectForKey:@"coverArtLocale"];
-	if ([coverArtLocale isEqual:@"de"]) {
-		[mCoverArtPopup selectItemWithTag:COVER_ART_AMAZON_DE];
-	} else if ([coverArtLocale isEqualToString:@"fr"]) {
-		[mCoverArtPopup selectItemWithTag:COVER_ART_AMAZON_FR];
-	} else if ([coverArtLocale isEqualToString:@"jp"]) {
-		[mCoverArtPopup selectItemWithTag:COVER_ART_AMAZON_JP];
-	} else if ([coverArtLocale isEqualToString:@"uk"]) {
-		[mCoverArtPopup selectItemWithTag:COVER_ART_AMAZON_UK];
-	} else if ([coverArtLocale isEqualToString:@"us"]) {
-		[mCoverArtPopup selectItemWithTag:COVER_ART_AMAZON_US];
-	}
-}
-
-- (BOOL) mpdPasswordExists {
-	NSString *accountName = [NSString stringWithFormat:@"%@:%d", [self mpdServer], [self mpdPort]];
-	SecKeychainItemRef itemRef;
-	
-	if (SecKeychainFindGenericPassword(NULL,strlen(gKeychainServiceName),gKeychainServiceName,[accountName length],
-									   [accountName UTF8String],0,NULL,&itemRef) == noErr) {
-		return YES;
+		return UpdateIntervalOnceAWeek;
 	}
 	
-	return NO;
+	return UpdateIntervalNever;
 }
 
-- (NSString *) mpdPassword {
-	void *password;
-	UInt32 passwordLength;
-	NSString *accountName = [NSString stringWithFormat:@"%@:%d", [self mpdServer], [self mpdPort]];
-	if ([accountName length] > 1) {
-		if (SecKeychainFindGenericPassword(NULL, strlen(gKeychainServiceName), gKeychainServiceName, [accountName length],
-										   [accountName UTF8String], &passwordLength, &password, NULL) == noErr) {
-			NSString *s = [[NSMutableString alloc] initWithCString:password length:passwordLength];
-			memset(password,0xFF,passwordLength);
-
-			SecKeychainItemFreeContent(NULL, password);
-			return [s autorelease];
-		}
-	}
-	
-	return nil;
-}
-
-- (void) setMpdPassword:(NSString *)aPassword {
-	NSString *accountName = [NSString stringWithFormat:@"%@:%d", [self mpdServer], [self mpdPort]];
-	SecKeychainItemRef itemRef;
-	if (SecKeychainFindGenericPassword(NULL,strlen(gKeychainServiceName),gKeychainServiceName,[accountName length],
-									   [accountName UTF8String],0,NULL,&itemRef) != noErr) {
-		SecKeychainAddGenericPassword(NULL,strlen(gKeychainServiceName),gKeychainServiceName,[accountName length],
-									  [accountName UTF8String],[aPassword length],[aPassword UTF8String],NULL);
-		[mPassword setStringValue:aPassword];
-		return;
-	}
-	
-	if (aPassword == nil) {
-		[mPassword setStringValue:@""];
-		SecKeychainItemDelete(itemRef);
-		CFRelease(itemRef);
-	} else {
-		SecKeychainItemModifyContent(itemRef,NULL,[aPassword length],[aPassword UTF8String]);
-		[mPassword setStringValue:aPassword];
-	}
-}
-
-- (void) textDidEndEditing:(NSNotification *)notification {
-	if ([[mPassword stringValue] isEqualToString:dummyMpdPassword] == NO)
-		[self setMpdPassword:[mPassword stringValue]];
-}
-
-- (void)windowDidResignKey:(NSNotification *)aNotification {
-	if ([[mPassword stringValue] isEqualToString:dummyMpdPassword] == NO)
-		[self setMpdPassword:[mPassword stringValue]];
-	[[NSUserDefaultsController sharedUserDefaultsController] commitEditing];
-}
-
-- (IBAction) updatePopupMenuChanged:(id)sender {
-	int tag = [[sender selectedItem] tag];
-	
-	switch (tag) {
-		case UPDATE_NEVER:
+- (void) setUpdateInterval:(PWPreferencesUpdateInterval) aUpdateInterval {
+	switch (aUpdateInterval) {
+		case UpdateIntervalNever:
 			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SUScheduledCheckInterval"];
 			[mUpdater scheduleCheckWithInterval:0.0];
 			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:@"SUCheckAtStartup"];
 			break;
 			
-		case UPDATE_ONCE_A_DAY:
+		case UpdateIntervalOnceADay:
 			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:24*60*60] forKey:@"SUScheduledCheckInterval"];
 			[mUpdater scheduleCheckWithInterval:24*60*60];
 			break;
 			
-		case UPDATE_ONCE_A_WEEK:
+		case UpdateIntervalOnceAWeek:
 			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:7*24*60*60] forKey:@"SUScheduledCheckInterval"];
 			[mUpdater scheduleCheckWithInterval:7*24*60*60];
 			break;
 			
-		case UPDATE_ONLY_AT_STARTUP:
+		case UpdateIntervalOnlyAtStartup:
 			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SUScheduledCheckInterval"];
 			[mUpdater scheduleCheckWithInterval:0.0];
 			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"SUCheckAtStartup"];			
@@ -167,55 +186,11 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 	}
 }
 
-- (IBAction) coverArtPopupMenuChanged:(id)sender {
-	int tag = [[sender selectedItem] tag];
-	
-	NSString *setting;
-	switch (tag) {
-		case COVER_ART_AMAZON_DE:
-			setting = @"de";
-			break;
-			
-		case COVER_ART_AMAZON_FR:
-			setting = @"fr";
-			break;
-			
-		case COVER_ART_AMAZON_JP:
-			setting = @"jp";
-			break;
-			
-		case COVER_ART_AMAZON_UK:
-			setting = @"uk";
-			break;
-			
-		case COVER_ART_AMAZON_US:
-			setting = @"us";
-			break;
-	}
-	
-	[[NSUserDefaults standardUserDefaults] setValue:setting forKey:@"coverArtLocale"];
-	
-	// we have to clear the cache manually as otherwise we don't know if the CoverArtView or the CoverArtCache notification
-	// will be recevied at first..
-	//[[CoverArtCache defaultCache] invalidateCache];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nCoverArtLocaleChanged object:self];
-}
-
-- (NSString *) mpdServer {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"mpdServer"];
-}
-
-- (int) mpdPort {
-	return [[NSUserDefaults standardUserDefaults] integerForKey:@"mpdPort"];
-}
-
-- (BOOL) autoreconnectEnabled {
-	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"autoreconnect"] boolValue];
-}
 
 - (NSString *) coverArtLocale {
 	return [[NSUserDefaults standardUserDefaults] objectForKey:@"coverArtLocale"];
 }
+
 
 - (BOOL) coverArtEnabled {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"enableCoverArt"] boolValue];
@@ -227,8 +202,9 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 
 
 - (NSString *) currentServerNameWithPort {
-	return [NSString stringWithFormat:@"%@:%d", [self mpdServer], [self mpdPort]];
+	return [NSString stringWithFormat:@"%@:%d", [[self currentProfile] hostname], [[self currentProfile] port]];
 }
+
 
 - (BOOL) askedAboutCoverArt {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"askedCoverArt"] boolValue];
@@ -238,13 +214,8 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"askedCoverArt"];
 }
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"values.enableCoverArt"]) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:nCoverArtEnabledChanged
-															object:self];
-	}
-}
 
+// set using cocoa bindings in UI
 - (BOOL) pauseOnSleep {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"pauseOnSleep"] boolValue];
 }
@@ -258,10 +229,13 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"NoConfirmationNeededForDeletionOfPlaylist"] boolValue];
 }
 
+
+// set using cocoa bindings in UI
 - (AppleRemoteMode) appleRemoteMode {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"appleRemoteMode"] intValue];
 }
 
+// set using cocoa bindings in UI
 - (LibraryDoubleClickMode) libraryDoubleClickAction {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"libraryDoubleClickAction"] intValue];
 }
@@ -275,6 +249,7 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"playlistDrawerOpen"] boolValue];
 }
 
+
 - (void) setPlaylistDrawerWidth:(float)theWidth {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:theWidth] forKey:@"playlistDrawerWidth"];
 }
@@ -283,32 +258,6 @@ static NSString *dummyMpdPassword = @"ThErP4SS!";
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"playlistDrawerWidth"] floatValue]; 
 }
 
-- (NSString *) lastDatabaseFetchedFromServer {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"lastDatabaseFetchedFromServer"];
-}
-
-- (void) setLastDatabaseFetchedFromServer:(NSString *)aString {
-	[[NSUserDefaults standardUserDefaults] setObject:aString forKey:@"lastDatabaseFetchedFromServer"];
-}
-
-- (NSData *) databaseIdentifier {
-	return [[NSUserDefaults standardUserDefaults] objectForKey:dDatabaseIdentifier];
-}
-
-- (void) setDatabaseIdentifier:(NSData *)theDatabaseIdentifier {
-	[[NSUserDefaults standardUserDefaults] setObject:theDatabaseIdentifier forKey:dDatabaseIdentifier];
-}
-
-- (BOOL) isLibraryOutdated {
-	NSData *dataId = [[[WindowController instance] musicClient] databaseIdentifier];
-
-	if ([dataId isEqualToData:[self databaseIdentifier]] == NO ||
-		[[self currentServerNameWithPort] isEqualToString:[self lastDatabaseFetchedFromServer]] == NO) {
-		return YES;
-	}
-	
-	return NO;
-}
 
 - (BOOL) showGenreInLibrary {
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"showGenreInLibrary"] boolValue];

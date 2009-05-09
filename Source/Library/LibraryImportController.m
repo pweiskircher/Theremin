@@ -28,6 +28,8 @@
 NSString *nBeganLibraryImport = @"nBeganLibraryImport";
 NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 
+const NSString *gDatabaseIdentifierKey = @"gDatabaseIdentifierKey";
+
 @interface LibraryImportThread : NSObject {
 }
 - (void) startThread:(NSDictionary *)arguments;
@@ -74,14 +76,15 @@ NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 }
 
 - (void) clientConnected:(NSNotification *)notification {
-	// on connect, we look if the database identifier is different or if we are connected to a different server
-	if ([[[WindowController instance] preferences] isLibraryOutdated]) {
+	if ([[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs &&
+		[[[WindowController instance] currentLibraryDataSource] needsImport]) {
 		[[[WindowController instance] musicClient] startFetchDatabase];
 	}	
 }
 
 - (void) remoteDatabaseUpdated:(NSNotification *)notification {
-	[[[WindowController instance] musicClient] startFetchDatabase];	
+	if ([[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs)
+		[[[WindowController instance] musicClient] startFetchDatabase];	
 }
 
 - (void) startImportThreadWithSongs:(NSArray *)theSongs {
@@ -89,7 +92,7 @@ NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 	mImporterThread = [[LibraryImportThread alloc] init];
 	
 	NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:theSongs, dSongs,
-		mCurrentServerAndPort, @"SERVER_AND_PORT", nil];
+		mCurrentDatabaseIdentifier, gDatabaseIdentifierKey, nil];
 	//[mImporterThread startThread:dict];
 	[NSThread detachNewThreadSelector:@selector(startThread:) toTarget:mImporterThread withObject:dict];
 }
@@ -121,13 +124,6 @@ NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 }
 
 - (void) threadFinished:(NSNotification *)notification {
-	[[[WindowController instance] preferences] setDatabaseIdentifier:mCurrentDatabaseIdentifier];
-	[[[WindowController instance] preferences] setLastDatabaseFetchedFromServer:mCurrentServerAndPort];
-	
-	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[[SQLController defaultController] metaData]];
-	[dict setObject:mCurrentServerAndPort forKey:@"SERVER_AND_PORT"];
-	[[SQLController defaultController] setMetaData:dict];
-	
 	[mCurrentDatabaseIdentifier release], mCurrentDatabaseIdentifier = nil;
 	[mCurrentServerAndPort release], mCurrentServerAndPort = nil;
 	[mCurrentSongs release], mCurrentSongs = nil;
@@ -152,12 +148,8 @@ NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 
 @implementation LibraryImportThread
 
-- (NSString *) compilationBackupFilenameWithServerAndPort:(NSString *)serverAndPort {
-	if (serverAndPort == nil) {
-		serverAndPort = @"unknown";
-	}
-
-	return [NSString stringWithFormat:@"%@/Compilation%@.dat", [[WindowController instance] applicationSupportFolder], serverAndPort];
+- (NSString *) compilationBackupFilenameWithServerAndPort:(Profile *)aProfile {
+	return [NSString stringWithFormat:@"%@/Compilation%@-%d.dat", [[WindowController instance] applicationSupportFolder], [aProfile hostname], [aProfile port]];
 }
 
 - (void) startThread:(NSDictionary *)arguments {
@@ -165,34 +157,36 @@ NSString *nFinishedLibraryImport = @"nFinishedLibraryImport";
 	
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nBeganLibraryImport object:self];
 	
-	SQLController *controller = [SQLController defaultController];
+	id<LibraryDataSourceProtocol> dataSource = [[WindowController instance] currentLibraryDataSource];
 	
-	NSDictionary *metadata = [controller metaData];
-	NSString *filename = [self compilationBackupFilenameWithServerAndPort:[metadata objectForKey:@"SERVER_AND_PORT"]];
-
-	if ([[NSFileManager defaultManager] fileExistsAtPath:filename] == NO) {
-		NSArray *array = [controller compilationUniqueIdentifiers];
-//		NSLog(@"saving compilation status to a backup file %@.", filename);
-		if (![NSArchiver archiveRootObject:array toFile:filename]) {
-			NSLog(@"Couldn't save compilation data. Continuing anyway.");
-		}
+	BOOL supportsCompilations = [dataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations;
+	
+	NSString *compilationBackupFilename;
+	if (supportsCompilations) {
+		compilationBackupFilename = [self compilationBackupFilenameWithServerAndPort:[[[WindowController instance] preferences] currentProfile]];
+		
+		if ([[NSFileManager defaultManager] fileExistsAtPath:compilationBackupFilename] == NO) {
+			NSArray *array = [dataSource compilationUniqueIdentifiers];
+			if (![NSArchiver archiveRootObject:array toFile:compilationBackupFilename]) {
+				NSLog(@"Couldn't save compilation data. Continuing anyway.");
+			}
+		}		
 	}
 	
-	[controller clear];
+	[dataSource clear];
 	
 	NSLog(@"started importing ...");
 	
 	NSArray *allSongs = [arguments objectForKey:dSongs];
-	[controller insertSongs:allSongs];
+	[dataSource insertSongs:allSongs withDatabaseIdentifier:[arguments objectForKey:gDatabaseIdentifierKey]];
 
 	NSLog(@"finished.");
 	
-//	NSLog(@"resetting compilation status");
-	filename = [self compilationBackupFilenameWithServerAndPort:[arguments objectForKey:@"SERVER_AND_PORT"]];
-	
-	NSArray *array = [NSUnarchiver unarchiveObjectWithFile:filename];
-	[controller setCompilationByUniqueIdentifiers:array];
-	[[NSFileManager defaultManager] removeFileAtPath:filename handler:NULL];		
+	if (supportsCompilations) {
+		NSArray *array = [NSUnarchiver unarchiveObjectWithFile:compilationBackupFilename];
+		[dataSource setCompilationByUniqueIdentifiers:array];
+		[[NSFileManager defaultManager] removeFileAtPath:compilationBackupFilename handler:NULL];		
+	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nFinishedLibraryImport object:self userInfo:nil waitUntilDone:YES];
 	

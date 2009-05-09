@@ -20,6 +20,8 @@
 #import "MusicServerClient.h"
 #import "NSNotificationAdditions.h"
 #import "WindowController.h"
+#import "MpdMusicServerClient.h"
+#import "SqueezeLibMusicServerClient.h"
 
 NSString *nMusicServerClientConnecting = @"nMusicServerClientConnecting";
 NSString *nMusicServerClientConnected = @"nMusicServerClientConnected";
@@ -31,12 +33,15 @@ NSString *nMusicServerClientCurrentSongPositionChanged = @"nMusicServerClientCur
 NSString *nMusicServerClientCurrentSongChanged = @"nMusicServerClientCurrentSongChanged";
 NSString *nMusicServerClientStateChanged = @"nMusicServerClientStateChanged";
 NSString *nMusicServerClientVolumeChanged = @"nMusicServerClientVolumeChanged";
-NSString *nMusicServerClientElapsedAndTotalTimeChanged = @"nMusicServerClientElapsedAndTotalTimeChanged";
+NSString *nMusicServerClientElapsedTimeChanged = @"nMusicServerClientElapsedTimeChanged";
+NSString *nMusicServerClientTotalTimeChanged = @"nMusicServerClientTotalTimeChanged";
 NSString *nMusicServerClientShuffleOptionChanged = @"nMusicServerClientShuffleOptionChanged";
 NSString *nMusicServerClientRepeatOptionChanged = @"nMusicServerClientRepeatOptionChanged";
 
 NSString *nMusicServerClientFetchedDatabase = @"nMusicServerClientFetchedDatabase";
 NSString *nMusicServerClientFetchedPlaylist = @"nMusicServerClientFetchedPlaylist";
+NSString *nMusicServerClientFetchedPlaylistLength = @"nMusicServerClientFetchedPlaylistLength";
+NSString *nMusicServerClientFetchedTitleForPlaylist = @"nMusicServerClientFetchedTitleForPlaylist";
 NSString *nMusicServerClientDatabaseUpdated = @"nMusicServerClientDatabaseUpdated";
 NSString *nMusicServerClientFetchedNamedPlaylist = @"nMusicServerClientFetchedNamedPlaylist";
 
@@ -51,8 +56,24 @@ NSString *dDisconnectReason = @"dDisconnectReason";
 NSString *dSongs = @"dSongs";
 NSString *dSongPosition = @"dSongPosition";
 NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
+NSString *dState = @"dState";
+NSString *dVolume = @"dVolume";
+NSString *dSong = @"dSong";
+NSString *dTotalTime = @"dTotalTime";
+NSString *dElapsedTime= @"dElapsedTime";
+NSString *dPlaylistLength = @"dPlaylistLength";
 
 @implementation MusicServerClient
++ (Class) musicServerClientClassForProfile:(Profile *)aProfile {
+	switch ([aProfile mode]) {
+		case eModeMPD:
+			return [MpdMusicServerClient class];
+		case eModeSqueezeCenter:
+			return [SqueezeLibMusicServerClient class];
+	}
+	return [NSNull class];
+}
+
 + (void) connectWithPorts:(NSDictionary *) infos {
 	NSAutoreleasePool *pool;
 	NSConnection *connectionToController;
@@ -60,30 +81,46 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 	
 	pool = [[NSAutoreleasePool alloc] init];
 	
-	connectionToController = [NSConnection connectionWithReceivePort:[infos objectForKey:nMusicServerClientPort0]
-															sendPort:[infos objectForKey:nMusicServerClientPort1]];
+	connectionToController = [[NSConnection connectionWithReceivePort:[infos objectForKey:nMusicServerClientPort0]
+															sendPort:[infos objectForKey:nMusicServerClientPort1]] retain];
 	
 	client = [[NSClassFromString([infos objectForKey:nMusicServerClientClass]) alloc] init];
 	WindowController *wc = (WindowController *)[connectionToController rootProxy];
 	[wc setMusicClient:client];
 	
-	[client release];
-
-	BOOL done = NO;
-	while (!done) {
-		pool = [[NSAutoreleasePool alloc] init];
-		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
-		[pool release];
+	while (![client shouldStop]) {
+		NSAutoreleasePool *innerPool = [[NSAutoreleasePool alloc] init];
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
+		[innerPool release];
 	}
+
+	[[connectionToController sendPort] invalidate];
+	[[connectionToController receivePort] invalidate];
+	[connectionToController release];
+	
+	[client release];
+	[pool release];
+}
+
++ (unsigned int) capabilities {
+	return 0;
 }
 
 - (id) init {
 	self = [super init];
 	if (self != nil) {
 		mLastSetTime = -1;
+		_stop = NO;
 	}
 	return self;
 }
+
+- (void) dealloc
+{
+	[mSeekTimer release];
+	[super dealloc];
+}
+
 
 - (oneway void) scheduleSeek:(int)time withDelay:(NSTimeInterval)delay {
 	if (mSeekTimer != nil) {
@@ -130,8 +167,8 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 	return NO;
 }
 
-- (oneway void) connectToServer:(NSString *)server withPort:(int)port andPassword:(NSString *)password {
-	[NSException raise:NSInternalInconsistencyException format:@"You need to overwrite the connectToServer:withPort:andPassword method."];
+- (oneway void) connectToServerWithProfile:(Profile *)profile {
+	[NSException raise:NSInternalInconsistencyException format:@"You need to overwrite the connectToServerWithProfile: method."];
 }
 
 - (oneway void) disconnectWithReason:(NSString *)reason {
@@ -139,24 +176,6 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 }
 
 #pragma mark Database
-- (oneway void) startFetchDatabase {
-}
-
-- (NSData *) databaseIdentifier {
-	return nil;
-}
-
-- (bycopy) entriesInDirectory:(Directory *)aDirectory withTypes:(int)theTypes {
-	return nil;
-}
-
-- (bycopy) rootDirectory {
-	return nil;
-}
-
-- (oneway void) updateDirectory:(Directory *)aDirectory {
-}
-
 - (bycopy Song *) songInformationByUniqueIdentifier:(NSData *)aUniqueIdentifier {
 	[NSException raise:NSInternalInconsistencyException format:@"You need to overwrite the songInformationByUniqueIdentifier: method."];
 	return nil;
@@ -180,9 +199,6 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 }
 
 - (oneway void) moveSongFromPosition:(int)src toPosition:(int)dest {
-}
-
-- (oneway void) swapSongs:(bycopy Song *)srcSong with:(bycopy Song *)destSong {
 }
 
 - (oneway void) loadPlaylist:(PlayListFile *)aPlayListFile {
@@ -236,8 +252,6 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 
 - (oneway void) setPlaybackVolume:(int)volume {
 }
-- (oneway void) changePlaybackVolume:(int)diff {
-}
 
 - (oneway void) seek:(int)time {
 }
@@ -275,6 +289,14 @@ NSString *dDatabaseIdentifier = @"dDatabaseIdentifier";
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientFoundPlaylists 
 																		object:self 
 																	  userInfo:dict];
+}
+
+- (BOOL) shouldStop {
+	return _stop;
+}
+
+- (void) stop {
+	_stop = YES;
 }
 
 @end

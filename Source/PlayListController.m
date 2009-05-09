@@ -30,6 +30,8 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 
 @interface PlayListController (PrivateMethods)
 - (NSString *) songString:(int)playlistCount;
+- (void) updateAfterNewSongs:(BOOL)needsCompleteReload;
+- (void) updateStatusBar;
 @end
 
 @implementation PlayListController
@@ -58,6 +60,14 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(clientFetchedPlaylist:)
 													 name:nMusicServerClientFetchedPlaylist
+												   object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(fetchedPlaylistLength:)
+													 name:nMusicServerClientFetchedPlaylistLength
+												   object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(fetchedOnePlaylistTitle:)
+													 name:nMusicServerClientFetchedTitleForPlaylist
 												   object:nil];
 	}
 	return self;
@@ -127,14 +137,11 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	[mPlayList release];
 	mPlayList = [songs retain];
 	
-	if (mFilteredPlaylist) {
-		[self searchAction:mSearchField];
-	} else {
-		[mTableView reloadData];
-	}
-	
-	NSArray *currentPlaylist = mFilteredPlaylist;
-	if (!currentPlaylist) currentPlaylist = mPlayList;
+	[self updateAfterNewSongs:YES];
+}
+
+- (void) updateStatusBar {
+	NSArray *currentPlaylist = mPlayList;
 	int seconds = 0;
 	for (int i = 0; i < [currentPlaylist count]; i++) 
 		seconds += [[currentPlaylist objectAtIndex:i] time];
@@ -143,15 +150,54 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		BOOL isValid;
 		NSString *formattedSeconds = [NSString convertSecondsToTime:seconds andIsValid:&isValid];
 		[mCurrentPlaylistInfo setStringValue:
-		  [NSString stringWithFormat:NSLocalizedString(@"%d %@, %@ total time.", "Current playlist information"), [currentPlaylist count], [self songString:[currentPlaylist count]], formattedSeconds]];
+		 [NSString stringWithFormat:NSLocalizedString(@"%d %@, %@ total time.", "Current playlist information"), [currentPlaylist count], [self songString:[currentPlaylist count]], formattedSeconds]];
 		[mCurrentPlaylistInfo setHidden:NO];
 	} else
 		[mCurrentPlaylistInfo setStringValue:@""];
+}
+
+- (void) updateAfterNewSongs:(BOOL)needsCompleteReload {
+	if (mFilteredPlaylist) {
+		[self searchAction:mSearchField];
+	} else if (needsCompleteReload) {
+		[mTableView reloadData];
+	}
+	
+	[self updateStatusBar];
 	
 	if (!mShownAndSelectedCurrentSongAfterConnect) {
 		if ([self showCurrentSong] && [self selectCurrentSong])
 			mShownAndSelectedCurrentSongAfterConnect = YES;
+	}	
+}
+
+- (void) fetchedPlaylistLength:(NSNotification *)aNotification {
+	int length = [[[aNotification userInfo] objectForKey:dPlaylistLength] intValue];
+	
+	NSMutableArray *dummyPlaylist = [NSMutableArray arrayWithCapacity:length];
+	for (int i = 0; i < length; i++) {
+		Song *dummySong = [[[Song alloc] init] autorelease];
+		[dummySong setTitle:@"Loading ..."];
+		[dummyPlaylist addObject:dummySong];
 	}
+	
+	[mPlayList release];
+	mPlayList = [dummyPlaylist retain];
+	
+	[self updateAfterNewSongs:YES];
+}
+
+- (void) fetchedOnePlaylistTitle:(NSNotification *)aNotification {
+	int position = [[[aNotification userInfo] objectForKey:dSongPosition] intValue];
+	Song *song = [[aNotification userInfo] objectForKey:dSong];
+	
+	[mPlayList replaceObjectAtIndex:position withObject:song];
+	
+	NSRect rect = [mTableView rectOfRow:position];
+	if (rect.size.width != 0 && rect.size.height != 0)
+		[mTableView setNeedsDisplayInRect:rect];
+	
+	[self updateAfterNewSongs:NO];
 }
 
 - (NSString *) songString:(int)playlistCount {
@@ -230,7 +276,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	
 	if (mFilteredPlaylist) {
 		NSDictionary *dict = [mFilteredPlaylist objectAtIndex:rowIndex];
-		song = [dict objectForKey:@"song"];
+		song = [dict objectForKey:dSong];
 		playlistPosition = [[dict objectForKey:@"playlistPosition"] intValue];
 	} else {
 		song = [self songAtRow:rowIndex];
@@ -364,7 +410,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	Song *song;
 	
 	if (mFilteredPlaylist) {
-		song = [[mFilteredPlaylist objectAtIndex:selectedRow] objectForKey:@"song"];
+		song = [[mFilteredPlaylist objectAtIndex:selectedRow] objectForKey:dSong];
 	} else {
 		song = [self songAtRow:selectedRow];
 	}
@@ -386,7 +432,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	while ( (returnValue = [songSelection getIndexes:indexes maxCount:20 inIndexRange:&range])) {
 		for (int i = 0; i < returnValue; i++) {
 			if (mFilteredPlaylist) {
-				[selectedSongs addObject:[Song songWithSong:[[mFilteredPlaylist objectAtIndex:indexes[i]] objectForKey:@"song"]]];
+				[selectedSongs addObject:[Song songWithSong:[[mFilteredPlaylist objectAtIndex:indexes[i]] objectForKey:dSong]]];
 			} else {
 				[selectedSongs addObject:[Song songWithSong:[self songAtRow:indexes[i]]]];
 			}
@@ -415,8 +461,8 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		NSArray *tokens = [searchString parseIntoTokens];
 		for (int i = 0; i < [mPlayList count]; i++) {
 			Song *song = [self songAtRow:i];
-			if ([song foundTokens:tokens onFields:flags]) {
-				NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:song, @"song", [NSNumber numberWithInt:i], @"playlistPosition", nil];
+			if ([song valid] && [song foundTokens:tokens onFields:flags]) {
+				NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:song, dSong, [NSNumber numberWithInt:i], @"playlistPosition", nil];
 				[mFilteredPlaylist addObject:dict];
 			}
 			

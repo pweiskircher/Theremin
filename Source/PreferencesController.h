@@ -19,17 +19,22 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Sparkle/SUUpdater.h>
+#import "Profile.h"
 
-#define UPDATE_ONCE_A_DAY		1
-#define UPDATE_ONCE_A_WEEK		2
-#define UPDATE_ONLY_AT_STARTUP	3
-#define UPDATE_NEVER			4
+typedef enum {
+	UpdateIntervalOnceADay = 1,
+	UpdateIntervalOnceAWeek = 2,
+	UpdateIntervalOnlyAtStartup = 3,
+	UpdateIntervalNever = 4
+} PWPreferencesUpdateInterval;
 
-#define COVER_ART_AMAZON_DE		0
-#define COVER_ART_AMAZON_FR		1
-#define COVER_ART_AMAZON_JP		2
-#define COVER_ART_AMAZON_UK		3
-#define COVER_ART_AMAZON_US		4
+typedef enum {
+	CoverArtProviderAmazonDe = 0,
+	CoverArtProviderAmazonFr = 1,
+	CoverArtProviderAmazonJp = 2,
+	CoverArtProviderAmazonUk = 3,
+	CoverArtProviderAmazonUs = 4
+} PWPreferencesCoverArtProvider;
 
 typedef enum {
 	eAppleRemoteModeAlways		= 0,
@@ -45,29 +50,30 @@ typedef enum {
 extern NSString *nCoverArtLocaleChanged;
 extern NSString *nCoverArtEnabledChanged;
 
-@interface PreferencesController : NSObject {
-	IBOutlet NSWindow *mPreferencesWindow;
-	IBOutlet NSPopUpButton *mUpdatePopup;
-	IBOutlet NSPopUpButton *mCoverArtPopup;
-	IBOutlet SUUpdater *mUpdater;
-	IBOutlet NSTextField *mPassword;
+@interface PreferencesController : NSObject {	
+	SUUpdater *mUpdater;
+	
+	Profile *_currentProfile;
 }
-- (void)showPreferences;
-- (void)windowDidResignKey:(NSNotification *)aNotification;
 
-- (void) setMpdPassword:(NSString *)aPassword;
+- (id) initWithSparkleUpdater:(SUUpdater *)aSparkleUpdater;
 
-- (IBAction) updatePopupMenuChanged:(id)sender;
-- (IBAction) coverArtPopupMenuChanged:(id)sender;
+- (Profile *) currentProfile;
+- (void) setCurrentProfile:(Profile *)aProfile;
+- (void) importOldSettings;
+- (void) save;
+
+// settings getters ( / setters )
+
+- (PWPreferencesCoverArtProvider) coverArtProvider;
+- (void) setCoverArtProvider:(PWPreferencesCoverArtProvider) aCoverArtProvider;
+
+- (PWPreferencesUpdateInterval) updateInterval;
+- (void) setUpdateInterval:(PWPreferencesUpdateInterval) aUpdateInterval;
 
 - (void) setNoConfirmationNeededForDeletionOfPlaylist:(BOOL)aValue;
 - (BOOL) noConfirmationNeededForDeletionOfPlaylist;
 
-- (NSString *) mpdPassword;
-- (BOOL) mpdPasswordExists;
-- (NSString *) mpdServer;
-- (int) mpdPort;
-- (BOOL) autoreconnectEnabled;
 - (NSString *) coverArtLocale;
 
 - (LibraryDoubleClickMode) libraryDoubleClickAction;
@@ -90,15 +96,7 @@ extern NSString *nCoverArtEnabledChanged;
 - (void) setPlaylistDrawerWidth:(float)theSize;
 - (float) playlistDrawerWidth;
 
-- (NSString *) lastDatabaseFetchedFromServer;
-- (void) setLastDatabaseFetchedFromServer:(NSString *)aString;
-
-- (NSData *) databaseIdentifier;
-- (void) setDatabaseIdentifier:(NSData *)theDatabaseIdentifier;
-
 - (BOOL) showGenreInLibrary;
 - (void) setShowGenreInLibrary:(BOOL)aValue;
-
-- (BOOL) isLibraryOutdated;
 
 @end

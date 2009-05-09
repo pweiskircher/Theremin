@@ -22,6 +22,7 @@
 @class LibraryController;
 
 #import "PWTableView.h"
+#import "LibraryDataSource.h"
 
 @interface LibrarySubControllerBase : NSObject {
 	IBOutlet PWTableView *mTableView;
@@ -34,8 +35,13 @@
 	id mSelectionData;
 	
 	NSArray *mItems;
+	
+	id<LibraryDataSourceProtocol> _libraryDataSource;
 }
-- (id) initWithTableView:(PWTableView *)aTableView andLibraryController:(LibraryController *)aLibraryController andHasAllEntry:(BOOL)allEntry;
+- (id) initWithTableView:(PWTableView *)aTableView
+	andLibraryController:(LibraryController *)aLibraryController
+		  andHasAllEntry:(BOOL)allEntry
+usingReceiveNotification:(NSString *)aReceiveNotification;
 
 - (NSArray *) getSelected:(BOOL*)allSelected;
 - (void) reloadData;
@@ -44,9 +50,11 @@
 - (void) enable;
 
 - (void) addRequiredFilters:(NSMutableArray *)filters;
-- (NSArray *) getFilteredItems:(NSArray *)filters;
+- (NSArray *) requestFilteredItems:(NSArray *)filters;
 - (NSString *) getDisplayTitleOfAllItem;
 - (NSArray *) sortedArray:(NSArray *)items;
+
+- (id<LibraryDataSourceProtocol>) libraryDataSource;
 
 @end
 

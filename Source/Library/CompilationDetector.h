@@ -18,10 +18,10 @@
  */
 
 #import <Cocoa/Cocoa.h>
-
+#import "LibraryDataSource.h"
 
 @interface CompilationDetector : NSObject {
 
 }
-+ (void) detectCompilations;
++ (void) detectCompilationsUsingDataSource:(id<LibraryDataSourceProtocol>)aDataSource;
 @end

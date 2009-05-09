@@ -42,6 +42,12 @@ NSString *gSongPropertyUniqueIdentifier = @"gSongPropertyUniqueIdentifier";
 NSString *gSongPropertySqlIdentifier = @"gSongPropertySqlIdentifier";
 NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 
+#warning FIXME: remove libmpdclient dependency.
+
+@interface Song (PrivateMethods)
+- (NSDictionary *) values;
+@end
+
 @implementation Song
 + (id)songWithMpd_Song:(mpd_Song *)song {
 	return [[[Song alloc] initWithMpd_Song:song] autorelease];
@@ -103,7 +109,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 			}
 			
 			[self setTime:song->time];
-			[self setIdentifier:song->id];
+			[self setRemoteIdentifier:song->id];
 			
 			mValid = YES;
 		} else {
@@ -261,7 +267,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	return -1;
 }
 
-- (int) identifier {
+- (int) remoteIdentifier {
 	if ([mValues objectForKey:gSongPropertyIdentifier])
 		return [[mValues objectForKey:gSongPropertyIdentifier] intValue];
 	return -1;
@@ -273,7 +279,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	return nil;
 }
 
-- (int) SQLIdentifier {
+- (int) identifier {
 	if ([mValues objectForKey:gSongPropertySqlIdentifier])
 		return [[mValues objectForKey:gSongPropertySqlIdentifier] intValue];
 	return -1;
@@ -372,7 +378,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	[mValues setObject:[NSNumber numberWithInt:aInteger] forKey:gSongPropertyTime];
 }
 
-- (void) setIdentifier:(int)aInteger {
+- (void) setRemoteIdentifier:(int)aInteger {
 	[mValues setObject:[NSNumber numberWithInt:aInteger] forKey:gSongPropertyIdentifier];
 }
 
@@ -381,7 +387,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	[mValues setObject:aData forKey:gSongPropertyUniqueIdentifier];
 }
 
-- (void) setSQLIdentifier:(int)aInteger {
+- (void) setIdentifier:(int)aInteger {
 	[mValues setObject:[NSNumber numberWithInt:aInteger] forKey:gSongPropertySqlIdentifier];
 }
 
@@ -408,6 +414,20 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	memcpy(&mValid, [decoder decodeBytesWithReturnedLength:&length], sizeof(mValid));
 	
 	return self;
+}
+
+- (BOOL)isEqual:(id)anObject {
+	if ([anObject isKindOfClass:[self class]])
+		return [self isEqualToSong:anObject];
+	return NO;
+}
+
+- (NSDictionary *) values {
+	return [[mValues retain] autorelease];
+}
+
+- (BOOL)isEqualToSong:(Song *)aSong {
+	return [mValues isEqualToDictionary:[aSong values]];
 }
 
 @end

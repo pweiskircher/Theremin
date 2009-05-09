@@ -1,7 +1,3 @@
-  Thermein 0.5.3.2:
-    * fixed memory leaks.
-    * keyboard shortcuts in library work again.
-
   Theremin 0.5.3.1:
     * Batch re-setting of compilation info on import. This fixes a crash on startup experienced by some users.
 

@@ -20,10 +20,31 @@
 #import "LibrarySongSubController.h"
 #import "SQLController.h"
 #import "Song.h"
+#import "LibraryIdFilter.h"
 
 @implementation LibrarySongSubController
-- (NSArray *) getFilteredItems:(NSArray *)filters {
-	return [[SQLController defaultController] songsWithFilters:filters];
+- (void) requestFilteredItems:(NSArray *)filters {
+	BOOL fetchTitles = YES;
+	
+	if (!([_libraryDataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsMultipleSelection)) {
+		// as the squeezecenter is pretty slow, we only show titles if we can limit them to one album or one artist.
+		fetchTitles = NO;
+		for (int i = 0; i < [filters count]; i++) {
+			id filter = [filters objectAtIndex:i];
+			
+			if ([filter isKindOfClass:[LibraryIdFilter class]]) {
+				LibraryIdFilter *idFilter = (LibraryIdFilter *)filter;
+				if ([idFilter type] == eLibraryIdFilterAlbum ||
+					[idFilter type] == eLibraryIdFilterArtist) {
+					fetchTitles = YES;
+					break;					
+				}
+			}
+		}		
+	}
+	
+	if (fetchTitles)
+		[[self libraryDataSource] requestSongsWithFilters:filters];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {

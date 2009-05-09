@@ -23,6 +23,7 @@
 #import "SQLController.h"
 #import "PlayListController.h"
 #import "LibrarySearchController.h"
+#import "WindowController.h"
 
 static int manageableArtistSort(id a1, id a2, void *b) {
 	NSString *artist1 = [a1 name];
@@ -49,14 +50,19 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 
 - (NSString *)liveSearchColumn;
 - (void) customTableViewSetup;
+
+- (void) setupLibraryDataSource;
+- (void) updateLibraryDataSource;
 @end
 
 @implementation LibrarySubControllerBase
-- (id) initWithTableView:(PWTableView *)aTableView andLibraryController:(LibraryController *)aLibraryController andHasAllEntry:(BOOL)allEntry {
+- (id) initWithTableView:(PWTableView *)aTableView andLibraryController:(LibraryController *)aLibraryController andHasAllEntry:(BOOL)allEntry usingReceiveNotification:(NSString *)aReceiveNotification {
 	self = [super init];
 	if (self != nil) {
 		mTableView = aTableView;
 		mLibraryController = aLibraryController;
+		
+		[self setupLibraryDataSource];
 		
 		[mTableView setDataSource:self];
 		[mTableView setDelegate:self];
@@ -67,6 +73,11 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 		[[NSNotificationCenter defaultCenter] addObserver:mLibraryController selector:@selector(tableViewBecameFirstResponder:) 
 													 name:nBecameFirstResponder
 												   object:mTableView];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(dataSourceReceivedResults:)
+													 name:aReceiveNotification
+												   object:nil];
 		
 		if (allEntry)
 			[mTableView selectAllSelectsRow:0];
@@ -94,6 +105,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 
 - (void) dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mItems release];
 	[super dealloc];
 }
@@ -143,7 +155,8 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 		while ( (returnValue = [selection getIndexes:indexes maxCount:20 inIndexRange:&range])) {
 			for (int i = 0; i < returnValue; i++) {
 				NSObject *item = [mItems objectAtIndex:[self convertToListIndex:indexes[i]]];
-				[selectedItems addObject:item];
+				if (item != nil)
+					[selectedItems addObject:item];
 			}
 			if (returnValue < 20)
 				break;
@@ -161,7 +174,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	BOOL selectCompilation = NO;
 	
 	for (int i = 0; i < [selectedEntries count]; i++) {
-		int sqlIdentifier = [[selectedEntries objectAtIndex:i] SQLIdentifier];
+		int sqlIdentifier = [(id<ThereminEntity>)[selectedEntries objectAtIndex:i] identifier];
 		
 		if (sqlIdentifier == CompilationSQLIdentifier)
 			selectCompilation = YES;
@@ -181,7 +194,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	
 	BOOL first = YES;
 	for (int i = 0; i < [theEntries count]; i++) {
-		int sqlIdentifier = [[theEntries objectAtIndex:i] SQLIdentifier];
+		int sqlIdentifier = [(id<ThereminEntity>)[theEntries objectAtIndex:i] identifier];
 		if ([indexes containsIndex:sqlIdentifier] || (selectCompilation == YES && sqlIdentifier == CompilationSQLIdentifier)) {
 			[mTableView selectRow:[self convertToDisplayIndex:i] byExtendingSelection:!first];
 			
@@ -218,7 +231,9 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	
 	[mItems release], mItems = nil;
 	
-	NSMutableArray *filters = [[mLibraryController searchController] musicSearchFilters];	
+	NSMutableArray *filters = [[mLibraryController searchController] musicSearchFilters];
+	if (!filters)
+		filters = [NSMutableArray array];
 
 	NSArray *controllers = [mLibraryController getOrderedListOfSubControllers];
 	
@@ -236,7 +251,12 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	NSLog(@"before");
 #endif
 	
-	mItems = [[self sortedArray:[self getFilteredItems:filters]] retain];
+	[self requestFilteredItems:filters];
+}
+
+- (void) dataSourceReceivedResults:(NSNotification *)aNotification {
+	NSArray *items = [[aNotification userInfo] objectForKey:gLibraryResults];
+	mItems = [[self sortedArray:items] retain];
 	
 #ifdef SQL_DEBUG
 	NSLog(@"after");
@@ -299,6 +319,29 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	return YES;
 }
 
+- (id<LibraryDataSourceProtocol>) libraryDataSource {
+	return [[_libraryDataSource retain] autorelease];
+}
+
+- (void) setupLibraryDataSource {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileChanged:) name:(NSString *)nProfileSwitched object:nil];
+	[self updateLibraryDataSource];
+}
+
+- (void) updateLibraryDataSource {
+	[_libraryDataSource release];
+	_libraryDataSource = [[WindowController instance] currentLibraryDataSource];
+	
+	[mItems release], mItems = nil;
+	[mTableView reloadData];
+	
+	[mTableView setAllowsMultipleSelection:[_libraryDataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsMultipleSelection];
+}
+
+- (void) profileChanged:(NSNotification*)aNotification {
+	[self updateLibraryDataSource];
+}
+
 #pragma mark -
 #pragma mark Overrideable
 
@@ -306,7 +349,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	
 }
 
-- (NSArray *) getFilteredItems:(NSArray *)filters {
+- (NSArray *) requestFilteredItems:(NSArray *)filters {
 	return nil;
 }
 

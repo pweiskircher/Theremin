@@ -20,6 +20,7 @@
 #import <Cocoa/Cocoa.h>
 #import "MusicServerClient.h"
 #import "AppleRemote.h"
+#import "LibraryDataSource.h"
 
 @class PreferencesController, PlayListController, PWWindow;
 @class LicenseController, PWVolumeSlider, LibraryController, PWTableView, PWMusicSearchField;
@@ -30,15 +31,20 @@ extern NSString *tPlayControlItemIdentifier;
 extern NSString *tStopItemIdentifier;
 extern NSString *tSearchField;
 
+extern const NSString *nProfileSwitched;
+extern const NSString *dProfile;
+
+@class SUUpdater;
+
 @interface WindowController : NSObject {
 	// controller
 	IBOutlet PlayListController *mPlaylistController;
-	IBOutlet PreferencesController *mPreferencesController;	
-	IBOutlet LicenseController *mLicenseController;
 	IBOutlet InfoAreaController *mInfoAreaController;
 	LibraryController *mLibraryController;
 	UpdateDatabaseController *mUpdateDatabaseController;
 	PlayListFilesController *mPlayListFilesController;
+	
+	IBOutlet SUUpdater *mUpdater;
 		
 	// UI
 	IBOutlet PWWindow *mWindow;
@@ -48,6 +54,12 @@ extern NSString *tSearchField;
 	IBOutlet NSMenuItem *mDisconnectItem;
 	IBOutlet NSMenuItem *mShuffleItem;
 	IBOutlet NSMenuItem *mRepeatItem;
+	IBOutlet NSMenu *_fileMenu;
+	
+	IBOutlet NSPopUpButton *_profileChooser;
+	
+	// Preferences
+	PreferencesController *mPreferencesController;
 
 	// Toolbar
 	UnifiedToolbar *mToolbar;
@@ -83,6 +95,8 @@ extern NSString *tSearchField;
 
 + (id) instance;
 
+- (id<LibraryDataSourceProtocol>) currentLibraryDataSource;
+
 - (void)setMusicClient:(id)inClient;
 - (id)musicClient;
 
@@ -93,6 +107,15 @@ extern NSString *tSearchField;
 
 - (NSWindow *)window;
 - (NSString *)applicationSupportFolder;
+
+
+- (IBAction) connect:(id)sender;
+- (IBAction) disconnect:(id)sender;
+- (IBAction) saveCurrentPlaylist:(id)sender;
+- (IBAction) getInfo:(id)sender;
+- (IBAction) getInfoOnKeyWindow:(id)sender;
+- (IBAction) scrollToCurrentSong:(id)sender;
+- (IBAction) toggleDrawer:(id)sender;
 
 - (IBAction) preferencesClicked:(id)sender;
 - (IBAction) authenticationButtonPressed:(id)sender;
@@ -109,20 +132,18 @@ extern NSString *tSearchField;
 - (IBAction) updateCompleteDatabase:(id)sender;
 - (IBAction) deleteSelectedSongs:(id)sender;
 - (IBAction) seekSliderChanged:(id)sender;
-- (IBAction) connect:(id)sender;
-- (IBAction) disconnect:(id)sender;
 - (IBAction) toggleShuffle:(id)sender;
 - (IBAction) toggleRepeat:(id)sender;
 - (IBAction) find:(id)sender;
-- (IBAction) scrollToCurrentSong:(id)sender;
-- (IBAction) toggleDrawer:(id)sender;
-- (IBAction) saveCurrentPlaylist:(id)sender;
+
+
+
 - (IBAction) randomizePlaylist:(id)sender;
 - (IBAction) increaseVolume:(id)sender;
 - (IBAction) decreaseVolume:(id)sender;
-- (IBAction) getInfo:(id)sender;
-- (IBAction) getInfoOnKeyWindow:(id)sender;
 - (IBAction) detectCompilations:(id)sender;
+
+- (IBAction) selectProfile:(id)sender;
 
 - (void)getSystemVersionMajor:(unsigned *)major minor:(unsigned *)minor bugFix:(unsigned *)bugFix;
 @end

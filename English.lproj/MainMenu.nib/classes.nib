@@ -62,57 +62,6 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
-			<string>LicenseController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>mTextField</key>
-				<string>NSTextView</string>
-				<key>mWindow</key>
-				<string>NSWindow</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>coverArtPopupMenuChanged</key>
-				<string>id</string>
-				<key>updatePopupMenuChanged</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>PreferencesController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>mCoverArtPopup</key>
-				<string>NSPopUpButton</string>
-				<key>mPassword</key>
-				<string>NSTextField</string>
-				<key>mPreferencesWindow</key>
-				<string>NSWindow</string>
-				<key>mUpdatePopup</key>
-				<string>NSPopUpButton</string>
-				<key>mUpdater</key>
-				<string>SUUpdater</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>FirstResponder</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
 			<string>NSObject</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
@@ -223,6 +172,8 @@
 				<string>id</string>
 				<key>seekSliderChanged</key>
 				<string>id</string>
+				<key>selectProfile</key>
+				<string>id</string>
 				<key>showLibrary</key>
 				<string>id</string>
 				<key>showLicense</key>
@@ -250,6 +201,10 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>_fileMenu</key>
+				<string>NSMenu</string>
+				<key>_profileChooser</key>
+				<string>NSPopUpButton</string>
 				<key>mAuthenticateButton</key>
 				<string>NSButton</string>
 				<key>mAuthenticationDescription</key>
@@ -272,18 +227,16 @@
 				<string>InfoAreaController</string>
 				<key>mLibraryButton</key>
 				<string>NSButton</string>
-				<key>mLicenseController</key>
-				<string>LicenseController</string>
 				<key>mPlaylist</key>
 				<string>PWTableView</string>
 				<key>mPlaylistController</key>
 				<string>PlayListController</string>
-				<key>mPreferencesController</key>
-				<string>PreferencesController</string>
 				<key>mRepeatItem</key>
 				<string>NSMenuItem</string>
 				<key>mShuffleItem</key>
 				<string>NSMenuItem</string>
+				<key>mUpdater</key>
+				<string>SUUpdater</string>
 				<key>mWindow</key>
 				<string>PWWindow</string>
 			</dict>

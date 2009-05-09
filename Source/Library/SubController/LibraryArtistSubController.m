@@ -18,63 +18,59 @@
  */
 
 #import "LibraryArtistSubController.h"
-#import "SQLiteFilter.h"
 #import "SQLController.h"
+#import "LibraryIdFilter.h"
+#import "LibraryBooleanFilter.h"
+#import "LibraryFilterGroup.h"
 #import "Artist.h"
 
 @implementation LibraryArtistSubController
 - (void) addRequiredFilters:(NSMutableArray *)filters {
 	BOOL allArtistsSelected = NO;
+	BOOL addArtistsFilter = YES;
+	LibraryFilterGroup *group = nil;
+	
 	NSArray *artists = [self getSelected:&allArtistsSelected];
 	
 	if (allArtistsSelected == NO) {
-		SQLiteFilter *filter;
-		BOOL addArtistFilter = YES;
-		BOOL compilationSelected = NO;
-		
-		for (int i = 0; i < [artists count]; i++) {
-			Artist *artist = [artists objectAtIndex:i];
-			if ([artist SQLIdentifier] == CompilationSQLIdentifier) {
-				compilationSelected = YES;
-				break;
-			}
-		}
-		
-		if (compilationSelected == NO) {
-			filter = [SQLiteFilter filterWithKey:@"songs.isCompilation" andMethod:eFilterIsNotEqual usingFilter:
-					  [NSArray arrayWithObject:[NSNumber numberWithInt:1]]];
-			[filter setBelongsToSubGroup:@"COMPILATIONFILTER"];
-			[filters addObject:filter];
-		} else {
-			// only compilations selected
-			if ([artists count] == 1) {
-				filter = [SQLiteFilter filterWithKey:@"songs.isCompilation" andMethod:eFilterIsEqual usingFilter:
-						  [NSArray arrayWithObject:[NSNumber numberWithInt:1]]];
-				[filter setBelongsToSubGroup:@"COMPILATIONFILTER"];
-				[filters addObject:filter];
-				addArtistFilter = NO;
-			} else {
-				filter = [SQLiteFilter filterWithKey:@"songs.isCompilation" andMethod:eFilterIsEqual usingFilter:
-						  [NSArray arrayWithObject:[NSNumber numberWithInt:1]]];
-				[filter setBelongsToSubGroup:@"COMPILATIONFILTER"];
-				[filter setNextFilterAndOr:eFilterOr];
-				[filters addObject:filter];
-			}
-		}
-		
-		if (addArtistFilter) {
-			filter = [SQLiteFilter filterWithKey:@"songs.artist" andMethod:eFilterIsEqual usingFilter:artists];
-			[filter setFilterAndOr:eFilterOr];
-			[filter setFilterSelector:@selector(CocoaSQLIdentifier)];
-			[filter setBelongsToSubGroup:@"ARTISTFILTER"];
+		if ([[self libraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations) {
+			BOOL compilationSelected = NO;
 			
-			[filters addObject:filter];
+			for (int i = 0; i < [artists count]; i++) {
+				Artist *artist = [artists objectAtIndex:i];
+				if ([artist identifier] == CompilationSQLIdentifier) {
+					compilationSelected = YES;
+					break;
+				}
+			}
+			
+			if (compilationSelected && [artists count] > 1)
+				group = [[[LibraryFilterGroup alloc] initWithMode:eLibraryFilterGroupOr] autorelease];
+			else
+				group = [[[LibraryFilterGroup alloc] initWithMode:eLibraryFilterGroupAnd] autorelease];
+			[filters addObject:group];
+
+			// if compilations are selected, we only want compilation results selected.
+			[group addFilter:[[[LibraryBooleanFilter alloc] initWithType:eLibraryBooleanIsCompilation
+															andIncludeTrue:compilationSelected] autorelease]];
+
+			// if there's only one artist selected, and that one is our fake-compilation artist, we don't need a artist filter.
+			if (compilationSelected == YES && [artists count] == 1)
+				addArtistsFilter = NO;
+		}
+		
+		if (addArtistsFilter && [artists count] > 0) {
+			LibraryIdFilter *artistsFilter = [[[LibraryIdFilter alloc] initWithType:eLibraryIdFilterArtist andIds:artists] autorelease];
+			if (group)
+				[group addFilter:artistsFilter];
+			else
+				[filters addObject:artistsFilter];			
 		}
 	}
 }
 
-- (NSArray *) getFilteredItems:(NSArray *)filters {
-	return [[SQLController defaultController] artistsWithFilters:filters];
+- (void) requestFilteredItems:(NSArray *)filters {
+	[[self libraryDataSource] requestArtistsWithFilters:filters];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

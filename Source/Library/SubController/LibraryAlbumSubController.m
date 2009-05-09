@@ -17,7 +17,7 @@
  MA 02110-1301, USA.
  */
 #import "LibraryAlbumSubController.h"
-#import "SQLiteFilter.h"
+#import "LibraryIdFilter.h"
 #import "SQLController.h"
 
 @implementation LibraryAlbumSubController
@@ -26,16 +26,13 @@
 	NSArray *albums = [self getSelected:&allAlbumsSelected];
 	
 	if (allAlbumsSelected == NO && [albums count] > 0) {
-		SQLiteFilter *filter = [SQLiteFilter filterWithKey:@"songs.album" andMethod:eFilterIsEqual usingFilter:albums];
-		[filter setFilterAndOr:eFilterOr];
-		[filter setFilterSelector:@selector(CocoaSQLIdentifier)];
-		
-		[filters addObject:filter];		
+		LibraryIdFilter *filter = [[[LibraryIdFilter alloc] initWithType:eLibraryIdFilterAlbum andIds:albums] autorelease];
+		[filters addObject:filter];
 	}
 }
 
-- (NSArray *) getFilteredItems:(NSArray *)filters {
-	return [[SQLController defaultController] albumsWithFilters:filters];
+- (void) requestFilteredItems:(NSArray *)filters {
+	[[self libraryDataSource] requestAlbumsWithFilters:filters];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

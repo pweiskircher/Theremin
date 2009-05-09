@@ -18,6 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "Profile.h"
 
 @class Song, Directory, PlayListFile;
 
@@ -34,12 +35,15 @@ extern NSString *nMusicServerClientCurrentSongPositionChanged;
 extern NSString *nMusicServerClientCurrentSongChanged;
 extern NSString *nMusicServerClientStateChanged;
 extern NSString *nMusicServerClientVolumeChanged;
-extern NSString *nMusicServerClientElapsedAndTotalTimeChanged;
+extern NSString *nMusicServerClientElapsedTimeChanged;
+extern NSString *nMusicServerClientTotalTimeChanged;
 extern NSString *nMusicServerClientShuffleOptionChanged;
 extern NSString *nMusicServerClientRepeatOptionChanged;
 
 extern NSString *nMusicServerClientFetchedDatabase;
 extern NSString *nMusicServerClientFetchedPlaylist;
+extern NSString *nMusicServerClientFetchedPlaylistLength;
+extern NSString *nMusicServerClientFetchedTitleForPlaylist;
 extern NSString *nMusicServerClientDatabaseUpdated;
 extern NSString *nMusicServerClientFetchedNamedPlaylist;
 
@@ -57,6 +61,12 @@ extern NSString *dDisconnectReason;
 extern NSString *dSongs;
 extern NSString *dSongPosition;
 extern NSString *dDatabaseIdentifier;
+extern NSString *dState;
+extern NSString *dVolume;
+extern NSString *dSong;
+extern NSString *dTotalTime;
+extern NSString *dElapsedTime;
+extern NSString *dPlaylistLength;
 
 typedef enum {
 	eStatePaused,
@@ -70,22 +80,20 @@ typedef enum {
 	ePlayListFileType	= 0x0004
 } DataTypes;
 
+typedef enum {
+	eMusicClientCapabilitiesRandomizePlaylist = 0x0001,
+} MusicClientCapabilities;
+
 @protocol MusicServerClientInterface
 - (oneway void) initialize;
++ (unsigned int) capabilities;
 
 #pragma mark Connection
 - (BOOL) isConnected;
-- (oneway void) connectToServer:(NSString *)server withPort:(int)port andPassword:(NSString *)password;
+- (oneway void) connectToServerWithProfile:(Profile *)profile;
 - (oneway void) disconnectWithReason:(NSString *)reason;
 
 #pragma mark Database
-- (oneway void) startFetchDatabase;
-- (NSData *) databaseIdentifier;
-
-- (bycopy) entriesInDirectory:(Directory *)aDirectory withTypes:(int)theTypes;
-- (bycopy) rootDirectory;
-- (oneway void) updateDirectory:(Directory *)aDirectory;
-
 - (bycopy Song *) songInformationByUniqueIdentifier:(NSData *)aUniqueIdentifier;
 
 #pragma mark Playlist
@@ -95,7 +103,6 @@ typedef enum {
 - (oneway void) addSongsToPlaylistByUniqueIdentifier:(NSArray *)uniqueIdentifiers;
 
 - (oneway void) moveSongFromPosition:(int)src toPosition:(int)dest;
-- (oneway void) swapSongs:(bycopy Song *)srcSong with:(bycopy Song *)destSong;
 
 - (oneway void) loadPlaylist:(bycopy PlayListFile *)aPlayListFile;
 - (oneway void) saveCurrentPlaylistAs:(NSString *)aPlayListName;
@@ -116,7 +123,6 @@ typedef enum {
 - (oneway void) skipToSong:(Song *)song;
 
 - (oneway void) setPlaybackVolume:(int)volume;
-- (oneway void) changePlaybackVolume:(int)diff;
 - (oneway void) seek:(int)time;
 
 #pragma mark Authentication
@@ -130,15 +136,32 @@ typedef enum {
 - (oneway void) playerWindowUnfocused;
 - (oneway void) playerWindowClosed;
 
+@optional
+// needed for importing
+- (oneway void) startFetchDatabase;
+- (NSData *) databaseIdentifier;
+
+- (bycopy) entriesInDirectory:(Directory *)aDirectory withTypes:(int)theTypes;
+- (bycopy) rootDirectory;
+- (oneway void) updateDirectory:(Directory *)aDirectory;
+
+// needed for randomzing
+- (oneway void) swapSongs:(bycopy Song *)srcSong with:(bycopy Song *)destSong;
 @end
 
 @interface MusicServerClient : NSObject <MusicServerClientInterface> {
 	NSTimer *mSeekTimer;
 	int mLastSetTime;
+	BOOL _stop;
 }
 + (void) connectWithPorts:(NSDictionary *)infos;
++ (Class) musicServerClientClassForProfile:(Profile *)aProfile;
 
 - (void) scheduleSeek:(int)time withDelay:(NSTimeInterval)delay;
 - (bycopy) entriesInDirectory:(Directory *)aDirectory;
 - (oneway void) asynchronousEntriesInDirectory:(Directory *)aDirectory withTypes:(int)theTypes;
+
+- (BOOL) shouldStop;
+- (void) stop;
+
 @end

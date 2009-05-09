@@ -163,7 +163,8 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 			[mTitle setStringValue:NSLocalizedString(@"Not playing.", @"Info Area Status Text")];
 			[mArtist setStringValue:@""];
 			[mAlbum setStringValue:@""];
-			[self updateSeekBarWithSongLength:0 andElapsedTime:0];
+			[self updateSeekBarWithTotalTime:0];
+			[self updateSeekBarWithElapsedTime:0];
 			
 			[mCoverArtView showCoverForSong:nil];
 			[mLastNotifiedSongIdentifier release], mLastNotifiedSongIdentifier = nil;
@@ -199,10 +200,30 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 		[mTitle setStringValue:NSLocalizedString(@"Not connected.", @"Info Area Status Text")];
 		[mArtist setStringValue:@""];
 		[mAlbum setStringValue:@""];
-		[self updateSeekBarWithSongLength:0 andElapsedTime:0];
+
+		[self updateSeekBarWithTotalTime:0];
+		[self updateSeekBarWithElapsedTime:0];
 		
 		[mCoverArtView showCoverForSong:nil];
 	}
+}
+
+- (void) updateSeekBarWithTotalTime:(int)total {
+	_total = total;
+	[mSeekSlider setMinValue:0];
+	[mSeekSlider setMaxValue:total];
+}
+
+- (void) updateSeekBarWithElapsedTime:(int)elapsed {
+	int remaining = _total - elapsed;
+	
+	[mElapsedTime setStringValue:[NSString convertSecondsToTime:elapsed andIsValid:NULL]];
+	
+	BOOL isValid = NO;
+	NSString *tmp = [NSString convertSecondsToTime:remaining andIsValid:&isValid];
+	[mRemainingTime setStringValue:[NSString stringWithFormat:@"%c%@", isValid == YES ? '-' : ' ', tmp]];
+	
+	[mSeekSlider setIntValue:elapsed];
 }
 
 - (void) updateSeekBarWithSongLength:(int)songLength andElapsedTime:(int)elapsed {
@@ -260,7 +281,7 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 
 - (void) clientCurrentSongChanged:(NSNotification *)notification {
 	[mCurrentSong release];
-	mCurrentSong = [[[notification userInfo] objectForKey:@"song"] retain];	
+	mCurrentSong = [[[notification userInfo] objectForKey:dSong] retain];	
 	
 	[self scheduleUpdate];
 	
@@ -328,7 +349,7 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 
 - (void) progressIndicatorStartTimerTriggered:(NSTimer *)timer {
 	// the timer is released in the connect/disconnect notification
-	[mProgressLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", @"Info Area Status Indicator"), [[[WindowController instance] preferences] mpdServer]]];
+	[mProgressLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", @"Info Area Status Indicator"), [[[[WindowController instance] preferences] currentProfile] hostname]]];
 	[mProgressIndicator startAnimation:self];
 }
 

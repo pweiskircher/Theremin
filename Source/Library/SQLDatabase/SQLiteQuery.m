@@ -18,13 +18,13 @@
  */
 
 #import "SQLiteQuery.h"
-#import "SQLiteFilter.h"
+#import "LibraryFilterToSQLQueryConverter.h"
 
 @implementation SQLiteQuery
 - (id) initWithDatabase:(SQLiteDatabase *)theDatabase andQuery:(NSString *)theQuery {
 	self = [super init];
 	if (self != nil) {
-		mDatabase = theDatabase;
+		mDatabase = [theDatabase retain];
 //		[mDatabase registerQuery:self];
 		mSQLStatement = [theQuery retain];
 		mStatement = NULL;
@@ -39,6 +39,7 @@
 	[mSQLStatement release], mSQLStatement = nil;
 	[mBoundValues release], mBoundValues = nil;
 	[self invalidate];
+	[mDatabase release];
 	[super dealloc];
 }
 
@@ -50,15 +51,15 @@
 	const char *query;
 	
 	if ([theFilters count] > 0) {
-		NSMutableString *tmp = [NSMutableString stringWithString:mSQLStatement];
-		NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-		[SQLiteFilter applyFilters:theFilters onString:tmp withValuesNeedingBinding:dict];
-		query = [tmp UTF8String];
+		
+		LibraryFilterToSQLQueryConverter *converter = [[[LibraryFilterToSQLQueryConverter alloc] initWithLibraryFilters:theFilters] autorelease];
+		[converter process];
+		query = [[NSString stringWithFormat:@"%@ WHERE %@", mSQLStatement, [converter whereClause]] UTF8String];
 		
 		if (mBoundValues) {
-			[mBoundValues addEntriesFromDictionary:dict];
+			[mBoundValues addEntriesFromDictionary:[converter boundValues]];
 		} else {
-			mBoundValues = [dict retain];
+			mBoundValues = [[converter boundValues] retain];
 		}
 	} else {
 		query = [mSQLStatement UTF8String];

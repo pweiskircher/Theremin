@@ -53,6 +53,9 @@
 }
 
 - (void) clientConnectionStatusChanged:(NSNotification *)notification {
+	if (!([[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs))
+		return;
+	
 	BOOL enableControls = NO;
 	
 	if ([[notification name] isEqualTo:nMusicServerClientConnected]) {

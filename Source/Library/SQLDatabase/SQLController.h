@@ -18,50 +18,23 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "LibraryDataSource.h"
 
 @class Song, SQLiteDatabase, SQLiteQuery, SQLiteFilter;
 
 #define TR_S_COMPILATION	NSLocalizedString(@"Compilations", @"Compilations")
 extern int CompilationSQLIdentifier;
 
-@interface SQLController : NSObject {
+@interface SQLController : NSObject <LibraryDataSourceProtocol> {
 	SQLiteDatabase *mDatabase;
 	
 	NSMutableDictionary *mIdSelectQueries;
 	NSMutableDictionary *mIdInsertQueries;
 	
 	SQLiteQuery *mSongInsertQuery;
+	
+	BOOL _needImport;
+	
+	Profile *_profile;
 }
-+ (id) defaultController;
-
-- (id) initWithFile:(NSString *)filename;
-- (void) dealloc;
-
-- (void) startup;
-- (BOOL) createTables;
-
-- (NSArray *) albumsWithFilters:(NSArray *)theFilters;
-- (NSArray *) songsWithFilters:(NSArray *)theFilters;
-- (NSArray *) artistsWithFilters:(NSArray *)theFilters;
-- (NSArray *) genresWithFilters:(NSArray *)theFilters;
-
-- (BOOL) insertSong:(Song *)aSong;
-- (BOOL) insertSongs:(NSArray *)aArray;
-
-- (BOOL) setSongsAsCompilation:(NSArray *)aArray;
-- (BOOL) setSongAsCompilation:(Song *)aSong;
-
-- (void) clearCompilations;
-
-- (BOOL) removeSongsAsCompilation:(NSArray *)aArray;
-- (BOOL) removeSongAsCompilation:(Song *)aSong;
-
-- (NSArray *) compilationUniqueIdentifiers;
-- (BOOL) setCompilationByUniqueIdentifiers:(NSArray *)uniqueIdentifiers;
-
-- (void) clear;
-
-- (NSDictionary *) metaData;
-- (BOOL) setMetaData:(NSDictionary *)theMetaData;
-
 @end

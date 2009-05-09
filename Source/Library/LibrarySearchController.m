@@ -18,7 +18,8 @@
  */
 
 #import "LibrarySearchController.h"
-#import "SQLiteFilter.h"
+#import "LibraryStringFilter.h"
+#import "LibraryFilterGroup.h"
 #import "PWMusicSearchField.h"
 #import "NSStringAdditions.h"
 
@@ -48,61 +49,29 @@
 - (NSMutableArray *) musicSearchFilters {
 	NSMutableArray *filters = [NSMutableArray array];
 	
-	SQLiteFilter *filter;
-	if (mSearchString && [mSearchString length]) {
-		NSArray *tokens = [mSearchString parseIntoSQLSearchTokens];
-		if ([tokens count] == 0)
-			return filters;
-		
-		MusicFlags state = [mSearchField searchState];
-		
-		if (state == eMusicFlagsAll || state == eMusicFlagsAlbum) {
-			filter = [SQLiteFilter filterWithKey:@"albums.name"
-									   andMethod:eFilterIsLike
-									 usingFilter:tokens];
-			[filter setNextFilterAndOr:eFilterOr];
-			[filter setFilterAndOr:eFilterAnd];
-			[filter setBelongsToSubGroup:@"MUSICFLAGSALL"];
-			[filters addObject:filter];
-		}
-		
-		if (state == eMusicFlagsAll || state == eMusicFlagsTitle) {
-			filter = [SQLiteFilter filterWithKey:@"songs.title"
-									   andMethod:eFilterIsLike
-									 usingFilter:tokens];
-			[filter setNextFilterAndOr:eFilterOr];
-			[filter setFilterAndOr:eFilterAnd];
-			[filter setBelongsToSubGroup:@"MUSICFLAGSALL.TITLE"];
-			[filters addObject:filter];
-			
-			filter = [SQLiteFilter filterWithKey:@"songs.title"
-									   andMethod:eFilterIsNull
-							   usingSingleFilter:@""];
-			[filter setNextFilterAndOr:eFilterAnd];
-			[filter setBelongsToSubGroup:@"MUSICFLAGSALL.TITLE.FILENAMESEARCH"];
-			[filters addObject:filter];
-			
-			filter = [SQLiteFilter filterWithKey:@"file"
-									   andMethod:eFilterIsLike
-									 usingFilter:tokens];
-			[filter setNextFilterAndOr:eFilterOr];
-			[filter setFilterAndOr:eFilterAnd];
-			[filter setBelongsToSubGroup:@"MUSICFLAGSALL.TITLE.FILENAMESEARCH"];
-			[filters addObject:filter];
-		}
-		
-		if (state == eMusicFlagsAll || state == eMusicFlagsArtist) {
-			filter = [SQLiteFilter filterWithKey:@"artists.name"
-									   andMethod:eFilterIsLike
-									 usingFilter:tokens];
-			[filter setBelongsToSubGroup:@"MUSICFLAGSALL"];
-			[filter setFilterAndOr:eFilterAnd];
-			[filters addObject:filter];
-		}
-	}
+	if (mSearchString == nil || [mSearchString length] == 0)
+		return nil;
 	
-	if ([filters count] > 0)
-		[[filters lastObject] setIsEndOfGroup:YES];
+	NSArray *tokens = [mSearchString parseIntoTokens];
+	if ([tokens count] == 0)
+		return nil;
+	
+	LibraryFilterGroup *group = [[[LibraryFilterGroup alloc] initWithMode:eLibraryFilterGroupOr] autorelease];
+	[filters addObject:group];
+	
+	MusicFlags state = [mSearchField searchState];
+		
+	if (state == eMusicFlagsAll || state == eMusicFlagsAlbum)
+		[group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterAlbum
+														 andStrings:tokens] autorelease]];
+		 
+	if (state == eMusicFlagsAll || state == eMusicFlagsTitle)
+		[group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterSong
+														 andStrings:tokens] autorelease]];
+
+	if (state == eMusicFlagsAll || state == eMusicFlagsArtist)
+		 [group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterArtist
+														  andStrings:tokens] autorelease]];
 	
 	return filters;
 }

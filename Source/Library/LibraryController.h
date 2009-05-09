@@ -18,6 +18,8 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <RBSplitView/RBSplitView.h>
+#import <RBSplitView/RBSplitSubview.h>
 
 @class LibraryImportController, PWTableView, PWMusicSearchField, PWWindow;
 @class LibraryArtistSubController, LibraryAlbumSubController, LibrarySongSubController;
@@ -42,6 +44,10 @@
 	IBOutlet NSScrollView *mArtistScroller;
 	IBOutlet NSScrollView *mAlbumScroller;
 	
+	IBOutlet RBSplitSubview *mTitleSplitView;
+	IBOutlet RBSplitView *mSplitView;
+	BOOL _titleShown;
+	
 	IBOutlet NSPanel *mProgressPanel;
 	IBOutlet NSProgressIndicator *mProgressPanelIndicator;
 	BOOL mShowProgressPanelOnShow;
@@ -56,6 +62,8 @@
 	LibrarySearchController *mSearchController;
 	
 	BOOL mIgnoreSelectionChanged;
+	
+	NSImage *_dividerImage;
 }
 - (id) init;
 - (void) dealloc;

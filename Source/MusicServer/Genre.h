@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ThereminEntity.h"
 
 extern NSString *gUnknownGenreName;
 #define TR_S_UNKNOWN_GENRE	NSLocalizedString(@"Unknown Genre", @"Unknown Genre")
 
-@interface Genre : NSObject {
+@interface Genre : NSObject <ThereminEntity> {
 	NSString *mName;
-	int mSQLIdentifier;
+	int _identifier;
 }
 - (id) init;
 - (void) dealloc;
@@ -21,9 +22,8 @@ extern NSString *gUnknownGenreName;
 - (NSString *) description;
 
 - (NSString *) name;
-- (int) SQLIdentifier;
-- (NSNumber *) CocoaSQLIdentifier;
+- (int) identifier;
 
 - (void) setName:(NSString *)aName;
-- (void) setSQLIdentifier:(int)aInteger;
+- (void) setIdentifier:(int)aInteger;
 @end

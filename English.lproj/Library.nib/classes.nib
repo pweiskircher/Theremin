@@ -17,6 +17,8 @@
 				<string>id</string>
 				<key>setToggleIsPartOfCompilation</key>
 				<string>id</string>
+				<key>tableAction</key>
+				<string>id</string>
 			</dict>
 			<key>CLASS</key>
 			<string>LibraryController</string>
@@ -56,6 +58,10 @@
 				<string>NSProgressIndicator</string>
 				<key>mSongView</key>
 				<string>PWTableView</string>
+				<key>mSplitView</key>
+				<string>RBSplitView</string>
+				<key>mTitleSplitView</key>
+				<string>RBSplitSubview</string>
 				<key>mWindow</key>
 				<string>PWWindow</string>
 			</dict>
@@ -64,17 +70,17 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>FirstResponder</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>NSObject</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>

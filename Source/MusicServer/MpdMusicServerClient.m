@@ -40,7 +40,9 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 @implementation MpdMusicServerClient
-
++ (unsigned int) capabilities {
+	return eMusicClientCapabilitiesRandomizePlaylist;
+}
 
 - (id) init {
 	self = [super init];
@@ -56,6 +58,18 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	}
 	return self;
 }
+
+- (void) dealloc
+{
+	[mMpdTimer invalidate];
+	[mMpdTimer release];
+	[mPassword release];
+	
+	mpd_free(mConnection), mConnection = NULL;
+	
+	[super dealloc];
+}
+
 
 - (void) resetDelayForStatusUpdateTimer:(NSTimeInterval)aInterval {
 	if (!mMpdTimer)
@@ -108,7 +122,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 				break;
 		}
 		
-		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:state] forKey:@"state"];
+		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:state] forKey:dState];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientStateChanged 
 																			object:self
 																		  userInfo:dict];
@@ -131,7 +145,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 		mpd_Song *song = mpd_playlist_get_current_song(mConnection);
 		Song *mpdsong = [Song songWithMpd_Song:song];
 		
-		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:mpdsong, @"song",
+		NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:mpdsong, dSong,
 			[NSNumber numberWithInt:[self currentSongPosition]], dSongPosition, nil];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCurrentSongChanged
 																			object:self
@@ -150,19 +164,22 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	
 	if (what & MPD_CST_VOLUME) {
 		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:mpd_status_get_volume(mConnection)]
-														 forKey:@"volume"];
+														 forKey:dVolume];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientVolumeChanged
 																			object:self
 																		  userInfo:dict];
 	}
 	
-	if (what & MPD_CST_TOTAL_TIME || what & MPD_CST_ELAPSED_TIME) {
-		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:2];
-		[dict setObject:[NSNumber numberWithInt:mpd_status_get_elapsed_song_time(mConnection)] forKey:@"elapsed"];
-		[dict setObject:[NSNumber numberWithInt:mpd_status_get_total_song_time(mConnection)] forKey:@"total"];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientElapsedAndTotalTimeChanged
+	if (what & MPD_CST_TOTAL_TIME) {
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientTotalTimeChanged
 																			object:self
-																		  userInfo:dict];
+																		  userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:mpd_status_get_total_song_time(mConnection)] forKey:dTotalTime]];
+	}
+	
+	if (what & MPD_CST_ELAPSED_TIME) {
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientElapsedTimeChanged
+																			object:self
+																		  userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:mpd_status_get_elapsed_song_time(mConnection)] forKey:dElapsedTime]];
 	}
 	
 	if (what & MPD_CST_CROSSFADE) {
@@ -210,6 +227,13 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 - (void) callbackConnectionChanged:(int)connect {
 }
 
+- (void) stop {
+	[mMpdTimer invalidate];
+	[mMpdTimer release], mMpdTimer = nil;
+	
+	[super stop];
+}
+
 #pragma mark Protocol Implementation
 - (oneway void) initialize {
 }
@@ -219,7 +243,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	return mpd_check_connected(mConnection) == TRUE ? YES : NO;
 }
 
-- (oneway void) connectToServer:(NSString *)server withPort:(int)port andPassword:(NSString *)password {
+- (oneway void) connectToServerWithProfile:(Profile *)profile {
 	if ([self isConnected]) {
 		//NSLog(@"Already connected ...");
 		return;
@@ -227,9 +251,13 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientConnecting object:self];
 	
-	mpd_set_hostname(mConnection, (char *)[server UTF8String]);
-	mpd_set_port(mConnection, port);
+	mpd_set_hostname(mConnection, (char *)[[profile hostname] UTF8String]);
+	mpd_set_port(mConnection, [profile port]);
 	mpd_set_connection_timeout(mConnection, 5.0);
+	
+	NSString *password = nil;
+	if ([profile passwordExists])
+		password = [profile password];
 	
 	if (password != nil)
 		mpd_set_password(mConnection, (char *)[password UTF8String]);
@@ -240,8 +268,8 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 			mpd_send_password(mConnection);
 		
 		while (mpd_server_check_command_allowed(mConnection,"status") != MPD_SERVER_COMMAND_ALLOWED) {
-			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:server, @"server",
-				[NSNumber numberWithInt:port], @"port",
+			NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[profile hostname], @"server",
+				[NSNumber numberWithInt:[profile port]], @"port",
 				nil];
 			mSetPasswordCalled = NO;
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientRequiresAuthentication object:self
@@ -268,7 +296,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 												   userInfo:nil 
 													repeats:YES] retain];
 	} else {
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientDisconnected object:self userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Could not connect to %@", server] forKey:dDisconnectReason]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientDisconnected object:self userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Could not connect to %@", [profile hostname]] forKey:dDisconnectReason]];
 	}
 }
 
@@ -353,7 +381,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 - (oneway void) removeSongsFromPlaylist:(NSArray *)songs {
 	for (int i = 0; i < [songs count]; i++) {
-		mpd_playlist_queue_delete_id(mConnection,[(Song *)[songs objectAtIndex:i] identifier]);
+		mpd_playlist_queue_delete_id(mConnection,[(Song *)[songs objectAtIndex:i] remoteIdentifier]);
 	}
 	mpd_playlist_queue_commit(mConnection);
 }
@@ -375,7 +403,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 - (oneway void) swapSongs:(bycopy Song *)srcSong with:(bycopy Song *)destSong {
-	mpd_playlist_swap_id(mConnection,[srcSong identifier],[destSong identifier]);
+	mpd_playlist_swap_id(mConnection,[srcSong remoteIdentifier],[destSong remoteIdentifier]);
 }
 
 - (oneway void) loadPlaylist:(bycopy PlayListFile *)aPlayListFile {
@@ -445,16 +473,11 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 - (oneway void) skipToSong:(Song *)song {
-	mpd_player_play_id(mConnection,[song identifier]);
+	mpd_player_play_id(mConnection,[song remoteIdentifier]);
 }
 
 - (oneway void) setPlaybackVolume:(int)volume {
 	mpd_status_set_volume(mConnection,volume);
-	[self  setIncludeInNextStatus:MPD_CST_VOLUME];
-}
-
-- (oneway void) changePlaybackVolume:(int)diff {
-	[self setPlaybackVolume:mpd_status_get_volume(mConnection) + diff];
 }
 
 - (oneway void) seek:(int)time {

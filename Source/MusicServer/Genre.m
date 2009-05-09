@@ -15,7 +15,7 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 	self = [super init];
 	if (self != nil) {
 		mName = nil;
-		mSQLIdentifier = -1;
+		_identifier = -1;
 	}
 	return self;
 }
@@ -26,21 +26,16 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Genre <0x%08x> Name: %@ SQLIdentifier: %d", self, [self name], [self SQLIdentifier]];
+	return [NSString stringWithFormat:@"Genre <0x%08x> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
 }
 
 - (NSString *) name {
 	return [[mName retain] autorelease];
 }
 
-- (int) SQLIdentifier {
-	return mSQLIdentifier;
+- (int) identifier {
+	return _identifier;
 }
-
-- (NSNumber *) CocoaSQLIdentifier {
-	return [NSNumber numberWithInt:mSQLIdentifier];
-}
-
 
 - (void) setName:(NSString *)aName {
 	[mName release];
@@ -51,8 +46,8 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 		mName = [aName retain];
 }
 
-- (void) setSQLIdentifier:(int)aInteger {
-	mSQLIdentifier = aInteger;
+- (void) setIdentifier:(int)aInteger {
+	_identifier = aInteger;
 }
 
 
@@ -64,7 +59,7 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:mName];
-	[encoder encodeBytes:&mSQLIdentifier length:sizeof(mSQLIdentifier)];
+	[encoder encodeBytes:&_identifier length:sizeof(_identifier)];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -72,7 +67,7 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 	mName = [[decoder decodeObject] retain];
 	
 	unsigned length;
-	memcpy(&mSQLIdentifier, [decoder decodeBytesWithReturnedLength:&length], sizeof(mSQLIdentifier));
+	memcpy(&_identifier, [decoder decodeBytesWithReturnedLength:&length], sizeof(_identifier));
 	
 	return self;
 }

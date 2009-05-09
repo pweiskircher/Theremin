@@ -18,14 +18,15 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "ThereminEntity.h"
 
 extern NSString *gUnknownAlbumName;
 
 #define TR_S_UNKNOWN_ALBUM	NSLocalizedString(@"Unknown Album", @"Unknown Album")
 
-@interface Album : NSObject {
+@interface Album : NSObject <ThereminEntity> {
 	NSString *mName;
-	int mSQLIdentifier;
+	int _identifier;
 }
 - (id) init;
 - (void) dealloc;
@@ -33,9 +34,8 @@ extern NSString *gUnknownAlbumName;
 - (NSString *) description;
 
 - (NSString *) name;
-- (int) SQLIdentifier;
-- (NSNumber *) CocoaSQLIdentifier;
+- (int) identifier;
 
 - (void) setName:(NSString *)aName;
-- (void) setSQLIdentifier:(int)aInteger;
+- (void) setIdentifier:(int)aInteger;
 @end
