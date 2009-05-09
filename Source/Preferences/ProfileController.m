@@ -113,6 +113,9 @@ const NSString *newProfileNameTemplate = @"Profile %d";
 	ImageTextCell *cell = [[[ImageTextCell alloc] init] autorelease];
 	[cell setDataDelegate:self];
 	[[[_tableView tableColumns] objectAtIndex:0] setDataCell:cell];
+	
+	if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"squeezeboxSupportEnabled"] boolValue] == NO)
+		[_type removeItemAtIndex:1];
 }
 
 - (id) newObject {

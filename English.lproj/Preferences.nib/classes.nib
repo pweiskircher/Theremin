@@ -5,6 +5,38 @@
 	<key>IBClasses</key>
 	<array>
 		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>coverArtPopupMenuChanged</key>
+				<string>id</string>
+				<key>updatePopupMenuChanged</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>PreferencesWindowController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>_profileController</key>
+				<string>ProfileController</string>
+				<key>mCoverArtPopup</key>
+				<string>NSPopUpButton</string>
+				<key>mPreferencesWindow</key>
+				<string>NSWindow</string>
+				<key>mUpdatePopup</key>
+				<string>NSPopUpButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
 			<key>ACTIONS</key>
 			<dict>
 				<key>removeCurrentlySelectedProfile</key>
@@ -43,38 +75,6 @@
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSArrayController</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>NSObject</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-		</dict>
-		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>coverArtPopupMenuChanged</key>
-				<string>id</string>
-				<key>updatePopupMenuChanged</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>PreferencesWindowController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>_profileController</key>
-				<string>ProfileController</string>
-				<key>mCoverArtPopup</key>
-				<string>NSPopUpButton</string>
-				<key>mPreferencesWindow</key>
-				<string>NSWindow</string>
-				<key>mUpdatePopup</key>
-				<string>NSPopUpButton</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
 		</dict>
 	</array>
 	<key>IBVersion</key>
