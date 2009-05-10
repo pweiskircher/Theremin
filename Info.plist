@@ -27,7 +27,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
-	<string>http://theremin.amd.co.at/appcast.xml</string>
+	<string>http://theremin.amd.co.at/appcastProfileInfo.php</string>
 	<key>SUPublicDSAKey</key>
 	<string>-----BEGIN PUBLIC KEY-----
 MIIDOjCCAi0GByqGSM44BAEwggIgAoIBAQCrLftLlmuKqvHFJJBn6tLUyBerb0CM
@@ -50,6 +50,8 @@ t4suReFvV6/avYOKkSjr78OqbSpunSffIkKAuXL6OOMyAKky5t0W66NA+75Ydnba
 Ib3L3X8lDvQ055cZ5SI=
 -----END PUBLIC KEY-----</string>
 	<key>SUExpectsDSASignature</key>
+	<true/>
+	<key>SUEnableSystemProfiling</key>
 	<true/>
 	<key>SUAllowsAutomaticUpdates</key>
 	<false/>
