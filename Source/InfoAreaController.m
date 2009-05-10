@@ -71,47 +71,42 @@
 
 - (void) update {
 	WindowController *wc = [WindowController instance];
+	
+	NSString *title = @"";
+	NSString *artist = @"";
+	NSString *album = @"";
+	
 	if ([[wc musicClient] isConnected] == YES) {
 		if ([wc currentPlayerState] == eStateStopped) {
-			[mTitle setStringValue:NSLocalizedString(@"Not playing.", @"Info Area Status Text")];
-			[mArtist setStringValue:@""];
-			[mAlbum setStringValue:@""];
-			[self updateSeekBarWithTotalTime:0];
-			[self updateSeekBarWithElapsedTime:0];
+			title = NSLocalizedString(@"Not playing.", @"Info Area Status Text");
 			[mLastNotifiedSongIdentifier release], mLastNotifiedSongIdentifier = nil;
+
+			[self updateSeekBarWithTotalTime:0];
+			[self updateSeekBarWithElapsedTime:0];			
 		} else if ([mCurrentSong valid]) {
 			if ([mCurrentSong title] == nil || [[mCurrentSong title] length] == 0) {
 				if ([mCurrentSong file] && [[mCurrentSong file] length])
-					[mTitle setStringValue:[[mCurrentSong file] lastPathComponent]];
-				else
-					[mTitle setStringValue:@""];
+					title = [[mCurrentSong file] lastPathComponent];
 			} else {
-				[mTitle setStringValue:[mCurrentSong title]];
+				title = [mCurrentSong title];
 			}
 			
 			if ([mCurrentSong artist])
-				[mArtist setStringValue:[mCurrentSong artist]];
-			else
-				[mArtist setStringValue:@""];
+				artist = [mCurrentSong artist];
 			
 			if ([mCurrentSong album])
-				[mAlbum setStringValue:[mCurrentSong album]];
-			else
-				[mAlbum setStringValue:@""];
-
-		} else {
-			[mTitle setStringValue:@""];
-			[mArtist setStringValue:@""];
-			[mAlbum setStringValue:@""];
+				album = [mCurrentSong album];
 		}
 	} else {
-		[mTitle setStringValue:NSLocalizedString(@"Not connected.", @"Info Area Status Text")];
-		[mArtist setStringValue:@""];
-		[mAlbum setStringValue:@""];
+		title = NSLocalizedString(@"Not connected.", @"Info Area Status Text");
 
 		[self updateSeekBarWithTotalTime:0];
 		[self updateSeekBarWithElapsedTime:0];
 	}
+	
+	[mTitle setStringValue:title];
+	[mAlbum setStringValue:album];
+	[mArtist setStringValue:artist];
 }
 
 - (void) updateSeekBarWithTotalTime:(int)total {
