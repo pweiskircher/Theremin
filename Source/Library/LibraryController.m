@@ -246,7 +246,7 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 }
 
 - (void) profileSwitched:(NSNotification *)aNotification {
-//	[self showTitleView:[[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsTitleList];
+	[self reloadAll];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

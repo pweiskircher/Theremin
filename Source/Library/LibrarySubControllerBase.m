@@ -51,7 +51,6 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 - (NSString *)liveSearchColumn;
 - (void) customTableViewSetup;
 
-- (void) setupLibraryDataSource;
 - (void) updateLibraryDataSource;
 @end
 
@@ -61,8 +60,6 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	if (self != nil) {
 		mTableView = aTableView;
 		mLibraryController = aLibraryController;
-		
-		[self setupLibraryDataSource];
 		
 		[mTableView setDataSource:self];
 		[mTableView setDelegate:self];
@@ -220,6 +217,8 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 #pragma mark Data gathering
 
 - (void) reloadData {
+	[self updateLibraryDataSource];
+	
 #ifdef SQL_DEBUG
 	NSLog(@"%@: reloadData", [self class]);
 #endif
@@ -317,11 +316,6 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	return [[_libraryDataSource retain] autorelease];
 }
 
-- (void) setupLibraryDataSource {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileChanged:) name:(NSString *)nProfileSwitched object:nil];
-	[self updateLibraryDataSource];
-}
-
 - (void) updateLibraryDataSource {
 	[_libraryDataSource release];
 	_libraryDataSource = [[WindowController instance] currentLibraryDataSource];
@@ -330,10 +324,6 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	[mTableView reloadData];
 	
 	[mTableView setAllowsMultipleSelection:[_libraryDataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsMultipleSelection];
-}
-
-- (void) profileChanged:(NSNotification*)aNotification {
-	[self updateLibraryDataSource];
 }
 
 #pragma mark -
