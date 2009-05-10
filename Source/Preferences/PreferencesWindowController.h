@@ -31,7 +31,6 @@
 }
 
 - (id) initWithPreferencesController:(PreferencesController *)aPreferencesController;
-
 - (void)showPreferences;
 
 @end

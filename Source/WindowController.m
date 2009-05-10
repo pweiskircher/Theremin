@@ -252,9 +252,9 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) awakeFromNib {
-	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]];
 	[[self preferences] importOldSettings];
-	[self setupProfilesMenu];
+	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]];
+	[self profilesChanged:nil];
 	
 	[mWindow setToolbar:mToolbar];
 	[mPlaylistController setupSearchField:[self musicSearchField]];

@@ -38,9 +38,6 @@
 	[super dealloc];
 }
 
-- (void)windowWillClose:(NSNotification *)notification {
-}
-
 - (void)showPreferences {
 	[mPreferencesWindow makeKeyAndOrderFront:self];
 }
