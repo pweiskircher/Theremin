@@ -27,17 +27,15 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 
 @implementation PreferencesController
 
-- (id) initWithSparkleUpdater:(SUUpdater *)aSparkleUpdater {
+- (id) init {
 	self = [super init];
 	if (self != nil) {
-		mUpdater = [aSparkleUpdater retain];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[mUpdater release];
 	[_currentProfile release];
 	[super dealloc];
 }
@@ -81,51 +79,6 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	[_currentProfile release];
 	_currentProfile = [aProfile retain];
 }
-
-
-- (PWPreferencesUpdateInterval) updateInterval {
-	int checkInterval = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SUScheduledCheckInterval"] intValue];
-	BOOL checkAtStartup = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SUCheckAtStartup"] boolValue];
-	
-	if (checkAtStartup) {
-		return UpdateIntervalOnlyAtStartup;
-	} else if (checkInterval == 0) {
-		return UpdateIntervalNever;
-	} else if (checkInterval == 24*60*60) {
-		return UpdateIntervalOnceADay;
-	} else if (checkInterval == 7*24*60*60) {
-		return UpdateIntervalOnceAWeek;
-	}
-	
-	return UpdateIntervalNever;
-}
-
-- (void) setUpdateInterval:(PWPreferencesUpdateInterval) aUpdateInterval {
-	switch (aUpdateInterval) {
-		case UpdateIntervalNever:
-			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SUScheduledCheckInterval"];
-			[mUpdater scheduleCheckWithInterval:0.0];
-			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:NO] forKey:@"SUCheckAtStartup"];
-			break;
-			
-		case UpdateIntervalOnceADay:
-			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:24*60*60] forKey:@"SUScheduledCheckInterval"];
-			[mUpdater scheduleCheckWithInterval:24*60*60];
-			break;
-			
-		case UpdateIntervalOnceAWeek:
-			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:7*24*60*60] forKey:@"SUScheduledCheckInterval"];
-			[mUpdater scheduleCheckWithInterval:7*24*60*60];
-			break;
-			
-		case UpdateIntervalOnlyAtStartup:
-			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"SUScheduledCheckInterval"];
-			[mUpdater scheduleCheckWithInterval:0.0];
-			[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"SUCheckAtStartup"];			
-			break;
-	}
-}
-
 
 - (NSString *) currentServerNameWithPort {
 	return [NSString stringWithFormat:@"%@:%d", [[self currentProfile] hostname], [[self currentProfile] port]];

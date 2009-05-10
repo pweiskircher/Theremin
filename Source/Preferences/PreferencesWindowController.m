@@ -39,24 +39,15 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-	[self autorelease];
 }
 
 - (void)showPreferences {
-	[mUpdatePopup selectItemWithTag:[_preferencesController updateInterval]];
-	
 	[mPreferencesWindow makeKeyAndOrderFront:self];
 }
 
 - (void)windowDidResignKey:(NSNotification *)aNotification {
 	[_profileController saveProfiles];
 	[_preferencesController save];
-}
-
-- (IBAction) updatePopupMenuChanged:(id)sender {
-	int tag = [[sender selectedItem] tag];
-	
-	[_preferencesController setUpdateInterval:tag];
 }
 
 @end

@@ -217,7 +217,7 @@ const NSString *dProfile = @"dProfile";
 	if (self != nil) {
 		globalWindowController = self;
 		
-		mPreferencesController = [[PreferencesController alloc] initWithSparkleUpdater:mUpdater];
+		mPreferencesController = [[PreferencesController alloc] init];
 
 		[NSApp setDelegate:self];
 	

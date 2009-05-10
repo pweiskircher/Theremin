@@ -22,13 +22,6 @@
 #import "Profile.h"
 
 typedef enum {
-	UpdateIntervalOnceADay = 1,
-	UpdateIntervalOnceAWeek = 2,
-	UpdateIntervalOnlyAtStartup = 3,
-	UpdateIntervalNever = 4
-} PWPreferencesUpdateInterval;
-
-typedef enum {
 	eAppleRemoteModeAlways		= 0,
 	eAppleRemoteModeWhenFocused = 1,
 	eAppleRemoteModeNever		= 2
@@ -40,12 +33,10 @@ typedef enum {
 } LibraryDoubleClickMode;
 
 @interface PreferencesController : NSObject {	
-	SUUpdater *mUpdater;
-	
 	Profile *_currentProfile;
 }
 
-- (id) initWithSparkleUpdater:(SUUpdater *)aSparkleUpdater;
+- (id) init;
 
 - (Profile *) currentProfile;
 - (void) setCurrentProfile:(Profile *)aProfile;
@@ -53,9 +44,6 @@ typedef enum {
 - (void) save;
 
 // settings getters ( / setters )
-
-- (PWPreferencesUpdateInterval) updateInterval;
-- (void) setUpdateInterval:(PWPreferencesUpdateInterval) aUpdateInterval;
 
 - (void) setNoConfirmationNeededForDeletionOfPlaylist:(BOOL)aValue;
 - (BOOL) noConfirmationNeededForDeletionOfPlaylist;
