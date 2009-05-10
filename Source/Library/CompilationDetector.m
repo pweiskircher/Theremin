@@ -23,6 +23,21 @@
 
 @implementation CompilationDetector
 
+- (id) initWithDataSource:(id<LibraryDataSourceProtocol>)aDataSource andDelegate:(id)aDelegate {
+	self = [super init];
+	if (self != nil) {
+		_dataSource = [aDataSource retain];
+		_delegate = aDelegate;
+	}
+	return self;
+}
+
+- (void) dealloc
+{
+	[_dataSource release];
+	[super dealloc];
+}
+
 + (NSArray *) compilationSongsOfAlbumSongs:(NSArray *)songs {
 	// a compilation is usually kept in one directory - so sort by directory and go from there
 	
@@ -74,9 +89,14 @@
 	return result;
 }
 
-+ (void) detectCompilationsUsingDataSource:(id<LibraryDataSourceProtocol>)aDataSource {
-#warning FIXME
-/*	NSArray *songs = [[aDataSource songsWithFilters:nil] sortedArrayUsingDescriptors:
+- (void) start {
+	if (!([_dataSource supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations))
+		[NSException raise:NSInternalInconsistencyException format:@"This datasource doesn't support custom compilations."];
+	[_dataSource requestSongsWithFilters:nil reportToTarget:self andSelector:@selector(dataSourceResults:)];
+}
+
+- (void) dataSourceResults:(NSArray *)results {
+	NSArray *songs = [results sortedArrayUsingDescriptors:
 					  [NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"album" ascending:YES] autorelease]]];
 	Song *song;
 	NSString *previousAlbum = nil;
@@ -92,7 +112,7 @@
 		if (previousAlbum != nil && [[song album] isEqualToString:previousAlbum] == NO) {
 			// we have more than 2 artists in that album.. do a bit more detective work on that
 			if ([dict count] > 2) {
-				NSArray *tmp = [self compilationSongsOfAlbumSongs:array];
+				NSArray *tmp = [CompilationDetector compilationSongsOfAlbumSongs:array];
 				if (tmp) [result addObjectsFromArray:tmp];
 			}
 			[dict removeAllObjects];
@@ -114,7 +134,7 @@
 	if (previousAlbum != nil) {
 		// we have more than 2 artists in that album.. do a bit more detective work on that
 		if ([dict count] > 2) {
-			NSArray *tmp = [self compilationSongsOfAlbumSongs:array];
+			NSArray *tmp = [CompilationDetector compilationSongsOfAlbumSongs:array];
 			if (tmp) [result addObjectsFromArray:tmp];
 		}
 		
@@ -122,7 +142,8 @@
 		[array removeAllObjects];
 	}
 	
-	[aDataSource setSongsAsCompilation:result]; */
+	[_dataSource setSongsAsCompilation:result];
+	[_delegate compilationDetectorFinished:self];
 }
 
 @end

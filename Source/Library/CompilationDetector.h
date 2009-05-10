@@ -21,7 +21,15 @@
 #import "LibraryDataSource.h"
 
 @interface CompilationDetector : NSObject {
-
+	id<LibraryDataSourceProtocol> _dataSource;
+	id _delegate;
 }
-+ (void) detectCompilationsUsingDataSource:(id<LibraryDataSourceProtocol>)aDataSource;
+- (id) initWithDataSource:(id<LibraryDataSourceProtocol>)aDataSource andDelegate:(id)aDelegate;
+
+- (void) start;
 @end
+
+@interface CompilationDetector (DelegateMethods)
+- (void) compilationDetectorFinished:(CompilationDetector *)aCompilationDetector;
+@end
+

@@ -931,7 +931,12 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) detectCompilations:(id)sender {
-	[CompilationDetector detectCompilationsUsingDataSource:[self currentLibraryDataSource]];
+	CompilationDetector *detector = [[CompilationDetector alloc] initWithDataSource:[self currentLibraryDataSource] andDelegate:self];
+	[detector start];
+}
+
+- (void) compilationDetectorFinished:(id)sender {
+	[sender release];
 	[mLibraryController reloadAll];
 }
 
