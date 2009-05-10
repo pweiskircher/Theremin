@@ -21,7 +21,7 @@
 }
 
 - (void) requestFilteredItems:(NSArray *)filters {
-	[[self libraryDataSource] requestGenresWithFilters:filters];
+	[[self libraryDataSource] requestGenresWithFilters:filters reportToTarget:self andSelector:@selector(receivedResults:)];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

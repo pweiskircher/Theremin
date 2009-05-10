@@ -23,9 +23,6 @@
 #import <SqueezeLib/SLCLICredentials.h>
 #import <SqueezeLib/PWDatabaseQuery.h>
 
-#import "SqueezeLibToThereminTransformer.h"
-#import "NSArray+Transformations.h"
-
 #import "Profile.h"
 
 #import "ThereminFilterToPWDatabaseQueryFilter.h"
@@ -46,6 +43,8 @@
 		_server = [[SLSqueezeServer alloc] initWithServer:server andCredentials:credentials];
 		[_server setDelegate:self];
 		[_server requestPlayerList];
+		
+		_operationQueue = [[LibraryOperationQueue alloc] initWithServer:_server];
 	}
 	return self;
 }
@@ -54,6 +53,7 @@
 {
 	[_profile release];
 	[_server release];
+	[_operationQueue release];
 	[super dealloc];
 }
 
@@ -70,43 +70,23 @@
 }
 
 - (void) databaseQuery:(PWDatabaseQuery *)query finished:(NSArray *)result {
-	if ([query type] == PWDatabaseQueryEntityTypeArtist) {
-		NSArray *artists = [result arrayByApplyingTransformationUsingTarget:[SqueezeLibToThereminTransformer class] andSelector:@selector(slArtistToArtistTransform:)];
-		[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedArtists
-															object:nil
-														  userInfo:[NSDictionary dictionaryWithObject:artists forKey:gLibraryResults]];		
-	} else if ([query type] == PWDatabaseQueryEntityTypeAlbum) {
-		NSArray *albums = [result arrayByApplyingTransformationUsingTarget:[SqueezeLibToThereminTransformer class] andSelector:@selector(slAlbumToAlbumTransform:)];
-		[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedAlbums
-															object:nil
-														  userInfo:[NSDictionary dictionaryWithObject:albums forKey:gLibraryResults]];				
-	} else if ([query type] == PWDatabaseQueryEntityTypeGenre) {
-		NSArray *genres = [result arrayByApplyingTransformationUsingTarget:[SqueezeLibToThereminTransformer class] andSelector:@selector(slGenreToGenreTransform:)];
-		[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedGenres
-															object:nil
-														  userInfo:[NSDictionary dictionaryWithObject:genres forKey:gLibraryResults]];						
-	} else if ([query type] == PWDatabaseQueryEntityTypeTitle) {
-		NSArray *titles = [result arrayByApplyingTransformationUsingTarget:[SqueezeLibToThereminTransformer class] andSelector:@selector(slTitleToSongTransform:)];
-		[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedSongs
-															object:nil
-														  userInfo:[NSDictionary dictionaryWithObject:titles forKey:gLibraryResults]];
-	}
+	[_operationQueue databaseQuery:query finished:result];
 }
 
-- (void) requestAlbumsWithFilters:(NSArray *)theFilters {
-	[_server executeDatabaseQueryForType:PWDatabaseQueryEntityTypeAlbum usingFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters]];
+- (void) requestAlbumsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
+	[_operationQueue queueOperationWithType:PWDatabaseQueryEntityTypeAlbum andFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters] usingTarget:aTarget andSelector:aSelector];
 }
 
-- (void) requestArtistsWithFilters:(NSArray *)theFilters {
-	[_server executeDatabaseQueryForType:PWDatabaseQueryEntityTypeArtist usingFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters]];
+- (void) requestArtistsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
+	[_operationQueue queueOperationWithType:PWDatabaseQueryEntityTypeArtist andFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters] usingTarget:aTarget andSelector:aSelector];
 }
 
-- (void) requestGenresWithFilters:(NSArray *)theFilters {
-	[_server executeDatabaseQueryForType:PWDatabaseQueryEntityTypeGenre usingFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters]];
+- (void) requestGenresWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
+	[_operationQueue queueOperationWithType:PWDatabaseQueryEntityTypeGenre andFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters] usingTarget:aTarget andSelector:aSelector];
 }
 
-- (void) requestSongsWithFilters:(NSArray *)theFilters {
-	[_server executeDatabaseQueryForType:PWDatabaseQueryEntityTypeTitle usingFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters]];
+- (void) requestSongsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
+	[_operationQueue queueOperationWithType:PWDatabaseQueryEntityTypeTitle andFilters:[ThereminFilterToPWDatabaseQueryFilter transformFilters:theFilters] usingTarget:aTarget andSelector:aSelector];
 }
 
 - (int) supportsDataSourceCapabilities {

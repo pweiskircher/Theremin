@@ -44,7 +44,7 @@
 	}
 	
 	if (fetchTitles)
-		[[self libraryDataSource] requestSongsWithFilters:filters];
+		[[self libraryDataSource] requestSongsWithFilters:filters reportToTarget:self andSelector:@selector(receivedResults:)];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {

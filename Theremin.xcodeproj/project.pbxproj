@@ -60,6 +60,8 @@
 		438DC1860DFD10200055BD4C /* PWSeekSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DC1800DFD10200055BD4C /* PWSeekSliderCell.m */; };
 		438DC1870DFD10200055BD4C /* PWVolumeImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DC1820DFD10200055BD4C /* PWVolumeImage.m */; };
 		438DC1880DFD10200055BD4C /* PWVolumeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 438DC1840DFD10200055BD4C /* PWVolumeSlider.m */; };
+		4396EFC30FB6CCE900F6902B /* LibraryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4396EFC20FB6CCE900F6902B /* LibraryOperation.m */; };
+		4396EFC90FB6CE0F00F6902B /* LibraryOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4396EFC80FB6CE0F00F6902B /* LibraryOperationQueue.m */; };
 		43A0091E0DF3D39F00F42212 /* Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0091D0DF3D39F00F42212 /* Genre.m */; };
 		43A016920E571A4700AA8198 /* CompilationDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016690E571A4700AA8198 /* CompilationDetector.m */; };
 		43A016930E571A4700AA8198 /* LibraryBooleanFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0166C0E571A4700AA8198 /* LibraryBooleanFilter.m */; };
@@ -307,6 +309,10 @@
 		438DC1830DFD10200055BD4C /* PWVolumeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWVolumeSlider.h; path = Source/VolumeSlider/PWVolumeSlider.h; sourceTree = "<group>"; };
 		438DC1840DFD10200055BD4C /* PWVolumeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWVolumeSlider.m; path = Source/VolumeSlider/PWVolumeSlider.m; sourceTree = "<group>"; };
 		4391DDAC0BA35E9100D9BE2C /* libmpd-version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-version.h"; path = "libmpdclient/src/libmpd-version.h"; sourceTree = "<group>"; };
+		4396EFC10FB6CCE900F6902B /* LibraryOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryOperation.h; sourceTree = "<group>"; };
+		4396EFC20FB6CCE900F6902B /* LibraryOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryOperation.m; sourceTree = "<group>"; };
+		4396EFC70FB6CE0F00F6902B /* LibraryOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryOperationQueue.h; sourceTree = "<group>"; };
+		4396EFC80FB6CE0F00F6902B /* LibraryOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryOperationQueue.m; sourceTree = "<group>"; };
 		43A0091C0DF3D39F00F42212 /* Genre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Genre.h; path = Source/MusicServer/Genre.h; sourceTree = "<group>"; };
 		43A0091D0DF3D39F00F42212 /* Genre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Genre.m; path = Source/MusicServer/Genre.m; sourceTree = "<group>"; };
 		43A016680E571A4700AA8198 /* CompilationDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompilationDetector.h; sourceTree = "<group>"; };
@@ -885,6 +891,10 @@
 				43DEB58A0F082F3800A791A0 /* SqueezeLibDataSource.m */,
 				43E887830F097C20003F708D /* ThereminFilterToPWDatabaseQueryFilter.h */,
 				43E887840F097C20003F708D /* ThereminFilterToPWDatabaseQueryFilter.m */,
+				4396EFC10FB6CCE900F6902B /* LibraryOperation.h */,
+				4396EFC20FB6CCE900F6902B /* LibraryOperation.m */,
+				4396EFC70FB6CE0F00F6902B /* LibraryOperationQueue.h */,
+				4396EFC80FB6CE0F00F6902B /* LibraryOperationQueue.m */,
 			);
 			name = "SqueezeBox Library";
 			sourceTree = "<group>";
@@ -1246,6 +1256,8 @@
 				43E8872C0F09766A003F708D /* SqueezeLibToThereminTransformer.m in Sources */,
 				43E887320F0977EB003F708D /* NSArray+Transformations.m in Sources */,
 				43E887850F097C20003F708D /* ThereminFilterToPWDatabaseQueryFilter.m in Sources */,
+				4396EFC30FB6CCE900F6902B /* LibraryOperation.m in Sources */,
+				4396EFC90FB6CE0F00F6902B /* LibraryOperationQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -70,7 +70,7 @@
 }
 
 - (void) requestFilteredItems:(NSArray *)filters {
-	[[self libraryDataSource] requestArtistsWithFilters:filters];
+	[[self libraryDataSource] requestArtistsWithFilters:filters reportToTarget:self andSelector:@selector(receivedResults:)];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

@@ -114,10 +114,10 @@ static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
 	
 	[self showGenreView:[[[WindowController instance] preferences] showGenreInLibrary]];
 	
-	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedArtists];
-	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedAlbums];
-	mSongController = [[LibrarySongSubController alloc] initWithTableView:mSongView andLibraryController:self andHasAllEntry:NO usingReceiveNotification:nLibraryDataSourceReceivedSongs];
-	mGenreController = [[LibraryGenreSubController alloc] initWithTableView:mGenreView andLibraryController:self andHasAllEntry:YES usingReceiveNotification:nLibraryDataSourceReceivedGenres];
+	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES];
+	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES];
+	mSongController = [[LibrarySongSubController alloc] initWithTableView:mSongView andLibraryController:self andHasAllEntry:NO];
+	mGenreController = [[LibraryGenreSubController alloc] initWithTableView:mGenreView andLibraryController:self andHasAllEntry:YES];
 }
 
 - (void) dealloc {

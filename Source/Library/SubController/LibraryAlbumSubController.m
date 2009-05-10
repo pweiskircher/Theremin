@@ -32,7 +32,7 @@
 }
 
 - (void) requestFilteredItems:(NSArray *)filters {
-	[[self libraryDataSource] requestAlbumsWithFilters:filters];
+	[[self libraryDataSource] requestAlbumsWithFilters:filters reportToTarget:self andSelector:@selector(receivedResults:)];
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

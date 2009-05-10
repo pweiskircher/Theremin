@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2008  Patrik Weiskircher
+ Copyright (C) 2009  Patrik Weiskircher
  
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -18,16 +18,19 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "LibraryDataSource.h"
-#import "LibraryOperationQueue.h"
-#import <SqueezeLib/SLSqueezeServer.h>
+#import <SqueezeLib/PWDatabaseQuery.h>
 
-@class Profile;
-
-@interface SqueezeLibDataSource : NSObject <LibraryDataSourceProtocol> {
-	Profile *_profile;
-	SLSqueezeServer *_server;
-	LibraryOperationQueue *_operationQueue;
+@interface LibraryOperation : NSObject {
+	PWDatabaseQueryEntityType _type;
+	id _target;
+	SEL _sel;
+	NSArray *_filter;
 }
++ (id) libraryOperationUsingType:(PWDatabaseQueryEntityType)aType andFilters:(NSArray *)someFilters andTarget:(id)aTarget andSelector:(SEL)aSel;
+- (id) initWithType:(PWDatabaseQueryEntityType)aType andFilters:(NSArray *)someFilters andTarget:(id)aTarget andSelector:(SEL)aSel;
 
+- (PWDatabaseQueryEntityType) type;
+- (NSArray *) filters;
+
+- (void) reportResult:(id)aResult;
 @end

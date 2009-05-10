@@ -255,7 +255,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	return array;
 }
 
-- (void) requestGenresWithFilters:(NSArray *)theFilters {
+- (void) requestGenresWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS identifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
@@ -263,12 +263,10 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		[NSException raise:NSGenericException format:@"Couldn't get genres."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Genre class] andQuery:query];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedGenres
-														object:nil
-													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
+	[aTarget performSelector:aSelector withObject:results];
 }
 
-- (void) requestAlbumsWithFilters:(NSArray *)theFilters {
+- (void) requestAlbumsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS identifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
@@ -276,13 +274,10 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		[NSException raise:NSGenericException format:@"Couldn't get albums."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Album class] andQuery:query];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedAlbums
-														object:nil
-													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
-	
+	[aTarget performSelector:aSelector withObject:results];	
 }
 
-- (void) requestSongsWithFilters:(NSArray *)theFilters {
+- (void) requestSongsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT songs.file AS file, songs.title AS title, songs.track AS track,"
 							@"songs.name AS name, songs.date AS date, songs.composer AS composer, songs.disc AS disc,"
 							@"songs.comment AS comment, songs.time AS time, songs.uniqueIdentifier AS uniqueIdentifier,"
@@ -295,13 +290,10 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		[NSException raise:NSGenericException format:@"Couldn't get songs."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Song class] andQuery:query];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedSongs
-														object:nil
-													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
-	
+	[aTarget performSelector:aSelector withObject:results];	
 }
 
-- (void) requestArtistsWithFilters:(NSArray *)theFilters {
+- (void) requestArtistsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT artists.name AS name, songs.artist AS identifier, songs.isCompilation FROM songs "
 		                                                     @"LEFT JOIN artists ON songs.artist = artists.id "
 		                                                     @"LEFT JOIN albums ON songs.album = albums.id"];
@@ -311,10 +303,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		[NSException raise:NSGenericException format:@"Couldn't get artists."];
 	
 	NSArray *results = [self artistsFromQuery:query];
-	[[NSNotificationCenter defaultCenter] postNotificationName:nLibraryDataSourceReceivedArtists
-														object:nil
-													  userInfo:[NSDictionary dictionaryWithObject:results forKey:gLibraryResults]];
-	
+	[aTarget performSelector:aSelector withObject:results];	
 }
 
 - (int) getIdFromTable:(NSString *)table forItem:(id)item usingKey:(NSString *)key andFallbackIfKeyUnknown:(NSString *)fallback {

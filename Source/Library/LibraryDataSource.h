@@ -27,20 +27,14 @@ typedef enum {
 	eLibraryDataSourceSupportsMultipleSelection	 = 0x04
 } LibraryDataSourceCapabilities;
 
-extern NSString *nLibraryDataSourceReceivedAlbums;
-extern NSString *nLibraryDataSourceReceivedArtists;
-extern NSString *nLibraryDataSourceReceivedGenres;
-extern NSString *nLibraryDataSourceReceivedSongs;
-extern NSString *gLibraryResults;
-
 @protocol LibraryDataSourceProtocol <NSObject>
 - (id) initWithProfile:(Profile *)aProfile;
 - (Profile *) profile;
 
-- (void) requestAlbumsWithFilters:(NSArray *)theFilters;
-- (void) requestArtistsWithFilters:(NSArray *)theFilters;
-- (void) requestGenresWithFilters:(NSArray *)theFilters;
-- (void) requestSongsWithFilters:(NSArray *)theFilters;
+- (void) requestAlbumsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
+- (void) requestArtistsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
+- (void) requestGenresWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
+- (void) requestSongsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
 
 - (int) supportsDataSourceCapabilities;
 

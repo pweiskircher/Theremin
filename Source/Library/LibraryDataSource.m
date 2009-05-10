@@ -23,12 +23,6 @@
 #import "SQLController.h"
 #import "SqueezeLibDataSource.h"
 
-NSString *nLibraryDataSourceReceivedAlbums = @"nLibraryDataSourceReceivedAlbums";
-NSString *nLibraryDataSourceReceivedArtists = @"nLibraryDataSourceReceivedArtists";
-NSString *nLibraryDataSourceReceivedGenres = @"nLibraryDataSourceReceivedGenres";
-NSString *nLibraryDataSourceReceivedSongs = @"nLibraryDataSourceReceivedSongs";
-NSString *gLibraryResults = @"gLibraryResults";
-
 @implementation LibraryDataSource
 + (id<LibraryDataSourceProtocol>) libraryDataSourceForProfile:(Profile *)aProfile {
 	if ([aProfile mode] == eModeMPD)

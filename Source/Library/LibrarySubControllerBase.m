@@ -56,7 +56,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 @end
 
 @implementation LibrarySubControllerBase
-- (id) initWithTableView:(PWTableView *)aTableView andLibraryController:(LibraryController *)aLibraryController andHasAllEntry:(BOOL)allEntry usingReceiveNotification:(NSString *)aReceiveNotification {
+- (id) initWithTableView:(PWTableView *)aTableView andLibraryController:(LibraryController *)aLibraryController andHasAllEntry:(BOOL)allEntry {
 	self = [super init];
 	if (self != nil) {
 		mTableView = aTableView;
@@ -73,11 +73,6 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 		[[NSNotificationCenter defaultCenter] addObserver:mLibraryController selector:@selector(tableViewBecameFirstResponder:) 
 													 name:nBecameFirstResponder
 												   object:mTableView];
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(dataSourceReceivedResults:)
-													 name:aReceiveNotification
-												   object:nil];
 		
 		if (allEntry)
 			[mTableView selectAllSelectsRow:0];
@@ -254,8 +249,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	[self requestFilteredItems:filters];
 }
 
-- (void) dataSourceReceivedResults:(NSNotification *)aNotification {
-	NSArray *items = [[aNotification userInfo] objectForKey:gLibraryResults];
+- (void) receivedResults:(NSArray *)items {
 	mItems = [[self sortedArray:items] retain];
 	
 #ifdef SQL_DEBUG

@@ -40,8 +40,7 @@
 }
 - (id) initWithTableView:(PWTableView *)aTableView
 	andLibraryController:(LibraryController *)aLibraryController
-		  andHasAllEntry:(BOOL)allEntry
-usingReceiveNotification:(NSString *)aReceiveNotification;
+		  andHasAllEntry:(BOOL)allEntry;
 
 - (NSArray *) getSelected:(BOOL*)allSelected;
 - (void) reloadData;
@@ -56,5 +55,6 @@ usingReceiveNotification:(NSString *)aReceiveNotification;
 
 - (id<LibraryDataSourceProtocol>) libraryDataSource;
 
+- (void) receivedResults:(NSArray *)items;
 @end
 
