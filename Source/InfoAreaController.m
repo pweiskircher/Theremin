@@ -14,7 +14,6 @@
 #import "NSStringAdditions.h"
 
 
-NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 
 @implementation InfoAreaController
 - (id) init {
@@ -39,35 +38,21 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 												 selector:@selector(clientDisconnected:)
 													 name:nMusicServerClientDisconnected
 												   object:nil];
+		
+		_growlMessenger = [[GrowlMessenger alloc] initWithDelegate:self];
 	}
 	return self;
 }
 
 - (void) dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[_growlMessenger release];
 	[super dealloc];
 }
 
-- (void) awakeFromNib {
-	[GrowlApplicationBridge setGrowlDelegate:self];
-	
-	mOriginalOriginTitle = [mTitle frame].origin;
-	mOriginalOriginArtist = [mArtist frame].origin;
-	mOriginalOriginProgressLabel = [mProgressLabel frame].origin;
-}
-
-- (void) growlNotificationWasClicked:(id)clickContext {
-	if ([clickContext isEqualTo:nGrowlNotificationPlaying]) {
-		[NSApp activateIgnoringOtherApps:YES];
-		[[WindowController instance] showPlayerWindow:self];
-	}
-}
-
-- (NSDictionary *) registrationDictionaryForGrowl {
-	if (!mGrowlDictionary) {
-		mGrowlDictionary = [[NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:nGrowlNotificationPlaying], GROWL_NOTIFICATIONS_ALL, [NSArray arrayWithObject:nGrowlNotificationPlaying], GROWL_NOTIFICATIONS_DEFAULT, nil] retain];
-	}
-	return mGrowlDictionary;
+- (void) growlMessengerNotificationWasClicked:(GrowlMessenger *)aGrowlMessenger {
+	[NSApp activateIgnoringOtherApps:YES];
+	[[WindowController instance] showPlayerWindow:self];
 }
 
 - (void) updateWithTimer:(NSTimer *)timer {
@@ -161,45 +146,6 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	[mSeekSlider setIntValue:elapsed];
 }
 
-- (void) sendGrowlInfo:(NSTimer *)aTimer {
-	[mGrowlTimer release], mGrowlTimer = nil;
-	
-	NSData *icon = nil;
-	if (mGrowlImage) {
-		icon = [mGrowlImage TIFFRepresentation];
-		[mGrowlImage release], mGrowlImage = nil;
-	}
-	
-	BOOL gotSomething = NO;
-	NSString *title = [mCurrentSong title];
-	if (!title)
-		title = @"Unknown Title";
-	else
-		gotSomething = YES;
-	
-	NSString *album = [mCurrentSong album];
-	if (!album)
-		album = @"Unknown Album";
-	else
-		gotSomething = YES;
-	
-	NSString *artist = [mCurrentSong artist];
-	if (!artist)
-		artist = @"Unknown Artist";
-	else
-		gotSomething = YES;
-	
-	if (gotSomething) {
-		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Playing: %@", @"Growl Notification Title"), title]
-									description:[NSString stringWithFormat:@"%@\n%@", album, artist]
-							   notificationName:nGrowlNotificationPlaying
-									   iconData:icon
-									   priority:0
-									   isSticky:NO
-								   clickContext:nGrowlNotificationPlaying];	
-	}
-}
-
 - (void) clientCurrentSongChanged:(NSNotification *)notification {
 	[mCurrentSong release];
 	mCurrentSong = [[[notification userInfo] objectForKey:dSong] retain];	
@@ -207,15 +153,7 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	[self scheduleUpdate];
 	
 	if ([[WindowController instance] currentPlayerState] == eStatePlaying) {
-		if (![[mCurrentSong uniqueIdentifier] isEqualTo:mLastNotifiedSongIdentifier]) {
-			[mGrowlTimer invalidate];
-			[mGrowlTimer release], mGrowlTimer = nil;
-			[mGrowlImage release], mGrowlImage = nil;
-			[mLastNotifiedSongIdentifier release], mLastNotifiedSongIdentifier = nil;
-			[self sendGrowlInfo:nil];
-
-			mLastNotifiedSongIdentifier = [[mCurrentSong uniqueIdentifier] copy];
-		}
+		[_growlMessenger currentSongChanged:mCurrentSong];
 	}
 }
 

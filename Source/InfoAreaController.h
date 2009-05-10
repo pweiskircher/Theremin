@@ -18,11 +18,11 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "Growl/GrowlApplicationBridge.h"
+#import "GrowlMessenger.h"
 
 @class WindowController, Song;
 
-@interface InfoAreaController : NSObject <GrowlApplicationBridgeDelegate> {
+@interface InfoAreaController : NSObject {
 	IBOutlet NSTextField *mTitle;
 	IBOutlet NSTextField *mArtist;
 	IBOutlet NSTextField *mAlbum;
@@ -36,24 +36,16 @@
 	
 	NSTimer *mProgressIndicatorStartTimer;	
 	NSTimer *mInfoAreaUpdateTimer;
-
-	NSPoint mOriginalOriginTitle;
-	NSPoint mOriginalOriginArtist;
-	NSPoint mOriginalOriginProgressLabel;
 	
 	Song *mCurrentSong;
 	NSData *mLastNotifiedSongIdentifier;
 	
-	NSDictionary *mGrowlDictionary;
-	NSTimer *mGrowlTimer;
-	NSImage *mGrowlImage;
+	GrowlMessenger *_growlMessenger;
 	
 	int _total;
 }
 - (id) init;
 - (void) dealloc;
-
-- (NSDictionary *) registrationDictionaryForGrowl;
 
 - (void) scheduleUpdate;
 - (void) update;

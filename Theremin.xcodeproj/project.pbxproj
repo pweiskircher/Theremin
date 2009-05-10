@@ -35,6 +35,7 @@
 		435726670B7FBBE2007010EF /* PWDirectoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 435726650B7FBBE2007010EF /* PWDirectoryCell.m */; };
 		435A43190E53312F00EF425A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 435A43180E53312F00EF425A /* Default.png */; };
 		435C962F0B4BC8AE00350601 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 435C962E0B4BC8AE00350601 /* NSStringAdditions.m */; };
+		436D30F00FB72AB80063DC8D /* GrowlMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 436D30EF0FB72AB80063DC8D /* GrowlMessenger.m */; };
 		436DB37E0E5258C500907E0F /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 436DB37D0E5258C500907E0F /* Profile.m */; };
 		437BDB270B74F42E001C1057 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BDB260B74F42E001C1057 /* Security.framework */; };
 		437C5B740B400035008B8DEC /* debug_printf.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B620B400035008B8DEC /* debug_printf.c */; };
@@ -259,6 +260,8 @@
 		435A43180E53312F00EF425A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		435C962D0B4BC8AE00350601 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringAdditions.h; path = Source/Additions/NSStringAdditions.h; sourceTree = "<group>"; };
 		435C962E0B4BC8AE00350601 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringAdditions.m; path = Source/Additions/NSStringAdditions.m; sourceTree = "<group>"; };
+		436D30EE0FB72AB80063DC8D /* GrowlMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlMessenger.h; sourceTree = "<group>"; };
+		436D30EF0FB72AB80063DC8D /* GrowlMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlMessenger.m; sourceTree = "<group>"; };
 		436DB37C0E5258C500907E0F /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		436DB37D0E5258C500907E0F /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		437BDB260B74F42E001C1057 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -488,6 +491,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				436D30ED0FB72AA30063DC8D /* Growl */,
 				436DB37B0E52589C00907E0F /* Preferences */,
 				438DC17C0DFD10120055BD4C /* VolumeSlider */,
 				43858D6D0DFB430F00FEFB5E /* TableView */,
@@ -667,6 +671,16 @@
 			);
 			name = Library;
 			path = Source/Library;
+			sourceTree = "<group>";
+		};
+		436D30ED0FB72AA30063DC8D /* Growl */ = {
+			isa = PBXGroup;
+			children = (
+				436D30EE0FB72AB80063DC8D /* GrowlMessenger.h */,
+				436D30EF0FB72AB80063DC8D /* GrowlMessenger.m */,
+			);
+			name = Growl;
+			path = Source/Growl;
 			sourceTree = "<group>";
 		};
 		436DB37B0E52589C00907E0F /* Preferences */ = {
@@ -1258,6 +1272,7 @@
 				43E887850F097C20003F708D /* ThereminFilterToPWDatabaseQueryFilter.m in Sources */,
 				4396EFC30FB6CCE900F6902B /* LibraryOperation.m in Sources */,
 				4396EFC90FB6CE0F00F6902B /* LibraryOperationQueue.m in Sources */,
+				436D30F00FB72AB80063DC8D /* GrowlMessenger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
