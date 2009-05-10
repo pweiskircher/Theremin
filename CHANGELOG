@@ -7,7 +7,7 @@
       sign the requests using their private key, which I am not willing to embed
       into an open source app.
     * Updated Sparkle to 1.5 b6 and enabled optional anonymous usage
-    statistics.
+      statistics.
 
 
   Theremin 0.5.3.1:
