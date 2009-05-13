@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431CCBB60FBB61680042E376 /* LastFmCoverArtDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */; };
+		431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC2E0FBB6A850042E376 /* ImageDownloader.m */; };
+		431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC410FBB6E060042E376 /* CoverArtImageView.m */; };
 		43215B770BCA3964009E4C18 /* AppGlobalHotkeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43215B750BCA3964009E4C18 /* AppGlobalHotkeyController.m */; };
 		43215B7F0BCA3970009E4C18 /* AppGlobalHotkey.m in Sources */ = {isa = PBXBuildFile; fileRef = 43215B7D0BCA3970009E4C18 /* AppGlobalHotkey.m */; };
 		4325060C0B57C1FB007FFE40 /* PWMusicSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4325060A0B57C1FB007FFE40 /* PWMusicSearchField.m */; };
@@ -211,6 +214,13 @@
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		431CCBAF0FBB5F880042E376 /* CoverArtDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtDataSourceProtocol.h; sourceTree = "<group>"; };
+		431CCBB40FBB61680042E376 /* LastFmCoverArtDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastFmCoverArtDataSource.h; sourceTree = "<group>"; };
+		431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastFmCoverArtDataSource.m; sourceTree = "<group>"; };
+		431CCC2D0FBB6A850042E376 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
+		431CCC2E0FBB6A850042E376 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
+		431CCC400FBB6E060042E376 /* CoverArtImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtImageView.h; sourceTree = "<group>"; };
+		431CCC410FBB6E060042E376 /* CoverArtImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtImageView.m; sourceTree = "<group>"; };
 		43215B740BCA3964009E4C18 /* AppGlobalHotkeyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppGlobalHotkeyController.h; path = Source/AppGlobalHotkey/AppGlobalHotkeyController.h; sourceTree = "<group>"; };
 		43215B750BCA3964009E4C18 /* AppGlobalHotkeyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppGlobalHotkeyController.m; path = Source/AppGlobalHotkey/AppGlobalHotkeyController.m; sourceTree = "<group>"; };
 		43215B7C0BCA3970009E4C18 /* AppGlobalHotkey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppGlobalHotkey.h; path = Source/AppGlobalHotkey/AppGlobalHotkey.h; sourceTree = "<group>"; };
@@ -491,6 +501,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				431CCBAE0FBB5F640042E376 /* CoverArt */,
 				436D30ED0FB72AA30063DC8D /* Growl */,
 				436DB37B0E52589C00907E0F /* Preferences */,
 				438DC17C0DFD10120055BD4C /* VolumeSlider */,
@@ -586,6 +597,21 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		431CCBAE0FBB5F640042E376 /* CoverArt */ = {
+			isa = PBXGroup;
+			children = (
+				431CCBAF0FBB5F880042E376 /* CoverArtDataSourceProtocol.h */,
+				431CCBB40FBB61680042E376 /* LastFmCoverArtDataSource.h */,
+				431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */,
+				431CCC2D0FBB6A850042E376 /* ImageDownloader.h */,
+				431CCC2E0FBB6A850042E376 /* ImageDownloader.m */,
+				431CCC400FBB6E060042E376 /* CoverArtImageView.h */,
+				431CCC410FBB6E060042E376 /* CoverArtImageView.m */,
+			);
+			name = CoverArt;
+			path = Source/CoverArt;
 			sourceTree = "<group>";
 		};
 		43215B710BCA393C009E4C18 /* App Global Hotkeys */ = {
@@ -1273,6 +1299,9 @@
 				4396EFC30FB6CCE900F6902B /* LibraryOperation.m in Sources */,
 				4396EFC90FB6CE0F00F6902B /* LibraryOperationQueue.m in Sources */,
 				436D30F00FB72AB80063DC8D /* GrowlMessenger.m in Sources */,
+				431CCBB60FBB61680042E376 /* LastFmCoverArtDataSource.m in Sources */,
+				431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */,
+				431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
