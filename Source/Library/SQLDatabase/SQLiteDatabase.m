@@ -68,7 +68,7 @@ void sqlitetrace(void *gna, const char *s) {
 	return YES;
 }
 
-- (BOOL) close {
+- (void) close {
 	// we have to finalize every query - otherwise we can't close the database
 	NSEnumerator *enumerator = [mQuerySet objectEnumerator];
 	SQLiteQuery *query;
@@ -81,9 +81,10 @@ void sqlitetrace(void *gna, const char *s) {
 	int result = sqlite3_close(mDatabase);
 	[self setError:result];
 	if (result != SQLITE_OK) {
-		return NO;
+		[NSException raise:NSInternalInconsistencyException format:@"Couldn't close database: %d", result];
+		return;
 	}
-	return YES;
+	return;
 }
 
 - (BOOL) execSimpleQuery:(NSString *)theQuery {
@@ -96,7 +97,7 @@ void sqlitetrace(void *gna, const char *s) {
 	return query;
 }
 
-- (void) setError:(int)error {
+- (void) setError:(int)error {	
 	mSQLiteError = error;
 }
 

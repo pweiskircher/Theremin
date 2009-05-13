@@ -37,7 +37,7 @@
 - (void) dealloc;
 
 - (BOOL) open;
-- (BOOL) close;
+- (void) close;
 
 - (BOOL) execSimpleQuery:(NSString *)theQuery;
 - (SQLiteQuery *) query:(NSString *)theQuery;

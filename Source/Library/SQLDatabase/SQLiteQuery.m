@@ -25,7 +25,6 @@
 	self = [super init];
 	if (self != nil) {
 		mDatabase = [theDatabase retain];
-//		[mDatabase registerQuery:self];
 		mSQLStatement = [theQuery retain];
 		mStatement = NULL;
 		[self setState:eSQLiteQueryStateHasStatement];
@@ -35,7 +34,6 @@
 }
 
 - (void) dealloc {
-//	[mDatabase unregisterQuery:self];
 	[mSQLStatement release], mSQLStatement = nil;
 	[mBoundValues release], mBoundValues = nil;
 	[self invalidate];
