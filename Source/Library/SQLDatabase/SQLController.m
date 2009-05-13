@@ -76,7 +76,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	[mIdInsertQueries release], mIdInsertQueries = nil;
 	[mIdSelectQueries release], mIdSelectQueries = nil;
 	
-	[mDatabase dealloc], mDatabase = nil;
+	[mDatabase release], mDatabase = nil;
 	[super dealloc];
 }
 
