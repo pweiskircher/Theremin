@@ -19,14 +19,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class CoverArtView, PWMusicTextField;
+@class PWMusicTextField;
 
 @interface SongInfoController : NSObject {
     IBOutlet NSTextField *mAlbum;
     IBOutlet NSTextField *mArtist;
     IBOutlet PWMusicTextField *mComment;
     IBOutlet NSTextField *mComposer;
-    IBOutlet CoverArtView *mCoverView;
     IBOutlet NSTextField *mDate;
     IBOutlet NSTextField *mDisc;
     IBOutlet NSTextField *mFilename;

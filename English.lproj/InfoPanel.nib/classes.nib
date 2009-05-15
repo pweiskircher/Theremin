@@ -1,30 +1,89 @@
-{
-    IBClasses = (
-        {CLASS = CoverArtView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = PWMusicTextField; LANGUAGE = ObjC; SUPERCLASS = NSTextField; }, 
-        {
-            ACTIONS = {close = id; nextSong = id; previousSong = id; }; 
-            CLASS = SongInfoController; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                mAlbum = NSTextField; 
-                mArtist = NSTextField; 
-                mComment = NSTextField; 
-                mComposer = NSTextField; 
-                mCoverView = CoverArtView; 
-                mDate = NSTextField; 
-                mDisc = NSTextField; 
-                mFilename = NSTextField; 
-                mGenre = NSTextField; 
-                mNextButton = NSButton; 
-                mPanel = NSWindow; 
-                mPreviousButton = NSButton; 
-                mTitle = NSTextField; 
-                mTrackNumber = NSTextField; 
-            }; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>PWMusicTextField</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSTextField</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>CoverArtView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>close</key>
+				<string>id</string>
+				<key>nextSong</key>
+				<string>id</string>
+				<key>previousSong</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>SongInfoController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>mAlbum</key>
+				<string>NSTextField</string>
+				<key>mArtist</key>
+				<string>NSTextField</string>
+				<key>mComment</key>
+				<string>PWMusicTextField</string>
+				<key>mComposer</key>
+				<string>NSTextField</string>
+				<key>mCoverView</key>
+				<string>CoverArtView</string>
+				<key>mDate</key>
+				<string>NSTextField</string>
+				<key>mDisc</key>
+				<string>NSTextField</string>
+				<key>mFilename</key>
+				<string>NSTextField</string>
+				<key>mGenre</key>
+				<string>NSTextField</string>
+				<key>mNextButton</key>
+				<string>NSButton</string>
+				<key>mPanel</key>
+				<string>NSWindow</string>
+				<key>mPreviousButton</key>
+				<string>NSButton</string>
+				<key>mTitle</key>
+				<string>NSTextField</string>
+				<key>mTrackNumber</key>
+				<string>NSTextField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>
