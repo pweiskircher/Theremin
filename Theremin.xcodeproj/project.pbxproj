@@ -103,7 +103,6 @@
 		43BF741A0F06FA5800420B56 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73C80F06F72A00420B56 /* Growl.framework */; };
 		43BF744C0F06FFB000420B56 /* LicenseWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF744A0F06FFB000420B56 /* LicenseWindow.nib */; };
 		43BF74750F0701EB00420B56 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF74730F0701EB00420B56 /* Preferences.nib */; };
-		43BF77780BB52CCD00715336 /* CoverViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF776E0BB52CCD00715336 /* CoverViewer.nib */; };
 		43BF77790BB52CCD00715336 /* Library.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77700BB52CCD00715336 /* Library.nib */; };
 		43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77720BB52CCD00715336 /* MainMenu.nib */; };
 		43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77740BB52CCD00715336 /* PlayListFiles.nib */; };
@@ -391,7 +390,6 @@
 		43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SqueezeLib.xcodeproj; path = ../../squeezelib/trunk/SqueezeLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		43BF744B0F06FFB000420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/LicenseWindow.nib; sourceTree = "<group>"; };
 		43BF74740F0701EB00420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
-		43BF776F0BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/CoverViewer.nib; sourceTree = "<group>"; };
 		43BF77710BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Library.nib; sourceTree = "<group>"; };
 		43BF77730BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		43BF77750BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PlayListFiles.nib; sourceTree = "<group>"; };
@@ -834,7 +832,6 @@
 			isa = PBXGroup;
 			children = (
 				43D0C8B50C13F25900940B39 /* Localizable.strings */,
-				43BF776E0BB52CCD00715336 /* CoverViewer.nib */,
 				43BF77700BB52CCD00715336 /* Library.nib */,
 				43BF77720BB52CCD00715336 /* MainMenu.nib */,
 				43BF77740BB52CCD00715336 /* PlayListFiles.nib */,
@@ -1138,7 +1135,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43BF77780BB52CCD00715336 /* CoverViewer.nib in Resources */,
 				43BF77790BB52CCD00715336 /* Library.nib in Resources */,
 				43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */,
 				43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */,
@@ -1338,14 +1334,6 @@
 				43BF74740F0701EB00420B56 /* English */,
 			);
 			name = Preferences.nib;
-			sourceTree = "<group>";
-		};
-		43BF776E0BB52CCD00715336 /* CoverViewer.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF776F0BB52CCD00715336 /* English */,
-			);
-			name = CoverViewer.nib;
 			sourceTree = "<group>";
 		};
 		43BF77700BB52CCD00715336 /* Library.nib */ = {
