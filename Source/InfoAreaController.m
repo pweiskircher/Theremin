@@ -12,7 +12,11 @@
 #import "PreferencesController.h"
 #import "Song.h"
 #import "NSStringAdditions.h"
+#import "LastFmCoverArtDataSource.h"
 
+@interface InfoAreaController (CoverArt)
+- (void) enableCoverArt:(BOOL)enabled;
+@end
 
 
 @implementation InfoAreaController
@@ -39,6 +43,11 @@
 													 name:nMusicServerClientDisconnected
 												   object:nil];
 		
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+																  forKeyPath:@"values.coverArtFetchingEnabled" 
+																	 options:NSKeyValueObservingOptionNew 
+																	 context:NULL];   
+		
 		_growlMessenger = [[GrowlMessenger alloc] initWithDelegate:self];
 	}
 	return self;
@@ -47,8 +56,60 @@
 - (void) dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_growlMessenger release];
+	[[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self];
 	[super dealloc];
 }
+
+- (void) awakeFromNib {
+	_originTitle = [mTitle frame].origin;
+	_originArtist = [mArtist frame].origin;
+	_originProgressLabel = [mProgressLabel frame].origin;
+	
+	[_coverArtImageView setFallbackImage:[NSImage imageNamed:@"FallbackCover"]];
+	[_coverArtImageView setRequestImageSize:CoverArtSizeSmall];
+	
+	[self enableCoverArt:[[[WindowController instance] preferences] fetchingOfCoverArtEnabled]];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context { 
+	if ([keyPath isEqualToString:@"values.coverArtFetchingEnabled"]) { 
+		[self enableCoverArt:[[[WindowController instance] preferences] fetchingOfCoverArtEnabled]];
+	} 
+} 
+
+- (void) enableCoverArt:(BOOL)enabled {
+	if (enabled) {
+		[_coverArtImageView setHidden:NO]; 
+		[_coverArtImageView setDataSourceClass:[LastFmCoverArtDataSource class]];
+		
+		[mTitle setFrameOrigin:_originTitle]; 
+		[mArtist setFrameOrigin:_originArtist]; 
+		[mProgressLabel setFrameOrigin:_originProgressLabel]; 
+			 	                 
+		[[mTitle window] display];
+		
+	} else {
+		[_coverArtImageView setHidden:YES]; 
+		[_coverArtImageView setDataSourceClass:nil];
+
+		NSPoint point = [mTitle frame].origin; 
+		point.x = [_coverArtImageView frame].origin.x; 
+		[mTitle setFrameOrigin:point]; 
+		                 
+		point = [mArtist frame].origin; 
+		point.x = [_coverArtImageView frame].origin.x; 
+		[mArtist setFrameOrigin:point]; 
+			 	                 
+		point = [mProgressLabel frame].origin; 
+		point.x = [_coverArtImageView frame].origin.x; 
+		[mProgressLabel setFrameOrigin:point]; 
+	}
+	
+	[mTitle setNeedsDisplay]; 
+	[mArtist setNeedsDisplay]; 
+	[mProgressLabel setNeedsDisplay];
+}
+
 
 - (void) growlMessengerNotificationWasClicked:(GrowlMessenger *)aGrowlMessenger {
 	[NSApp activateIgnoringOtherApps:YES];
@@ -97,11 +158,15 @@
 			if ([mCurrentSong album])
 				album = [mCurrentSong album];
 		}
+		
+		[_coverArtImageView updateWithSong:mCurrentSong];
 	} else {
 		title = NSLocalizedString(@"Not connected.", @"Info Area Status Text");
 
 		[self updateSeekBarWithTotalTime:0];
 		[self updateSeekBarWithElapsedTime:0];
+		
+		[_coverArtImageView clear];
 	}
 	
 	[mTitle setStringValue:title];

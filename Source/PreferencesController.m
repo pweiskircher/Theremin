@@ -137,4 +137,17 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"showGenreInLibrary"];
 }
 
+- (NSString *) coverArtFetchingPropertyName {
+  return @"coverArtFetchingEnabled";
+
+}
+- (BOOL) fetchingOfCoverArtEnabled {
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:[self coverArtFetchingPropertyName]] boolValue];
+}
+
+- (void) setFetchingOfCoverArt:(BOOL)aValue {
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"coverArtFetchingEnabled"];
+}
+
+
 @end

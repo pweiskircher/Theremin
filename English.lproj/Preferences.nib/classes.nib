@@ -29,6 +29,11 @@
 			<string>NSObject</string>
 		</dict>
 		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>openLastFm</key>
+				<string>id</string>
+			</dict>
 			<key>CLASS</key>
 			<string>PreferencesWindowController</string>
 			<key>LANGUAGE</key>

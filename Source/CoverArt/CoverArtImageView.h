@@ -34,4 +34,5 @@
 - (void) setRequestImageSize:(CoverArtSize)aSize;
 
 - (void) updateWithSong:(Song *)aSong;
+- (void) clear;
 @end

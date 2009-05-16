@@ -33,4 +33,5 @@
 - (id) initWithPreferencesController:(PreferencesController *)aPreferencesController;
 - (void)showPreferences;
 
+- (IBAction) openLastFm:(id)sender;
 @end

@@ -18,6 +18,8 @@
 	<integer>0</integer>
 	<key>showGenreInLibrary</key>
 	<false/>
+	<key>coverArtFetchingEnabled</key>
+	<false/>
 	<key>SongLibraryTableInfos Customizable Columns</key>
 	<array>
 		<dict>

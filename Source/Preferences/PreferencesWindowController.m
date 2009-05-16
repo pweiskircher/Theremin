@@ -47,4 +47,8 @@
 	[_preferencesController save];
 }
 
+- (IBAction) openLastFm:(id)sender {
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://last.fm"]];
+}
+
 @end

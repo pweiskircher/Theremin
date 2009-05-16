@@ -37,6 +37,9 @@
 }
 
 - (void) updateWithSong:(Song *)aSong {
+	if (_dataSourceClass == nil)
+		return;
+	
 	[_currentSong release];
 	_currentSong = [aSong retain];
 	
@@ -53,5 +56,9 @@
 - (void) dataSourceFailedToGetImage:(id<CoverArtDataSourceProtocol>)theDataSource {
 	[theDataSource autorelease];
 	[self setImage:_fallbackImage];
+}
+
+- (void) clear {
+	[self setImage:[NSImage imageNamed:@"empty"]];
 }
 @end

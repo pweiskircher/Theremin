@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */; };
+		43156DC20FBF020C00EF3ECA /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 43156DC10FBF020C00EF3ECA /* empty.png */; };
 		431CCBB60FBB61680042E376 /* LastFmCoverArtDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */; };
 		431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC2E0FBB6A850042E376 /* ImageDownloader.m */; };
 		431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC410FBB6E060042E376 /* CoverArtImageView.m */; };
@@ -213,6 +215,8 @@
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = lastfm_red.gif; path = Resources/lastfm_red.gif; sourceTree = "<group>"; };
+		43156DC10FBF020C00EF3ECA /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty.png; path = Resources/empty.png; sourceTree = "<group>"; };
 		431CCBAF0FBB5F880042E376 /* CoverArtDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtDataSourceProtocol.h; sourceTree = "<group>"; };
 		431CCBB40FBB61680042E376 /* LastFmCoverArtDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastFmCoverArtDataSource.h; sourceTree = "<group>"; };
 		431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastFmCoverArtDataSource.m; sourceTree = "<group>"; };
@@ -573,8 +577,6 @@
 				43F0BA300BBE97DC00018704 /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				43BF744A0F06FFB000420B56 /* LicenseWindow.nib */,
-				43BF74730F0701EB00420B56 /* Preferences.nib */,
 			);
 			name = Theremin;
 			sourceTree = "<group>";
@@ -831,6 +833,8 @@
 		43BF776D0BB52CB600715336 /* Nib Files */ = {
 			isa = PBXGroup;
 			children = (
+				43BF744A0F06FFB000420B56 /* LicenseWindow.nib */,
+				43BF74730F0701EB00420B56 /* Preferences.nib */,
 				43D0C8B50C13F25900940B39 /* Localizable.strings */,
 				43BF77700BB52CCD00715336 /* Library.nib */,
 				43BF77720BB52CCD00715336 /* MainMenu.nib */,
@@ -939,6 +943,8 @@
 		43F0BA300BBE97DC00018704 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				43156DC10FBF020C00EF3ECA /* empty.png */,
+				43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */,
 				43F0BA9A0BBE980A00018704 /* CoverStuff */,
 				43F0BA9E0BBE980A00018704 /* Playlist */,
 				43F0BAA20BBE980A00018704 /* Seekbar */,
@@ -1194,6 +1200,8 @@
 				43BF744C0F06FFB000420B56 /* LicenseWindow.nib in Resources */,
 				43BF74750F0701EB00420B56 /* Preferences.nib in Resources */,
 				4350F0780F079D4F00FB6EDF /* PreferencesWindowController.m in Resources */,
+				43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */,
+				43156DC20FBF020C00EF3ECA /* empty.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

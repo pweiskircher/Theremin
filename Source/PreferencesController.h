@@ -65,4 +65,7 @@ typedef enum {
 - (BOOL) showGenreInLibrary;
 - (void) setShowGenreInLibrary:(BOOL)aValue;
 
+- (BOOL) fetchingOfCoverArtEnabled;
+- (void) setFetchingOfCoverArt:(BOOL)aValue;
+
 @end

@@ -97,11 +97,21 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
+			<string>CoverArtImageView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSImageView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>InfoAreaController</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>_coverArtImageView</key>
+				<string>CoverArtImageView</string>
 				<key>mAlbum</key>
 				<string>NSTextField</string>
 				<key>mArtist</key>

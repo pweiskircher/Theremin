@@ -19,6 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "GrowlMessenger.h"
+#import "CoverArtImageView.h"
 
 @class WindowController, Song;
 
@@ -33,6 +34,12 @@
 	
 	IBOutlet NSProgressIndicator *mProgressIndicator;
 	IBOutlet NSTextField *mProgressLabel;
+	
+	IBOutlet CoverArtImageView *_coverArtImageView;
+	
+	NSPoint _originTitle;
+	NSPoint _originArtist;
+	NSPoint _originProgressLabel;
 	
 	NSTimer *mProgressIndicatorStartTimer;	
 	NSTimer *mInfoAreaUpdateTimer;
