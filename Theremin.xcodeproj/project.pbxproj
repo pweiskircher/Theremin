@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */; };
 		43156DC20FBF020C00EF3ECA /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 43156DC10FBF020C00EF3ECA /* empty.png */; };
+		43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43156E040FBF097E00EF3ECA /* CoverArtAsker.m */; };
 		431CCBB60FBB61680042E376 /* LastFmCoverArtDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */; };
 		431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC2E0FBB6A850042E376 /* ImageDownloader.m */; };
 		431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 431CCC410FBB6E060042E376 /* CoverArtImageView.m */; };
@@ -217,6 +218,8 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = lastfm_red.gif; path = Resources/lastfm_red.gif; sourceTree = "<group>"; };
 		43156DC10FBF020C00EF3ECA /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty.png; path = Resources/empty.png; sourceTree = "<group>"; };
+		43156E030FBF097E00EF3ECA /* CoverArtAsker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtAsker.h; sourceTree = "<group>"; };
+		43156E040FBF097E00EF3ECA /* CoverArtAsker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtAsker.m; sourceTree = "<group>"; };
 		431CCBAF0FBB5F880042E376 /* CoverArtDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtDataSourceProtocol.h; sourceTree = "<group>"; };
 		431CCBB40FBB61680042E376 /* LastFmCoverArtDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastFmCoverArtDataSource.h; sourceTree = "<group>"; };
 		431CCBB50FBB61680042E376 /* LastFmCoverArtDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastFmCoverArtDataSource.m; sourceTree = "<group>"; };
@@ -722,6 +725,8 @@
 				4350F0770F079D4F00FB6EDF /* PreferencesWindowController.m */,
 				4350F0820F07A51100FB6EDF /* ProfileRepository.h */,
 				4350F0830F07A51100FB6EDF /* ProfileRepository.m */,
+				43156E030FBF097E00EF3ECA /* CoverArtAsker.h */,
+				43156E040FBF097E00EF3ECA /* CoverArtAsker.m */,
 			);
 			name = Preferences;
 			path = Source/Preferences;
@@ -1306,6 +1311,7 @@
 				431CCBB60FBB61680042E376 /* LastFmCoverArtDataSource.m in Sources */,
 				431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */,
 				431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */,
+				43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

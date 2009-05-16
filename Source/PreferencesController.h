@@ -68,4 +68,7 @@ typedef enum {
 - (BOOL) fetchingOfCoverArtEnabled;
 - (void) setFetchingOfCoverArt:(BOOL)aValue;
 
+- (BOOL) askedAboutCoverArt;
+- (void) setAskedAboutCoverArt;
+
 @end

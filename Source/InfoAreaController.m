@@ -13,6 +13,7 @@
 #import "Song.h"
 #import "NSStringAdditions.h"
 #import "LastFmCoverArtDataSource.h"
+#import "CoverArtAsker.h"
 
 @interface InfoAreaController (CoverArt)
 - (void) enableCoverArt:(BOOL)enabled;
@@ -67,6 +68,13 @@
 	
 	[_coverArtImageView setFallbackImage:[NSImage imageNamed:@"FallbackCover"]];
 	[_coverArtImageView setRequestImageSize:CoverArtSizeSmall];
+	
+	if ([[[WindowController instance] preferences] askedAboutCoverArt] == NO) { 
+		[[[WindowController instance] preferences] setAskedAboutCoverArt]; 
+		
+		CoverArtAsker *asker = [[[CoverArtAsker alloc] init] autorelease];
+		[asker ask];
+	}
 	
 	[self enableCoverArt:[[[WindowController instance] preferences] fetchingOfCoverArtEnabled]];
 }

@@ -149,5 +149,12 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"coverArtFetchingEnabled"];
 }
 
+- (BOOL) askedAboutCoverArt {
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"wasAskedAboutCoverArt"] boolValue];
+}
+
+- (void) setAskedAboutCoverArt {
+	[[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"wasAskedAboutCoverArt"];
+}
 
 @end
