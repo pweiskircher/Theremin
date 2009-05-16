@@ -227,6 +227,9 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 	NSDictionary *dictionary;
 	while (dictionary = [enumerator nextObject]) {
 		BOOL hide = [[dictionary objectForKey:@"state"] intValue] == NSOffState;
+		if (hide == YES)
+			hide = [[dictionary objectForKey:@"dState"] intValue] == NSOffState;
+		
 		if (hide) {
 			NSString *identifier = [dictionary objectForKey:@"identifier"];			
 			NSTableColumn *column = [self tableColumnWithIdentifier:identifier];
