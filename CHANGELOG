@@ -1,3 +1,8 @@
+  Theremin 0.6.1:
+    * Last.fm cover art support.
+	* Fixes a bug where the player and library tables were empty.
+	* Various other bugfixes.
+  
   Theremin 0.6.0:
     * Profile support.
     * A lot of refactoring - consider this a beta release.
