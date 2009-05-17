@@ -1417,6 +1417,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_CFLAGS = "-DTHREADSAFE=1";
 				PRODUCT_NAME = Theremin;
+				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1452,7 +1453,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Theremin;
-				SYMROOT = ../../../build;
+				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
