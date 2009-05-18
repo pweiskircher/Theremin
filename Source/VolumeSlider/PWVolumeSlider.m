@@ -24,8 +24,6 @@
 #import "PWSeekSlider.h"
 #import "PWSeekSliderCell.h"
 
-NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
-
 @implementation PWVolumeSlider
 - (id) initWithFrame:(NSRect)frame {
 	self = [super initWithFrame:frame];
@@ -56,18 +54,10 @@ NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
 		
 		[[mSlider cell] setKnobImage:[NSImage imageNamed:@"volume_knob"]];
 		
-		[mSlider setTarget:self];
-		[mSlider setAction:@selector(sliderUpdated:)];
-		
 		[self addSubview:mSlider];
 		
 		mSize.height = 22;
 		mSize.width = [volumeImage100 size].width + 2 + 100;
-		
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(volumeChanged:)
-													 name:nMusicServerClientVolumeChanged
-												   object:nil];
 		
 		mCachedNewVolume = -1;
 	}
@@ -91,24 +81,22 @@ NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
 
 - (void) setIntValue:(int)value {
 	[mSlider setIntValue:value];
+	[self updateVolumeImage];
 }
 
 - (int) intValue {
 	return [mSlider intValue];
 }
 
-- (void) volumeChanged:(NSNotification *)notification {
-	int volume = [[[notification userInfo] objectForKey:dVolume] intValue];
-	
-	if ([[[NSRunLoop currentRunLoop] currentMode] isEqualTo:NSEventTrackingRunLoopMode] == YES) {
-		return;
-	}
-	
-	[self setIntValue:volume];
-	[self setVolumeImage];
+- (void) setTarget:(id)aTarget {
+	[mSlider setTarget:aTarget];
 }
 
-- (void) setVolumeImage {
+- (void) setAction:(SEL)aAction {
+	[mSlider setAction:aAction];
+}
+
+- (void) updateVolumeImage {
 	int value = [mSlider intValue];
 	if (value == 0) {
 		[mImageView setImage:volumeImageZero];
@@ -121,11 +109,6 @@ NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
 	}	
 }
 
-- (void) sliderUpdated:(id)sender {
-	[self setVolumeImage];
-	[[[WindowController instance] musicClient] setPlaybackVolume:[mSlider intValue]];
-}
-
 - (void) toggleMute {
 	if ([self intValue] > 0) {
 		mValueBeforeMute = [self intValue];
@@ -133,14 +116,14 @@ NSString *nVolumeSliderUpdated = @"nVolumeSliderUpdated";
 	} else {
 		[self setIntValue:mValueBeforeMute];
 	}
-	[self sliderUpdated:nil];
+	[[mSlider target] performSelector:[mSlider action] withObject:mSlider];
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {
 	int delta = [theEvent deltaY];
 	if (!delta) delta = 1;
 	[self setIntValue:[self intValue]+delta];
-	[self sliderUpdated:nil];
+	[[mSlider target] performSelector:[mSlider action] withObject:mSlider];
 }
 
 @end

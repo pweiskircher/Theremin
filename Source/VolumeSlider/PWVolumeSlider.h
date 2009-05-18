@@ -21,8 +21,6 @@
 
 @class PWSeekSlider, PWVolumeImage;
 
-extern NSString *nVolumeSliderUpdated;
-
 @interface PWVolumeSlider : NSView {
 	PWVolumeImage *mImageView;
 	PWSeekSlider *mSlider;
@@ -38,14 +36,19 @@ extern NSString *nVolumeSliderUpdated;
 	int mValueBeforeMute;
 }
 - (id) initWithFrame:(NSRect)frame;
+
 - (NSSize) size;
 
 - (void) setEnabled:(BOOL)enabled;
+
 - (int) intValue;
 - (void) setIntValue:(int)value;
-- (void) setVolumeImage;
-- (void) volumeChanged:(NSNotification *)notification;
+
+- (void) setTarget:(id)aTarget;
+- (void) setAction:(SEL)aAction;
+
+- (void) updateVolumeImage;
+
 - (void) toggleMute;
 
-- (void) sliderUpdated:(id)sender;
 @end

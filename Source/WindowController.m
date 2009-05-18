@@ -118,7 +118,6 @@ const NSString *dProfile = @"dProfile";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientDisconnected:) name:nMusicServerClientDisconnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRequiredAuthentication:) name:nMusicServerClientRequiresAuthentication object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientStateChanged:) name:nMusicServerClientStateChanged object:nil];	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(volumeSliderChanged:) name:nVolumeSliderUpdated object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientShuffleChanged:) name:nMusicServerClientShuffleOptionChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRepeatChanged:) name:nMusicServerClientRepeatOptionChanged object:nil];
 	
@@ -417,11 +416,6 @@ const NSString *dProfile = @"dProfile";
 	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
 }
 
-- (void) volumeSliderChanged:(NSNotification *)notification {
-	int volume = [[[notification userInfo] objectForKey:dVolume] intValue];
-	[mClient setPlaybackVolume:volume];
-}
-
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
 	BOOL connected = [[self musicClient] isConnected];
 	
@@ -463,7 +457,6 @@ const NSString *dProfile = @"dProfile";
 }
 
 #pragma mark MusicClient notification handlers
-
 
 - (void) clientDisconnected:(NSNotification *)notification {
 	if ([[[self preferences] currentProfile] autoreconnect] == YES) {

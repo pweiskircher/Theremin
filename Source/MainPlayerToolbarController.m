@@ -62,6 +62,11 @@ NSString *tSearchField = @"tSearchField";
 												 selector:@selector(stateChanged:) 
 													 name:nMusicServerClientStateChanged 
 												   object:nil];	
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(volumeChanged:)
+													 name:nMusicServerClientVolumeChanged
+												   object:nil];
 	}
 	return self;
 }
@@ -133,6 +138,21 @@ NSString *tSearchField = @"tSearchField";
 	}
 }
 
+- (void) volumeChanged:(NSNotification *)notification {
+	int volume = [[[notification userInfo] objectForKey:dVolume] intValue];
+	
+	if ([[[NSRunLoop currentRunLoop] currentMode] isEqualTo:NSEventTrackingRunLoopMode] == YES) {
+		return;
+	}
+	
+	[_volumeSlider setIntValue:volume];
+}
+
+- (void) volumeShouldChange:(id)sender {
+	[[[WindowController instance] musicClient] setPlaybackVolume:[_volumeSlider intValue]];
+	[_volumeSlider updateVolumeImage];
+}
+
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
 	if ([_toolbarItems objectForKey:itemIdentifier] != nil)
@@ -181,6 +201,9 @@ NSString *tSearchField = @"tSearchField";
 		[item setView:_volumeSlider];
 		[item setMinSize:NSMakeSize(NSWidth([_volumeSlider frame]), NSHeight([_volumeSlider frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([_volumeSlider frame]), NSHeight([_volumeSlider frame]))];
+		
+		[_volumeSlider setTarget:self];
+		[_volumeSlider setAction:@selector(volumeShouldChange:)];
 		
 		[_toolbarItems setObject:item forKey:itemIdentifier];
 	} else if ([itemIdentifier isEqualToString:tSearchField]) {
