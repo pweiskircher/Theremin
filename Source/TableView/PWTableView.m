@@ -20,6 +20,7 @@
 #import "PWTableView.h"
 #import "WindowController.h"
 #import "PWTableViewMenuItem.h"
+#import "SystemInformation.h"
 
 NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 
@@ -55,7 +56,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 
 - (void) setLiveSearchEnabled:(BOOL)value {
 	unsigned major, minor, bugfix;
-	[[WindowController instance] getSystemVersionMajor:&major minor:&minor bugFix:&bugfix];
+	[SystemInformation getSystemVersionMajor:&major minor:&minor bugFix:&bugfix];
 	
 	// if we are on >= 5, we don't use the code below.
 	if (minor < 5)

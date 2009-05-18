@@ -148,6 +148,4 @@ extern const NSString *dProfile;
 - (IBAction) detectCompilations:(id)sender;
 
 - (IBAction) selectProfile:(id)sender;
-
-- (void)getSystemVersionMajor:(unsigned *)major minor:(unsigned *)minor bugFix:(unsigned *)bugFix;
 @end

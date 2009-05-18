@@ -177,6 +177,7 @@
 		43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */; };
 		43FDCC450B7E0F840015CD57 /* InfoAreaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FDCC430B7E0F840015CD57 /* InfoAreaController.m */; };
 		43FFC3990FC1FC5E002620C0 /* MainPlayerToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC3980FC1FC5E002620C0 /* MainPlayerToolbarController.m */; };
+		43FFC3A70FC1FD4B002620C0 /* SystemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC3A60FC1FD4B002620C0 /* SystemInformation.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -486,6 +487,8 @@
 		43FDCC430B7E0F840015CD57 /* InfoAreaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoAreaController.m; path = Source/InfoAreaController.m; sourceTree = "<group>"; };
 		43FFC3970FC1FC5E002620C0 /* MainPlayerToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPlayerToolbarController.h; path = Source/MainPlayerToolbarController.h; sourceTree = "<group>"; };
 		43FFC3980FC1FC5E002620C0 /* MainPlayerToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPlayerToolbarController.m; path = Source/MainPlayerToolbarController.m; sourceTree = "<group>"; };
+		43FFC3A50FC1FD4B002620C0 /* SystemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInformation.h; sourceTree = "<group>"; };
+		43FFC3A60FC1FD4B002620C0 /* SystemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInformation.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -734,6 +737,8 @@
 				4350F0830F07A51100FB6EDF /* ProfileRepository.m */,
 				43156E030FBF097E00EF3ECA /* CoverArtAsker.h */,
 				43156E040FBF097E00EF3ECA /* CoverArtAsker.m */,
+				43FFC3A50FC1FD4B002620C0 /* SystemInformation.h */,
+				43FFC3A60FC1FD4B002620C0 /* SystemInformation.m */,
 			);
 			name = Preferences;
 			path = Source/Preferences;
@@ -1333,6 +1338,7 @@
 				43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */,
 				43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */,
 				43FFC3990FC1FC5E002620C0 /* MainPlayerToolbarController.m in Sources */,
+				43FFC3A70FC1FD4B002620C0 /* SystemInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
