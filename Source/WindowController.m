@@ -36,12 +36,10 @@
 #import "SongInfoController.h"
 #import "CompilationDetector.h"
 
-#import "MultiClickRemoteBehavior.h"
-#import "RemoteControlContainer.h"
-
 #import "ProfileMenuItem.h"
 #import "ProfileRepository.h"
 #import "OutputDeviceHandler.h"
+#import "AppleRemoteController.h"
 
 WindowController *globalWindowController = nil;
 
@@ -49,7 +47,6 @@ const NSString *nProfileSwitched = @"nProfileSwitched";
 const NSString *dProfile = @"dProfile";
 
 @interface WindowController (PrivateMethods)
-- (RemoteControl *)appleRemote;
 - (void) setupNotificationObservers;
 - (void) setupProfilesMenu;
 
@@ -190,8 +187,6 @@ const NSString *dProfile = @"dProfile";
 	
 		[self setupNotificationObservers];
 		
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.appleRemoteMode" options:NSKeyValueObservingOptionNew context:NULL];
-		
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(appActiveChanged:)
 													 name:NSApplicationDidResignActiveNotification
@@ -235,10 +230,8 @@ const NSString *dProfile = @"dProfile";
 	
 	[self setupConnectionWithMusicClient];
 	
-	if ([[self preferences] appleRemoteMode] == eAppleRemoteModeAlways)
-		[[self appleRemote] startListening:self];
-	
 	_outputDeviceHandler = [[OutputDeviceHandler alloc] initWithMenu:[_controlsMenuItem submenu]];
+	_appleRemoteController = [[AppleRemoteController alloc] init];
 }
 
 - (void) dealloc {
@@ -253,8 +246,9 @@ const NSString *dProfile = @"dProfile";
 	[mPreferencesController release];
 	
 	[_outputDeviceHandler release];
+	[_appleRemoteController release];
 	
-	[[self appleRemote] stopListening:self];
+
 	
 	[super dealloc];
 }
@@ -392,24 +386,6 @@ const NSString *dProfile = @"dProfile";
 }
 
 #pragma mark Configuration Stuff
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"values.appleRemoteMode"]) {
-		switch ([[self preferences] appleRemoteMode]) {
-			case eAppleRemoteModeAlways:
-				[[self appleRemote] startListening:self];
-				break;
-				
-			case eAppleRemoteModeNever:
-				[[self appleRemote] stopListening:self];
-				break;
-				
-			case eAppleRemoteModeWhenFocused:
-				if ([NSApp isActive])
-					[[self appleRemote] startListening:self];
-				break;
-		}
-	}
-}
 
 - (void) autoreconnectTimerTriggered:(NSTimer *)timer {
 	mAutoreconnectTimer = nil;
@@ -548,89 +524,6 @@ const NSString *dProfile = @"dProfile";
 	[mAuthenticationPassword setStringValue:@""];
 	[mAuthenticationPanel orderOut:self];
 	[NSApp stopModal];
-}
-
-#pragma mark Apple Remote stuff
-- (RemoteControl*) appleRemote 
-{
-	if (mAppleRemote == nil) {
-		MultiClickRemoteBehavior *behavior = [[MultiClickRemoteBehavior alloc] init];
-		[behavior setDelegate:self];
-		[behavior setSimulateHoldEvent:YES];
-		RemoteControlContainer *container = [[RemoteControlContainer alloc] initWithDelegate:behavior];
-
-		[container instantiateAndAddRemoteControlDeviceWithClass:[AppleRemote class]];
-		
-		mAppleRemote = container;
-	}
-	return mAppleRemote;
-}
-
-- (void) applicationDidBecomeActive:(NSNotification *)aNotification
-{
-	if ([[self preferences] appleRemoteMode] == eAppleRemoteModeWhenFocused) {
-		[[self appleRemote] startListening: self];
-	}
-}
-
-- (void) applicationDidResignActive:(NSNotification *)aNotification
-{
-	if ([[self preferences] appleRemoteMode] == eAppleRemoteModeWhenFocused) {
-		[[self appleRemote] stopListening: self];
-	}
-}
-
-- (void) appleRemoteButtonHeldDownWithButton:(NSNumber *)theButton {
-	if (mAppleRemoteButtonHeld) {
-		switch ([theButton intValue]) {
-			case kRemoteButtonMinus_Hold:
-				[self decreaseVolume:self];
-				break;
-			case kRemoteButtonPlus_Hold:
-				[self increaseVolume:self];
-				break;
-		}
-		
-		if (mAppleRemoteButtonHeld) {
-			[self performSelector:@selector(appleRemoteButtonHeldDownWithButton:)
-					   withObject:theButton
-					   afterDelay:0.25];
-		}
-	}
-}
-
-- (void) remoteButton: (RemoteControlEventIdentifier)buttonIdentifier pressedDown: (BOOL) pressedDown clickCount: (unsigned int)clickCount
-{
-	if ([[self musicClient] isConnected] == NO)
-		return;
-	
-	if (buttonIdentifier == kRemoteButtonPlus_Hold ||
-		buttonIdentifier == kRemoteButtonMinus_Hold) {
-		mAppleRemoteButtonHeld = pressedDown;
-		if (pressedDown)
-			[self appleRemoteButtonHeldDownWithButton:[NSNumber numberWithInt:buttonIdentifier]];
-	}
-	
-	if (pressedDown == NO)
-		return;
-	
-	switch (buttonIdentifier) {
-		case kRemoteButtonPlus:
-			[self increaseVolume:self];
-			break;
-		case kRemoteButtonMinus:
-			[self decreaseVolume:self];
-			break;
-		case kRemoteButtonPlay:
-			[self togglePlayPause:self];
-			break;
-		case kRemoteButtonLeft:
-			[mClient previous];
-			break;
-		case kRemoteButtonRight:
-			[mClient next];
-			break;
-	}
 }
 
 #pragma mark toolbar actions

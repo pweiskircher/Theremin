@@ -19,7 +19,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MusicServerClient.h"
-#import "AppleRemote.h"
 #import "LibraryDataSource.h"
 #import "PreferencesWindowController.h"
 
@@ -34,6 +33,7 @@
 @class PlayListFilesController;
 @class OutputDeviceHandler;
 @class MainPlayerToolbarController;
+@class AppleRemoteController;
 
 extern const NSString *nProfileSwitched;
 extern const NSString *dProfile;
@@ -85,16 +85,13 @@ extern const NSString *dProfile;
 	
 	BOOL mPausedOnSleep;
 	
-	BOOL mAppleRemoteButtonHeld;
-	
-	RemoteControl *mAppleRemote;
-	
 	PreferencesWindowController *preferencesWindowController;
 	
 	OutputDeviceHandler *_outputDeviceHandler;
 	IBOutlet NSMenuItem *_controlsMenuItem;
 	
 	MainPlayerToolbarController *_mainPlayerToolbarController;
+	AppleRemoteController *_appleRemoteController;
 }
 
 + (id) instance;
