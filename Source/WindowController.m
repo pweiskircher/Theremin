@@ -20,59 +20,35 @@
 #import "WindowController.h"
 #import "InfoAreaController.h"
 
-#import "MpdMusicServerClient.h"
-#import "SqueezeLibMusicServerClient.h"
-
 #import "PreferencesController.h"
-#import "Song.h"
 #import "PlayListController.h"
 #import "PWWindow.h"
 #import "LicenseController.h"
 #import "PWVolumeSlider.h"
 #import "LibraryController.h"
-#import "PWTableView.h"
-#import "PWMusicSearchField.h"
+#import "MainPlayerToolbarController.h"
+
 #import "PlayListFilesController.h"
 #import "UpdateDatabaseController.h"
 #import "AppGlobalHotkey.h"
 #import "AppGlobalHotkeyController.h"
 
-#import "UnifiedToolbar.h"
-#import "UnifiedToolbarItem.h"
-
 #import "SongInfoController.h"
-
-#import "SQLController.h"
+#import "CompilationDetector.h"
 
 #import "MultiClickRemoteBehavior.h"
 #import "RemoteControlContainer.h"
-#import "RemoteControl.h"
-
-#import "CompilationDetector.h"
 
 #import "ProfileMenuItem.h"
 #import "ProfileRepository.h"
-#import "PreferencesWindowController.h"
 #import "OutputDeviceHandler.h"
 
 WindowController *globalWindowController = nil;
-
-NSString *tPlayControlItemIdentifier = @"tPlayControlItemIdentifier";
-NSString *tStopItemIdentifier = @"tStopItemIdentifier";
-NSString *tVolumeSlider = @"tVolumeSlider";
-NSString *tSearchField = @"tSearchField";
-
-#define TR_S_TOOLBAR_LABEL_PREV		NSLocalizedString(@"Previous", @"Main Window toolbar items label")
-#define TR_S_TOOLBAR_LABEL_PLAY		NSLocalizedString(@"Play", @"Main Window toolbar items label")
-#define TR_S_TOOLBAR_LABEL_NEXT		NSLocalizedString(@"Next", @"Main Window toolbar items label")
-#define TR_S_TOOLBAR_LABEL_PAUSE	NSLocalizedString(@"Pause", @"Main Window toolbar items label")
-#define TR_S_TOOLBAR_LABEL_STOP		NSLocalizedString(@"Stop", @"Main Window toolbar items label")
 
 const NSString *nProfileSwitched = @"nProfileSwitched";
 const NSString *dProfile = @"dProfile";
 
 @interface WindowController (PrivateMethods)
-- (PWMusicSearchField *)musicSearchField;
 - (RemoteControl *)appleRemote;
 - (void) setupNotificationObservers;
 - (void) setupProfilesMenu;
@@ -139,7 +115,6 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) setupNotificationObservers {
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientConnected:) name:nMusicServerClientConnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientDisconnected:) name:nMusicServerClientDisconnected object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRequiredAuthentication:) name:nMusicServerClientRequiresAuthentication object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientStateChanged:) name:nMusicServerClientStateChanged object:nil];	
@@ -153,14 +128,6 @@ const NSString *dProfile = @"dProfile";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profilesChanged:) name:(NSString *)nProfileControllerUpdatedProfiles object:nil];
 }
 
-- (void) setupToolbar {
-	mToolbarItems = [[NSMutableDictionary alloc] init];
-	mToolbar = [[UnifiedToolbar alloc] initWithIdentifier:@"mpdToolbar"];
-	[mToolbar setDelegate:self];
-	[mToolbar setDisplayMode:NSToolbarDisplayModeIconOnly];	
-	[mToolbar setAllowsUserCustomization:YES];
-	[mToolbar setAutosavesConfiguration:YES];
-}
 
 - (void) setKeyEquivalentForMenuItemWithSelector:(SEL)selector toKey:(int)key {
 	NSMenu *controlMenu = [[[[NSApplication sharedApplication] mainMenu] itemWithTag:1] submenu];
@@ -223,7 +190,6 @@ const NSString *dProfile = @"dProfile";
 		[NSApp setDelegate:self];
 	
 		[self setupNotificationObservers];
-		[self setupToolbar];
 		
 		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forKeyPath:@"values.appleRemoteMode" options:NSKeyValueObservingOptionNew context:NULL];
 		
@@ -257,8 +223,11 @@ const NSString *dProfile = @"dProfile";
 	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]];
 	[self profilesChanged:nil];
 	
-	[mWindow setToolbar:mToolbar];
-	[mPlaylistController setupSearchField:[self musicSearchField]];
+	_mainPlayerToolbarController = [[MainPlayerToolbarController alloc] init];
+	[mWindow setToolbar:[_mainPlayerToolbarController toolbar]];
+	
+	[mPlaylistController setupSearchField:[_mainPlayerToolbarController musicSearchField]];
+	
 	[self setupMenuShortcuts];
 	
 	mPlayListFilesController = [[PlayListFilesController alloc] init];
@@ -275,12 +244,11 @@ const NSString *dProfile = @"dProfile";
 
 - (void) dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
+	[_mainPlayerToolbarController release];
+	
 	[mClient release];
-	[mToolbarItems release];
-	[mToolbar release];
 	[mConnectionToMpdClient release];
 	[mLibraryController release];
-	[mMusicSearch release];
 	[mUpdateDatabaseController release];
 	[mPlayListFilesController release], mPlayListFilesController = nil;
 	[mPreferencesController release];
@@ -496,24 +464,8 @@ const NSString *dProfile = @"dProfile";
 
 #pragma mark MusicClient notification handlers
 
-- (void) clientConnected:(NSNotification *)notification {
-	[mPlayerItem setEnabled:YES forSegment:0];
-	[mPlayerItem setEnabled:YES forSegment:1];
-	[mPlayerItem setEnabled:YES forSegment:2];
-	
-	[mStopItem setEnabled:YES];
-	[mVolumeSlider setEnabled:YES];
-	[[self musicSearchField] setEnabled:YES];	
-}
 
 - (void) clientDisconnected:(NSNotification *)notification {
-	[mPlayerItem setEnabled:NO forSegment:0];
-	[mPlayerItem setEnabled:NO forSegment:1];
-	[mPlayerItem setEnabled:NO forSegment:2];
-	[mStopItem setEnabled:NO];
-	[mVolumeSlider setEnabled:NO];
-	[[self musicSearchField] setEnabled:NO];
-
 	if ([[[self preferences] currentProfile] autoreconnect] == YES) {
 		if (mDisableAutoreconnectOnce == YES) {
 			mDisableAutoreconnectOnce = NO;
@@ -535,34 +487,8 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) clientStateChanged:(NSNotification *)notification {
-	int state = [[[notification userInfo] objectForKey:dState] intValue];
+	mCurrentState = [[[notification userInfo] objectForKey:dState] intValue];
 
-	mCurrentState = state;
-	
-	[mPlayerItem setEnabled:YES forSegment:0];
-	[mPlayerItem setEnabled:YES forSegment:1];
-	[mPlayerItem setEnabled:YES forSegment:2];
-	
-	switch (mCurrentState) {
-		case eStatePaused:
-			[mPlayerItem setImage:[NSImage imageNamed:@"playSong"] forSegment:1];
-			[mPlayerItem setLabel:TR_S_TOOLBAR_LABEL_PLAY forSegment:1];
-			[mStopItem setEnabled:YES];
-			break;
-			
-		case eStatePlaying:
-			[mPlayerItem setImage:[NSImage imageNamed:@"pauseSong"] forSegment:1];
-			[mPlayerItem setLabel:TR_S_TOOLBAR_LABEL_PAUSE forSegment:1];
-			[mStopItem setEnabled:YES];
-			break;
-			
-		case eStateStopped:
-			[mPlayerItem setImage:[NSImage imageNamed:@"playSong"] forSegment:1];
-			[mPlayerItem setLabel:TR_S_TOOLBAR_LABEL_PLAY forSegment:1];
-			[mStopItem setEnabled:NO];
-			break;
-	}
-	
 	[mInfoAreaController scheduleUpdate];
 	[mPlaylistController updateCurrentSongMarker];
 }
@@ -603,82 +529,6 @@ const NSString *dProfile = @"dProfile";
 
 - (IBAction) preferencesClicked:(id)sender {
 	[preferencesWindowController showPreferences];
-}
-
-- (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag {
-	if ([mToolbarItems objectForKey:itemIdentifier] != nil)
-		return [mToolbarItems objectForKey:itemIdentifier];
-	
-	NSToolbarItem *item = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
-	
-	if ([itemIdentifier isEqualToString:tPlayControlItemIdentifier]) {
-		UnifiedToolbarItem *uitem = [[[UnifiedToolbarItem alloc] initWithItemIdentifier:itemIdentifier segmentCount:3] autorelease];
-		
-		[uitem setImage:[NSImage imageNamed:@"prevSong"] forSegment:0];
-		[uitem setImage:[NSImage imageNamed:@"playSong"] forSegment:1];
-		[uitem setImage:[NSImage imageNamed:@"nextSong"] forSegment:2];
-		
-		[uitem setLabel:TR_S_TOOLBAR_LABEL_PREV forSegment:0];
-		[uitem setLabel:TR_S_TOOLBAR_LABEL_PLAY forSegment:1];
-		[uitem setLabel:TR_S_TOOLBAR_LABEL_NEXT forSegment:2];
-		
-		[uitem setTarget:self forSegment:0];
-		[uitem setAction:@selector(previousSong:) forSegment:0];
-		
-		[uitem setTarget:self forSegment:1];
-		[uitem setAction:@selector(togglePlayPause:) forSegment:1];
-		
-		[uitem setTarget:self forSegment:2];
-		[uitem setAction:@selector(nextSong:) forSegment:2];
-
-		[mToolbarItems setObject:uitem forKey:itemIdentifier];
-		item = uitem;
-		mPlayerItem = uitem;
-	} else if ([itemIdentifier isEqualToString:tStopItemIdentifier]) {
-		UnifiedToolbarItem *uitem = [[[UnifiedToolbarItem alloc] initWithItemIdentifier:itemIdentifier segmentCount:1] autorelease];
-		
-		[uitem setImage:[NSImage imageNamed:@"stopSong"]];
-		[uitem setTarget:self];
-		[uitem setAction:@selector(stop:)];
-		[uitem setLabel:TR_S_TOOLBAR_LABEL_STOP];
-		
-		[mToolbarItems setObject:uitem forKey:itemIdentifier];
-		item = uitem;
-		mStopItem = uitem;
-	} else if ([itemIdentifier isEqualToString:tVolumeSlider]) {
-		mVolumeSlider = [[PWVolumeSlider alloc] initWithFrame:NSMakeRect(0,0,0,0)];
-		[mVolumeSlider setFrame:NSMakeRect(0, 0, [mVolumeSlider size].width, [mVolumeSlider size].height)];
-		
-		[item setView:mVolumeSlider];
-		[item setMinSize:NSMakeSize(NSWidth([mVolumeSlider frame]), NSHeight([mVolumeSlider frame]))];
-		[item setMaxSize:NSMakeSize(NSWidth([mVolumeSlider frame]), NSHeight([mVolumeSlider frame]))];
-
-		[mToolbarItems setObject:item forKey:itemIdentifier];
-	} else if ([itemIdentifier isEqualToString:tSearchField]) {
-		[item setView:[self musicSearchField]];
-		[item setMinSize:NSMakeSize(NSWidth([[self musicSearchField] frame]), NSHeight([[self musicSearchField] frame]))];
-		[item setMaxSize:NSMakeSize(NSWidth([[self musicSearchField] frame]), NSHeight([[self musicSearchField] frame]))];
-		
-		[mToolbarItems setObject:item forKey:itemIdentifier];
-	}
-	
-	return item;
-}
-
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar {
-	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, tVolumeSlider, tSearchField, nil];
-}
-
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, tVolumeSlider, NSToolbarFlexibleSpaceItemIdentifier, tSearchField, nil];
-}
-
-- (PWMusicSearchField *)musicSearchField {
-	if (!mMusicSearch) {
-		NSRect frame = NSMakeRect(0,0,150,30);
-		mMusicSearch = [[PWMusicSearchField alloc] initWithFrame:frame];
-	}
-	return mMusicSearch;
 }
 
 - (void) getInfoOnSongs:(NSArray *)theSongs {
@@ -793,10 +643,14 @@ const NSString *dProfile = @"dProfile";
 #pragma mark toolbar actions
 
 - (IBAction) togglePlayPause:(id)sender {
-	if ([[[mPlayerItem imageForSegment:1] name] isEqual:@"pauseSong"] == YES) {
-		[mClient pausePlayback];
-	} else {
-		[mClient startPlayback];
+	switch ([self currentPlayerState]) {
+		case eStatePaused:
+		case eStateStopped:
+			[mClient startPlayback];
+			break;
+		case eStatePlaying:
+			[mClient pausePlayback];
+			break;
 	}
 }
 
@@ -890,7 +744,7 @@ const NSString *dProfile = @"dProfile";
 		return;
 	}
 	
-	id search = [[[window delegate] toolbar:[window toolbar] itemForItemIdentifier:tSearchField willBeInsertedIntoToolbar:NO] view];
+	id search = [_mainPlayerToolbarController musicSearchField];
 	if (search != nil && [search acceptsFirstResponder])
 		[window makeFirstResponder:search];
 }
@@ -912,11 +766,11 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) increaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([mVolumeSlider intValue]+5)];
+	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]+5)];
 }
 
 - (IBAction) decreaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([mVolumeSlider intValue]-5)];
+	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]-5)];
 }
 
 - (IBAction) getInfo:(id)sender {

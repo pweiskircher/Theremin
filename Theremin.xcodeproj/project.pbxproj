@@ -176,6 +176,7 @@
 		43F5BA4F0E5219EB00655E7B /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F5BA4E0E5219EB00655E7B /* addButton.png */; };
 		43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */; };
 		43FDCC450B7E0F840015CD57 /* InfoAreaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FDCC430B7E0F840015CD57 /* InfoAreaController.m */; };
+		43FFC3990FC1FC5E002620C0 /* MainPlayerToolbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC3980FC1FC5E002620C0 /* MainPlayerToolbarController.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -483,6 +484,8 @@
 		43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExceptionHandling.framework; path = /System/Library/Frameworks/ExceptionHandling.framework; sourceTree = "<absolute>"; };
 		43FDCC420B7E0F840015CD57 /* InfoAreaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoAreaController.h; path = Source/InfoAreaController.h; sourceTree = "<group>"; };
 		43FDCC430B7E0F840015CD57 /* InfoAreaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InfoAreaController.m; path = Source/InfoAreaController.m; sourceTree = "<group>"; };
+		43FFC3970FC1FC5E002620C0 /* MainPlayerToolbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPlayerToolbarController.h; path = Source/MainPlayerToolbarController.h; sourceTree = "<group>"; };
+		43FFC3980FC1FC5E002620C0 /* MainPlayerToolbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPlayerToolbarController.m; path = Source/MainPlayerToolbarController.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1092,6 +1095,8 @@
 		43FB61B00B3D39CA00C1CA22 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				43FFC3970FC1FC5E002620C0 /* MainPlayerToolbarController.h */,
+				43FFC3980FC1FC5E002620C0 /* MainPlayerToolbarController.m */,
 				43ACAC380E544811002C8857 /* ImageTextCell.h */,
 				43ACAC390E544811002C8857 /* ImageTextCell.m */,
 				43341F860B8BA20100B8804A /* UnifiedToolbar */,
@@ -1327,6 +1332,7 @@
 				431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */,
 				43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */,
 				43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */,
+				43FFC3990FC1FC5E002620C0 /* MainPlayerToolbarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,15 +23,17 @@
 #import "LibraryDataSource.h"
 #import "PreferencesWindowController.h"
 
-@class PreferencesController, PlayListController, PWWindow;
-@class LicenseController, PWVolumeSlider, LibraryController, PWTableView, PWMusicSearchField;
-@class InfoAreaController, UpdateDatabaseController, UnifiedToolbar, UnifiedToolbarItem;
-@class PlayListFilesController, SongInfoController;
+@class PreferencesController;
+@class PlayListController;
+@class PWWindow;
+@class PWVolumeSlider;
+@class LibraryController;
+@class PWTableView;
+@class InfoAreaController;
+@class UpdateDatabaseController;
+@class PlayListFilesController;
 @class OutputDeviceHandler;
-
-extern NSString *tPlayControlItemIdentifier;
-extern NSString *tStopItemIdentifier;
-extern NSString *tSearchField;
+@class MainPlayerToolbarController;
 
 extern const NSString *nProfileSwitched;
 extern const NSString *dProfile;
@@ -62,13 +64,6 @@ extern const NSString *dProfile;
 	
 	// Preferences
 	PreferencesController *mPreferencesController;
-
-	// Toolbar
-	UnifiedToolbar *mToolbar;
-	UnifiedToolbarItem *mPlayerItem, *mStopItem;
-	NSMutableDictionary *mToolbarItems;
-	PWVolumeSlider *mVolumeSlider;
-	PWMusicSearchField *mMusicSearch;
 	
 	// autoreconnect stuff
 	NSTimer *mAutoreconnectTimer;
@@ -98,6 +93,8 @@ extern const NSString *dProfile;
 	
 	OutputDeviceHandler *_outputDeviceHandler;
 	IBOutlet NSMenuItem *_controlsMenuItem;
+	
+	MainPlayerToolbarController *_mainPlayerToolbarController;
 }
 
 + (id) instance;

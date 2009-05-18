@@ -37,6 +37,7 @@
 
 static NSString *tAppendSongs = @"tAppendSongs";
 static NSString *tGetInfoOnSongs = @"tGetInfoOnSongs";
+static NSString *tSearchField = @"tSearchField";
 
 @interface LibraryController (PrivateMethods)
 - (void) clientConnected:(NSNotification *)notification;
