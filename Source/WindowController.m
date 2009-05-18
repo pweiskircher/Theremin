@@ -489,7 +489,7 @@ const NSString *dProfile = @"dProfile";
 	else if ([item action] == @selector(detectCompilations:))
 		return connected && [[self currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations;
 	else if ([item action] == @selector(randomizePlaylist:))
-		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] && eMusicClientCapabilitiesRandomizePlaylist;
+		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] & eMusicClientCapabilitiesRandomizePlaylist;
 	
 	return [item isEnabled];
 }
