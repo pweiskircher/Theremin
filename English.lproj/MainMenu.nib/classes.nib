@@ -219,8 +219,14 @@
 			<string>ObjC</string>
 			<key>OUTLETS</key>
 			<dict>
+				<key>_controlsMenuItem</key>
+				<string>NSMenuItem</string>
 				<key>_fileMenu</key>
 				<string>NSMenu</string>
+				<key>_outputDevices</key>
+				<string>NSMenuItem</string>
+				<key>_outputDevicesSeperator</key>
+				<string>NSMenuItem</string>
 				<key>_profileChooser</key>
 				<string>NSPopUpButton</string>
 				<key>mAuthenticateButton</key>

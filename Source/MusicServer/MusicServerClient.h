@@ -68,6 +68,10 @@ extern NSString *dTotalTime;
 extern NSString *dElapsedTime;
 extern NSString *dPlaylistLength;
 
+extern NSString *dId;
+extern NSString *dName;
+extern NSString *dEnabled;
+
 typedef enum {
 	eStatePaused,
 	eStateStopped,
@@ -82,6 +86,7 @@ typedef enum {
 
 typedef enum {
 	eMusicClientCapabilitiesRandomizePlaylist = 0x0001,
+	eMusicClientCapabilitiesOutputDevices = 0x0002
 } MusicClientCapabilities;
 
 @protocol MusicServerClientInterface
@@ -147,6 +152,9 @@ typedef enum {
 
 // needed for randomzing
 - (oneway void) swapSongs:(bycopy Song *)srcSong with:(bycopy Song *)destSong;
+
+- (bycopy NSArray*) getOutputDevices;
+- (void) setOutputDeviceWithId:(int)theId toEnabled:(BOOL)enabled;
 @end
 
 @interface MusicServerClient : NSObject <MusicServerClientInterface> {

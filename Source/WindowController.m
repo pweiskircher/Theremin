@@ -53,6 +53,7 @@
 #import "ProfileMenuItem.h"
 #import "ProfileRepository.h"
 #import "PreferencesWindowController.h"
+#import "OutputDeviceHandler.h"
 
 WindowController *globalWindowController = nil;
 
@@ -268,6 +269,8 @@ const NSString *dProfile = @"dProfile";
 	
 	if ([[self preferences] appleRemoteMode] == eAppleRemoteModeAlways)
 		[[self appleRemote] startListening:self];
+	
+	_outputDeviceHandler = [[OutputDeviceHandler alloc] initWithMenu:[_controlsMenuItem submenu]];
 }
 
 - (void) dealloc {
@@ -281,6 +284,8 @@ const NSString *dProfile = @"dProfile";
 	[mUpdateDatabaseController release];
 	[mPlayListFilesController release], mPlayListFilesController = nil;
 	[mPreferencesController release];
+	
+	[_outputDeviceHandler release];
 	
 	[[self appleRemote] stopListening:self];
 	
@@ -484,7 +489,7 @@ const NSString *dProfile = @"dProfile";
 	else if ([item action] == @selector(detectCompilations:))
 		return connected && [[self currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations;
 	else if ([item action] == @selector(randomizePlaylist:))
-		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] == eMusicClientCapabilitiesRandomizePlaylist;
+		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] && eMusicClientCapabilitiesRandomizePlaylist;
 	
 	return [item isEnabled];
 }

@@ -41,7 +41,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 @implementation MpdMusicServerClient
 + (unsigned int) capabilities {
-	return eMusicClientCapabilitiesRandomizePlaylist;
+	return eMusicClientCapabilitiesRandomizePlaylist | eMusicClientCapabilitiesOutputDevices;
 }
 
 - (id) init {
@@ -515,6 +515,23 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 - (oneway void) playerWindowClosed {
 	[self resetDelayForStatusUpdateTimer:5];
+}
+
+- (bycopy NSArray*) getOutputDevices {
+	MpdData *data = mpd_server_get_output_devices(mConnection);
+	NSMutableArray *results = [NSMutableArray array];
+	for (; data != NULL; data = mpd_data_get_next(data)) {
+		[results addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+							[NSNumber numberWithBool:data->output_dev->enabled == 1 ? YES : NO], dEnabled,
+							[NSString stringWithUTF8String:data->output_dev->name], dName,
+							[NSNumber numberWithInt:data->output_dev->id], dId, nil]];
+	}
+	
+	return results;
+}
+
+- (void) setOutputDeviceWithId:(int)theId toEnabled:(BOOL)enabled {
+	mpd_server_set_output_device(mConnection, theId, enabled == YES ? 1 : 0);
 }
 
 @end

@@ -27,6 +27,7 @@
 @class LicenseController, PWVolumeSlider, LibraryController, PWTableView, PWMusicSearchField;
 @class InfoAreaController, UpdateDatabaseController, UnifiedToolbar, UnifiedToolbarItem;
 @class PlayListFilesController, SongInfoController;
+@class OutputDeviceHandler;
 
 extern NSString *tPlayControlItemIdentifier;
 extern NSString *tStopItemIdentifier;
@@ -94,6 +95,9 @@ extern const NSString *dProfile;
 	RemoteControl *mAppleRemote;
 	
 	PreferencesWindowController *preferencesWindowController;
+	
+	OutputDeviceHandler *_outputDeviceHandler;
+	IBOutlet NSMenuItem *_controlsMenuItem;
 }
 
 + (id) instance;

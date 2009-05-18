@@ -110,6 +110,7 @@
 		43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77720BB52CCD00715336 /* MainMenu.nib */; };
 		43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77740BB52CCD00715336 /* PlayListFiles.nib */; };
 		43BF777C0BB52CCD00715336 /* UpdateDatabase.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77760BB52CCD00715336 /* UpdateDatabase.nib */; };
+		43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */; };
 		43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D0126C0B8B66BA00711A1B /* IOKit.framework */; };
 		43D0C8B70C13F25900940B39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D0C8B50C13F25900940B39 /* Localizable.strings */; };
 		43D254AA0B4D80F200660DD9 /* MPSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D254A90B4D80F200660DD9 /* MPSlider.m */; };
@@ -402,6 +403,8 @@
 		43BF77750BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PlayListFiles.nib; sourceTree = "<group>"; };
 		43BF77770BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UpdateDatabase.nib; sourceTree = "<group>"; };
 		43C45DB10F09064300911191 /* ThereminEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThereminEntity.h; path = Source/MusicServer/ThereminEntity.h; sourceTree = "<group>"; };
+		43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputDeviceHandler.h; sourceTree = "<group>"; };
+		43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputDeviceHandler.m; sourceTree = "<group>"; };
 		43D0126C0B8B66BA00711A1B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D2549B0B4D80B900660DD9 /* MPSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPSlider.h; path = Source/subclasses/MPSlider.h; sourceTree = "<group>"; };
@@ -506,6 +509,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43CA16D50FC1E42800E14FE7 /* OutputDevices */,
 				431CCBAE0FBB5F640042E376 /* CoverArt */,
 				436D30ED0FB72AA30063DC8D /* Growl */,
 				436DB37B0E52589C00907E0F /* Preferences */,
@@ -865,6 +869,16 @@
 				43E887310F0977EB003F708D /* NSArray+Transformations.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		43CA16D50FC1E42800E14FE7 /* OutputDevices */ = {
+			isa = PBXGroup;
+			children = (
+				43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */,
+				43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */,
+			);
+			name = OutputDevices;
+			path = Source/OutputDevices;
 			sourceTree = "<group>";
 		};
 		43CD56E40B354EBE00C42092 /* libmpdclient */ = {
@@ -1312,6 +1326,7 @@
 				431CCC2F0FBB6A850042E376 /* ImageDownloader.m in Sources */,
 				431CCC420FBB6E060042E376 /* CoverArtImageView.m in Sources */,
 				43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */,
+				43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

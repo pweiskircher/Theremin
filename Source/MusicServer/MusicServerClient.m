@@ -63,6 +63,10 @@ NSString *dTotalTime = @"dTotalTime";
 NSString *dElapsedTime= @"dElapsedTime";
 NSString *dPlaylistLength = @"dPlaylistLength";
 
+NSString *dId = @"dId";
+NSString *dName = @"dName";
+NSString *dEnabled = @"dEnabled";
+
 @implementation MusicServerClient
 + (Class) musicServerClientClassForProfile:(Profile *)aProfile {
 	switch ([aProfile mode]) {
