@@ -18,8 +18,6 @@
  */
 
 #import "CoverArtAsker.h"
-
-#import "WindowController.h"
 #import "PreferencesController.h"
 
 @implementation CoverArtAsker
@@ -32,9 +30,9 @@
 	
 	int result = [alert runModal]; 
 	if (result == NSAlertDefaultReturn) { 
-		[[[WindowController instance] preferences] setFetchingOfCoverArt:YES]; 
+		[[PreferencesController sharedInstance] setFetchingOfCoverArt:YES]; 
 	} else if (result == NSAlertAlternateReturn) { 
-		[[[WindowController instance] preferences] setFetchingOfCoverArt:NO]; 
+		[[PreferencesController sharedInstance] setFetchingOfCoverArt:NO]; 
 	} 
 	
 }

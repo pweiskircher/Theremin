@@ -69,19 +69,19 @@
 	[_coverArtImageView setFallbackImage:[NSImage imageNamed:@"FallbackCover"]];
 	[_coverArtImageView setRequestImageSize:CoverArtSizeSmall];
 	
-	if ([[[WindowController instance] preferences] askedAboutCoverArt] == NO) { 
-		[[[WindowController instance] preferences] setAskedAboutCoverArt]; 
+	if ([[PreferencesController sharedInstance] askedAboutCoverArt] == NO) { 
+		[[PreferencesController sharedInstance] setAskedAboutCoverArt]; 
 		
 		CoverArtAsker *asker = [[[CoverArtAsker alloc] init] autorelease];
 		[asker ask];
 	}
 	
-	[self enableCoverArt:[[[WindowController instance] preferences] fetchingOfCoverArtEnabled]];
+	[self enableCoverArt:[[PreferencesController sharedInstance] fetchingOfCoverArtEnabled]];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context { 
 	if ([keyPath isEqualToString:@"values.coverArtFetchingEnabled"]) { 
-		[self enableCoverArt:[[[WindowController instance] preferences] fetchingOfCoverArtEnabled]];
+		[self enableCoverArt:[[PreferencesController sharedInstance] fetchingOfCoverArtEnabled]];
 	} 
 } 
 
@@ -259,7 +259,7 @@
 
 - (void) progressIndicatorStartTimerTriggered:(NSTimer *)timer {
 	// the timer is released in the connect/disconnect notification
-	[mProgressLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", @"Info Area Status Indicator"), [[[[WindowController instance] preferences] currentProfile] hostname]]];
+	[mProgressLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", @"Info Area Status Indicator"), [[[PreferencesController sharedInstance] currentProfile] hostname]]];
 	[mProgressIndicator startAnimation:self];
 }
 

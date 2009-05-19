@@ -18,7 +18,6 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <Sparkle/SUUpdater.h>
 #import "Profile.h"
 
 typedef enum {
@@ -36,7 +35,7 @@ typedef enum {
 	Profile *_currentProfile;
 }
 
-- (id) init;
++ (PreferencesController *) sharedInstance;
 
 - (Profile *) currentProfile;
 - (void) setCurrentProfile:(Profile *)aProfile;

@@ -22,7 +22,6 @@
 #import "LibraryDataSource.h"
 #import "PreferencesWindowController.h"
 
-@class PreferencesController;
 @class PlayListController;
 @class PWWindow;
 @class PWVolumeSlider;
@@ -61,10 +60,7 @@ extern const NSString *dProfile;
 	IBOutlet NSMenu *_fileMenu;
 	
 	IBOutlet NSPopUpButton *_profileChooser;
-	
-	// Preferences
-	PreferencesController *mPreferencesController;
-	
+		
 	// autoreconnect stuff
 	NSTimer *mAutoreconnectTimer;
 	BOOL mDisableAutoreconnectOnce;
@@ -103,7 +99,6 @@ extern const NSString *dProfile;
 
 - (int) currentPlayerState;
 
-- (PreferencesController *) preferences;
 - (PlayListController *) playlistController;
 
 - (NSWindow *)window;

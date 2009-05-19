@@ -51,7 +51,7 @@
 													 name:NSApplicationDidResignActiveNotification
 												   object:nil];
 		
-		if ([[[WindowController instance] preferences] appleRemoteMode] == eAppleRemoteModeAlways)
+		if ([[PreferencesController sharedInstance] appleRemoteMode] == eAppleRemoteModeAlways)
 			[[self appleRemote] startListening:self];
 	}
 	return self;
@@ -68,7 +68,7 @@
 }
 
 - (AppleRemoteMode) appleRemoteMode {
-	return [[[WindowController instance] preferences] appleRemoteMode];
+	return [[PreferencesController sharedInstance] appleRemoteMode];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

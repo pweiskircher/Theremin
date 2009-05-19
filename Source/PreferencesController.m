@@ -25,6 +25,8 @@
 
 NSString *cImportedOldSettings = @"cImportedOldSettings";
 
+static PreferencesController *_sharedPreferencesController;
+
 @implementation PreferencesController
 
 - (id) init {
@@ -38,6 +40,13 @@ NSString *cImportedOldSettings = @"cImportedOldSettings";
 {
 	[_currentProfile release];
 	[super dealloc];
+}
+
++ (PreferencesController *) sharedInstance {
+	if (_sharedPreferencesController == nil) {
+		_sharedPreferencesController = [[PreferencesController alloc] init];
+	}
+	return _sharedPreferencesController;
 }
 
 - (void) importOldSettings {

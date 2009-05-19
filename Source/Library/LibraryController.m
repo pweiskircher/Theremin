@@ -113,7 +113,7 @@ static NSString *tSearchField = @"tSearchField";
 
 	[mWindow setUseGlobalHotkeys:YES];
 	
-	[self showGenreView:[[[WindowController instance] preferences] showGenreInLibrary]];
+	[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary]];
 	
 	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES];
 	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES];
@@ -252,7 +252,7 @@ static NSString *tSearchField = @"tSearchField";
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	if ([keyPath isEqualToString:@"values.showGenreInLibrary"])
-		[self showGenreView:[[[WindowController instance] preferences] showGenreInLibrary]];
+		[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary]];
 }
 
 - (void) clearAndDisableViews {
@@ -369,7 +369,7 @@ static NSString *tSearchField = @"tSearchField";
 }
 
 - (IBAction) tableAction:(id)sender {
-	switch ([[[WindowController instance] preferences] libraryDoubleClickAction]) {
+	switch ([[PreferencesController sharedInstance] libraryDoubleClickAction]) {
 		case eLibraryDoubleClickReplaces:
 			[self replaceFilesInPlaylistAndStartPlayingWithSelectionFromTable:sender];
 			break;

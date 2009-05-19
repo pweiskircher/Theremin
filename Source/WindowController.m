@@ -24,7 +24,6 @@
 #import "PlayListController.h"
 #import "PWWindow.h"
 #import "LicenseController.h"
-#import "PWVolumeSlider.h"
 #import "LibraryController.h"
 #import "MainPlayerToolbarController.h"
 
@@ -79,7 +78,7 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (id<LibraryDataSourceProtocol>) currentLibraryDataSource {
-	return [LibraryDataSource libraryDataSourceForProfile:[[self preferences] currentProfile]];
+	return [LibraryDataSource libraryDataSourceForProfile:[[PreferencesController sharedInstance] currentProfile]];
 }
 
 - (void) setupConnectionWithMusicClient {
@@ -98,7 +97,7 @@ const NSString *dProfile = @"dProfile";
 	[mConnectionToMpdClient setRootObject:self];
 
 	
-	NSString *musicClientClass = NSStringFromClass([MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]]);
+	NSString *musicClientClass = NSStringFromClass([MusicServerClient musicServerClientClassForProfile:[[PreferencesController sharedInstance] currentProfile]]);
 
 	NSDictionary *infos = [NSDictionary dictionaryWithObjectsAndKeys:port2, nMusicServerClientPort0,
 																	port1, nMusicServerClientPort1,
@@ -181,8 +180,6 @@ const NSString *dProfile = @"dProfile";
 	if (self != nil) {
 		globalWindowController = self;
 		
-		mPreferencesController = [[PreferencesController alloc] init];
-
 		[NSApp setDelegate:self];
 	
 		[self setupNotificationObservers];
@@ -213,8 +210,8 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) awakeFromNib {
-	[[self preferences] importOldSettings];
-	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[self preferences]];
+	[[PreferencesController sharedInstance] importOldSettings];
+	preferencesWindowController = [[PreferencesWindowController alloc] initWithPreferencesController:[PreferencesController sharedInstance]];
 	[self profilesChanged:nil];
 	
 	_mainPlayerToolbarController = [[MainPlayerToolbarController alloc] init];
@@ -243,7 +240,6 @@ const NSString *dProfile = @"dProfile";
 	[mLibraryController release];
 	[mUpdateDatabaseController release];
 	[mPlayListFilesController release], mPlayListFilesController = nil;
-	[mPreferencesController release];
 	
 	[_outputDeviceHandler release];
 	[_appleRemoteController release];
@@ -291,13 +287,13 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) selectProfile:(id)sender {
-	[[self preferences] setCurrentProfile:[(ProfileMenuItem *)sender profile]];
+	[[PreferencesController sharedInstance] setCurrentProfile:[(ProfileMenuItem *)sender profile]];
 	[self setupConnectionWithMusicClient];
 }
 
 - (void) switchedProfile {
 	NSMenu *profilesMenu = [[self profilesMenuItem] submenu];
-	Profile *currentProfile = [[self preferences] currentProfile];
+	Profile *currentProfile = [[PreferencesController sharedInstance] currentProfile];
 
 	for (int i = 0; i < [[profilesMenu itemArray] count]; i++) {
 		ProfileMenuItem *item = [profilesMenu itemAtIndex:i];
@@ -329,7 +325,7 @@ const NSString *dProfile = @"dProfile";
 	[mInfoAreaController scheduleUpdate];
 	[mClient initialize];
 	
-	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
+	[mClient connectToServerWithProfile:[[PreferencesController sharedInstance] currentProfile]];
 }
 
 - (id)musicClient {
@@ -338,10 +334,6 @@ const NSString *dProfile = @"dProfile";
 
 - (int) currentPlayerState {
 	return mCurrentState;
-}
-
-- (PreferencesController *) preferences {
-	return mPreferencesController;
 }
 
 - (PlayListController *) playlistController {
@@ -361,14 +353,14 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (void) systemWillSleep:(NSNotification *) notification {
-	if ([[self preferences] pauseOnSleep] && [self currentPlayerState] == eStatePlaying) {
+	if ([[PreferencesController sharedInstance] pauseOnSleep] && [self currentPlayerState] == eStatePlaying) {
 		[mClient pausePlayback];
 		mPausedOnSleep = YES;
 	}
 }
 
 - (void) systemDidWake:(NSNotification *) notification {
-	if ([[self preferences] pauseOnSleep] && mPausedOnSleep)
+	if ([[PreferencesController sharedInstance] pauseOnSleep] && mPausedOnSleep)
 		[mClient play];
 	mPausedOnSleep = NO;
 }
@@ -389,7 +381,7 @@ const NSString *dProfile = @"dProfile";
 
 - (void) autoreconnectTimerTriggered:(NSTimer *)timer {
 	mAutoreconnectTimer = nil;
-	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
+	[mClient connectToServerWithProfile:[[PreferencesController sharedInstance] currentProfile]];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item {
@@ -427,7 +419,7 @@ const NSString *dProfile = @"dProfile";
 	else if ([item action] == @selector(detectCompilations:))
 		return connected && [[self currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsCustomCompilations;
 	else if ([item action] == @selector(randomizePlaylist:))
-		return connected && [[MusicServerClient musicServerClientClassForProfile:[[self preferences] currentProfile]] capabilities] & eMusicClientCapabilitiesRandomizePlaylist;
+		return connected && [[MusicServerClient musicServerClientClassForProfile:[[PreferencesController sharedInstance] currentProfile]] capabilities] & eMusicClientCapabilitiesRandomizePlaylist;
 	
 	return [item isEnabled];
 }
@@ -435,7 +427,7 @@ const NSString *dProfile = @"dProfile";
 #pragma mark MusicClient notification handlers
 
 - (void) clientDisconnected:(NSNotification *)notification {
-	if ([[[self preferences] currentProfile] autoreconnect] == YES) {
+	if ([[[PreferencesController sharedInstance] currentProfile] autoreconnect] == YES) {
 		if (mDisableAutoreconnectOnce == YES) {
 			mDisableAutoreconnectOnce = NO;
 		} else {
@@ -514,8 +506,8 @@ const NSString *dProfile = @"dProfile";
 			
 		case 1: // authenticate
 			if ([mAuthenticationSavePassword state] == NSOnState) {
-				[[[self preferences] currentProfile] setPassword:[mAuthenticationPassword stringValue]];
-				[[[self preferences] currentProfile] savePassword];
+				[[[PreferencesController sharedInstance] currentProfile] setPassword:[mAuthenticationPassword stringValue]];
+				[[[PreferencesController sharedInstance] currentProfile] savePassword];
 			}
 			[mClient setAuthenticationInformation:[NSDictionary dictionaryWithObject:[mAuthenticationPassword stringValue] forKey:@"password"]];
 			break;
@@ -608,7 +600,7 @@ const NSString *dProfile = @"dProfile";
 
 - (IBAction) connect:(id)sender {
 	[mAutoreconnectTimer invalidate], mAutoreconnectTimer = nil;
-	[mClient connectToServerWithProfile:[[self preferences] currentProfile]];
+	[mClient connectToServerWithProfile:[[PreferencesController sharedInstance] currentProfile]];
 }
 
 - (IBAction) disconnect:(id)sender {

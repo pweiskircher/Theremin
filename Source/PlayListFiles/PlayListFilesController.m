@@ -83,7 +83,7 @@
 	NSCharacterSet *returnCharacterSet = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithCharacters:returnActionKeys length:1]];
 	[mPlayListFilesView setActionForCharacters:returnCharacterSet onTarget:self usingSelector:@selector(loadSelectedPlaylist:)];
 	
-	if ([[[WindowController instance] preferences] playlistDrawerOpen])
+	if ([[PreferencesController sharedInstance] playlistDrawerOpen])
 		[self toggleDrawer];
 	
 	[[mDrawer contentView] setPostsFrameChangedNotifications:YES];
@@ -94,25 +94,25 @@
 }
 
 - (void) drawerFrameChanged:(NSNotification *)aNotification {
-	[[[WindowController instance] preferences] setPlaylistDrawerWidth:[mDrawer contentSize].width];
+	[[PreferencesController sharedInstance] setPlaylistDrawerWidth:[mDrawer contentSize].width];
 }
 
 - (void) toggleDrawer {
 	if ([mDrawer state] == NSDrawerOpenState) {
 		[mDrawer close];
-		[[[WindowController instance] preferences] setPlaylistDrawerOpen:NO];
+		[[PreferencesController sharedInstance] setPlaylistDrawerOpen:NO];
 	} else if ([mDrawer state] == NSDrawerClosedState) {
 		[mDrawer open];
 		
 		NSSize current = [mDrawer contentSize];
-		current.width = [[[WindowController instance] preferences] playlistDrawerWidth];
+		current.width = [[PreferencesController sharedInstance] playlistDrawerWidth];
 		[mDrawer setContentSize:current];
 		
 		if (mRefreshDate == nil || [[NSDate date] timeIntervalSinceDate:mRefreshDate] > 5*60)
 			[self refresh:nil];
 		
 		[[[WindowController instance] window] makeFirstResponder:mPlayListFilesView];
-		[[[WindowController instance] preferences] setPlaylistDrawerOpen:YES];
+		[[PreferencesController sharedInstance] setPlaylistDrawerOpen:YES];
 	}
 }
 
@@ -186,7 +186,7 @@
 		return;
 	}
 
-	if ([[[WindowController instance] preferences] noConfirmationNeededForDeletionOfPlaylist])
+	if ([[PreferencesController sharedInstance] noConfirmationNeededForDeletionOfPlaylist])
 		[self deleteSelectedPlaylist];
 	else {
 		PlayListFile *file = [mPlaylists objectAtIndex:[mPlayListFilesView selectedRow]];
@@ -209,7 +209,7 @@
 		BOOL doNotAskMeAgain = [mDeleteConfirmationDoNotAskMeAgainCheckbox state] == NSOnState ? YES : NO;
 		
 		if (doNotAskMeAgain) {
-			[[[WindowController instance] preferences] setNoConfirmationNeededForDeletionOfPlaylist:YES];
+			[[PreferencesController sharedInstance] setNoConfirmationNeededForDeletionOfPlaylist:YES];
 		}
 		
 		[self deleteSelectedPlaylist];
