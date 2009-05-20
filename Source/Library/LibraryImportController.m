@@ -100,7 +100,7 @@ const NSString *gDatabaseIdentifierKey = @"gDatabaseIdentifierKey";
 - (void) fetchedRemoteDatabase:(NSNotification *)notification {
 	NSArray *allSongs = [[notification userInfo] objectForKey:dSongs];
 	NSData *databaseIdentifier = [[notification userInfo] objectForKey:dDatabaseIdentifier];
-	NSString *currentServerAndPort = [[[WindowController instance] preferences] currentServerNameWithPort];
+	NSString *currentServerAndPort = [[PreferencesController sharedInstance] currentServerNameWithPort];
 	
 	if (mImporterThread) {
 		[mQueuedDatabaseIdentifier release], mQueuedDatabaseIdentifier = nil;

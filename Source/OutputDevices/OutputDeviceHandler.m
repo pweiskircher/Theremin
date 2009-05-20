@@ -45,7 +45,7 @@ const static int menuTagOutputSeperator = 123412;
 }
 
 - (void) connected:(NSNotification *)theNotification {
-	if (!([[MusicServerClient musicServerClientClassForProfile:[[[WindowController instance] preferences] currentProfile]] capabilities] & eMusicClientCapabilitiesOutputDevices)) {
+	if (!([[MusicServerClient musicServerClientClassForProfile:[[PreferencesController sharedInstance] currentProfile]] capabilities] & eMusicClientCapabilitiesOutputDevices)) {
 		[self removeMenuItems];
 	} else {		
 		[self discoverOutputDevices];

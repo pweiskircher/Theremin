@@ -43,13 +43,14 @@ const NSString const *lastFmBaseMethodCall = @"http://ws.audioscrobbler.com/2.0/
 	if (_used)
 		[NSException raise:NSInternalInconsistencyException format:@"LastFmCoverArtDataSource is single-use."];
 	
+	_used = YES;
+	
 	if ([aSong artist] == nil || [[aSong artist] length] == 0 ||
 		[aSong album] == nil || [[aSong album] length] == 0) {
 		[_delegate dataSourceFailedToGetImage:self];
 		return;
 	}
 	
-	_used = YES;
 	
 	_size = aSize;
 	_delegate = aDelegate;
@@ -95,10 +96,12 @@ const NSString const *lastFmBaseMethodCall = @"http://ws.audioscrobbler.com/2.0/
 @implementation LastFmCoverArtDataSource (ImageDownloader)
 - (void) imageDownloader:(ImageDownloader *)theImageDownloader receivedImage:(NSImage *)theImage {
 	[_delegate dataSource:self foundImage:theImage forSong:_song withSize:_size];
+	[theImageDownloader autorelease];
 }
 
 - (void) imageDownloaderFailed:(ImageDownloader *)theImageDownloader {
 	[_delegate dataSourceFailedToGetImage:self];
+	[theImageDownloader autorelease];
 }
 @end
 
