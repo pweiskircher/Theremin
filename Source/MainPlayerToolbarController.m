@@ -145,11 +145,11 @@ NSString *tSearchField = @"tSearchField";
 		return;
 	}
 	
-	[_volumeSlider setIntValue:volume];
+	[_volumeSlider setFloatValue:volume];
 }
 
 - (void) volumeShouldChange:(id)sender {
-	[[[WindowController instance] musicClient] setPlaybackVolume:[_volumeSlider intValue]];
+	[[[WindowController instance] musicClient] setPlaybackVolume:[_volumeSlider floatValue]];
 	[_volumeSlider updateVolumeImage];
 }
 

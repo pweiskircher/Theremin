@@ -163,7 +163,7 @@ const NSString *gDatabaseIdentifierKey = @"gDatabaseIdentifierKey";
 	
 	NSString *compilationBackupFilename;
 	if (supportsCompilations) {
-		compilationBackupFilename = [self compilationBackupFilenameWithServerAndPort:[[[WindowController instance] preferences] currentProfile]];
+		compilationBackupFilename = [self compilationBackupFilenameWithServerAndPort:[[PreferencesController sharedInstance] currentProfile]];
 		
 		if ([[NSFileManager defaultManager] fileExistsAtPath:compilationBackupFilename] == NO) {
 			NSArray *array = [dataSource compilationUniqueIdentifiers];

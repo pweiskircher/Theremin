@@ -32,8 +32,8 @@
 	
 	NSSize mSize;
 	
-	int mCachedNewVolume;
-	int mValueBeforeMute;
+	float mCachedNewVolume;
+	float mValueBeforeMute;
 }
 - (id) initWithFrame:(NSRect)frame;
 
@@ -41,8 +41,8 @@
 
 - (void) setEnabled:(BOOL)enabled;
 
-- (int) intValue;
-- (void) setIntValue:(int)value;
+- (void) setFloatValue:(float)aValue;
+- (float) floatValue;
 
 - (void) setTarget:(id)aTarget;
 - (void) setAction:(SEL)aAction;

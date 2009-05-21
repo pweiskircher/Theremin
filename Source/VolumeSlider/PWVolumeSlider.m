@@ -79,13 +79,13 @@
 	[mSlider setEnabled:enabled];
 }
 
-- (void) setIntValue:(int)value {
-	[mSlider setIntValue:value];
+- (void) setFloatValue:(float)aValue {
+	[mSlider setFloatValue:aValue];
 	[self updateVolumeImage];
 }
 
-- (int) intValue {
-	return [mSlider intValue];
+- (float) floatValue {
+	return [mSlider floatValue];
 }
 
 - (void) setTarget:(id)aTarget {
@@ -110,19 +110,18 @@
 }
 
 - (void) toggleMute {
-	if ([self intValue] > 0) {
-		mValueBeforeMute = [self intValue];
-		[self setIntValue:0];
+	if ([self floatValue] > 0) {
+		mValueBeforeMute = [self floatValue];
+		[self setFloatValue:0];
 	} else {
-		[self setIntValue:mValueBeforeMute];
+		[self setFloatValue:mValueBeforeMute];
 	}
 	[[mSlider target] performSelector:[mSlider action] withObject:mSlider];
 }
 
 - (void)scrollWheel:(NSEvent *)theEvent {
-	int delta = [theEvent deltaY];
-	if (!delta) delta = 1;
-	[self setIntValue:[self intValue]+delta];
+	float delta = [theEvent deltaY];
+	[self setFloatValue:[self floatValue]+delta];
 	[[mSlider target] performSelector:[mSlider action] withObject:mSlider];
 }
 
