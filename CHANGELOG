@@ -1,3 +1,8 @@
+  Theremin 0.6.2:
+    * Toggle MPD output devices
+    * Refactoring
+	* Volum Slider bug fixes.
+	
   Theremin 0.6.1:
     * Last.fm cover art support.
 	* Fixes a bug where the player and library tables were empty.
