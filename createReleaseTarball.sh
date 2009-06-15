@@ -20,7 +20,7 @@ TARGET=$TARGETDIR/Theremin_${VERSION}.tbz
 
 echo Creating $TARGET ...
 
-cd build/Release
+cd ../../build/Release
 tar -jcf $TARGET Theremin.app
 cp -R Theremin.app.dSYM $TARGETDIR/
 
