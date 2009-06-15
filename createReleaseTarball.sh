@@ -39,7 +39,7 @@ cat >$TARGET.appcast << EOF
 	<title>Theremin Version $VERSION</title>
 	<description></description>
 	<pubDate>`date -u`</pubDate>
-	<enclosure sparkle:dsaSignature="$KEY" sparkle:version="$VERSION" url="`basename $TARGET`" length="`ls -la $TARGET | awk '{print $5}'`" type="application/octet-stream"/>
+	<enclosure sparkle:dsaSignature="$KEY" sparkle:version="$VERSION" url="http://theremin.amd.co.at/$VERSION/`basename $TARGET`" length="`ls -la $TARGET | awk '{print $5}'`" type="application/octet-stream"/>
 </item>
 EOF
 
