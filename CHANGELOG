@@ -1,3 +1,6 @@
+  Theremin 0.6.2.1:
+    * Fix crash when connecting to old MPD.
+
   Theremin 0.6.2:
     * Toggle MPD output devices
     * Refactoring
