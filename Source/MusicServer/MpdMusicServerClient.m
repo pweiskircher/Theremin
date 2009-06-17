@@ -41,7 +41,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 @implementation MpdMusicServerClient
 + (unsigned int) capabilities {
-	return eMusicClientCapabilitiesRandomizePlaylist | eMusicClientCapabilitiesOutputDevices;
+		return eMusicClientCapabilitiesRandomizePlaylist | eMusicClientCapabilitiesOutputDevices;
 }
 
 - (id) init {
@@ -518,6 +518,9 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 - (bycopy NSArray*) getOutputDevices {
+	if (!mpd_server_check_version(mConnection, 0, 13, 0))
+		return [NSArray array];
+	
 	MpdData *data = mpd_server_get_output_devices(mConnection);
 	NSMutableArray *results = [NSMutableArray array];
 	for (; data != NULL; data = mpd_data_get_next(data)) {

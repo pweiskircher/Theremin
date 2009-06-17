@@ -69,6 +69,10 @@ const static int menuTagOutputSeperator = 123412;
 - (void) discoverOutputDevices {
 	[self removeMenuItems];
 	
+	NSArray *outputDevices = [[[WindowController instance] musicClient] getOutputDevices];
+	if ([outputDevices count] == 0)
+		return;
+	
 	NSMenuItem *seperatorItem = [NSMenuItem separatorItem];
 	[seperatorItem setTag:menuTagOutputSeperator];
 	[_menu addItem:seperatorItem];
@@ -78,7 +82,6 @@ const static int menuTagOutputSeperator = 123412;
 	[outputDeviceItem setTag:menuTagOutputDevices];
 	[_menu addItem:outputDeviceItem];
 	
-	NSArray *outputDevices = [[[WindowController instance] musicClient] getOutputDevices];
 	for (int i = 0; i < [outputDevices count]; i++) {
 		NSDictionary *outputDevice = [outputDevices objectAtIndex:i];
 		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:[outputDevice objectForKey:dName]
