@@ -61,43 +61,14 @@ extern NSString *gMpdUniqueIdentifierType;
 	
 	BOOL mDisallowPlaylistUpdates;
 }
-
-- (id) init;
-- (void) dealloc;
-
-- (void) clientPlaylistChanged:(NSNotification *)notification;
-
-- (int) currentSongRow;
-- (void) clientCurrentSongPositionChanged:(NSNotification *)notification;
 - (void) updateCurrentSongMarker;
-
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView;
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex;
-
-- (void)playSelectedSong:(id)sender;
-- (Song *) songAtRow:(int)row;
-
 - (NSArray *)getSelectedSongs;
-
-- (void) searchAction:(id)sender;
 - (void) setupSearchField:(PWMusicSearchField *)field;
-
 - (BOOL) showCurrentSong;
-- (BOOL) selectCurrentSong;
 - (void) scheduleShowCurrentSongOnNextSongChange;
 - (void) scheduleSelectCurrentSongOnNextSongChange;
-
-- (IBAction) cancelSearch:(id)sender;
-
-
-- (Song *) beginningOfAlbumWithPosition:(int)position;
-
 - (Song *) songOfNextAlbum;
 - (Song *) songOfPreviousAlbum;
-
 - (IBAction) deleteSelectedSongs:(id)sender;
-
 - (IBAction) randomizePlaylist:(id)sender;
-- (IBAction) cancelRandomize:(id)sender;
-
 @end

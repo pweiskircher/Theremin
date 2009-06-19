@@ -32,6 +32,16 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 - (NSString *) songString:(int)playlistCount;
 - (void) updateAfterNewSongs:(BOOL)needsCompleteReload;
 - (void) updateStatusBar;
+- (void) clientPlaylistChanged:(NSNotification *)notification;
+- (int) currentSongRow;
+- (void) clientCurrentSongPositionChanged:(NSNotification *)notification;
+- (void)playSelectedSong:(id)sender;
+- (Song *) songAtRow:(int)row;
+- (void) searchAction:(id)sender;
+- (BOOL) selectCurrentSong;
+- (IBAction) cancelSearch:(id)sender;
+- (Song *) beginningOfAlbumWithPosition:(int)position;
+- (IBAction) cancelRandomize:(id)sender;
 @end
 
 @implementation PlayListController
