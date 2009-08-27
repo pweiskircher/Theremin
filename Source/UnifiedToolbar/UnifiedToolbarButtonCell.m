@@ -98,6 +98,11 @@ static BOOL		imagesLoaded = NO;
 	return imageSize.width * 2;
 }
 
+- (id) _setMenuShouldBeUniquedAgainstMainMenu:(id)a {
+		return 0;
+}
+
+
 /*!
  * @abstract Draw background of a segment
  */

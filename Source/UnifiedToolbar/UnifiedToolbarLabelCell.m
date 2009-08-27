@@ -55,6 +55,11 @@
 	//No background
 }
 
+- (id) _setMenuShouldBeUniquedAgainstMainMenu:(id)a {
+	return 0;
+}
+
+
 /*!
  * @abstract Draw content of a segment
  */
