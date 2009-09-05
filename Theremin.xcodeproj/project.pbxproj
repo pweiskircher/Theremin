@@ -101,7 +101,6 @@
 		43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 43BD36651052E628001E30F0 /* libmpd-version.h.in */; };
 		43BD36731052E628001E30F0 /* libmpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36661052E628001E30F0 /* libmpd.c */; };
 		43BD36741052E628001E30F0 /* libmpdclient.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36681052E628001E30F0 /* libmpdclient.c */; };
-		43BD36A01052E84F001E30F0 /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BD369F1052E84F001E30F0 /* libglib-2.0.a */; };
 		43BF73C90F06F72A00420B56 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73C80F06F72A00420B56 /* Growl.framework */; };
 		43BF73CD0F06F73300420B56 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
 		43BF74190F06FA5800420B56 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
@@ -400,7 +399,6 @@
 		43BD36681052E628001E30F0 /* libmpdclient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libmpdclient.c; path = "libmpdclient-0.18.96/src/libmpdclient.c"; sourceTree = "<group>"; };
 		43BD36691052E628001E30F0 /* libmpdclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libmpdclient.h; path = "libmpdclient-0.18.96/src/libmpdclient.h"; sourceTree = "<group>"; };
 		43BD367D1052E699001E30F0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "libmpdclient-0.18.96/src/config.h"; sourceTree = "<group>"; };
-		43BD369F1052E84F001E30F0 /* libglib-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libglib-2.0.a"; path = "glib/libglib-2.0.a"; sourceTree = "<group>"; };
 		43BF73C80F06F72A00420B56 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		43BF73CC0F06F73300420B56 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SqueezeLib.xcodeproj; path = ../../squeezelib/trunk/SqueezeLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -518,7 +516,6 @@
 				43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */,
 				43BF73C90F06F72A00420B56 /* Growl.framework in Frameworks */,
 				43BF73CD0F06F73300420B56 /* Sparkle.framework in Frameworks */,
-				43BD36A01052E84F001E30F0 /* libglib-2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,7 +567,6 @@
 				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
 				437BDB260B74F42E001C1057 /* Security.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-				43BD369F1052E84F001E30F0 /* libglib-2.0.a */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
