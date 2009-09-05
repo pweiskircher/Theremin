@@ -318,7 +318,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 
 - (void) updateLibraryDataSource {
 	[_libraryDataSource release];
-	_libraryDataSource = [[WindowController instance] currentLibraryDataSource];
+	_libraryDataSource = [[[WindowController instance] currentLibraryDataSource] retain];
 	
 	[mItems release], mItems = nil;
 	[mTableView reloadData];
@@ -333,8 +333,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	
 }
 
-- (NSArray *) requestFilteredItems:(NSArray *)filters {
-	return nil;
+- (void) requestFilteredItems:(NSArray *)filters {
 }
 
 - (NSString *) getDisplayTitleOfAllItem {

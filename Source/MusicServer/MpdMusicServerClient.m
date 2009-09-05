@@ -105,7 +105,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	what |= mForcedStatusUpdates;
 	
 	if (what & MPD_CST_STATE) {
-		int state;
+		int state = 0;
 		
 		switch (mpd_player_get_state(mConnection)) {
 			case MPD_PLAYER_UNKNOWN:

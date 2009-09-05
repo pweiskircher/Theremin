@@ -49,7 +49,7 @@
 - (void) enable;
 
 - (void) addRequiredFilters:(NSMutableArray *)filters;
-- (NSArray *) requestFilteredItems:(NSArray *)filters;
+- (void) requestFilteredItems:(NSArray *)filters;
 - (NSString *) getDisplayTitleOfAllItem;
 - (NSArray *) sortedArray:(NSArray *)items;
 

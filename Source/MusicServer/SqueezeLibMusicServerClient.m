@@ -251,7 +251,7 @@
 }
 
 - (void) eventServer:(SLSqueezeEventServer *)server receivedPlayPauseStatus:(SLPlayPauseStatus)status {
-	int state;
+	int state = 0;
 	switch(status) {
 		case eStopped: state = eStateStopped; break;
 		case ePaused: state = eStatePaused; break;

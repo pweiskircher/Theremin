@@ -26,9 +26,9 @@
 @implementation LibraryDataSource
 + (id<LibraryDataSourceProtocol>) libraryDataSourceForProfile:(Profile *)aProfile {
 	if ([aProfile mode] == eModeMPD)
-		return [[SQLController alloc] initWithProfile:aProfile];
+		return [[[SQLController alloc] initWithProfile:aProfile] autorelease];
 	else if ([aProfile mode] == eModeSqueezeCenter)
-		return [[SqueezeLibDataSource alloc] initWithProfile:aProfile];
+		return [[[SqueezeLibDataSource alloc] initWithProfile:aProfile] autorelease];
 	return nil;
 }
 @end
