@@ -1,0 +1,70 @@
+29-11-2007 Qball <Qball@Sarine.nl>
+	* libmpd.pc.in:			Add Dependency on glib-2.0
+
+28-11-2007 Qball <Qball@Sarine.nl>
+	* src/debug_printf.c:	Only print date stamp on linux, win32 has no
+	localtime_r.
+
+28-11-2007 Qball <Qball@Sarine.nl>
+	**Backloggin**  Yes I should not forget changelog. not everybody reads
+	git/svn log.
+	* Add server side search
+	* Add Glib dependency and use slice allocater in linked list
+	* Remove Pooled link list.
+	* Add Stat search.
+	* Playlist editing functionality.
+	* Add support for urlhandlers and tag_types.
+	* Support exposing mpd errors.  (f.e. failed to open audio device).
+	* Don't give disconnect signal when connecting fails. only when actual
+	going from connect to disconnect.
+	* Playback Queue support. 
+	* Remove sorting, as it's done better in gmpc.
+	* Playlist change where size stays the same, give song_change signal
+	(needed for streams that change metadata).
+	* Removal of token based functions.
+	* Redirecting of debug output to a FILE *
+
+24-02-2007 Qball <Qball@Sarine.nl>
+	* configure.ac:	Bump version to 0.13.1 because of api change
+	* src/libmpd-playlist.c: Add support for server side search.
+
+23-02-2007 Qball <Qball@sarine.nl>
+	* src/libmpd.c:	Make debug message a bit less retarted.
+
+26-01-2007 Qball <Qball@sarine.nl>
+	* src/libmpd-strfsong.c: Add performer to strfsong
+
+01-01-2007 Qball <qball@sarine.nl>
+	* src/libmpdclient.c:	Adding performer tag
+	* src/libmpdclient.h:	Adding performer tag
+
+06-03-2006 Jelmer Vernooij <jelmer@samba.org>
+	* Fixed IPv6 support
+
+29-10-2005 Qball <Qball@qballcow.nl>
+	* Fixed signal bitmasks... they where overlapping....
+	* Fixed signal being called if nothing changed
+27-10-2005 Qball <Qball@qballcow.nl>
+	* Adding DJWLindenaar signal patch
+	* first splitting of parts in to seperate C and header files
+	* missing mpd_status_update function added to header file
+
+24-10-2005 Qball <Qball@qballcow.nl>
+	* Added avuton's libmpdclient patch
+
+07-10-2005 Qball <Qball@qballcow.nl>
+	* Added win32 patch. 
+	* Added fix for possible memory in mpd_plyalist_find
+	* Changed mpd_free_data_ob to mpd_data_Free
+07-08-2005 Qball <Qball@qballcow.nl>
+	* src/libmpd.c:	Replaced all printf with debug_printf
+06-08-2005 Qball <Qball@qballcow.nl>
+	* src/libmpd.c: mpd_ob_playlist_clear: added mi->sonid  = -1. This is
+	needed to detect song change when doing clear (on 1 song) and directly
+	add a song.
+	* autogen.sh:	added libtoolize
+31-07-2005 Qball <Qball@qballcow.nl>
+	* src/libmpd.c:		Changed some printf to debug_printf
+
+29-07-2005 Qball <Qball@qballcow.nl>
+	* Initial import
