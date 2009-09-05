@@ -29,9 +29,10 @@ static void MpdClientStatusChangedCallback(MpdObj *mi, ChangedStatusType what, v
 	[client callbackStatusChanged:what];
 }
 
-static void MpdClientErrorCallback(MpdObj *mi, int identifier, char *msg, void *userdata) {
+static int MpdClientErrorCallback(MpdObj *mi, int identifier, char *msg, void *userdata) {
 	MpdMusicServerClient *client = (MpdMusicServerClient *)userdata;
 	[client callbackErrorOnIdentifier:identifier withMessage:msg];
+	return 0;
 }
 
 static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *userdata) {
@@ -341,7 +342,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 		if (data->type == MPD_DATA_TYPE_DIRECTORY && (theTypes == 0 || theTypes & eDirectoryType)) {
 			[array addObject:[Directory directoryWithPath:[NSString stringWithUTF8String:data->directory]]];
 		} else if (data->type == MPD_DATA_TYPE_PLAYLIST && (theTypes == 0 || theTypes & ePlayListFileType)) {
-			[array addObject:[PlayListFile listWithFilePath:[NSString stringWithUTF8String:data->playlist]]];
+			[array addObject:[PlayListFile listWithFilePath:[NSString stringWithUTF8String:data->playlist->path]]];
 		} else if (data->type == MPD_DATA_TYPE_SONG && (theTypes == 0 || theTypes & eSongType)) {
 			[array addObject:[Song songWithMpd_Song:data->song]];
 		}

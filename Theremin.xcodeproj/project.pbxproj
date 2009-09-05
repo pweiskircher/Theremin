@@ -42,14 +42,6 @@
 		436D30F00FB72AB80063DC8D /* GrowlMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 436D30EF0FB72AB80063DC8D /* GrowlMessenger.m */; };
 		436DB37E0E5258C500907E0F /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 436DB37D0E5258C500907E0F /* Profile.m */; };
 		437BDB270B74F42E001C1057 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BDB260B74F42E001C1057 /* Security.framework */; };
-		437C5B740B400035008B8DEC /* debug_printf.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B620B400035008B8DEC /* debug_printf.c */; };
-		437C5B750B400035008B8DEC /* libmpd-database.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B640B400035008B8DEC /* libmpd-database.c */; };
-		437C5B760B400035008B8DEC /* libmpd-player.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B670B400035008B8DEC /* libmpd-player.c */; };
-		437C5B770B400035008B8DEC /* libmpd-playlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B690B400035008B8DEC /* libmpd-playlist.c */; };
-		437C5B780B400035008B8DEC /* libmpd-status.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B6B0B400035008B8DEC /* libmpd-status.c */; };
-		437C5B790B400035008B8DEC /* libmpd-strfsong.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B6D0B400035008B8DEC /* libmpd-strfsong.c */; };
-		437C5B7A0B400035008B8DEC /* libmpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B700B400035008B8DEC /* libmpd.c */; };
-		437C5B7B0B400035008B8DEC /* libmpdclient.c in Sources */ = {isa = PBXBuildFile; fileRef = 437C5B720B400035008B8DEC /* libmpdclient.c */; };
 		437C5F750B403BA2008B8DEC /* PlayListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C5F740B403BA2008B8DEC /* PlayListController.m */; };
 		437EB69B0BBDB8930033AE88 /* InfoPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = 437EB6990BBDB8930033AE88 /* InfoPanel.nib */; };
 		437EB6A20BBDBA480033AE88 /* SongInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437EB6A00BBDBA480033AE88 /* SongInfoController.m */; };
@@ -98,6 +90,18 @@
 		43ACAC3A0E544811002C8857 /* ImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ACAC390E544811002C8857 /* ImageTextCell.m */; };
 		43B0F8CA0B7F3D1400F3A951 /* UpdateDatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F8C80B7F3D1400F3A951 /* UpdateDatabaseController.m */; };
 		43B0F92E0B7F412E00F3A951 /* Directory.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F92C0B7F412E00F3A951 /* Directory.m */; };
+		43BD366A1052E628001E30F0 /* debug_printf.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36541052E628001E30F0 /* debug_printf.c */; };
+		43BD366B1052E628001E30F0 /* lib_strptime.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36561052E628001E30F0 /* lib_strptime.c */; };
+		43BD366C1052E628001E30F0 /* libmpd-database.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36571052E628001E30F0 /* libmpd-database.c */; };
+		43BD366D1052E628001E30F0 /* libmpd-player.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD365A1052E628001E30F0 /* libmpd-player.c */; };
+		43BD366E1052E628001E30F0 /* libmpd-playlist.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD365C1052E628001E30F0 /* libmpd-playlist.c */; };
+		43BD366F1052E628001E30F0 /* libmpd-status.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD365E1052E628001E30F0 /* libmpd-status.c */; };
+		43BD36701052E628001E30F0 /* libmpd-sticker.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36601052E628001E30F0 /* libmpd-sticker.c */; };
+		43BD36711052E628001E30F0 /* libmpd-strfsong.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36621052E628001E30F0 /* libmpd-strfsong.c */; };
+		43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 43BD36651052E628001E30F0 /* libmpd-version.h.in */; };
+		43BD36731052E628001E30F0 /* libmpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36661052E628001E30F0 /* libmpd.c */; };
+		43BD36741052E628001E30F0 /* libmpdclient.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36681052E628001E30F0 /* libmpdclient.c */; };
+		43BD36A01052E84F001E30F0 /* libglib-2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BD369F1052E84F001E30F0 /* libglib-2.0.a */; };
 		43BF73C90F06F72A00420B56 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73C80F06F72A00420B56 /* Growl.framework */; };
 		43BF73CD0F06F73300420B56 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
 		43BF74190F06FA5800420B56 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43BF73CC0F06F73300420B56 /* Sparkle.framework */; };
@@ -281,24 +285,6 @@
 		436DB37C0E5258C500907E0F /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
 		436DB37D0E5258C500907E0F /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		437BDB260B74F42E001C1057 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		437C5B610B400022008B8DEC /* config.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		437C5B620B400035008B8DEC /* debug_printf.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = debug_printf.c; path = libmpdclient/src/debug_printf.c; sourceTree = "<group>"; };
-		437C5B630B400035008B8DEC /* debug_printf.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = debug_printf.h; path = libmpdclient/src/debug_printf.h; sourceTree = "<group>"; };
-		437C5B640B400035008B8DEC /* libmpd-database.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libmpd-database.c"; path = "libmpdclient/src/libmpd-database.c"; sourceTree = "<group>"; };
-		437C5B650B400035008B8DEC /* libmpd-database.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-database.h"; path = "libmpdclient/src/libmpd-database.h"; sourceTree = "<group>"; };
-		437C5B660B400035008B8DEC /* libmpd-internal.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-internal.h"; path = "libmpdclient/src/libmpd-internal.h"; sourceTree = "<group>"; };
-		437C5B670B400035008B8DEC /* libmpd-player.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libmpd-player.c"; path = "libmpdclient/src/libmpd-player.c"; sourceTree = "<group>"; };
-		437C5B680B400035008B8DEC /* libmpd-player.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-player.h"; path = "libmpdclient/src/libmpd-player.h"; sourceTree = "<group>"; };
-		437C5B690B400035008B8DEC /* libmpd-playlist.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libmpd-playlist.c"; path = "libmpdclient/src/libmpd-playlist.c"; sourceTree = "<group>"; };
-		437C5B6A0B400035008B8DEC /* libmpd-playlist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-playlist.h"; path = "libmpdclient/src/libmpd-playlist.h"; sourceTree = "<group>"; };
-		437C5B6B0B400035008B8DEC /* libmpd-status.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libmpd-status.c"; path = "libmpdclient/src/libmpd-status.c"; sourceTree = "<group>"; };
-		437C5B6C0B400035008B8DEC /* libmpd-status.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-status.h"; path = "libmpdclient/src/libmpd-status.h"; sourceTree = "<group>"; };
-		437C5B6D0B400035008B8DEC /* libmpd-strfsong.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = "libmpd-strfsong.c"; path = "libmpdclient/src/libmpd-strfsong.c"; sourceTree = "<group>"; };
-		437C5B6E0B400035008B8DEC /* libmpd-strfsong.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-strfsong.h"; path = "libmpdclient/src/libmpd-strfsong.h"; sourceTree = "<group>"; };
-		437C5B700B400035008B8DEC /* libmpd.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = libmpd.c; path = libmpdclient/src/libmpd.c; sourceTree = "<group>"; };
-		437C5B710B400035008B8DEC /* libmpd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = libmpd.h; path = libmpdclient/src/libmpd.h; sourceTree = "<group>"; };
-		437C5B720B400035008B8DEC /* libmpdclient.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = libmpdclient.c; path = libmpdclient/src/libmpdclient.c; sourceTree = "<group>"; };
-		437C5B730B400035008B8DEC /* libmpdclient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = libmpdclient.h; path = libmpdclient/src/libmpdclient.h; sourceTree = "<group>"; };
 		437C5F730B403BA2008B8DEC /* PlayListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListController.h; path = Source/PlayListController.h; sourceTree = "<group>"; };
 		437C5F740B403BA2008B8DEC /* PlayListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayListController.m; path = Source/PlayListController.m; sourceTree = "<group>"; };
 		437EB69A0BBDB8930033AE88 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/InfoPanel.nib; sourceTree = "<group>"; };
@@ -327,7 +313,6 @@
 		438DC1820DFD10200055BD4C /* PWVolumeImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWVolumeImage.m; path = Source/VolumeSlider/PWVolumeImage.m; sourceTree = "<group>"; };
 		438DC1830DFD10200055BD4C /* PWVolumeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWVolumeSlider.h; path = Source/VolumeSlider/PWVolumeSlider.h; sourceTree = "<group>"; };
 		438DC1840DFD10200055BD4C /* PWVolumeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWVolumeSlider.m; path = Source/VolumeSlider/PWVolumeSlider.m; sourceTree = "<group>"; };
-		4391DDAC0BA35E9100D9BE2C /* libmpd-version.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = "libmpd-version.h"; path = "libmpdclient/src/libmpd-version.h"; sourceTree = "<group>"; };
 		4396EFC10FB6CCE900F6902B /* LibraryOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryOperation.h; sourceTree = "<group>"; };
 		4396EFC20FB6CCE900F6902B /* LibraryOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryOperation.m; sourceTree = "<group>"; };
 		4396EFC70FB6CE0F00F6902B /* LibraryOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryOperationQueue.h; sourceTree = "<group>"; };
@@ -392,6 +377,30 @@
 		43B0F8C80B7F3D1400F3A951 /* UpdateDatabaseController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = UpdateDatabaseController.m; path = Source/UpdateDatabaseController.m; sourceTree = "<group>"; };
 		43B0F92B0B7F412E00F3A951 /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Directory.h; path = Source/MusicServer/Directory.h; sourceTree = "<group>"; };
 		43B0F92C0B7F412E00F3A951 /* Directory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Directory.m; path = Source/MusicServer/Directory.m; sourceTree = "<group>"; };
+		43BD36541052E628001E30F0 /* debug_printf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = debug_printf.c; path = "libmpdclient-0.18.96/src/debug_printf.c"; sourceTree = "<group>"; };
+		43BD36551052E628001E30F0 /* debug_printf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = debug_printf.h; path = "libmpdclient-0.18.96/src/debug_printf.h"; sourceTree = "<group>"; };
+		43BD36561052E628001E30F0 /* lib_strptime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lib_strptime.c; path = "libmpdclient-0.18.96/src/lib_strptime.c"; sourceTree = "<group>"; };
+		43BD36571052E628001E30F0 /* libmpd-database.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-database.c"; path = "libmpdclient-0.18.96/src/libmpd-database.c"; sourceTree = "<group>"; };
+		43BD36581052E628001E30F0 /* libmpd-database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-database.h"; path = "libmpdclient-0.18.96/src/libmpd-database.h"; sourceTree = "<group>"; };
+		43BD36591052E628001E30F0 /* libmpd-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-internal.h"; path = "libmpdclient-0.18.96/src/libmpd-internal.h"; sourceTree = "<group>"; };
+		43BD365A1052E628001E30F0 /* libmpd-player.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-player.c"; path = "libmpdclient-0.18.96/src/libmpd-player.c"; sourceTree = "<group>"; };
+		43BD365B1052E628001E30F0 /* libmpd-player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-player.h"; path = "libmpdclient-0.18.96/src/libmpd-player.h"; sourceTree = "<group>"; };
+		43BD365C1052E628001E30F0 /* libmpd-playlist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-playlist.c"; path = "libmpdclient-0.18.96/src/libmpd-playlist.c"; sourceTree = "<group>"; };
+		43BD365D1052E628001E30F0 /* libmpd-playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-playlist.h"; path = "libmpdclient-0.18.96/src/libmpd-playlist.h"; sourceTree = "<group>"; };
+		43BD365E1052E628001E30F0 /* libmpd-status.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-status.c"; path = "libmpdclient-0.18.96/src/libmpd-status.c"; sourceTree = "<group>"; };
+		43BD365F1052E628001E30F0 /* libmpd-status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-status.h"; path = "libmpdclient-0.18.96/src/libmpd-status.h"; sourceTree = "<group>"; };
+		43BD36601052E628001E30F0 /* libmpd-sticker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-sticker.c"; path = "libmpdclient-0.18.96/src/libmpd-sticker.c"; sourceTree = "<group>"; };
+		43BD36611052E628001E30F0 /* libmpd-sticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-sticker.h"; path = "libmpdclient-0.18.96/src/libmpd-sticker.h"; sourceTree = "<group>"; };
+		43BD36621052E628001E30F0 /* libmpd-strfsong.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "libmpd-strfsong.c"; path = "libmpdclient-0.18.96/src/libmpd-strfsong.c"; sourceTree = "<group>"; };
+		43BD36631052E628001E30F0 /* libmpd-strfsong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-strfsong.h"; path = "libmpdclient-0.18.96/src/libmpd-strfsong.h"; sourceTree = "<group>"; };
+		43BD36641052E628001E30F0 /* libmpd-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "libmpd-version.h"; path = "libmpdclient-0.18.96/src/libmpd-version.h"; sourceTree = "<group>"; };
+		43BD36651052E628001E30F0 /* libmpd-version.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "libmpd-version.h.in"; path = "libmpdclient-0.18.96/src/libmpd-version.h.in"; sourceTree = "<group>"; };
+		43BD36661052E628001E30F0 /* libmpd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libmpd.c; path = "libmpdclient-0.18.96/src/libmpd.c"; sourceTree = "<group>"; };
+		43BD36671052E628001E30F0 /* libmpd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libmpd.h; path = "libmpdclient-0.18.96/src/libmpd.h"; sourceTree = "<group>"; };
+		43BD36681052E628001E30F0 /* libmpdclient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libmpdclient.c; path = "libmpdclient-0.18.96/src/libmpdclient.c"; sourceTree = "<group>"; };
+		43BD36691052E628001E30F0 /* libmpdclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libmpdclient.h; path = "libmpdclient-0.18.96/src/libmpdclient.h"; sourceTree = "<group>"; };
+		43BD367D1052E699001E30F0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "libmpdclient-0.18.96/src/config.h"; sourceTree = "<group>"; };
+		43BD369F1052E84F001E30F0 /* libglib-2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libglib-2.0.a"; path = "glib/libglib-2.0.a"; sourceTree = "<group>"; };
 		43BF73C80F06F72A00420B56 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		43BF73CC0F06F73300420B56 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		43BF73F20F06F97A00420B56 /* SqueezeLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SqueezeLib.xcodeproj; path = ../../squeezelib/trunk/SqueezeLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -509,6 +518,7 @@
 				43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */,
 				43BF73C90F06F72A00420B56 /* Growl.framework in Frameworks */,
 				43BF73CD0F06F73300420B56 /* Sparkle.framework in Frameworks */,
+				43BD36A01052E84F001E30F0 /* libglib-2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +570,7 @@
 				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
 				437BDB260B74F42E001C1057 /* Security.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				43BD369F1052E84F001E30F0 /* libglib-2.0.a */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -895,25 +906,29 @@
 		43CD56E40B354EBE00C42092 /* libmpdclient */ = {
 			isa = PBXGroup;
 			children = (
-				4391DDAC0BA35E9100D9BE2C /* libmpd-version.h */,
-				437C5B620B400035008B8DEC /* debug_printf.c */,
-				437C5B630B400035008B8DEC /* debug_printf.h */,
-				437C5B640B400035008B8DEC /* libmpd-database.c */,
-				437C5B650B400035008B8DEC /* libmpd-database.h */,
-				437C5B660B400035008B8DEC /* libmpd-internal.h */,
-				437C5B670B400035008B8DEC /* libmpd-player.c */,
-				437C5B680B400035008B8DEC /* libmpd-player.h */,
-				437C5B690B400035008B8DEC /* libmpd-playlist.c */,
-				437C5B6A0B400035008B8DEC /* libmpd-playlist.h */,
-				437C5B6B0B400035008B8DEC /* libmpd-status.c */,
-				437C5B6C0B400035008B8DEC /* libmpd-status.h */,
-				437C5B6D0B400035008B8DEC /* libmpd-strfsong.c */,
-				437C5B6E0B400035008B8DEC /* libmpd-strfsong.h */,
-				437C5B710B400035008B8DEC /* libmpd.h */,
-				437C5B700B400035008B8DEC /* libmpd.c */,
-				437C5B720B400035008B8DEC /* libmpdclient.c */,
-				437C5B730B400035008B8DEC /* libmpdclient.h */,
-				437C5B610B400022008B8DEC /* config.h */,
+				43BD367D1052E699001E30F0 /* config.h */,
+				43BD36541052E628001E30F0 /* debug_printf.c */,
+				43BD36551052E628001E30F0 /* debug_printf.h */,
+				43BD36561052E628001E30F0 /* lib_strptime.c */,
+				43BD36571052E628001E30F0 /* libmpd-database.c */,
+				43BD36581052E628001E30F0 /* libmpd-database.h */,
+				43BD36591052E628001E30F0 /* libmpd-internal.h */,
+				43BD365A1052E628001E30F0 /* libmpd-player.c */,
+				43BD365B1052E628001E30F0 /* libmpd-player.h */,
+				43BD365C1052E628001E30F0 /* libmpd-playlist.c */,
+				43BD365D1052E628001E30F0 /* libmpd-playlist.h */,
+				43BD365E1052E628001E30F0 /* libmpd-status.c */,
+				43BD365F1052E628001E30F0 /* libmpd-status.h */,
+				43BD36601052E628001E30F0 /* libmpd-sticker.c */,
+				43BD36611052E628001E30F0 /* libmpd-sticker.h */,
+				43BD36621052E628001E30F0 /* libmpd-strfsong.c */,
+				43BD36631052E628001E30F0 /* libmpd-strfsong.h */,
+				43BD36641052E628001E30F0 /* libmpd-version.h */,
+				43BD36651052E628001E30F0 /* libmpd-version.h.in */,
+				43BD36661052E628001E30F0 /* libmpd.c */,
+				43BD36671052E628001E30F0 /* libmpd.h */,
+				43BD36681052E628001E30F0 /* libmpdclient.c */,
+				43BD36691052E628001E30F0 /* libmpdclient.h */,
 			);
 			name = libmpdclient;
 			sourceTree = "<group>";
@@ -1237,6 +1252,7 @@
 				4350F0780F079D4F00FB6EDF /* PreferencesWindowController.m in Resources */,
 				43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */,
 				43156DC20FBF020C00EF3ECA /* empty.png in Resources */,
+				43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1254,14 +1270,6 @@
 				438C8C880B3FDB91009D143A /* PreferencesController.m in Sources */,
 				438C8C890B3FDB91009D143A /* WindowController.m in Sources */,
 				438C8C8B0B3FDBA3009D143A /* main.m in Sources */,
-				437C5B740B400035008B8DEC /* debug_printf.c in Sources */,
-				437C5B750B400035008B8DEC /* libmpd-database.c in Sources */,
-				437C5B760B400035008B8DEC /* libmpd-player.c in Sources */,
-				437C5B770B400035008B8DEC /* libmpd-playlist.c in Sources */,
-				437C5B780B400035008B8DEC /* libmpd-status.c in Sources */,
-				437C5B790B400035008B8DEC /* libmpd-strfsong.c in Sources */,
-				437C5B7A0B400035008B8DEC /* libmpd.c in Sources */,
-				437C5B7B0B400035008B8DEC /* libmpdclient.c in Sources */,
 				437C5F750B403BA2008B8DEC /* PlayListController.m in Sources */,
 				433FC5ED0B4080F60082058A /* PWWindow.m in Sources */,
 				43E7F6450B415860005FEC19 /* LicenseController.m in Sources */,
@@ -1346,6 +1354,16 @@
 				43FFC4060FC202C7002620C0 /* RemoteControl.m in Sources */,
 				43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */,
 				43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */,
+				43BD366A1052E628001E30F0 /* debug_printf.c in Sources */,
+				43BD366B1052E628001E30F0 /* lib_strptime.c in Sources */,
+				43BD366C1052E628001E30F0 /* libmpd-database.c in Sources */,
+				43BD366D1052E628001E30F0 /* libmpd-player.c in Sources */,
+				43BD366E1052E628001E30F0 /* libmpd-playlist.c in Sources */,
+				43BD366F1052E628001E30F0 /* libmpd-status.c in Sources */,
+				43BD36701052E628001E30F0 /* libmpd-sticker.c in Sources */,
+				43BD36711052E628001E30F0 /* libmpd-strfsong.c in Sources */,
+				43BD36731052E628001E30F0 /* libmpd.c in Sources */,
+				43BD36741052E628001E30F0 /* libmpdclient.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1449,6 +1467,11 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				OTHER_CFLAGS = "-DTHREADSAFE=1";
 				PRODUCT_NAME = Theremin;
 				SYMROOT = ../../build;
@@ -1486,6 +1509,11 @@
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				PRODUCT_NAME = Theremin;
 				SYMROOT = ../../build;
 				WRAPPER_EXTENSION = app;
@@ -1505,6 +1533,7 @@
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SYMROOT = ../../../build;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -1520,6 +1549,7 @@
 				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
