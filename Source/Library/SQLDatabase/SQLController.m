@@ -259,7 +259,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS identifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
-	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
+	if ([query execWithFilters:theFilters] == NO)
 		[NSException raise:NSGenericException format:@"Couldn't get genres."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Genre class] andQuery:query];
@@ -270,7 +270,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS identifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
-	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
+	if ([query execWithFilters:theFilters] == NO)
 		[NSException raise:NSGenericException format:@"Couldn't get albums."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Album class] andQuery:query];
@@ -286,7 +286,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 							@"FROM songs LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN genres ON songs.genre = genres.id"];
 
 	SQLiteQuery *query = [mDatabase query:sql];
-	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
+	if ([query execWithFilters:theFilters] == NO)
 		[NSException raise:NSGenericException format:@"Couldn't get songs."];
 	
 	NSArray *results = [self resultFromQueryUsingClass:[Song class] andQuery:query];
@@ -299,7 +299,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		                                                     @"LEFT JOIN albums ON songs.album = albums.id"];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
-	if ([query execWithFilters:theFilters] == NO || [query state] != eSQLiteQueryStateHasData)
+	if ([query execWithFilters:theFilters] == NO)
 		[NSException raise:NSGenericException format:@"Couldn't get artists."];
 	
 	NSArray *results = [self artistsFromQuery:query];

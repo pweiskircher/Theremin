@@ -105,7 +105,8 @@ const NSString *newProfileNameTemplate = @"Profile %d";
 
 - (id) initWithCoder:(id)coder {
 	self = [super initWithCoder:coder];
-	[self setContent:[ProfileRepository profiles]];
+	NSArray *profiles = [ProfileRepository profiles];
+	[self setContent:profiles];
 	return self;
 }
 
@@ -150,6 +151,10 @@ const NSString *newProfileNameTemplate = @"Profile %d";
 		[self saveUIToProfile:[self selectedProfile]];
 	
 	[ProfileRepository saveProfiles:[self content]];
+}
+
+- (void) opened {
+	[self tableViewSelectionDidChange:nil];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {

@@ -39,6 +39,7 @@
 }
 
 - (void)showPreferences {
+	[_profileController opened];
 	[mPreferencesWindow makeKeyAndOrderFront:self];
 }
 

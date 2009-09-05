@@ -25,6 +25,7 @@
 	
 	Profile *_lastProfile;
 }
+- (void) opened;
 - (void) saveProfiles;
 - (BOOL) currentSelectionIsDefault;
 - (IBAction) typeChanged:(id)sender;
