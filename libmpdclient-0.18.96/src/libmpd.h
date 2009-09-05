@@ -604,12 +604,6 @@ int mpd_server_check_command_allowed(MpdObj * mi, const char *command);
 
 
 
-/**
- * @param mi a #MpdObj
- *
- * @returns an array with urlhandlers (NULL terminated). Result must be freed.
- */
-char ** mpd_server_get_url_handlers(MpdObj *mi);
 
 /**
  * @param mi a #MpdObj
@@ -644,17 +638,6 @@ int mpd_misc_get_tag_by_name(char *name);
  * @returns a boolean, TRUE if it has idle support
  */
 int mpd_server_has_idle(MpdObj *mi);
-
-/**
- * @param mi a #MpdObj
- * @param tag a #mpd_TagItems
- *
- * Returns if mpd supports this tag.
- *
- * return 1 if support 0 if not
- */
-int mpd_server_tag_supported(MpdObj *mi, int tag);
-
 #endif
 
 #ifdef __cplusplus

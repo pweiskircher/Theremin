@@ -44,8 +44,6 @@
 #include <fcntl.h>
 #include <limits.h>
 
-#include <glib.h>
-
 #ifdef WIN32
 #  include <ws2tcpip.h>
 #  include <winsock.h>
@@ -137,19 +135,16 @@ static int do_connect_fail(mpd_Connection *connection,
                 /* Check for errors */
                 getsockopt(connection->sock, SOL_SOCKET, SO_ERROR, (void*)(&valopt), &lon); 
                 if (valopt) { 
-                    fprintf(stderr, "Error in connection() %d - %s\n", valopt, strerror(valopt)); 
                     return 1;
                 } 
             } 
             else { 
                 /* Connecting timed out. */
-                fprintf(stderr, "Timeout or error() %d - %s\n", valopt, strerror(valopt)); 
                 return 1;
             } 
         } 
         else { 
             /* Failed to connect */
-            fprintf(stderr, "Error connecting %d - %s\n", errno, strerror(errno)); 
             return 1;
         } 
     } 
@@ -334,7 +329,7 @@ static char * mpd_sanitizeArg(const char * arg) {
 
 static mpd_ReturnElement * mpd_newReturnElement(const char * name, const char * value)
 {
-	mpd_ReturnElement* ret = g_slice_new(mpd_ReturnElement);
+	mpd_ReturnElement* ret = calloc(1, sizeof(mpd_ReturnElement));
 
 	ret->name = strdup(name);
 	ret->value = strdup(value);
@@ -345,7 +340,7 @@ static mpd_ReturnElement * mpd_newReturnElement(const char * name, const char * 
 static void mpd_freeReturnElement(mpd_ReturnElement * re) {
 	free(re->name);
 	free(re->value);
-	g_slice_free(mpd_ReturnElement, re);
+	free(re);
 }
 
 void mpd_setConnectionTimeout(mpd_Connection * connection, float timeout) {
@@ -440,7 +435,7 @@ mpd_Connection * mpd_newConnection(const char * host, int port, float timeout) {
 	int err;
 	char * rt;
 	char * output =  NULL;
-	mpd_Connection * connection = g_slice_new0(mpd_Connection);
+	mpd_Connection * connection = calloc(1, sizeof(mpd_Connection));
 	struct timeval tv;
 	fd_set fds;
 	strcpy(connection->buffer,"");
@@ -520,7 +515,7 @@ void mpd_closeConnection(mpd_Connection * connection) {
 	closesocket(connection->sock);
 	if(connection->returnElement) free(connection->returnElement);
 	if(connection->request) free(connection->request);
-	g_slice_free(mpd_Connection, connection);
+	free(connection);
 	WSACleanup();
 }
 
@@ -760,7 +755,7 @@ mpd_Status * mpd_getStatus(mpd_Connection * connection) {
 
 	if(!connection->returnElement) mpd_getNextReturnElement(connection);
 
-	mpd_Status* status = g_slice_new0(mpd_Status);
+	mpd_Status* status = calloc(1, sizeof(mpd_Status));
 	status->volume = -1;
 	status->playlist = -1;
 	status->storedplaylist = -1;
@@ -771,7 +766,7 @@ mpd_Status * mpd_getStatus(mpd_Connection * connection) {
 	status->crossfade = -1;
 
 	if(connection->error) {
-		g_slice_free(mpd_Status, status);
+		free(status);
 		return NULL;
 	}
 	while(connection->returnElement) {
@@ -857,19 +852,19 @@ mpd_Status * mpd_getStatus(mpd_Connection * connection) {
 
 		mpd_getNextReturnElement(connection);
 		if(connection->error) {
-			g_slice_free(mpd_Status, status);
+			free(status);
 			return NULL;
 		}
 	}
 
 	if(connection->error) {
-		g_slice_free(mpd_Status, status);
+		free(status);
 		return NULL;
 	}
 	else if(status->state<0) {
 		strcpy(connection->errorStr,"state not found");
 		connection->error = 1;
-		g_slice_free(mpd_Status, status);
+		free(status);
 		return NULL;
 	}
 
@@ -878,7 +873,7 @@ mpd_Status * mpd_getStatus(mpd_Connection * connection) {
 
 void mpd_freeStatus(mpd_Status * status) {
 	if(status->error) free(status->error);
-	g_slice_free(mpd_Status, status);
+	free(status);
 }
 
 void mpd_sendStatsCommand(mpd_Connection * connection) {
@@ -898,7 +893,7 @@ mpd_Stats * mpd_getStats(mpd_Connection * connection) {
 
 	if(!connection->returnElement) mpd_getNextReturnElement(connection);
 
-	mpd_Stats* stats = g_slice_new0(mpd_Stats);
+	mpd_Stats* stats = calloc(1, sizeof(mpd_Stats));
 
 	if(connection->error) {
 		mpd_freeStats(stats);
@@ -944,7 +939,7 @@ mpd_Stats * mpd_getStats(mpd_Connection * connection) {
 }
 
 void mpd_freeStats(mpd_Stats * stats) {
-	g_slice_free(mpd_Stats, stats);
+	free(stats);
 }
 
 mpd_SearchStats * mpd_getSearchStats(mpd_Connection * connection)
@@ -960,7 +955,7 @@ mpd_SearchStats * mpd_getSearchStats(mpd_Connection * connection)
 		return NULL;
 
 	mpd_ReturnElement* re;
-	mpd_SearchStats* stats = g_slice_new0(mpd_SearchStats);
+	mpd_SearchStats* stats = calloc(1, sizeof(mpd_SearchStats));
 
 	while (connection->returnElement) {
 		re = connection->returnElement;
@@ -988,7 +983,7 @@ mpd_SearchStats * mpd_getSearchStats(mpd_Connection * connection)
 
 void mpd_freeSearchStats(mpd_SearchStats * stats)
 {
-	g_slice_free(mpd_SearchStats, stats);
+	free(stats);
 }
 
 static void mpd_finishSong(mpd_Song * song) {
@@ -1008,7 +1003,7 @@ static void mpd_finishSong(mpd_Song * song) {
 }
 
 mpd_Song * mpd_newSong(void) {
-	mpd_Song * ret = g_slice_new0(mpd_Song);
+	mpd_Song * ret = calloc(1, sizeof(mpd_Song));
     ret->mtime = 0;
 	ret->time = MPD_SONG_NO_TIME;
 	ret->pos = MPD_SONG_NO_NUM;
@@ -1018,7 +1013,7 @@ mpd_Song * mpd_newSong(void) {
 
 void mpd_freeSong(mpd_Song * song) {
 	mpd_finishSong(song);
-	g_slice_free(mpd_Song, song);
+	free(song);
 }
 
 mpd_Song * mpd_songDup(const mpd_Song * song) {
@@ -1051,12 +1046,12 @@ static void mpd_finishDirectory(mpd_Directory * directory) {
 }
 
 mpd_Directory * mpd_newDirectory(void) {
-	return g_slice_new0(mpd_Directory);
+	return calloc(1, sizeof(mpd_Directory));
 }
 
 void mpd_freeDirectory(mpd_Directory * directory) {
 	mpd_finishDirectory(directory);
-	g_slice_free(mpd_Directory, directory);
+	free(directory);
 }
 
 mpd_Directory * mpd_directoryDup(mpd_Directory * directory) {
@@ -1073,12 +1068,12 @@ static void mpd_finishPlaylistFile(mpd_PlaylistFile * playlist) {
 }
 
 mpd_PlaylistFile * mpd_newPlaylistFile(void) {
-	return g_slice_new0(mpd_PlaylistFile);
+	return calloc(1, sizeof(mpd_PlaylistFile));
 }
 
 void mpd_freePlaylistFile(mpd_PlaylistFile * playlist) {
 	mpd_finishPlaylistFile(playlist);
-	g_slice_free(mpd_PlaylistFile, playlist);
+	free(playlist);
 }
 
 mpd_PlaylistFile * mpd_playlistFileDup(mpd_PlaylistFile * playlist) {
@@ -1105,12 +1100,12 @@ static void mpd_finishInfoEntity(mpd_InfoEntity * entity) {
 }
 
 mpd_InfoEntity * mpd_newInfoEntity(void) {
-	return g_slice_new0(mpd_InfoEntity);
+	return calloc(1, sizeof(mpd_InfoEntity));
 }
 
 void mpd_freeInfoEntity(mpd_InfoEntity * entity) {
 	mpd_finishInfoEntity(entity);
-	g_slice_free(mpd_InfoEntity, entity);
+	free(entity);
 }
 
 static void mpd_sendInfoCommand(mpd_Connection * connection,const char * command) {
@@ -1749,7 +1744,7 @@ mpd_OutputEntity * mpd_getNextOutput(mpd_Connection * connection) {
 
 	if(connection->error) return NULL;
 
-	mpd_OutputEntity* output = g_slice_new0(mpd_OutputEntity);
+	mpd_OutputEntity* output = calloc(1, sizeof(mpd_OutputEntity));
 	output->id = -10;
 
 	if(!connection->returnElement) mpd_getNextReturnElement(connection);
@@ -1796,7 +1791,7 @@ void mpd_sendDisableOutputCommand(mpd_Connection * connection, int outputId) {
 void mpd_freeOutputElement(mpd_OutputEntity * output) {
 	if(output->name)
 		free(output->name);
-	g_slice_free(mpd_OutputEntity, output);
+	free(output);
 }
 
 /**

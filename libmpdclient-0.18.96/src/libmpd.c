@@ -24,7 +24,6 @@
 #include <string.h>
 #include <stdarg.h>
 #include <config.h>
-#include <glib.h>
 #include "debug_printf.h"
 
 #include "libmpd.h"
@@ -94,8 +93,7 @@ static void mpd_init_MpdServerState(MpdServerState *state)
 
 static MpdObj * mpd_create()
 {
-	MpdObj * mi = g_slice_new0(MpdObj);
-	g_return_val_if_fail(mi != NULL, NULL); /* should never happen on linux */
+	MpdObj * mi = calloc(1, sizeof(MpdObj));
 
 	/* set default values */
 	/* we start not connected */
@@ -159,14 +157,9 @@ void mpd_free(MpdObj *mi)
 	{
 		mpd_freeSong(mi->CurrentSong);
 	}
-    if(mi->url_handlers)
-    {
-        g_strfreev(mi->url_handlers);
-        mi->url_handlers = NULL;
-    }
 	mpd_free_queue_ob(mi);
 	mpd_server_free_commands(mi);		
-	g_slice_free(MpdObj, mi);
+	free(mi);
 }
 
 int mpd_check_error(MpdObj *mi)
@@ -188,13 +181,7 @@ int mpd_check_error(MpdObj *mi)
 	mi->error = mi->connection->error;
 	mi->error_mpd_code = mi->connection->errorCode;
 	/*TODO: do I need to strdup this? */
-    if(!g_utf8_validate(mi->connection->errorStr, -1, NULL)){
-        mi->error_msg = g_locale_to_utf8(mi->connection->errorStr, -1, NULL, NULL,NULL);
-    }else{
-        mi->error_msg = g_strdup(mi->connection->errorStr);
-    }
-
-    if(mi->error_msg == NULL) mi->error_msg = g_strdup("Failed to convert error message to utf-8");
+	mi->error_msg = strdup(mi->connection->errorStr);
 
 	/* Check for permission */
 	/* First check for an error reported by MPD
@@ -367,24 +354,6 @@ int mpd_send_password(MpdObj *mi)
 		 */
 		if((mi->the_status_changed_callback != NULL))
         {
-            /** update the supported tags */
-            {
-                int i;
-                char **retv = mpd_server_get_tag_types(mi);
-                if(retv){
-                    for(i=0;i<MPD_TAG_ITEM_ANY;i++)
-                    {
-                        int j=0;
-                        for(j=0;retv[j] && strcasecmp(retv[j],mpdTagItemKeys[i]); j++);
-                        if(retv[j]) mi->supported_tags[i] = TRUE;
-                        else mi->supported_tags[i] = FALSE;
-                    }
-                    g_strfreev(retv);
-                }
-                /* also always true */
-                mi->supported_tags[MPD_TAG_ITEM_FILENAME] = TRUE;
-                mi->supported_tags[MPD_TAG_ITEM_ANY] = TRUE;
-            }
             /* If permission updates, we should also call an output update, The data might be available now. */
             mi->the_status_changed_callback( mi,
                     MPD_CST_PERMISSION|MPD_CST_OUTPUT, mi->the_status_changed_signal_userdata );
@@ -542,11 +511,6 @@ int mpd_disconnect(MpdObj *mi)
 		mpd_freeSong(mi->CurrentSong);
 		mi->CurrentSong = NULL;
 	}
-    if(mi->url_handlers)
-    {
-        g_strfreev(mi->url_handlers);
-        mi->url_handlers = NULL;
-    }
 	mi->CurrentState.playlistid = -1;
 	mi->CurrentState.storedplaylistid = -1;
 	mi->CurrentState.state = -1;
@@ -575,11 +539,9 @@ int mpd_disconnect(MpdObj *mi)
     /* outputs */
     mi->num_outputs = 0;
     if(mi->output_states)
-        g_free(mi->output_states);
+        free(mi->output_states);
     mi->output_states = NULL;
 
-    /* set 0 */ 
-    memset((mi->supported_tags), 0,sizeof(mi->supported_tags));
 
     mi->has_idle = 0;
 	
@@ -679,28 +641,6 @@ int mpd_connect_real(MpdObj *mi,mpd_Connection *connection)
     {
         mpd_send_password(mi);
     }
-    else
-    {
-        /* Update tag types, this is done in send_password.
-         * mpd_send_password() does this.
-         * So only do it when no password is send.
-         */
-        int i;
-        char **retv = mpd_server_get_tag_types(mi);
-        if(retv){
-            for(i=0;i<MPD_TAG_ITEM_ANY;i++)
-            {
-                int j=0;
-                for(j=0;retv[j] && strcasecmp(retv[j],mpdTagItemKeys[i]); j++);
-                if(retv[j]) mi->supported_tags[i] = TRUE;
-                else mi->supported_tags[i] = FALSE;
-            }
-            g_strfreev(retv);
-        }
-        /* also always true */ 
-        mi->supported_tags[MPD_TAG_ITEM_FILENAME] = TRUE;
-        mi->supported_tags[MPD_TAG_ITEM_ANY] = TRUE;
-    }
 /*
 
     retv = mpd_server_update_outputs(mi);
@@ -774,7 +714,7 @@ void	mpd_signal_connect_connection_changed(MpdObj *mi, ConnectionChangedCallback
 /* MpdData Part */
 MpdData *mpd_new_data_struct(void)
 {
-	return (MpdData*) g_slice_new0(MpdData_real);
+	return (MpdData*) calloc(1, sizeof(MpdData_real));
 }
 
 MpdData *mpd_new_data_struct_append(MpdData  * data)
@@ -954,7 +894,7 @@ void mpd_data_free(MpdData *data)
                 data_real->freefunc(data_real->userdata);
         }
         data_real = data_real->next;
-        g_slice_free(MpdData_real, temp);
+        free(temp);
     }
 }
 
@@ -982,7 +922,7 @@ static void mpd_free_queue_ob(MpdObj *mi)
             free(mi->queue->path);
         }
 
-        g_slice_free(MpdQueue, mi->queue);
+        free(mi->queue);
         mi->queue = temp;
     }
     mi->queue = NULL;
@@ -991,7 +931,7 @@ static void mpd_free_queue_ob(MpdObj *mi)
 
 MpdQueue *mpd_new_queue_struct()
 {
-    return g_slice_new0(MpdQueue);
+    return calloc(1, sizeof(MpdQueue));
 }
 
 
@@ -1128,41 +1068,7 @@ int mpd_server_check_command_allowed(MpdObj *mi, const char *command)
     return MPD_SERVER_COMMAND_NOT_SUPPORTED;
 }
 
-char ** mpd_server_get_url_handlers(MpdObj *mi)
-{
-    char *temp = NULL;
-    int i=0;
-    if(!mpd_check_connected(mi))
-    {
-        debug_printf(DEBUG_WARNING,"not connected\n");
-        return FALSE;
-    }
-    if(mi->url_handlers){
-        return g_strdupv(mi->url_handlers);
-    }
-    if(mpd_lock_conn(mi))
-    {
-        debug_printf(DEBUG_ERROR,"lock failed\n");
-        return NULL;
-    }                                           
-    /**
-     * Fetch url handlers and store them
-     */
-    mpd_sendUrlHandlersCommand(mi->connection);
-    while((temp = mpd_getNextHandler(mi->connection)) != NULL)
-    {
-        mi->url_handlers = realloc(mi->url_handlers,(i+2)*sizeof(*mi->url_handlers));
-        mi->url_handlers[i]   = temp;
-        mi->url_handlers[i+1] = NULL;
-        i++;
-    } 
-    mpd_finishCommand(mi->connection);
 
-
-    mpd_unlock_conn(mi);
-    /* Return copy */
-    return g_strdupv(mi->url_handlers);
-}
 char ** mpd_server_get_tag_types(MpdObj *mi)
 {
     char *temp = NULL;
@@ -1240,11 +1146,3 @@ int mpd_server_has_idle(MpdObj *mi)
     return mi->has_idle;
 }
 
-int mpd_server_tag_supported(MpdObj *mi, int tag)
-{
-    if(!mi) return FALSE;
-    if(tag < 0 || tag >= MPD_TAG_NUM_OF_ITEM_TYPES) {
-        return FALSE;
-    }
-    return mi->supported_tags[tag];
-}

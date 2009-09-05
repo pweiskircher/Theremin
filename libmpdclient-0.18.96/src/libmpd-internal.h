@@ -146,14 +146,7 @@ typedef struct _MpdObj {
      */
     int num_outputs;
     int *output_states;
-    /**
-     * Supported url handlers
-     */
-    char **url_handlers;
-    /**
-     * For testing supported tags
-     */
-    int supported_tags[MPD_TAG_NUM_OF_ITEM_TYPES];
+
 
     int has_idle;
 }_MpdObj;
