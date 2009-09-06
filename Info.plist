@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>PAWE</string>
 	<key>CFBundleVersion</key>
-	<string>0.6.2.3-pre2</string>
+	<string>0.6.2.3</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

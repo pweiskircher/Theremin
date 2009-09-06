@@ -1,3 +1,8 @@
+  Theremin 0.6.2.3:
+    * Fix some oddities on Snow Leopard regarding the Profile systems.
+    * Fix several memory leaks.
+    * Fix autoreconnect not working after a long period of time of reconnecting. (#136)
+
   Theremin 0.6.2.2:
     * Fix crash on Mac OS X 10.6
 
