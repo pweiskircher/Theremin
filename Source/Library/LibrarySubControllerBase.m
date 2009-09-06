@@ -188,7 +188,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	for (int i = 0; i < [theEntries count]; i++) {
 		int sqlIdentifier = [(id<ThereminEntity>)[theEntries objectAtIndex:i] identifier];
 		if ([indexes containsIndex:sqlIdentifier] || (selectCompilation == YES && sqlIdentifier == CompilationSQLIdentifier)) {
-			[mTableView selectRow:[self convertToDisplayIndex:i] byExtendingSelection:!first];
+			[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self convertToDisplayIndex:i]] byExtendingSelection:!first];
 			
 			if (first == YES) {
 				[mTableView scrollRowToVisible:[self convertToDisplayIndex:i]];
@@ -198,7 +198,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	}
 	
 	if ([indexes count] <= 0 || first == YES) {
-		[mTableView selectRow:0 byExtendingSelection:NO];
+		[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		[mTableView scrollRowToVisible:0];
 	}
 }
@@ -259,7 +259,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 	[mTableView reloadData];
 	
 	if (!mSelectionData) {
-		[mTableView selectRow:0 byExtendingSelection:NO];
+		[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		[mTableView scrollRowToVisible:0];
 	} else
 		[self loadSelectionInformation:mSelectionData withEntries:mItems];
@@ -301,7 +301,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
 	if ([rowIndexes count] == 1)
-		[aTableView selectRow:[rowIndexes firstIndex] byExtendingSelection:NO];
+		[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[rowIndexes firstIndex]] byExtendingSelection:NO];
 
 	NSArray *uniqueIdentifiers = [mLibraryController selectedSongsUniqueIdentifiersInTable:aTableView];
 	

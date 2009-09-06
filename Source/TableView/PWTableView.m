@@ -163,7 +163,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 		}
 	}
 	if (row != -1) {
-		[self selectRow:row byExtendingSelection:NO];
+		[self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 		[self scrollRowToVisible:row];
 	}
 }
@@ -206,7 +206,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 	// figure out if the row that was just clicked on is currently selected
 	if ([selectedRowIndexes containsIndex:row] == NO)
 	{
-		[self selectRow:row byExtendingSelection:NO];
+		[self selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 	}
 	// else that row is currently selected, so don't change anything.
 	
@@ -318,7 +318,7 @@ NSString *nBecameFirstResponder = @"nBecameFirstResponder";
 	if (mSelectAllSelectsRow == SELECT_ALL_SELECTS_ALL_ROWS)
 		[super selectAll:sender];
 	else {
-		[self selectRow:mSelectAllSelectsRow byExtendingSelection:NO];
+		[self selectRowIndexes:[NSIndexSet indexSetWithIndex:mSelectAllSelectsRow] byExtendingSelection:NO];
 		[self scrollRowToVisible:mSelectAllSelectsRow];
 	}
 }

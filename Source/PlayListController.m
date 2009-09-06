@@ -346,7 +346,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	}
 	
 	if ([rowIndexes count] == 1)
-		[aTableView selectRow:[rowIndexes firstIndex] byExtendingSelection:NO];
+		[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[rowIndexes firstIndex]] byExtendingSelection:NO];
 	
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
 	[pboard declareTypes:[NSArray arrayWithObject:gMpdPlaylistPositionType] owner:self];
@@ -374,7 +374,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			while (current_index != NSNotFound)
 			{
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRow:dest byExtendingSelection:expandSelection];
+				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				dest++;
 				current_index = [rowIndexes indexGreaterThanIndex: current_index];
@@ -385,7 +385,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			{
 				dest--;
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRow:dest byExtendingSelection:expandSelection];
+				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				current_index = [rowIndexes indexLessThanIndex: current_index];
 			}		
@@ -506,7 +506,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		
 		if ([mTableView acceptsFirstResponder])
 			[[mController window] makeFirstResponder:mTableView];
-		[mTableView selectRow:0 byExtendingSelection:NO];
+		[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 	}
 }
 
@@ -535,7 +535,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 - (BOOL) selectCurrentSong {
 	int row = [self currentSongRow];
 	if (row != -1) {
-		[mTableView selectRow:row byExtendingSelection:NO];
+		[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 		return YES;
 	}
 	return NO;
@@ -643,11 +643,11 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	[[mController musicClient] removeSongsFromPlaylist:array];
 	
 	if (selectLastRow)
-		[mTableView selectRow:[mTableView numberOfRows]-2 byExtendingSelection:NO];
+		[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[mTableView numberOfRows]-2] byExtendingSelection:NO];
 	else {
 		NSIndexSet *selection = [mTableView selectedRowIndexes];
 		if ([selection count] > 0)
-			[mTableView selectRow:[selection firstIndex] byExtendingSelection:NO];
+			[mTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[selection firstIndex]] byExtendingSelection:NO];
 	}
 }
 
