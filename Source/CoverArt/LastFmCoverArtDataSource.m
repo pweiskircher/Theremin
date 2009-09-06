@@ -45,17 +45,16 @@ const NSString const *lastFmBaseMethodCall = @"http://ws.audioscrobbler.com/2.0/
 	
 	_used = YES;
 	
-	if ([aSong artist] == nil || [[aSong artist] length] == 0 ||
-		[aSong album] == nil || [[aSong album] length] == 0) {
-		[_delegate dataSourceFailedToGetImage:self];
-		return;
-	}
-	
-	
 	_size = aSize;
 	_delegate = aDelegate;
 	_data = [[NSMutableData data] retain];
-	_song = [aSong retain];
+	_song = [aSong retain];	
+	
+	if ([_song artist] == nil || [[_song artist] length] == 0 ||
+		[_song album] == nil || [[_song album] length] == 0) {
+		[_delegate dataSourceFailedToGetImage:self];
+		return;
+	}
 	
 	NSURLRequest *request = [self createUrlRequestForRequestWithSong:aSong];
 	[[NSURLConnection connectionWithRequest:request delegate:self] retain];
