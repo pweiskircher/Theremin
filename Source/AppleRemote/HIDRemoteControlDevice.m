@@ -159,7 +159,7 @@
 	// 
 	// Note that there is a corresponding DisableSecureEventInput in the stopListening method below.
 	// 
-	if ([self isOpenInExclusiveMode] && fixSecureEventInputBug) EnableSecureEventInput();	
+	//if ([self isOpenInExclusiveMode] && fixSecureEventInputBug) EnableSecureEventInput();	
 	
 	[self removeNotifcationObserver];
 	
@@ -184,7 +184,7 @@
 	
 error:
 	[self stopListening:self];
-	DisableSecureEventInput();
+	//DisableSecureEventInput();
 	
 cleanup:	
 	IOObjectRelease(hidDevice);	
@@ -229,7 +229,7 @@ cleanup:
 		hidDeviceInterface = NULL;
 	}
 	
-	if ([self isOpenInExclusiveMode] && fixSecureEventInputBug) DisableSecureEventInput();
+	//if ([self isOpenInExclusiveMode] && fixSecureEventInputBug) DisableSecureEventInput();
 	
 	if ([self isOpenInExclusiveMode] && sendNotification) {
 		[[self class] sendFinishedNotifcationForAppIdentifier: nil];		

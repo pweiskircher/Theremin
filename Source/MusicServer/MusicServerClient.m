@@ -21,7 +21,6 @@
 #import "NSNotificationAdditions.h"
 #import "WindowController.h"
 #import "MpdMusicServerClient.h"
-#import "SqueezeLibMusicServerClient.h"
 
 NSString *nMusicServerClientConnecting = @"nMusicServerClientConnecting";
 NSString *nMusicServerClientConnected = @"nMusicServerClientConnected";
@@ -69,13 +68,7 @@ NSString *dEnabled = @"dEnabled";
 
 @implementation MusicServerClient
 + (Class) musicServerClientClassForProfile:(Profile *)aProfile {
-	switch ([aProfile mode]) {
-		case eModeMPD:
-			return [MpdMusicServerClient class];
-		case eModeSqueezeCenter:
-			return [SqueezeLibMusicServerClient class];
-	}
-	return [NSNull class];
+    return [MpdMusicServerClient class];
 }
 
 + (void) connectWithPorts:(NSDictionary *) infos {

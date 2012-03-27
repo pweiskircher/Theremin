@@ -21,14 +21,9 @@
 #import "Profile.h"
 
 #import "SQLController.h"
-#import "SqueezeLibDataSource.h"
 
 @implementation LibraryDataSource
 + (id<LibraryDataSourceProtocol>) libraryDataSourceForProfile:(Profile *)aProfile {
-	if ([aProfile mode] == eModeMPD)
-		return [[[SQLController alloc] initWithProfile:aProfile] autorelease];
-	else if ([aProfile mode] == eModeSqueezeCenter)
-		return [[[SqueezeLibDataSource alloc] initWithProfile:aProfile] autorelease];
-	return nil;
+    return [[[SQLController alloc] initWithProfile:aProfile] autorelease];
 }
 @end
