@@ -23,7 +23,7 @@
 
 @interface MainPlayerToolbarController : NSObject {
 	UnifiedToolbar *_toolbar;
-	UnifiedToolbarItem *_playerItem, *_stopItem;
+	UnifiedToolbarItem *_playerItem, *_stopItem, *_shuffleItem;
 	NSMutableDictionary *_toolbarItems;
 	PWVolumeSlider *_volumeSlider;
 	PWMusicSearchField *_musicSearch;	

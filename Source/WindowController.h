@@ -121,6 +121,7 @@ extern const NSString *dProfile;
 - (IBAction) nextAlbum:(id)sender;
 - (IBAction) prevAlbum:(id)sender;	
 - (IBAction) stop:(id)sender;
+- (IBAction) shuffle:(id)sender;
 - (IBAction) showPlayerWindow:(id)sender;
 - (IBAction) showLicense:(id)sender;
 - (IBAction) showLibrary:(id)sender;

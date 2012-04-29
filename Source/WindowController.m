@@ -564,6 +564,10 @@ const NSString *dProfile = @"dProfile";
 	[mClient stopPlayback];
 }
 
+- (IBAction) shuffle:(id)sender {
+	[mClient toggleShuffle];
+}
+
 - (IBAction) showPlayerWindow:(id)sender {
 	if ([[NSApp keyWindow] isEqualTo:mWindow])
 		[mClient playerWindowFocused];
