@@ -77,7 +77,7 @@
 	[mTrackNumber setStringValue:[song track]];
 }
 
-- (void) showSongs:(NSArray *)theSongs {
+- (void) showSongs:(NSMutableArray *)theSongs {
 	[mSongs release];
 	mSongs = [theSongs retain];
 	mCurrentIndex = 0;
