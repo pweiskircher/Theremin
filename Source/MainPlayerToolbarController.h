@@ -21,7 +21,7 @@
 
 @class UnifiedToolbar, UnifiedToolbarItem, PWVolumeSlider, PWMusicSearchField;
 
-@interface MainPlayerToolbarController : NSObject {
+@interface MainPlayerToolbarController : NSObject <NSToolbarDelegate> {
 	UnifiedToolbar *_toolbar;
 	UnifiedToolbarItem *_playerItem, *_stopItem, *_shuffleItem;
 	NSMutableDictionary *_toolbarItems;

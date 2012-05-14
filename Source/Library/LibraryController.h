@@ -25,7 +25,7 @@
 @class LibraryArtistSubController, LibraryAlbumSubController, LibrarySongSubController;
 @class LibrarySearchController, LibraryGenreSubController;
 
-@interface LibraryController : NSObject {
+@interface LibraryController : NSObject <NSToolbarDelegate> {
 	IBOutlet PWWindow *mWindow;
 	
 	LibraryArtistSubController *mArtistController;

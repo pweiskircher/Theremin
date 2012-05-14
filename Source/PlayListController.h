@@ -24,7 +24,7 @@ extern NSString *gMpdUniqueIdentifierType;
 
 @class WindowController, Song, PWMusicSearchField, PWTableView;
 
-@interface PlayListController : NSObject {
+@interface PlayListController : NSObject <NSTableViewDataSource> {
 	IBOutlet WindowController *mController;
 	IBOutlet PWTableView *mTableView;
 	
