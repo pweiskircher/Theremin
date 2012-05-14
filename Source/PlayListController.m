@@ -228,7 +228,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			}
 		}
 	} else {
-		if (!mPlayList || [mPlayList count] < 0)
+		if ( ! [mPlayList count])
 			return -1;
 		
 		row = mCurrentPlayingSongPosition;
