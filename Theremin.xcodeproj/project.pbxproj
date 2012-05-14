@@ -378,7 +378,7 @@
 		43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputDeviceHandler.h; sourceTree = "<group>"; };
 		43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputDeviceHandler.m; sourceTree = "<group>"; };
 		43D0126C0B8B66BA00711A1B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D2549B0B4D80B900660DD9 /* MPSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPSlider.h; path = Source/subclasses/MPSlider.h; sourceTree = "<group>"; };
 		43D254A90B4D80F200660DD9 /* MPSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = MPSlider.m; path = Source/subclasses/MPSlider.m; sourceTree = "<group>"; };
 		43E7F6430B415860005FEC19 /* LicenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LicenseController.h; path = Source/LicenseController.h; sourceTree = "<group>"; };
