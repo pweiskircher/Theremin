@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -109,9 +109,7 @@
 		43D254AA0B4D80F200660DD9 /* MPSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D254A90B4D80F200660DD9 /* MPSlider.m */; };
 		43E7F6450B415860005FEC19 /* LicenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7F6440B415860005FEC19 /* LicenseController.m */; };
 		43E887320F0977EB003F708D /* NSArray+Transformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E887310F0977EB003F708D /* NSArray+Transformations.m */; };
-		43E91FF615224EF5003FFDF5 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E91FF415224EF5003FFDF5 /* Growl.framework */; };
 		43E91FF715224EF5003FFDF5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E91FF515224EF5003FFDF5 /* Sparkle.framework */; };
-		43E91FF9152250BB003FFDF5 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43E91FF415224EF5003FFDF5 /* Growl.framework */; };
 		43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43E91FF515224EF5003FFDF5 /* Sparkle.framework */; };
 		43F0BACF0BBE980A00018704 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BA980BBE980A00018704 /* appicon.icns */; };
 		43F0BAD00BBE980A00018704 /* at.justp.theremin.userDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */; };
@@ -173,6 +171,7 @@
 		43FFC4060FC202C7002620C0 /* RemoteControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4000FC202C7002620C0 /* RemoteControl.m */; };
 		43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */; };
 		43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */; };
+		482A0DDD1560DA610020522F /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A0DDC1560DA600020522F /* Growl.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -184,7 +183,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
-				43E91FF9152250BB003FFDF5 /* Growl.framework in CopyFiles */,
 				43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +383,6 @@
 		43E7F6440B415860005FEC19 /* LicenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LicenseController.m; path = Source/LicenseController.m; sourceTree = "<group>"; };
 		43E887300F0977EB003F708D /* NSArray+Transformations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Transformations.h"; path = "Source/Additions/NSArray+Transformations.h"; sourceTree = "<group>"; };
 		43E887310F0977EB003F708D /* NSArray+Transformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Transformations.m"; path = "Source/Additions/NSArray+Transformations.m"; sourceTree = "<group>"; };
-		43E91FF415224EF5003FFDF5 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		43E91FF515224EF5003FFDF5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		43F0BA980BBE980A00018704 /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = Resources/appicon.icns; sourceTree = "<group>"; };
 		43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; name = at.justp.theremin.userDefaults.plist; path = Resources/at.justp.theremin.userDefaults.plist; sourceTree = "<group>"; };
@@ -458,6 +455,7 @@
 		43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlContainer.m; sourceTree = "<group>"; };
 		43FFC4090FC202D2002620C0 /* AppleRemoteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleRemoteController.h; sourceTree = "<group>"; };
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
+		482A0DDC1560DA600020522F /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -471,8 +469,8 @@
 				43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */,
 				43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */,
 				43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */,
-				43E91FF615224EF5003FFDF5 /* Growl.framework in Frameworks */,
 				43E91FF715224EF5003FFDF5 /* Sparkle.framework in Frameworks */,
+				482A0DDD1560DA610020522F /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +514,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43E91FF415224EF5003FFDF5 /* Growl.framework */,
+				482A0DDC1560DA600020522F /* Growl.framework */,
 				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
 				43A1ADAF0E5794B200226081 /* RBSplitView.framework */,
 				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
@@ -1080,8 +1078,11 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Theremin" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1344,34 +1345,24 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../squeezelib/build/Debug\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-DTHREADSAFE=1";
 				PRODUCT_NAME = Theremin;
 				SDKROOT = macosx;
 				SYMROOT = ../../build;
-				USER_HEADER_SEARCH_PATHS = "<Multiple values> $(PROJECT_DIR)/";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
@@ -1380,14 +1371,9 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
@@ -1400,16 +1386,12 @@
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Theremin;
 				SDKROOT = macosx;
 				SYMROOT = ../../build;
-				USER_HEADER_SEARCH_PATHS = "<Multiple values> $(PROJECT_DIR)/";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1425,7 +1407,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 				SYMROOT = ../../../build;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1435,8 +1416,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1446,7 +1426,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Release;
