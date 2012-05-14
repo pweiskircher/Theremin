@@ -172,6 +172,7 @@
 		43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */; };
 		43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */; };
 		482A0DDD1560DA610020522F /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A0DDC1560DA600020522F /* Growl.framework */; };
+		482A0DDE1560DD500020522F /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482A0DDC1560DA600020522F /* Growl.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,7 @@
 			files = (
 				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
 				43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */,
+				482A0DDE1560DD500020522F /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
