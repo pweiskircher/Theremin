@@ -112,7 +112,7 @@ static unsigned int gBindCounter;
 
 - (NSDictionary *) boundValues {
 	if (!_processed) [LibraryFilterToSQLQueryConverterException raise:(NSString *)cNotProcessedException format:@"Filters not processed yet"];
-	return [NSDictionary dictionaryWithDictionary:_boundValues];
+	return [NSMutableDictionary dictionaryWithDictionary:_boundValues];
 }
 
 

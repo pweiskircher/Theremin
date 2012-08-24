@@ -32,7 +32,7 @@
 - (void) process;
 
 - (NSString *) whereClause;
-- (NSDictionary *) boundValues;
+- (NSMutableDictionary *) boundValues;
 @end
 
 @interface LibraryFilterToSQLQueryConverterException : NSException {
