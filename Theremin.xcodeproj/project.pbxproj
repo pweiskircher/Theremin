@@ -457,7 +457,7 @@
 		43FFC4090FC202D2002620C0 /* AppleRemoteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleRemoteController.h; sourceTree = "<group>"; };
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
 		480249D715E7AC1F0029CBC7 /* InfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoPanel.xib; path = Resources/InfoPanel.xib; sourceTree = "<group>"; };
-		480249DE15E7AD030029CBC7 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		480249DE15E7AD030029CBC7 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		480249E015E7ADE40029CBC7 /* PlayListFiles.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayListFiles.xib; path = Resources/PlayListFiles.xib; sourceTree = "<group>"; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
