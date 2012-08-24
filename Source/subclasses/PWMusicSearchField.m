@@ -71,10 +71,6 @@
 
 - (int) mpdSongFlagsForSearchState {
 	switch ([self searchState]) {
-		case eMusicFlagsAll:
-			return eArtist | eAlbum | eTitle;
-			break;
-			
 		case eMusicFlagsArtist:
 			return eArtist;
 			break;
@@ -86,6 +82,9 @@
 		case eMusicFlagsTitle:
 			return eTitle;
 			break;
+			
+		default:
+			return eArtist | eAlbum | eTitle;
 	}
 	return 0;
 }
