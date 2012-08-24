@@ -329,7 +329,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 - (NSData *) databaseIdentifier {
-	NSString *string = [NSString stringWithFormat:@"%08d", mpd_server_get_database_update_time(mConnection)];
+	NSString *string = [NSString stringWithFormat:@"%08ld", mpd_server_get_database_update_time(mConnection)];
 	return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
 
