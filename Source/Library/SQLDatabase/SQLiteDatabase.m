@@ -55,7 +55,7 @@ void sqlitetrace(void *gna, const char *s) {
 
 - (BOOL) open {
 	NSString *directory = [mFilename stringByDeletingLastPathComponent];
-	[[NSFileManager defaultManager] createDirectoryAtPath:directory attributes:nil];
+	[[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:nil];
 	
 	int result = sqlite3_open([mFilename UTF8String], &mDatabase);
 	if (result != SQLITE_OK) {
