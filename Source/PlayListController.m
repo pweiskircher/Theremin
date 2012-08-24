@@ -143,7 +143,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	if (mDisallowPlaylistUpdates == YES)
 		return;
 	
-	NSArray *songs = [[notification userInfo] objectForKey:dSongs];
+	NSMutableArray *songs = [[notification userInfo] objectForKey:dSongs];
 	[mPlayList release];
 	mPlayList = [songs retain];
 	
