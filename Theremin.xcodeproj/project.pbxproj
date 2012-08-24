@@ -171,8 +171,8 @@
 		43FFC4060FC202C7002620C0 /* RemoteControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4000FC202C7002620C0 /* RemoteControl.m */; };
 		43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */; };
 		43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */; };
-		482A0DDD1560DA610020522F /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482A0DDC1560DA600020522F /* Growl.framework */; };
-		482A0DDE1560DD500020522F /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 482A0DDC1560DA600020522F /* Growl.framework */; };
+		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
+		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -185,7 +185,7 @@
 			files = (
 				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
 				43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */,
-				482A0DDE1560DD500020522F /* Growl.framework in CopyFiles */,
+				48A954F615E7206700289B16 /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +457,7 @@
 		43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlContainer.m; sourceTree = "<group>"; };
 		43FFC4090FC202D2002620C0 /* AppleRemoteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleRemoteController.h; sourceTree = "<group>"; };
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
-		482A0DDC1560DA600020522F /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -472,7 +472,7 @@
 				43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */,
 				43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */,
 				43E91FF715224EF5003FFDF5 /* Sparkle.framework in Frameworks */,
-				482A0DDD1560DA610020522F /* Growl.framework in Frameworks */,
+				48A954F515E71FE100289B16 /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +516,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				482A0DDC1560DA600020522F /* Growl.framework */,
+				48A954F415E71FE100289B16 /* Growl.framework */,
 				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
 				43A1ADAF0E5794B200226081 /* RBSplitView.framework */,
 				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
@@ -1349,7 +1349,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"\"$(SRCROOT)\"",
+				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../squeezelib/build/Debug\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1375,7 +1378,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"\"$(SRCROOT)\"",
+				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)\"";
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
