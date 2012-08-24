@@ -1,3 +1,7 @@
+  Theremin 0.6.3:
+    * Updated Apple Remote support for newer OS X.
+    * Updated Growl support, now falls back to to 10.8 Notification Center.
+
   Theremin 0.6.2.3:
     * Fix some oddities on Snow Leopard regarding the Profile systems.
     * Fix several memory leaks.
