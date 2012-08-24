@@ -6,7 +6,7 @@ New features since 2008:
 ------------------------
 * Updated Growl with 10.8 Notification Center support
 * Shuffle button (by [biappi](https://github.com/biappi))
-* Fixed Apple Remote on Lion (by [rubenvandeven](https://github.com/rubenvandeven))
+* Updated code for handling Apple Remotes
 
 Download built .app
 -------------------
