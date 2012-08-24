@@ -7,6 +7,7 @@ New features since 2008:
 * Updated Growl with 10.8 Notification Center support
 * Shuffle button (by [biappi](https://github.com/biappi))
 * Updated code for handling Apple Remotes
+* 64bit build (universal binary)
 
 Download built .app
 -------------------
