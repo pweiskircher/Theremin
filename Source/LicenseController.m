@@ -43,7 +43,7 @@
 	if (mLoaded == NO) {
 		NSString *filename = [[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@""];
 		if (filename != nil) {
-			NSString *license = [NSString stringWithContentsOfFile:filename];
+			NSString *license = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
 			[mTextField setString:license];
 		} else {
 			[mTextField setString:@"License file not found. Please see http://www.gnu.org/licenses/gpl.txt"];
