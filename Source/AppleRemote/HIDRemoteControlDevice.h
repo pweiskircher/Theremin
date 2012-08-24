@@ -38,9 +38,9 @@
 	IOHIDQueueInterface**  queue;
 	NSMutableArray*		   allCookies;
 	NSMutableDictionary*   cookieToButtonMapping;
-	CFRunLoopSourceRef	   eventSource;
 	
-	BOOL fixSecureEventInputBug;
+	__strong CFRunLoopSourceRef	   eventSource;
+	
 	BOOL openInExclusiveMode;
 	BOOL processesBacklog;	
 	
@@ -54,11 +54,18 @@
 - (BOOL) processesBacklog;
 - (void) setProcessesBacklog: (BOOL) value;
 
-// methods that should be overwritten by subclasses
+// methods that should be overridden by subclasses
 - (void) setCookieMappingInDictionary: (NSMutableDictionary*) cookieToButtonMapping;
 
 - (void) sendRemoteButtonEvent: (RemoteControlEventIdentifier) event pressedDown: (BOOL) pressedDown;
 
++ (const char*) remoteControlDeviceName;
+
+// protected methods
+- (void) openRemoteControlDevice;
+- (void) closeRemoteControlDevice: (BOOL) shallSendNotifications;
+
++ (io_object_t) findRemoteDevice;
 + (BOOL) isRemoteAvailable;
 
 @end
