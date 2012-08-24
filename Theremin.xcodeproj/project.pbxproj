@@ -173,6 +173,7 @@
 		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
+		48A9551315E7705900289B16 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 48A9551215E7705900289B16 /* CHANGELOG */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -458,6 +459,7 @@
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -917,6 +919,7 @@
 			children = (
 				48A954F715E72ED300289B16 /* README.markdown */,
 				43F0BA9C0BBE980A00018704 /* Credits.rtf */,
+				48A9551215E7705900289B16 /* CHANGELOG */,
 				43F0BA980BBE980A00018704 /* appicon.icns */,
 				43D0C8B50C13F25900940B39 /* Localizable.strings */,
 				43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */,
@@ -1183,6 +1186,7 @@
 				43156DC20FBF020C00EF3ECA /* empty.png in Resources */,
 				43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */,
 				48A954F815E72ED300289B16 /* README.markdown in Resources */,
+				48A9551315E7705900289B16 /* CHANGELOG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
