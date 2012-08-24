@@ -41,7 +41,7 @@ NSString *gPlayListFilePropertyFilePath = @"gPlayListFilePropertyFilePath";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"PlayListFile <0x%08x> Path: %@", self, [self filePath]];
+	return [NSString stringWithFormat:@"PlayListFile <%p> Path: %@", self, [self filePath]];
 }
 
 - (void) dealloc {

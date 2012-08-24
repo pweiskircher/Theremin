@@ -26,7 +26,7 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Genre <0x%08x> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
+	return [NSString stringWithFormat:@"Genre <%p> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
 }
 
 - (NSString *) name {

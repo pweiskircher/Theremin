@@ -59,7 +59,7 @@ NSString *gDirectoryPropertyParent = @"gDirectoryPropertyParent";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Directory <0x%08x> Path: %@", self, [self path]];
+	return [NSString stringWithFormat:@"Directory <%p> Path: %@", self, [self path]];
 }
 
 - (void) dealloc {

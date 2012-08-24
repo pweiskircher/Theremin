@@ -138,7 +138,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 }
 
 - (NSString *)description {
-	NSString *str = [NSString stringWithFormat:@"Song <0x%08x>. Name: %@ Artist: %@ Album: %@ Filename: %@", self, 
+	NSString *str = [NSString stringWithFormat:@"Song <%p>. Name: %@ Artist: %@ Album: %@ Filename: %@", self, 
 		[self name], [self artist], [self album], [self file]];
 	return str;
 }

@@ -37,7 +37,7 @@ NSString *gUnknownAlbumName = @"gUnknownAlbumName";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Album <0x%08x> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
+	return [NSString stringWithFormat:@"Album <%p> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
 }
 
 - (NSString *) name {
