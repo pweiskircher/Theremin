@@ -314,9 +314,13 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	}
 	
 	NSString *name = [item valueForKey:key];
-	if (name == nil)
-		if (fallback != nil) name = fallback;
-		else return -1;
+	if (name == nil) {
+		if (fallback != nil) {
+            name = fallback;
+        } else {
+			return -1;
+		}
+    }
 	
 	if (![mSelectQuery bindString:name toName:@":NAME"])
 		return -1;
