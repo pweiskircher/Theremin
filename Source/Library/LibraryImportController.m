@@ -185,7 +185,7 @@ const NSString *gDatabaseIdentifierKey = @"gDatabaseIdentifierKey";
 	if (supportsCompilations) {
 		NSArray *array = [NSUnarchiver unarchiveObjectWithFile:compilationBackupFilename];
 		[dataSource setCompilationByUniqueIdentifiers:array];
-		[[NSFileManager defaultManager] removeFileAtPath:compilationBackupFilename handler:NULL];		
+        [[NSFileManager defaultManager] removeItemAtPath:compilationBackupFilename error:nil];
 	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nFinishedLibraryImport object:self userInfo:nil waitUntilDone:YES];

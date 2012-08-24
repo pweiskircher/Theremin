@@ -153,7 +153,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 		if (version < THEREMIN_SQLITE_DATABASE_VERSION) {
 			NSLog(@"upgrading database ...");
 			[mDatabase close];
-			[[NSFileManager defaultManager] removeFileAtPath:[mDatabase filename] handler:NULL];
+            [[NSFileManager defaultManager] removeItemAtPath:mDatabase.filename error:nil];
 			[self startup];
 			return;
 		}
