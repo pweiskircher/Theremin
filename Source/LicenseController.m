@@ -41,6 +41,9 @@
 
 - (void) show {
 	if (mLoaded == NO) {
+		// Why it won't set through InterfaceBuilder?
+		[mTextField setFont:[NSFont fontWithName:@"Monaco" size:10]];
+		
 		NSString *filename = [[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@""];
 		if (filename != nil) {
 			NSString *license = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
