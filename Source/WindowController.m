@@ -296,7 +296,7 @@ const NSString *dProfile = @"dProfile";
 	Profile *currentProfile = [[PreferencesController sharedInstance] currentProfile];
 
 	for (int i = 0; i < [[profilesMenu itemArray] count]; i++) {
-		ProfileMenuItem *item = [profilesMenu itemAtIndex:i];
+		ProfileMenuItem *item = (ProfileMenuItem *)[profilesMenu itemAtIndex:i];
 		if ([[item profile] isEqualToProfile:currentProfile])
 			[item setState:NSOnState];
 		else
@@ -304,7 +304,7 @@ const NSString *dProfile = @"dProfile";
 	}
 	
 	for (int i = 0; i < [[[_profileChooser menu] itemArray] count]; i++) {
-		ProfileMenuItem *item = [[_profileChooser menu] itemAtIndex:i];
+		ProfileMenuItem *item = (ProfileMenuItem *)[[_profileChooser menu] itemAtIndex:i];
 		if ([[item profile] isEqualToProfile:currentProfile]) {
 			[_profileChooser selectItem:item];
 			break;
