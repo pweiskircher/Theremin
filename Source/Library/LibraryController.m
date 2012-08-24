@@ -104,9 +104,7 @@ static NSString *tSearchField = @"tSearchField";
 	return self;
 }
 
-- (void) awakeFromNib {	
-	_dividerImage = [[mSplitView divider] retain];
-	
+- (void) awakeFromNib {
 	[mWindow setToolbar:mToolbar];
 	
 	[self clientDisconnected:nil];
@@ -152,9 +150,6 @@ static NSString *tSearchField = @"tSearchField";
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem {
 	if ([menuItem action] != @selector(setToggleIsPartOfCompilation:))
 		return YES;
-	
-	if (_titleShown == NO)
-		return NO;
 	
 	NSArray *songs = [mSongController getSelected:NULL];
 	int state = NSOffState;
@@ -232,18 +227,6 @@ static NSString *tSearchField = @"tSearchField";
 		[[scrollers objectAtIndex:i] setFrame:NSMakeRect(i*width, 0, width, height)];
 	
 	[mGenreScroller setHidden:!show];
-}
-
-- (void) showTitleView:(BOOL)show {
-	_titleShown = show;
-	
-	if (show) {
-		[mTitleSplitView expand];
-		[mSplitView setDivider:_dividerImage];
-	} else {
-		[mTitleSplitView collapse];
-		[mSplitView setDivider:nil];
-	}
 }
 
 - (void) profileSwitched:(NSNotification *)aNotification {
