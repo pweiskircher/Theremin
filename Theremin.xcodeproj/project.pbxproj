@@ -100,7 +100,6 @@
 		43BF74750F0701EB00420B56 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF74730F0701EB00420B56 /* Preferences.nib */; };
 		43BF77790BB52CCD00715336 /* Library.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77700BB52CCD00715336 /* Library.nib */; };
 		43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77720BB52CCD00715336 /* MainMenu.nib */; };
-		43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77740BB52CCD00715336 /* PlayListFiles.nib */; };
 		43BF777C0BB52CCD00715336 /* UpdateDatabase.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77760BB52CCD00715336 /* UpdateDatabase.nib */; };
 		43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */; };
 		43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D0126C0B8B66BA00711A1B /* IOKit.framework */; };
@@ -171,6 +170,7 @@
 		43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */; };
 		480249D815E7AC1F0029CBC7 /* InfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249D715E7AC1F0029CBC7 /* InfoPanel.xib */; };
 		480249DF15E7AD030029CBC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 480249DD15E7AD030029CBC7 /* InfoPlist.strings */; };
+		480249E115E7ADE40029CBC7 /* PlayListFiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E015E7ADE40029CBC7 /* PlayListFiles.xib */; };
 		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
@@ -373,7 +373,6 @@
 		43BF74740F0701EB00420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		43BF77710BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Library.nib; sourceTree = "<group>"; };
 		43BF77730BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		43BF77750BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PlayListFiles.nib; sourceTree = "<group>"; };
 		43BF77770BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UpdateDatabase.nib; sourceTree = "<group>"; };
 		43C45DB10F09064300911191 /* ThereminEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThereminEntity.h; path = Source/MusicServer/ThereminEntity.h; sourceTree = "<group>"; };
 		43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputDeviceHandler.h; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
 		480249D715E7AC1F0029CBC7 /* InfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoPanel.xib; path = Resources/InfoPanel.xib; sourceTree = "<group>"; };
 		480249DE15E7AD030029CBC7 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		480249E015E7ADE40029CBC7 /* PlayListFiles.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayListFiles.xib; path = Resources/PlayListFiles.xib; sourceTree = "<group>"; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
@@ -812,8 +812,8 @@
 				43BF74730F0701EB00420B56 /* Preferences.nib */,
 				43BF77700BB52CCD00715336 /* Library.nib */,
 				43BF77720BB52CCD00715336 /* MainMenu.nib */,
-				43BF77740BB52CCD00715336 /* PlayListFiles.nib */,
 				43BF77760BB52CCD00715336 /* UpdateDatabase.nib */,
+				480249E015E7ADE40029CBC7 /* PlayListFiles.xib */,
 				480249D715E7AC1F0029CBC7 /* InfoPanel.xib */,
 			);
 			name = "Nib Files";
@@ -1130,7 +1130,6 @@
 			files = (
 				43BF77790BB52CCD00715336 /* Library.nib in Resources */,
 				43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */,
-				43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */,
 				43BF777C0BB52CCD00715336 /* UpdateDatabase.nib in Resources */,
 				43F0BACF0BBE980A00018704 /* appicon.icns in Resources */,
 				43F0BAD00BBE980A00018704 /* at.justp.theremin.userDefaults.plist in Resources */,
@@ -1192,6 +1191,7 @@
 				48A9551315E7705900289B16 /* CHANGELOG in Resources */,
 				480249D815E7AC1F0029CBC7 /* InfoPanel.xib in Resources */,
 				480249DF15E7AD030029CBC7 /* InfoPlist.strings in Resources */,
+				480249E115E7ADE40029CBC7 /* PlayListFiles.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1333,14 +1333,6 @@
 				43BF77730BB52CCD00715336 /* English */,
 			);
 			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		43BF77740BB52CCD00715336 /* PlayListFiles.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77750BB52CCD00715336 /* English */,
-			);
-			name = PlayListFiles.nib;
 			sourceTree = "<group>";
 		};
 		43BF77760BB52CCD00715336 /* UpdateDatabase.nib */ = {
