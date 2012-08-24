@@ -42,8 +42,6 @@ NSString *gSongPropertyUniqueIdentifier = @"gSongPropertyUniqueIdentifier";
 NSString *gSongPropertySqlIdentifier = @"gSongPropertySqlIdentifier";
 NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 
-#warning FIXME: remove libmpdclient dependency.
-
 @interface Song (PrivateMethods)
 - (NSDictionary *) values;
 @end
