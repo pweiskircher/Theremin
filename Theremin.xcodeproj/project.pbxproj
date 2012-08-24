@@ -97,7 +97,6 @@
 		43BD36731052E628001E30F0 /* libmpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36661052E628001E30F0 /* libmpd.c */; };
 		43BD36741052E628001E30F0 /* libmpdclient.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36681052E628001E30F0 /* libmpdclient.c */; };
 		43BF77790BB52CCD00715336 /* Library.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77700BB52CCD00715336 /* Library.nib */; };
-		43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77720BB52CCD00715336 /* MainMenu.nib */; };
 		43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */; };
 		43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D0126C0B8B66BA00711A1B /* IOKit.framework */; };
 		43D0C8B70C13F25900940B39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D0C8B50C13F25900940B39 /* Localizable.strings */; };
@@ -171,6 +170,7 @@
 		480249E315E7AFB40029CBC7 /* LicenseWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E215E7AFB40029CBC7 /* LicenseWindow.xib */; };
 		480249E515E7B10B0029CBC7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E415E7B10B0029CBC7 /* Preferences.xib */; };
 		480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E615E7B3310029CBC7 /* UpdateDatabase.xib */; };
+		480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E815E7B3990029CBC7 /* MainMenu.xib */; };
 		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
@@ -370,7 +370,6 @@
 		43BD36691052E628001E30F0 /* libmpdclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libmpdclient.h; path = "libmpdclient-0.18.96/src/libmpdclient.h"; sourceTree = "<group>"; };
 		43BD367D1052E699001E30F0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "libmpdclient-0.18.96/src/config.h"; sourceTree = "<group>"; };
 		43BF77710BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Library.nib; sourceTree = "<group>"; };
-		43BF77730BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		43C45DB10F09064300911191 /* ThereminEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThereminEntity.h; path = Source/MusicServer/ThereminEntity.h; sourceTree = "<group>"; };
 		43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputDeviceHandler.h; sourceTree = "<group>"; };
 		43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputDeviceHandler.m; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		480249E215E7AFB40029CBC7 /* LicenseWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LicenseWindow.xib; path = Resources/LicenseWindow.xib; sourceTree = "<group>"; };
 		480249E415E7B10B0029CBC7 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Preferences.xib; path = Resources/Preferences.xib; sourceTree = "<group>"; };
 		480249E615E7B3310029CBC7 /* UpdateDatabase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateDatabase.xib; path = Resources/UpdateDatabase.xib; sourceTree = "<group>"; };
+		480249E815E7B3990029CBC7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resources/MainMenu.xib; sourceTree = "<group>"; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
@@ -812,7 +812,7 @@
 				480249E415E7B10B0029CBC7 /* Preferences.xib */,
 				480249E615E7B3310029CBC7 /* UpdateDatabase.xib */,
 				43BF77700BB52CCD00715336 /* Library.nib */,
-				43BF77720BB52CCD00715336 /* MainMenu.nib */,
+				480249E815E7B3990029CBC7 /* MainMenu.xib */,
 				480249E015E7ADE40029CBC7 /* PlayListFiles.xib */,
 				480249D715E7AC1F0029CBC7 /* InfoPanel.xib */,
 			);
@@ -1129,7 +1129,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BF77790BB52CCD00715336 /* Library.nib in Resources */,
-				43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */,
 				43F0BACF0BBE980A00018704 /* appicon.icns in Resources */,
 				43F0BAD00BBE980A00018704 /* at.justp.theremin.userDefaults.plist in Resources */,
 				43F0BAD10BBE980A00018704 /* FallbackCover.png in Resources */,
@@ -1192,6 +1191,7 @@
 				480249E315E7AFB40029CBC7 /* LicenseWindow.xib in Resources */,
 				480249E515E7B10B0029CBC7 /* Preferences.xib in Resources */,
 				480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */,
+				480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,14 +1309,6 @@
 				43BF77710BB52CCD00715336 /* English */,
 			);
 			name = Library.nib;
-			sourceTree = "<group>";
-		};
-		43BF77720BB52CCD00715336 /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77730BB52CCD00715336 /* English */,
-			);
-			name = MainMenu.nib;
 			sourceTree = "<group>";
 		};
 		43D0C8B50C13F25900940B39 /* Localizable.strings */ = {
