@@ -198,7 +198,7 @@ NSString *dEnabled = @"dEnabled";
 - (oneway void) moveSongFromPosition:(int)src toPosition:(int)dest {
 }
 
-- (oneway void) loadPlaylist:(PlayListFile *)aPlayListFile {
+- (oneway void) loadPlaylist:(bycopy PlayListFile *)aPlayListFile {
 	[NSException raise:NSInternalInconsistencyException format:@"You need to overwrite the loadPlaylist: method."];
 }
 
