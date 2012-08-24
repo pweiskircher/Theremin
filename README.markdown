@@ -5,8 +5,8 @@ I usually develop for iOS, but in the absence of better MPD client for OS X i pi
 New features since 2008:
 ------------------------
 * Updated Growl with 10.8 Notification Center support
-* Shuffle button (by biappi)
-* Fxied Apple Remote on Lion (by rubenvandeven)
+* Shuffle button (by [biappi](https://github.com/biappi))
+* Fixed Apple Remote on Lion (by [rubenvandeven](https://github.com/rubenvandeven))
 
 Download built .app
 -------------------
