@@ -1,4 +1,5 @@
   Theremin 0.6.3:
+    * Added shuffle button to the toolbar
     * Updated Apple Remote support for newer OS X.
     * Updated Growl support, now falls back to to 10.8 Notification Center.
     * Universal binary with 64bit support
