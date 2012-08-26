@@ -354,13 +354,13 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	return YES;
 }
 
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op {
-	if (op == NSTableViewDropOn)
+- (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
+	if (dropOperation == NSTableViewDropOn)
 		return NSDragOperationNone;
 	return NSDragOperationEvery;
 }
 
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation {
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
 	NSPasteboard *pboard = [info draggingPasteboard];
 	
 	if ([[pboard types] containsObject:gMpdPlaylistPositionType]) {
@@ -374,7 +374,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			while (current_index != NSNotFound)
 			{
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
+				[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				dest++;
 				current_index = [rowIndexes indexGreaterThanIndex: current_index];
@@ -385,7 +385,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			{
 				dest--;
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
+				[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				current_index = [rowIndexes indexLessThanIndex: current_index];
 			}		
