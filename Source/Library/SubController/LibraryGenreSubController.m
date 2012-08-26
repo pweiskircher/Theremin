@@ -25,7 +25,7 @@
 }
 
 - (NSString *) getDisplayTitleOfAllItem {
-	return [NSString stringWithFormat:@"All (%ld Genre%s)", [mItems count], [mItems count] == 1 ? "" : "s"];
+	return [NSString stringWithFormat:@"All (%@ Genre%s)", [NSNumber numberWithUnsignedInteger:[mItems count]], [mItems count] == 1 ? "" : "s"];
 }
 
 - (NSString *)liveSearchColumn {
