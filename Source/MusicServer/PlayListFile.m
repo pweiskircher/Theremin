@@ -78,7 +78,7 @@ NSString *gPlayListFilePropertyFilePath = @"gPlayListFilePropertyFilePath";
 	self = [super init];
 	mValues = [[decoder decodeObject] retain];
 	
-	unsigned length;
+	NSUInteger length;
 	memcpy(&mValid, [decoder decodeBytesWithReturnedLength:&length], sizeof(mValid));
 	
 	return self;

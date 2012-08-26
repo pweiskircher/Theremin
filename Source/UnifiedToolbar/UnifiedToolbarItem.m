@@ -239,8 +239,8 @@
 - (void)setToolTip:(NSString *)toolTip { [self setToolTip:toolTip forSegment:0]; }
 - (NSString *)toolTip { return [self toolTipForSegment:0]; }
 
-- (void)setTag:(int)tag { [self setTag:tag forSegment:0]; }
-- (int)tag { return [self tagForSegment:0]; }
+- (void)setTag:(NSInteger)tag { [self setTag:tag forSegment:0]; }
+- (NSInteger)tag { return [self tagForSegment:0]; }
 
 - (void)setTarget:(id)target { [self setTarget:target forSegment:0]; }
 - (id)target { return [self targetForSegment:0]; }

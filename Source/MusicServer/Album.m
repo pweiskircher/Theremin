@@ -77,7 +77,7 @@ NSString *gUnknownAlbumName = @"gUnknownAlbumName";
 	self = [super init];
 	mName = [[decoder decodeObject] retain];
 	
-	unsigned length;
+	NSUInteger length;
 	memcpy(&_identifier, [decoder decodeBytesWithReturnedLength:&length], sizeof(_identifier));
 	
 	return self;

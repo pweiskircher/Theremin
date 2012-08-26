@@ -30,7 +30,7 @@
 	return self;
 }
 
-- (float)knobThickness
+- (CGFloat)knobThickness
 {
 	if (mKnobImage == nil) return [super knobThickness];
 	return [mKnobImage size].width;

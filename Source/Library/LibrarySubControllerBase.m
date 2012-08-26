@@ -138,10 +138,10 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 		}
 		return [NSArray arrayWithArray:mItems];
 	} else {
-		unsigned int indexes[20];
+		NSUInteger indexes[20];
 		NSRange range = NSMakeRange([self convertToDisplayIndex:0], [self convertToDisplayIndex:[mItems count]]);
 		
-		unsigned int returnValue;
+		NSUInteger returnValue;
 		NSMutableArray *selectedItems = [NSMutableArray array];
 		
 		while ( (returnValue = [selection getIndexes:indexes maxCount:20 inIndexRange:&range])) {
@@ -270,16 +270,15 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 #pragma mark -
 #pragma mark Table View Stuff
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
 	return mHasAllEntry ? [mItems count] + 1 : [mItems count];
 }
 
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-	if (rowIndex == 0 && mHasAllEntry)
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	if (row == 0 && mHasAllEntry)
 		return [self getDisplayTitleOfAllItem];
 	
-	return [[mItems objectAtIndex:[self convertToListIndex:rowIndex]] name];
+	return [[mItems objectAtIndex:[self convertToListIndex:row]] name];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {

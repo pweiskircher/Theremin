@@ -274,28 +274,28 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		[mTableView setNeedsDisplayInRect:[mTableView rectOfRow:row]];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
 	if (mFilteredPlaylist != nil)
 		return [mFilteredPlaylist count];
 	return [mPlayList count];
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 	Song *song;
 	int playlistPosition;
 	
 	if (mFilteredPlaylist) {
-		NSDictionary *dict = [mFilteredPlaylist objectAtIndex:rowIndex];
+		NSDictionary *dict = [mFilteredPlaylist objectAtIndex:row];
 		song = [dict objectForKey:dSong];
 		playlistPosition = [[dict objectForKey:@"playlistPosition"] intValue];
 	} else {
-		song = [self songAtRow:rowIndex];
-		playlistPosition = rowIndex;
+		song = [self songAtRow:row];
+		playlistPosition = row;
 	}
 	
-	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
+	if ([[tableColumn identifier] isEqualToString:@"time"]) {
 		return [NSString convertSecondsToTime:[song time] andIsValid:NULL];
-	} else if ([[aTableColumn identifier] isEqualToString:@"isPlaying"]) {
+	} else if ([[tableColumn identifier] isEqualToString:@"isPlaying"]) {
 		if (mCurrentPlayingSongPosition == playlistPosition) {
 			if ([mController currentPlayerState] == eStatePlaying) {
 				return [NSImage imageNamed:@"isPlaying"];
@@ -312,12 +312,12 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		}
 	} else {
 		NSString *key;
-		if ([[aTableColumn identifier] isEqualToString:@"trackNumber"])
+		if ([[tableColumn identifier] isEqualToString:@"trackNumber"])
 			key = @"track";
-		else if ([[aTableColumn identifier] isEqualToString:@"track"])
+		else if ([[tableColumn identifier] isEqualToString:@"track"])
 			key = @"title";
 		else
-			key = [aTableColumn identifier];
+			key = [tableColumn identifier];
 		
 		if ([key isEqualToString:@"title"]) {
 			NSString *title = [song title];
