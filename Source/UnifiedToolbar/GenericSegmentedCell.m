@@ -235,11 +235,11 @@
  * @abstract Set/Get segment width
  */
 - (void)setWidth:(float)width forSegment:(int)segment {
-	[[segments objectAtIndex:segment] setWidth:width];
+	[((GenericSegment *)[segments objectAtIndex:segment]) setWidth:width];
 	[self invalidateDrawInfo]; //must re-calc sizing
 }
 - (float)widthForSegment:(int)segment {
-	return [[segments objectAtIndex:segment] width];
+	return [((GenericSegment *)[segments objectAtIndex:segment]) width];
 }
 
 /*!
@@ -297,10 +297,10 @@
  * @abstract Set/Get segment tag
  */
 - (void)setTag:(int)tag forSegment:(int)segment {
-	[[segments objectAtIndex:segment] setTag:tag];
+	[((GenericSegment *)[segments objectAtIndex:segment]) setTag:tag];
 }
 - (int)tagForSegment:(int)segment {
-	return [[segments objectAtIndex:segment] tag];
+	return [((GenericSegment *)[segments objectAtIndex:segment]) tag];
 }
 
 /*!

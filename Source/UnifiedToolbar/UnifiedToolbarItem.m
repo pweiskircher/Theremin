@@ -304,10 +304,10 @@
  */
 - (void)setTag:(int)tag forSegment:(int)segment
 {
-	[[segments objectAtIndex:segment] setTag:tag];
+	[((UnifiedToolbarItemSegment *)[segments objectAtIndex:segment]) setTag:tag];
 }
 - (int)tagForSegment:(int)segment {
-	return [[segments objectAtIndex:segment] tag];
+	return [((UnifiedToolbarItemSegment *)[segments objectAtIndex:segment]) tag];
 }
 
 /*!

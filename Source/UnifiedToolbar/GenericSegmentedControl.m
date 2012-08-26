@@ -142,10 +142,10 @@
  * All segment properties must be reset after changing the segment count.
  */
 - (void)setSegmentCount:(int)count {
-	[[self cell] setSegmentCount:count];
+	[((GenericSegmentedCell *)[self cell]) setSegmentCount:count];
 }
 - (int)segmentCount {
-	return [[self cell] segmentCount];
+	return [((GenericSegmentedCell *)[self cell]) segmentCount];
 }
 
 /*!
@@ -162,13 +162,13 @@
  * @abstract Set/Get selected segment
  */
 - (void)setSelectedSegment:(int)selectedSegment {
-	[[self cell] setSelectedSegment:selectedSegment];
+	[((GenericSegmentedCell *)[self cell]) setSelectedSegment:selectedSegment];
 }
 - (int)selectedSegment {
-	return [[self cell] selectedSegment];
+	return [((GenericSegmentedCell *)[self cell]) selectedSegment];
 }
 - (BOOL)selectSegmentWithTag:(int)tag {
-	return [[self cell] selectSegmentWithTag:tag];
+	return [((GenericSegmentedCell *)[self cell]) selectSegmentWithTag:tag];
 }
 
 /*!
@@ -190,85 +190,85 @@
  * @abstract Set/Get segment width
  */
 - (void)setWidth:(float)width forSegment:(int)segment {
-	[[self cell] setWidth:width forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setWidth:width forSegment:segment];
 	[self setNeedsDisplay:YES];
 }
 - (float)widthForSegment:(int)segment {
-	return [[self cell] widthForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) widthForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment image
  */
 - (void)setImage:(NSImage *)image forSegment:(int)segment {
-	[[self cell] setImage:image forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setImage:image forSegment:segment];
 	[self setNeedsDisplay:YES];
 }
 - (NSImage *)imageForSegment:(int)segment {
-	return [[self cell] imageForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) imageForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment label
  */
 - (void)setLabel:(NSString *)label forSegment:(int)segment {
-	[[self cell] setLabel:label forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setLabel:label forSegment:segment];
 	[self setNeedsDisplay:YES];
 }
 - (NSString *)labelForSegment:(int)segment {
-	return [[self cell] labelForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) labelForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment menu
  */
 - (void)setMenu:(NSMenu *)menu forSegment:(int)segment {
-	[[self cell] setMenu:menu forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setMenu:menu forSegment:segment];
 }
 - (NSMenu *)menuForSegment:(int)segment {
-	return [[self cell] menuForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) menuForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment tooltip
  */
 - (void)setToolTip:(NSString *)toolTip forSegment:(int)segment {
-	[[self cell] setToolTip:toolTip forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setToolTip:toolTip forSegment:segment];
 }
 - (NSString *)toolTipForSegment:(int)segment {
-	return [[self cell] toolTipForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) toolTipForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment tag
  */
 - (void)setTag:(int)tag forSegment:(int)segment {
-	[[self cell] setTag:tag forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setTag:tag forSegment:segment];
 }
 - (int)tagForSegment:(int)segment {
-	return [[self cell] tagForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) tagForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment selected
  */
 - (void)setSelected:(BOOL)selected forSegment:(int)segment {
-	[[self cell] setSelected:selected forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setSelected:selected forSegment:segment];
 	[self setNeedsDisplay:YES];
 }
 - (BOOL)isSelectedForSegment:(int)segment {
-	return [[self cell] isSelectedForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) isSelectedForSegment:segment];
 }
 
 /*!
  * @abstract Set/Get segment enabled
  */
 - (void)setEnabled:(BOOL)enabled forSegment:(int)segment {
-	[[self cell] setEnabled:enabled forSegment:segment];
+	[((GenericSegmentedCell *)[self cell]) setEnabled:enabled forSegment:segment];
 	[self setNeedsDisplay:YES];
 }
 - (BOOL)isEnabledForSegment:(int)segment {
-	return [[self cell] isEnabledForSegment:segment];
+	return [((GenericSegmentedCell *)[self cell]) isEnabledForSegment:segment];
 }
 
 
