@@ -434,9 +434,9 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 
 - (NSArray *)getSelectedSongs {
 	NSIndexSet *songSelection = [mTableView selectedRowIndexes];
-	unsigned int indexes[20];
+	NSUInteger indexes[20];
 	NSRange range = NSMakeRange(0, [mPlayList count]);
-	unsigned int returnValue;
+	NSUInteger returnValue;
 	
 	NSMutableArray *selectedSongs = [NSMutableArray array];
 	while ( (returnValue = [songSelection getIndexes:indexes maxCount:20 inIndexRange:&range])) {
