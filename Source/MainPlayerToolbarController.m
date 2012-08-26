@@ -109,6 +109,7 @@ NSString *tSearchField = @"tSearchField";
 	[_playerItem setEnabled:enable forSegment:2];
 	
 	[_stopItem setEnabled:enable];
+	[_shuffleItem setEnabled:enable forSegment:0];
 	[_volumeSlider setEnabled:enable];
 	[[self musicSearchField] setEnabled:enable];	
 }
