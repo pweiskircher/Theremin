@@ -23,4 +23,6 @@
 @protocol ThereminEntity <NSObject>
 - (int) identifier;
 - (void) setIdentifier:(int)aIdentifier;
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity>*)entity;
+- (NSString *)name;
 @end

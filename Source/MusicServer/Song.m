@@ -428,4 +428,9 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	return [mValues isEqualToDictionary:[aSong values]];
 }
 
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity> *)entity
+{
+	return [self.name localizedCaseInsensitiveCompare:entity.name];
+}
+
 @end

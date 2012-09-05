@@ -25,24 +25,6 @@
 #import "LibrarySearchController.h"
 #import "WindowController.h"
 
-static int manageableArtistSort(id a1, id a2, void *b) {
-	NSString *artist1 = [a1 name];
-	NSString *artist2 = [a2 name];
-	
-	if ([artist1 isEqualToString:TR_S_COMPILATION])
-		return NSOrderedAscending;
-	if ([artist2 isEqualToString:TR_S_COMPILATION])
-		return NSOrderedDescending;
-	
-	if ([artist1 length] > 4 && [[artist1 substringToIndex:4] caseInsensitiveCompare:@"the "] == NSOrderedSame)
-		artist1 = [artist1 substringFromIndex:4];
-	
-	if ([artist2 length] > 4 && [[artist2 substringToIndex:4] caseInsensitiveCompare:@"the "] == NSOrderedSame)
-		artist2 = [artist2 substringFromIndex:4];
-	
-	return [artist1 caseInsensitiveCompare:artist2];
-}
-
 @interface LibrarySubControllerBase (PrivateMethods)
 - (int) convertToDisplayIndex:(int)i;
 - (int) convertToListIndex:(int)i;
@@ -340,7 +322,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 }
 
 - (NSArray *) sortedArray:(NSArray *)items {
-	return [items sortedArrayUsingFunction:manageableArtistSort context:nil];
+	return [items sortedArrayUsingSelector:@selector(compareTo:)];
 }
 
 @end

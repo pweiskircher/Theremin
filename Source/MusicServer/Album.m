@@ -83,4 +83,9 @@ NSString *gUnknownAlbumName = @"gUnknownAlbumName";
 	return self;
 }
 
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity> *)entity
+{
+	return [self.name localizedCaseInsensitiveCompare:entity.name];
+}
+
 @end

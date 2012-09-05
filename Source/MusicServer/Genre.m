@@ -71,4 +71,10 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 	
 	return self;
 }
+
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity> *)entity
+{
+	return [self.name localizedCaseInsensitiveCompare:entity.name];
+}
+
 @end
