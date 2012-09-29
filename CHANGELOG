@@ -1,3 +1,6 @@
+  Theremin 0.6.4:
+    * Nicer and much more useful Growl notifications
+
   Theremin 0.6.3:
     * Added shuffle button to the toolbar
     * Updated Apple Remote support for newer OS X.

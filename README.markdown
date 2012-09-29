@@ -4,11 +4,11 @@ I usually develop for iOS, but in the absence of better MPD client for OS X i pi
 
 New features since 2008:
 ------------------------
-* Updated Growl with 10.8 Notification Center support
+* 64bit build (universal binary)
 * Shuffle button (by [biappi](https://github.com/biappi))
 * Updated code for handling Apple Remotes
-* 64bit build (universal binary)
-* Growl when stream title changes
+* Updated Growl with 10.8 Notification Center support
+* Growl when stream title changes, fall back to icyName and filename
 
 Download built .app
 -------------------

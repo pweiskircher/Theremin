@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.6.3</string>
+	<string>0.6.4</string>
 	<key>CFBundleSignature</key>
 	<string>PAWE</string>
 	<key>CFBundleVersion</key>
-	<string>20120929</string>
+	<string>20120930</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
