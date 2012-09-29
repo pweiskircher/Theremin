@@ -75,35 +75,43 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	}
 }
 
-- (void) sendGrowlInfo:(NSTimer *)aTimer {
-	BOOL gotSomething = NO;
-	NSString *title = [_currentSong title];
-	if (!title)
-		title = @"Unknown Title";
-	else
-		gotSomething = YES;
+- (void) sendGrowlInfo:(NSTimer *)aTimer {	
+	NSMutableArray *notableTags = [NSMutableArray array];
 	
-	NSString *album = [_currentSong album];
-	if (!album)
-		album = @"Unknown Album";
-	else
-		gotSomething = YES;
-	
-	NSString *artist = [_currentSong artist];
-	if (!artist)
-		artist = @"Unknown Artist";
-	else
-		gotSomething = YES;
-	
-	if (gotSomething) {
-		[GrowlApplicationBridge notifyWithTitle:[NSString stringWithFormat:NSLocalizedString(@"Playing: %@", @"Growl Notification Title"), title]
-									description:[NSString stringWithFormat:@"%@\n%@", album, artist]
-							   notificationName:nGrowlNotificationPlaying
-									   iconData:nil
-									   priority:0
-									   isSticky:NO
-								   clickContext:nGrowlNotificationPlaying];	
+	if (_currentSong.title) {
+		[notableTags addObject:_currentSong.title];
 	}
+	
+	if (_currentSong.name) {
+		// Name is usually not set for files, but is used for streams
+		[notableTags addObject:_currentSong.name];
+	}
+	
+	if (( ! notableTags.count) && _currentSong.file) {
+		// Last resort for untagged files
+		[notableTags addObject:_currentSong.file];
+	}
+	
+	if (_currentSong.album) {
+		[notableTags addObject:_currentSong.album];
+	}
+	
+	if (_currentSong.artist) {
+		[notableTags addObject:_currentSong.artist];
+	}
+	
+	NSString *notificationTitle = [notableTags objectAtIndex:0];
+	[notableTags removeObject:notificationTitle];
+	
+	NSString *notificationDescription = [notableTags componentsJoinedByString:@"\n"];
+	
+	[GrowlApplicationBridge notifyWithTitle:notificationTitle
+								description:notificationDescription
+						   notificationName:nGrowlNotificationPlaying
+								   iconData:nil
+								   priority:0
+								   isSticky:NO
+							   clickContext:nGrowlNotificationPlaying];
 }
 
 @end
