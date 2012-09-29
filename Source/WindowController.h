@@ -26,6 +26,7 @@
 @class PWWindow;
 @class PWVolumeSlider;
 @class LibraryController;
+@class LicenseController;
 @class PWTableView;
 @class InfoAreaController;
 @class UpdateDatabaseController;
@@ -100,6 +101,7 @@ extern const NSString *dProfile;
 - (int) currentPlayerState;
 
 - (PlayListController *) playlistController;
+@property (retain, nonatomic) LicenseController *licenseController;
 
 - (NSWindow *)window;
 - (NSString *)applicationSupportFolder;

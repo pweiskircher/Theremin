@@ -18,7 +18,7 @@
  */
 
 #import "LicenseController.h"
-
+#import "WindowController.h"
 
 @implementation LicenseController
 - (id) init {
@@ -30,14 +30,10 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-	[self release];
+	WindowController *windowController = [WindowController instance];
+	
+	windowController.licenseController = nil;
 }
-
-- (void) dealloc
-{
-	[super dealloc];
-}
-
 
 - (void) show {
 	if (mLoaded == NO) {
@@ -57,4 +53,5 @@
 	
 	[mWindow makeKeyAndOrderFront:self];
 }
+
 @end

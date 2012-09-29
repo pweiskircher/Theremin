@@ -244,6 +244,7 @@ const NSString *dProfile = @"dProfile";
 	[_outputDeviceHandler release];
 	[_appleRemoteController release];
 	
+	[_licenseController release];
 
 	
 	[super dealloc];
@@ -576,7 +577,11 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) showLicense:(id)sender {
-	[[[LicenseController alloc] init] show];
+	if ( ! self.licenseController) {
+		self.licenseController = [[[LicenseController alloc] init] autorelease];
+	}
+	
+	[self.licenseController show];
 }
 
 - (IBAction) showLibrary:(id)sender {
