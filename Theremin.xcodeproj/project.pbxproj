@@ -457,7 +457,7 @@
 		480249EA15E7B7580029CBC7 /* Library.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Library.xib; path = Resources/Library.xib; sourceTree = "<group>"; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
-		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
+		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; usesTabs = 0; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
