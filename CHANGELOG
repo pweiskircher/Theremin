@@ -40,7 +40,6 @@
     * Updated Sparkle to 1.5 b6 and enabled optional anonymous usage
       statistics.
 
-
   Theremin 0.5.3.1:
     * Batch re-setting of compilation info on import. This fixes a crash on startup experienced by some users.
 
