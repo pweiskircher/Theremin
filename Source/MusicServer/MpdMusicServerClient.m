@@ -378,6 +378,10 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientFetchedPlaylist
 																		object:self
 																	  userInfo:dict];
+	
+	// Growl if current song's title has changed (for radio streams)
+	dict = [NSDictionary dictionaryWithObjectsAndKeys:[array objectAtIndex:self.currentSongPosition], dSong, [NSNumber numberWithInt:[self currentSongPosition]], dSongPosition, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCurrentSongChanged object:self userInfo:dict];
 }
 
 - (oneway void) removeSongsFromPlaylist:(NSArray *)songs {

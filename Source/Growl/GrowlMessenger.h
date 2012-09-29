@@ -26,6 +26,7 @@
 	Song *_currentSong;
 	id _delegate;
 	NSString *_lastSongIdentifier;
+	NSString *_lastSongTitle;
 	NSDictionary *_growlDictionary;
 }
 - (id) initWithDelegate:(id)aDelegate;

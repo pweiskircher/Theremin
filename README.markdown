@@ -8,6 +8,7 @@ New features since 2008:
 * Shuffle button (by [biappi](https://github.com/biappi))
 * Updated code for handling Apple Remotes
 * 64bit build (universal binary)
+* Growl when stream title changes
 
 Download built .app
 -------------------

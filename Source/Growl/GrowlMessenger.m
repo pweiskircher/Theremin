@@ -40,6 +40,7 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 {
 	[_currentSong release];
 	[_lastSongIdentifier release];
+	[_lastSongTitle release];
 	[_growlDictionary release];
 	[super dealloc];
 }
@@ -62,12 +63,15 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	[_currentSong release];
 	_currentSong = [theCurrentSong retain];
 	
-	if (![[_currentSong uniqueIdentifier] isEqualTo:_lastSongIdentifier]) {
+	if ((![[_currentSong uniqueIdentifier] isEqualTo:_lastSongIdentifier]) || ( ! [_currentSong.title isEqualToString:_lastSongTitle])) {
 		[_lastSongIdentifier release], _lastSongIdentifier = nil;
+		[_lastSongTitle release];
+		_lastSongTitle = nil;
 		
 		[self sendGrowlInfo:nil];
 		
 		_lastSongIdentifier = [[_currentSong uniqueIdentifier] copy];
+		_lastSongTitle = [_currentSong.title copy];
 	}
 }
 
