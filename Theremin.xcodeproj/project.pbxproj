@@ -69,7 +69,6 @@
 		43A0169D0E571A4700AA8198 /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016810E571A4700AA8198 /* SQLiteDatabase.m */; };
 		43A0169E0E571A4700AA8198 /* SQLiteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016830E571A4700AA8198 /* SQLiteQuery.m */; };
 		43A0169F0E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016850E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m */; };
-		43A016A00E571A4700AA8198 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 43A016870E571A4700AA8198 /* sqlite3.c */; };
 		43A016A10E571A4700AA8198 /* LibraryAlbumSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */; };
 		43A016A20E571A4700AA8198 /* LibraryArtistSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168D0E571A4700AA8198 /* LibraryArtistSubController.m */; };
 		43A016A30E571A4700AA8198 /* LibraryGenreSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168F0E571A4700AA8198 /* LibraryGenreSubController.m */; };
@@ -169,6 +168,7 @@
 		480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E615E7B3310029CBC7 /* UpdateDatabase.xib */; };
 		480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E815E7B3990029CBC7 /* MainMenu.xib */; };
 		480249EB15E7B7580029CBC7 /* Library.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249EA15E7B7580029CBC7 /* Library.xib */; };
+		48121D231620C9BC00C6626B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48121D221620C9B900C6626B /* libsqlite3.dylib */; };
 		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
@@ -313,8 +313,6 @@
 		43A016830E571A4700AA8198 /* SQLiteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteQuery.m; sourceTree = "<group>"; };
 		43A016840E571A4700AA8198 /* SQLUniqueIdentifiersFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLUniqueIdentifiersFilter.h; sourceTree = "<group>"; };
 		43A016850E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLUniqueIdentifiersFilter.m; sourceTree = "<group>"; };
-		43A016870E571A4700AA8198 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
-		43A016880E571A4700AA8198 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		43A0168A0E571A4700AA8198 /* LibraryAlbumSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryAlbumSubController.h; sourceTree = "<group>"; };
 		43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryAlbumSubController.m; sourceTree = "<group>"; };
 		43A0168C0E571A4700AA8198 /* LibraryArtistSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryArtistSubController.h; sourceTree = "<group>"; };
@@ -455,6 +453,7 @@
 		480249E615E7B3310029CBC7 /* UpdateDatabase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateDatabase.xib; path = Resources/UpdateDatabase.xib; sourceTree = "<group>"; };
 		480249E815E7B3990029CBC7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resources/MainMenu.xib; sourceTree = "<group>"; };
 		480249EA15E7B7580029CBC7 /* Library.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Library.xib; path = Resources/Library.xib; sourceTree = "<group>"; };
+		48121D221620C9B900C6626B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; usesTabs = 0; };
@@ -466,6 +465,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48121D231620C9BC00C6626B /* libsqlite3.dylib in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				437BDB270B74F42E001C1057 /* Security.framework in Frameworks */,
 				43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */,
@@ -512,27 +512,19 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+		1058C7A2FEA54F0111CA2CBB /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				48A954F415E71FE100289B16 /* Growl.framework */,
-				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
-				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
-				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
-				437BDB260B74F42E001C1057 /* Security.framework */,
+				48121D221620C9B900C6626B /* libsqlite3.dylib */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
+				437BDB260B74F42E001C1057 /* Security.framework */,
+				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
+				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
-			name = "Other Frameworks";
+			name = "System Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -571,8 +563,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				48A954F415E71FE100289B16 /* Growl.framework */,
+				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
+				1058C7A2FEA54F0111CA2CBB /* System Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -657,7 +650,6 @@
 				43A016780E571A4700AA8198 /* LibrarySearchController.m */,
 				43A016790E571A4700AA8198 /* LibrarySubControllerBase.h */,
 				43A0167A0E571A4700AA8198 /* LibrarySubControllerBase.m */,
-				43A016860E571A4700AA8198 /* SQLite3 */,
 				43A0167B0E571A4700AA8198 /* SQLDatabase */,
 			);
 			name = Library;
@@ -773,15 +765,6 @@
 				43A016850E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m */,
 			);
 			path = SQLDatabase;
-			sourceTree = "<group>";
-		};
-		43A016860E571A4700AA8198 /* SQLite3 */ = {
-			isa = PBXGroup;
-			children = (
-				43A016870E571A4700AA8198 /* sqlite3.c */,
-				43A016880E571A4700AA8198 /* sqlite3.h */,
-			);
-			path = SQLite3;
 			sourceTree = "<group>";
 		};
 		43A016890E571A4700AA8198 /* SubController */ = {
@@ -1259,7 +1242,6 @@
 				43A0169D0E571A4700AA8198 /* SQLiteDatabase.m in Sources */,
 				43A0169E0E571A4700AA8198 /* SQLiteQuery.m in Sources */,
 				43A0169F0E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m in Sources */,
-				43A016A00E571A4700AA8198 /* sqlite3.c in Sources */,
 				43A016A10E571A4700AA8198 /* LibraryAlbumSubController.m in Sources */,
 				43A016A20E571A4700AA8198 /* LibraryArtistSubController.m in Sources */,
 				43A016A30E571A4700AA8198 /* LibraryGenreSubController.m in Sources */,
