@@ -61,6 +61,8 @@ const NSString *dProfile = @"dProfile";
 
 @implementation WindowController
 
+@synthesize licenseController = _licenseController;
+
 #pragma mark Initializations 
 
 + (void) initialize {

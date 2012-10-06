@@ -47,6 +47,7 @@ extern const NSString *dProfile;
 	LibraryController *mLibraryController;
 	UpdateDatabaseController *mUpdateDatabaseController;
 	PlayListFilesController *mPlayListFilesController;
+	LicenseController *_licenseController;
 	
 	IBOutlet SUUpdater *mUpdater;
 		
