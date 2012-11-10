@@ -69,6 +69,11 @@ NSString *tSearchField = @"tSearchField";
 												 selector:@selector(volumeChanged:)
 													 name:nMusicServerClientVolumeChanged
 												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(shuffleOptionChanged:)
+													 name:nMusicServerClientShuffleOptionChanged
+												   object:nil];
 	}
 	return self;
 }
@@ -152,6 +157,15 @@ NSString *tSearchField = @"tSearchField";
 	[_volumeSlider setFloatValue:volume];
 }
 
+- (void) shuffleOptionChanged:(NSNotification *)notification {
+	bool shuffleState = [[[notification userInfo] objectForKey:@"shuffleState"] boolValue];
+	
+	if (shuffleState)
+		[_shuffleItem setImage:[NSImage imageNamed:@"shuffleOn"]];
+	else
+		[_shuffleItem setImage:[NSImage imageNamed:@"shuffleOff"]];
+}
+
 - (void) volumeShouldChange:(id)sender {
 	[[[WindowController instance] musicClient] setPlaybackVolume:[_volumeSlider floatValue]];
 	[_volumeSlider updateVolumeImage];
@@ -201,6 +215,7 @@ NSString *tSearchField = @"tSearchField";
 	} else if ([itemIdentifier isEqualToString:tShuffleItemIdentifier]) {
         UnifiedToolbarItem *uitem = [[[UnifiedToolbarItem alloc] initWithItemIdentifier:itemIdentifier segmentCount:1] autorelease];
         
+		[uitem setImage:[NSImage imageNamed:@"shuffleOff"]];
         [uitem setLabel:TR_S_TOOLBAR_LABEL_SHUFFLE];
 		[uitem setTarget:[WindowController instance]];
 		[uitem setAction:@selector(shuffle:)];

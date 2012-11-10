@@ -173,6 +173,8 @@
 		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
 		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
 		48A9551315E7705900289B16 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 48A9551215E7705900289B16 /* CHANGELOG */; };
+		4A2C74DB164EEE8F00F63333 /* shuffleOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DA164EEE8F00F63333 /* shuffleOff.png */; };
+		4A2C74DD164EEE9600F63333 /* shuffleOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DC164EEE9600F63333 /* shuffleOn.png */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -457,6 +459,8 @@
 		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; usesTabs = 0; };
+		4A2C74DA164EEE8F00F63333 /* shuffleOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOff.png; sourceTree = "<group>"; };
+		4A2C74DC164EEE9600F63333 /* shuffleOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOn.png; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1000,6 +1004,8 @@
 				43F0BAB10BBE980A00018704 /* playSong.png */,
 				43F0BAB20BBE980A00018704 /* prevSong.png */,
 				43F0BAB30BBE980A00018704 /* stopSong.png */,
+				4A2C74DA164EEE8F00F63333 /* shuffleOff.png */,
+				4A2C74DC164EEE9600F63333 /* shuffleOn.png */,
 			);
 			path = overlays;
 			sourceTree = "<group>";
@@ -1169,6 +1175,8 @@
 				480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */,
 				480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */,
 				480249EB15E7B7580029CBC7 /* Library.xib in Resources */,
+				4A2C74DB164EEE8F00F63333 /* shuffleOff.png in Resources */,
+				4A2C74DD164EEE9600F63333 /* shuffleOn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
