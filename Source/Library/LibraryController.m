@@ -258,6 +258,10 @@ static NSString *tSearchField = @"tSearchField";
 - (PWTableView *) tableViewFromSender:(id)sender {
 	if ([sender isKindOfClass:[NSTableView class]])
 		return sender;
+	if ([[mWindow getLastRightHit] isKindOfClass:[NSTableView class]])
+		return (PWTableView*)[mWindow getLastRightHit];
+	if ([[mWindow getLastLeftHit] isKindOfClass:[NSTableView class]])
+		return (PWTableView*)[mWindow getLastLeftHit];
 	if ([[mWindow firstResponder] isKindOfClass:[NSTableView class]])
 		return (PWTableView*)[mWindow firstResponder];
 	return nil;
