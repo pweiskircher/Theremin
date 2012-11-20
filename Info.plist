@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>PAWE</string>
 	<key>CFBundleVersion</key>
-	<string>20120930</string>
+	<string>20121121</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
