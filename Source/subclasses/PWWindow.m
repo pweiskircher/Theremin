@@ -51,12 +51,4 @@
 	return mUseGlobalHotkeys;
 }
 
-- (NSView *) getLastLeftHit {
-	return _lastLeftHit;
-}
-
-- (NSView *) getLastRightHit {
-	return _lastRightHit;
-}
-
 @end

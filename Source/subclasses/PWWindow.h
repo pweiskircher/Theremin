@@ -31,6 +31,4 @@
 - (void) setUseGlobalHotkeys:(BOOL)aValue;
 - (BOOL) useGlobalHotkeys;
 
-- (NSView *) getLastLeftHit;
-- (NSView *) getLastRightHit;
 @end

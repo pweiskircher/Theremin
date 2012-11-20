@@ -258,10 +258,20 @@ static NSString *tSearchField = @"tSearchField";
 - (PWTableView *) tableViewFromSender:(id)sender {
 	if ([sender isKindOfClass:[NSTableView class]])
 		return sender;
-	if ([[mWindow getLastRightHit] isKindOfClass:[NSTableView class]])
-		return (PWTableView*)[mWindow getLastRightHit];
-	if ([[mWindow getLastLeftHit] isKindOfClass:[NSTableView class]])
-		return (PWTableView*)[mWindow getLastLeftHit];
+	
+	if ([sender isKindOfClass:[NSMenuItem class]]) {
+		NSMenu *menu = [sender menu];
+		if (menu == mArtistView.menu) {
+			return mArtistView;
+		} else if (menu == mAlbumView.menu) {
+			return mAlbumView;
+		} else if (menu == mGenreView.menu) {
+			return mGenreView;
+		} else if (menu == mSongView.menu) {
+			return mSongView;
+		}
+	}
+
 	if ([[mWindow firstResponder] isKindOfClass:[NSTableView class]])
 		return (PWTableView*)[mWindow firstResponder];
 	return nil;
