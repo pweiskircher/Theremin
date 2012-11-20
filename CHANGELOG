@@ -1,5 +1,7 @@
   Theremin 0.6.4:
     * Nicer and much more useful Growl notifications
+    * Fixed library context menu
+    * Added icon for shuffle toolbar button
 
   Theremin 0.6.3:
     * Added shuffle button to the toolbar
