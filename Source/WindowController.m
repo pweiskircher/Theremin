@@ -590,6 +590,11 @@ const NSString *dProfile = @"dProfile";
 	[mLibraryController show];
 }
 
+- (IBAction)showFileBrowser:(id)sender {
+#warning implement me
+    NSLog(@"Show file browser");
+}
+
 - (IBAction) showUpdateDatabase:(id)sender {
 	[mUpdateDatabaseController show];
 }
