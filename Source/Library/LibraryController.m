@@ -453,6 +453,7 @@ static NSString *tSearchField = @"tSearchField";
 			[mAppendSongsItem setLabel:NSLocalizedString(@"Append", @"Library toolbar button label")];
 			[mAppendSongsItem setTarget:self];
 			[mAppendSongsItem setAction:@selector(appendSongsToPlaylist:)];
+			[mAppendSongsItem setImage:[NSImage imageNamed:NSImageNameMultipleDocuments]];
 		}
 		
 		return mAppendSongsItem;
@@ -463,7 +464,7 @@ static NSString *tSearchField = @"tSearchField";
 			[mGetInfoOnSongs setLabel:NSLocalizedString(@"Get Info", @"Library toolbar button label")];
 			[mGetInfoOnSongs setTarget:self];
 			[mGetInfoOnSongs setAction:@selector(getInfoOnSongs:)];			
-			[mGetInfoOnSongs setImage:[NSImage imageNamed:@"info"]];
+			[mGetInfoOnSongs setImage:[NSImage imageNamed:NSImageNameInfo]];
 		}
 		
 		return mGetInfoOnSongs;
