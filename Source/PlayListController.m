@@ -336,7 +336,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		return NO;
 	
 	unsigned last_index = -1;
-	unsigned current_index = [rowIndexes firstIndex];
+	NSUInteger current_index = [rowIndexes firstIndex];
 	while (current_index != NSNotFound) {
 		if (last_index != -1 && current_index - last_index != 1)
 			return NO;
@@ -369,7 +369,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		
 		BOOL expandSelection = NO;
 		int dest = row;
-		unsigned current_index = [rowIndexes firstIndex];
+		NSUInteger current_index = [rowIndexes firstIndex];
 		if (current_index > row) {
 			while (current_index != NSNotFound)
 			{
