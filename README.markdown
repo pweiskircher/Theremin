@@ -12,8 +12,7 @@ New features since 2008:
 
 Download built .app
 -------------------
-
-Release: [Theremin_0.6.4.app.zip](http://nn.lv/v5xu)
-Experimental: [Theremin_0.7_experimental.app.zip](http://nn.lv/tuva) - added crossfade switch to "Controls" menu
+* Release: [Theremin_0.6.4.app.zip](http://nn.lv/v5xu)
+* Experimental: [Theremin_0.7_experimental.app.zip](http://nn.lv/tuva) - added crossfade switch to "Controls" menu
 
 You may need to shut up Gatekeeper in System Preferences -> Security & Privacy.
