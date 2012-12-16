@@ -118,6 +118,7 @@ const NSString *dProfile = @"dProfile";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientStateChanged:) name:nMusicServerClientStateChanged object:nil];	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientShuffleChanged:) name:nMusicServerClientShuffleOptionChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRepeatChanged:) name:nMusicServerClientRepeatOptionChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientCrossfadeChanged:) name:nMusicServerClientCrossfadeSecondsChanged object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(elapsedTimeChanged:) name:nMusicServerClientElapsedTimeChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(totalTimeChanged:) name:nMusicServerClientTotalTimeChanged object:nil];
@@ -403,6 +404,7 @@ const NSString *dProfile = @"dProfile";
 			 [item action] == @selector(prevAlbum:) ||
 			 [item action] == @selector(toggleShuffle:) ||
 			 [item action] == @selector(toggleRepeat:) ||
+			 [item action] == @selector(toggleCrossfade:) ||
 			 [item action] == @selector(increaseVolume:) ||
 			 [item action] == @selector(decreaseVolume:) ||
 			 [item action] == @selector(find:))
@@ -486,6 +488,17 @@ const NSString *dProfile = @"dProfile";
 		[mRepeatItem setState:NSOnState];
 	} else {
 		[mRepeatItem setState:NSOffState];
+	}
+}
+
+- (void) clientCrossfadeChanged:(NSNotification *)notification {
+	NSInteger crossfadeSeconds = [notification.userInfo[@"crossfadeSeconds"] integerValue];
+	NSLog(@"Crossfade value: %ld", (long)crossfadeSeconds);
+	
+	if (crossfadeSeconds) {
+		[mCrossfadeItem setState:NSOnState];
+	} else {
+		[mCrossfadeItem setState:NSOffState];
 	}
 }
 
@@ -630,6 +643,11 @@ const NSString *dProfile = @"dProfile";
 
 - (IBAction) toggleRepeat:(id)sender {
 	[mClient toggleRepeat];
+}
+
+- (void)toggleCrossfade:(id)sender
+{
+	[mClient toggleCrossfade];
 }
 
 - (IBAction) find:(id)sender {

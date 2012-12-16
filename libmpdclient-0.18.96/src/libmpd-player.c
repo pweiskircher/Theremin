@@ -369,7 +369,36 @@ int mpd_player_set_repeat(MpdObj * mi, int repeat)
 	return MPD_OK;
 }
 
+int mpd_player_get_crossfade(MpdObj * mi)
+{
+	if (!mpd_check_connected(mi)) {
+		debug_printf(DEBUG_WARNING, "not connected\n");
+		return MPD_NOT_CONNECTED;
+	}
+	if (mpd_status_check(mi) != MPD_OK) {
+		debug_printf(DEBUG_WARNING, "Failed grabbing status\n");
+		return MPD_NOT_CONNECTED;
+	}
+	return mi->status->crossfade;
+}
 
+int mpd_player_set_crossfade(MpdObj * mi, int crossfade)
+{
+	if (!mpd_check_connected(mi)) {
+		debug_printf(DEBUG_WARNING, "not connected\n");
+		return MPD_NOT_CONNECTED;
+	}
+	if (mpd_lock_conn(mi)) {
+		debug_printf(DEBUG_WARNING, "lock failed\n");
+		return MPD_LOCK_FAILED;
+	}
+	mpd_sendCrossfadeCommand(mi->connection, crossfade);
+	mpd_finishCommand(mi->connection);
+	
+	mpd_unlock_conn(mi);
+	mpd_status_queue_update(mi);
+	return MPD_OK;
+}
 
 int mpd_player_get_random(MpdObj * mi)
 {

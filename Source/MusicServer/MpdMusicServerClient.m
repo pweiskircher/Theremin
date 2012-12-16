@@ -19,6 +19,7 @@
 
 #import "MpdMusicServerClient.h"
 #import "WindowController.h"
+#import "PreferencesController.h"
 #import "NSNotificationAdditions.h"
 #import "Song.h"
 #import "Directory.h"
@@ -184,7 +185,12 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	}
 	
 	if (what & MPD_CST_CROSSFADE) {
-		//NSLog(@"crossfade changed");
+		NSLog(@"MPD_CST_CROSSFADE");
+		int crossfade = mpd_player_get_crossfade(mConnection);
+		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:crossfade] forKey:@"crossfadeSeconds"];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCrossfadeSecondsChanged
+																			object:self
+																		  userInfo:dict];
 	}
 	
 	if (what & MPD_CST_RANDOM) {
@@ -508,6 +514,11 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 - (oneway void) toggleRepeat {
 	mpd_player_set_repeat(mConnection, !mpd_player_get_repeat(mConnection));
+}
+
+- (oneway void)toggleCrossfade
+{
+	mpd_player_set_crossfade(mConnection, mpd_player_get_crossfade(mConnection)?0:[[PreferencesController sharedInstance] crossfadeSeconds]);
 }
 
 - (oneway void) playerWindowFocused {

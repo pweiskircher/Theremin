@@ -849,7 +849,6 @@
 											<string key="NSFrame">{{471, 3}, {100, 15}}</string>
 											<reference key="NSSuperview" ref="682211647"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSPopUpButtonCell" key="NSCell" id="130387275">
 												<int key="NSCellFlags">-2076180416</int>
@@ -980,7 +979,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="213071637"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">ThereminPlayerWindow</string>
@@ -1511,6 +1510,14 @@
 									<reference key="NSMixedImage" ref="626543258"/>
 									<int key="NSTag">111</int>
 								</object>
+								<object class="NSMenuItem" id="730065914">
+									<reference key="NSMenu" ref="813725530"/>
+									<string key="NSTitle">Crossfade</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="27884211"/>
+									<reference key="NSMixedImage" ref="626543258"/>
+								</object>
 								<object class="NSMenuItem" id="535883145">
 									<reference key="NSMenu" ref="813725530"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -1822,7 +1829,6 @@
 							<string key="NSFrame">{{264, 12}, {82, 32}}</string>
 							<reference key="NSSuperview" ref="225763247"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="27676120">
 								<int key="NSCellFlags">67108864</int>
@@ -1846,7 +1852,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="4095241"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -1941,7 +1947,6 @@
 							<string key="NSFrame">{{281, 12}, {102, 32}}</string>
 							<reference key="NSSuperview" ref="46348047"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<int key="NSTag">1</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="938921792">
@@ -2105,7 +2110,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="38656973"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -2185,7 +2190,6 @@
 							<string key="NSFrame">{{264, 12}, {82, 32}}</string>
 							<reference key="NSSuperview" ref="505677955"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="931864804">
 								<int key="NSCellFlags">67108864</int>
@@ -2209,7 +2213,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="997582174"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -2805,6 +2809,22 @@
 						<reference key="destination" ref="711767355"/>
 					</object>
 					<int key="connectionID">2154</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mCrossfadeItem</string>
+						<reference key="source" ref="184925635"/>
+						<reference key="destination" ref="730065914"/>
+					</object>
+					<int key="connectionID">2156</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleCrossfade:</string>
+						<reference key="source" ref="184925635"/>
+						<reference key="destination" ref="730065914"/>
+					</object>
+					<int key="connectionID">2157</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3456,6 +3476,7 @@
 							<reference ref="783958124"/>
 							<reference ref="64023711"/>
 							<reference ref="294134576"/>
+							<reference ref="730065914"/>
 						</array>
 						<reference key="parent" ref="122055447"/>
 					</object>
@@ -4457,6 +4478,11 @@
 						<reference key="object" ref="1040655186"/>
 						<reference key="parent" ref="711767355"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">2155</int>
+						<reference key="object" ref="730065914"/>
+						<reference key="parent" ref="813725530"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -4535,6 +4561,7 @@
 				<string key="2138.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2149.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="2150.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="2155.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="230.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="231.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4663,7 +4690,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2154</int>
+			<int key="maxID">2157</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4923,6 +4950,7 @@
 						<string key="showUpdateDatabase:">id</string>
 						<string key="shuffle:">id</string>
 						<string key="stop:">id</string>
+						<string key="toggleCrossfade:">id</string>
 						<string key="toggleDrawer:">id</string>
 						<string key="togglePlayPause:">id</string>
 						<string key="toggleRepeat:">id</string>
@@ -5038,6 +5066,10 @@
 							<string key="name">stop:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="toggleCrossfade:">
+							<string key="name">toggleCrossfade:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="toggleDrawer:">
 							<string key="name">toggleDrawer:</string>
 							<string key="candidateClassName">id</string>
@@ -5071,6 +5103,7 @@
 						<string key="mAuthenticationSavePassword">NSButton</string>
 						<string key="mCancelButton">NSButton</string>
 						<string key="mConnectItem">NSMenuItem</string>
+						<string key="mCrossfadeItem">NSMenuItem</string>
 						<string key="mDisconnectItem">NSMenuItem</string>
 						<string key="mInfoAreaController">InfoAreaController</string>
 						<string key="mLibraryButton">NSButton</string>
@@ -5124,6 +5157,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="mConnectItem">
 							<string key="name">mConnectItem</string>
+							<string key="candidateClassName">NSMenuItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mCrossfadeItem">
+							<string key="name">mCrossfadeItem</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="mDisconnectItem">

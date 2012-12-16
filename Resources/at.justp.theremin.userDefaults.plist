@@ -6,6 +6,8 @@
 	<false/>
 	<key>pauseOnSleep</key>
 	<false/>
+	<key>crossfadeSeconds</key>
+	<integer>5</integer>
 	<key>NoConfirmationNeededForDeletionOfPlaylist</key>
 	<false/>
 	<key>appleRemoteMode</key>

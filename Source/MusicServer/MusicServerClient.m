@@ -36,6 +36,7 @@ NSString *nMusicServerClientElapsedTimeChanged = @"nMusicServerClientElapsedTime
 NSString *nMusicServerClientTotalTimeChanged = @"nMusicServerClientTotalTimeChanged";
 NSString *nMusicServerClientShuffleOptionChanged = @"nMusicServerClientShuffleOptionChanged";
 NSString *nMusicServerClientRepeatOptionChanged = @"nMusicServerClientRepeatOptionChanged";
+NSString *nMusicServerClientCrossfadeSecondsChanged = @"nMusicServerClientCrossfadeSecondsChanged";
 
 NSString *nMusicServerClientFetchedDatabase = @"nMusicServerClientFetchedDatabase";
 NSString *nMusicServerClientFetchedPlaylist = @"nMusicServerClientFetchedPlaylist";
@@ -262,6 +263,9 @@ NSString *dEnabled = @"dEnabled";
 }
 
 - (oneway void) toggleRepeat {
+}
+
+- (oneway void) toggleCrossfade {
 }
 
 - (oneway void) playerWindowClosed {

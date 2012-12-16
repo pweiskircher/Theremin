@@ -39,6 +39,7 @@ extern NSString *nMusicServerClientElapsedTimeChanged;
 extern NSString *nMusicServerClientTotalTimeChanged;
 extern NSString *nMusicServerClientShuffleOptionChanged;
 extern NSString *nMusicServerClientRepeatOptionChanged;
+extern NSString *nMusicServerClientCrossfadeSecondsChanged;
 
 extern NSString *nMusicServerClientFetchedDatabase;
 extern NSString *nMusicServerClientFetchedPlaylist;
@@ -136,6 +137,7 @@ typedef enum {
 #pragma mark Various
 - (oneway void) toggleShuffle;
 - (oneway void) toggleRepeat;
+- (oneway void) toggleCrossfade;
 
 - (oneway void) playerWindowFocused;
 - (oneway void) playerWindowUnfocused;

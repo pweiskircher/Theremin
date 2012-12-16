@@ -60,6 +60,7 @@ extern const NSString *dProfile;
 	IBOutlet NSMenuItem *mDisconnectItem;
 	IBOutlet NSMenuItem *mShuffleItem;
 	IBOutlet NSMenuItem *mRepeatItem;
+	IBOutlet NSMenuItem *mCrossfadeItem;
 	IBOutlet NSMenu *_fileMenu;
 	
 	IBOutlet NSPopUpButton *_profileChooser;
@@ -136,6 +137,7 @@ extern const NSString *dProfile;
 - (IBAction) seekSliderChanged:(id)sender;
 - (IBAction) toggleShuffle:(id)sender;
 - (IBAction) toggleRepeat:(id)sender;
+- (IBAction) toggleCrossfade:(id)sender;
 - (IBAction) find:(id)sender;
 
 

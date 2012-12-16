@@ -150,6 +150,15 @@ int mpd_player_get_repeat(MpdObj * mi);
 /**
  * \param mi a #MpdObj
  *
+ * Returns seconds of crossfade
+ *
+ * @returns seconds of crossfade
+ */
+int mpd_player_get_crossfade(MpdObj * mi);
+
+/**
+ * \param mi a #MpdObj
+ *
  * Get the state of consume mode: 1 if enabled, 0 when disabled.
  *
  * @returns the state of consume
@@ -174,6 +183,17 @@ int mpd_player_get_single(MpdObj * mi);
  * @returns 0 when successful
  */
 int mpd_player_set_repeat(MpdObj * mi, int repeat);
+
+/**
+ * \param mi a #MpdObj
+ * \param crossfade New seconds of crossfade
+ *
+ * Set seconds of crossfade
+ *
+ * @returns 0 when successful
+ */
+int mpd_player_set_crossfade(MpdObj * mi, int crossfade);
+
 /**
  * \param mi a #MpdObj
  *

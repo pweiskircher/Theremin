@@ -99,6 +99,10 @@ static PreferencesController *_sharedPreferencesController;
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"pauseOnSleep"] boolValue];
 }
 
+- (NSUInteger)crossfadeSeconds
+{
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"crossfadeSeconds"] unsignedIntegerValue];
+}
 
 - (void) setNoConfirmationNeededForDeletionOfPlaylist:(BOOL)aValue {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"NoConfirmationNeededForDeletionOfPlaylist"];

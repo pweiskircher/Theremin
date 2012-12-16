@@ -50,6 +50,7 @@ typedef enum {
 - (LibraryDoubleClickMode) libraryDoubleClickAction;
 
 - (BOOL) pauseOnSleep;
+- (NSUInteger) crossfadeSeconds;
 
 - (NSString *) currentServerNameWithPort;
 
