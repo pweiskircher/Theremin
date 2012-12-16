@@ -185,7 +185,6 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	}
 	
 	if (what & MPD_CST_CROSSFADE) {
-		NSLog(@"MPD_CST_CROSSFADE");
 		int crossfade = mpd_player_get_crossfade(mConnection);
 		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:crossfade] forKey:@"crossfadeSeconds"];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCrossfadeSecondsChanged

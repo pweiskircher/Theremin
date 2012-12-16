@@ -493,7 +493,6 @@ const NSString *dProfile = @"dProfile";
 
 - (void) clientCrossfadeChanged:(NSNotification *)notification {
 	NSInteger crossfadeSeconds = [notification.userInfo[@"crossfadeSeconds"] integerValue];
-	NSLog(@"Crossfade value: %ld", (long)crossfadeSeconds);
 	
 	if (crossfadeSeconds) {
 		[mCrossfadeItem setState:NSOnState];
