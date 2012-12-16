@@ -19,15 +19,21 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.6.4</string>
+	<string>0.7</string>
 	<key>CFBundleSignature</key>
 	<string>PAWE</string>
 	<key>CFBundleVersion</key>
-	<string>20121121</string>
+	<string>20121216</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUAllowsAutomaticUpdates</key>
+	<false/>
+	<key>SUEnableSystemProfiling</key>
+	<true/>
+	<key>SUExpectsDSASignature</key>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>http://theremin.amd.co.at/appcastProfileInfo.php</string>
 	<key>SUPublicDSAKey</key>
@@ -51,11 +57,5 @@ HQow9abzLJ3T/GLHMVFy1jfrugnuKbA4vZFPwvgO42xlcJ1+RLdsFugWYgG/j7nU
 t4suReFvV6/avYOKkSjr78OqbSpunSffIkKAuXL6OOMyAKky5t0W66NA+75Ydnba
 Ib3L3X8lDvQ055cZ5SI=
 -----END PUBLIC KEY-----</string>
-	<key>SUExpectsDSASignature</key>
-	<true/>
-	<key>SUEnableSystemProfiling</key>
-	<true/>
-	<key>SUAllowsAutomaticUpdates</key>
-	<false/>
 </dict>
 </plist>
