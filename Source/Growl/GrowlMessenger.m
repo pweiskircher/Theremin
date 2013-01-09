@@ -63,7 +63,8 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	[_currentSong release];
 	_currentSong = [theCurrentSong retain];
 	
-	if ((![[_currentSong uniqueIdentifier] isEqualTo:_lastSongIdentifier]) || ( ! [_currentSong.title isEqualToString:_lastSongTitle])) {
+	// this is FUBAR
+	if ((![[_currentSong uniqueIdentifier] isEqualTo:_lastSongIdentifier]) || ((_currentSong.title != _lastSongTitle) && ( ! [_currentSong.title isEqualToString:_lastSongTitle]))) {
 		[_lastSongIdentifier release], _lastSongIdentifier = nil;
 		[_lastSongTitle release];
 		_lastSongTitle = nil;
