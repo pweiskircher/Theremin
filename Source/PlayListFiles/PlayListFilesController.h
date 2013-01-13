@@ -46,6 +46,7 @@
 - (void) dealloc;
 
 - (void) toggleDrawer;
+- (PWTableView *)playlistFilesView;
 
 - (IBAction) refresh:(id)sender;
 - (IBAction) loadSelectedPlaylist:(id)sender;

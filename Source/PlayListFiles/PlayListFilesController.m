@@ -74,10 +74,6 @@
 	
 	[mPlayListFilesView setTarget:self];
 	[mPlayListFilesView setDoubleAction:@selector(loadSelectedPlaylist:)];
-	
-	unichar actionCharacters[] = { NSBackspaceCharacter, NSDeleteCharacter };
-	NSString *ac = [NSString stringWithCharacters:actionCharacters length:2];
-	[mPlayListFilesView setActionForCharacters:[NSCharacterSet characterSetWithCharactersInString:ac] onTarget:self usingSelector:@selector(deleteSelectedPlaylist:)];
 
 	unichar returnActionKeys[] = { NSCarriageReturnCharacter };
 	NSCharacterSet *returnCharacterSet = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithCharacters:returnActionKeys length:1]];
@@ -114,6 +110,11 @@
 		[[[WindowController instance] window] makeFirstResponder:mPlayListFilesView];
 		[[PreferencesController sharedInstance] setPlaylistDrawerOpen:YES];
 	}
+}
+
+- (PWTableView *)playlistFilesView
+{
+	return mPlayListFilesView;
 }
 
 - (IBAction) refresh:(id)sender {

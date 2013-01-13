@@ -395,7 +395,6 @@ const NSString *dProfile = @"dProfile";
 	else if ([item action] == @selector(disconnect:) ||
 		     [item action] == @selector(saveCurrentPlaylist:) ||
 			 [item action] == @selector(scrollToCurrentSong:) ||
-			 [item action] == @selector(deleteSelectedSongs:) ||
 			 [item action] == @selector(togglePlayPause:) ||
 			 [item action] == @selector(stop:) ||
 			 [item action] == @selector(nextSong:) ||
@@ -410,6 +409,14 @@ const NSString *dProfile = @"dProfile";
 			 [item action] == @selector(find:))
 		return connected;
 
+	if ([item action] == @selector(deleteSelectedItems:)) {
+		return (connected && (
+							  ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist)
+							  || ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlayListFilesController.playlistFilesView)
+							)
+		);
+	}
+	
 	if ([item action] == @selector(getInfoOnKeyWindow:)) {
 		if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist)
 			return connected;
@@ -615,8 +622,12 @@ const NSString *dProfile = @"dProfile";
 	[mUpdateDatabaseController updateCompleteDatabase];
 }
 
-- (IBAction) deleteSelectedSongs:(id)sender {
-	[mPlaylistController deleteSelectedSongs:self];
+- (IBAction) deleteSelectedItems:(id)sender {
+	if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist) {
+		[mPlaylistController deleteSelectedSongs:sender];
+	} else if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlayListFilesController.playlistFilesView) {
+		[mPlayListFilesController deleteSelectedPlaylist:sender];
+	}
 }
 
 - (IBAction) seekSliderChanged:(id)sender {

@@ -133,7 +133,7 @@ extern const NSString *dProfile;
 - (IBAction) showFileBrowser:(id)sender;
 - (IBAction) showUpdateDatabase:(id)sender;
 - (IBAction) updateCompleteDatabase:(id)sender;
-- (IBAction) deleteSelectedSongs:(id)sender;
+- (IBAction) deleteSelectedItems:(id)sender;
 - (IBAction) seekSliderChanged:(id)sender;
 - (IBAction) toggleShuffle:(id)sender;
 - (IBAction) toggleRepeat:(id)sender;

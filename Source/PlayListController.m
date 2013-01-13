@@ -87,13 +87,6 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	[mTableView setDataSource:self];
 	[mTableView registerForDraggedTypes:[NSArray arrayWithObjects:gMpdPlaylistPositionType, gMpdUniqueIdentifierType, nil]];
 	
-	unichar actionCharacters[] = { NSBackspaceCharacter, NSDeleteCharacter };
-	NSString *ac = [NSString stringWithCharacters:actionCharacters length:2];
-	NSMutableCharacterSet *mcs = [[[NSMutableCharacterSet alloc] init] autorelease];
-	[mcs addCharactersInString:ac];
-	[mcs addCharactersInRange:NSMakeRange(NSDeleteFunctionKey,1)];
-	[mTableView setActionForCharacters:mcs onTarget:mController usingSelector:@selector(deleteSelectedSongs:)];
-	
 	[mTableView setTarget:self];
 	[mTableView setDoubleAction:@selector(playSelectedSong:)];
 	

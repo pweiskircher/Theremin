@@ -2830,6 +2830,14 @@
 					<int key="connectionID">2157</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">deleteSelectedItems:</string>
+						<reference key="source" ref="184925635"/>
+						<reference key="destination" ref="837892334"/>
+					</object>
+					<int key="connectionID">2158</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nextKeyView</string>
 						<reference key="source" ref="148164150"/>
@@ -2916,14 +2924,6 @@
 						<reference key="destination" ref="360052376"/>
 					</object>
 					<int key="connectionID">671</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">deleteSelectedSongs:</string>
-						<reference key="source" ref="10256018"/>
-						<reference key="destination" ref="837892334"/>
-					</object>
-					<int key="connectionID">526</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -4693,7 +4693,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">2157</int>
+			<int key="maxID">2158</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4929,7 +4929,7 @@
 						<string key="authenticationButtonPressed:">id</string>
 						<string key="connect:">id</string>
 						<string key="decreaseVolume:">id</string>
-						<string key="deleteSelectedSongs:">id</string>
+						<string key="deleteSelectedItems:">id</string>
 						<string key="detectCompilations:">id</string>
 						<string key="disconnect:">id</string>
 						<string key="find:">id</string>
@@ -4973,8 +4973,8 @@
 							<string key="name">decreaseVolume:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="deleteSelectedSongs:">
-							<string key="name">deleteSelectedSongs:</string>
+						<object class="IBActionInfo" key="deleteSelectedItems:">
+							<string key="name">deleteSelectedItems:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="detectCompilations:">
