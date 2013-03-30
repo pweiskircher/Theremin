@@ -14,6 +14,6 @@ New features since 2008:
 Download built .app
 -------------------
 * Release: [Theremin_0.6.4.app.zip](http://nn.lv/v5xu)
-* Experimental: [Theremin_0.7_experimental.app.zip](http://nn.lv/tuva) - added crossfade switch to "Controls" menu
+* Experimental: [Theremin_0.7_experimental.app.zip](http://nn.lv/v1du) - added crossfade switch to "Controls" menu, now supports global media keyboard shortcuts
 
 You may need to shut up Gatekeeper in System Preferences -> Security & Privacy.
