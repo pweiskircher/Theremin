@@ -36,6 +36,8 @@
 	<true/>
 	<key>SUFeedURL</key>
 	<string>http://theremin.amd.co.at/appcastProfileInfo.php</string>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
 	<key>SUPublicDSAKey</key>
 	<string>-----BEGIN PUBLIC KEY-----
 MIIDOjCCAi0GByqGSM44BAEwggIgAoIBAQCrLftLlmuKqvHFJJBn6tLUyBerb0CM
