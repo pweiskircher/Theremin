@@ -746,11 +746,11 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) increaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]+5)];
+	[mClient setPlaybackVolume:MIN(([[_mainPlayerToolbarController volumeSlider] intValue]+5), 100)];
 }
 
 - (IBAction) decreaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]-5)];
+	[mClient setPlaybackVolume:MAX(0, ([[_mainPlayerToolbarController volumeSlider] intValue]-5))];
 }
 
 - (IBAction) getInfo:(id)sender {
