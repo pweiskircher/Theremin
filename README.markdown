@@ -10,6 +10,7 @@ New features since 2008:
 * Updated Growl with 10.8 Notification Center support
 * Growl when stream title changes, fall back to icyName and filename
 * Support for global media keyboard shortcuts
+* Playlists are now displayed in alphabetical order
 
 Download built .app
 -------------------
