@@ -1,6 +1,7 @@
   Theremin 0.7:
     * Menu item to toggle crossfade
     * Support for global media keyboard shortcuts
+    * Playlists are now in alphabetical order
 
   Theremin 0.6.4:
     * Nicer and much more useful Growl notifications
