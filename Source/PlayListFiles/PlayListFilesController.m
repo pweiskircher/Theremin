@@ -139,7 +139,6 @@
         NSString *first = [[(PlayListFile*)a filePath] lastPathComponent];
         NSString *second = [[(PlayListFile*)b filePath] lastPathComponent];
         if(first==nil || second==nil) return (NSComparisonResult)NSOrderedSame;
-        NSLog (@"a='%@' b='%@'", first, second);
         return (NSComparisonResult)[first caseInsensitiveCompare:second];
     }] retain];
 
