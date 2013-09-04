@@ -23,11 +23,13 @@
 	<key>CFBundleSignature</key>
 	<string>PAWE</string>
 	<key>CFBundleVersion</key>
-	<string>20130331</string>
+	<string>20130904</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
 	<key>SUAllowsAutomaticUpdates</key>
 	<false/>
 	<key>SUEnableSystemProfiling</key>
@@ -36,8 +38,6 @@
 	<true/>
 	<key>SUFeedURL</key>
 	<string>http://theremin.amd.co.at/appcastProfileInfo.php</string>
-	<key>NSSupportsSuddenTermination</key>
-	<true/>
 	<key>SUPublicDSAKey</key>
 	<string>-----BEGIN PUBLIC KEY-----
 MIIDOjCCAi0GByqGSM44BAEwggIgAoIBAQCrLftLlmuKqvHFJJBn6tLUyBerb0CM
