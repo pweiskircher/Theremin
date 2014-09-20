@@ -27,6 +27,7 @@
 	IBOutlet NSTextField *mTitle;
 	IBOutlet NSTextField *mArtist;
 	IBOutlet NSTextField *mAlbum;
+	IBOutlet NSTextField *mComposer;
 	
 	IBOutlet NSTextField *mElapsedTime;
 	IBOutlet NSTextField *mRemainingTime;
@@ -39,6 +40,7 @@
 	
 	NSPoint _originTitle;
 	NSPoint _originArtist;
+	NSPoint _originComposer;
 	NSPoint _originProgressLabel;
 	
 	NSTimer *mProgressIndicatorStartTimer;	

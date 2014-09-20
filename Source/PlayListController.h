@@ -42,6 +42,7 @@ extern NSString *gMpdUniqueIdentifierType;
 	IBOutlet NSTableColumn *mColumnAlbum;
 	IBOutlet NSTableColumn *mColumnTrackName;
 	IBOutlet NSTableColumn *mColumnGenre;
+	IBOutlet NSTableColumn *mColumnComposer;
 	IBOutlet NSTableColumn *mColumnTime;
 	IBOutlet NSTableColumn *mColumnDisc;
 	

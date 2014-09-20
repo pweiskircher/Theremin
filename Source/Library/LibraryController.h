@@ -21,13 +21,16 @@
 
 @class LibraryImportController, PWTableView, PWMusicSearchField, PWWindow;
 @class LibraryArtistSubController, LibraryAlbumSubController, LibrarySongSubController;
-@class LibrarySearchController, LibraryGenreSubController;
+@class LibrarySearchController, LibraryGenreSubController, LibraryComposerSubController;
 
 @interface LibraryController : NSObject <NSToolbarDelegate> {
 	IBOutlet PWWindow *mWindow;
 	
 	LibraryArtistSubController *mArtistController;
 	IBOutlet PWTableView *mArtistView;
+	
+	LibraryComposerSubController *mComposerController;
+	IBOutlet PWTableView *mComposerView;
 	
 	LibraryAlbumSubController *mAlbumController;
 	IBOutlet PWTableView *mAlbumView;
@@ -40,6 +43,7 @@
 	
 	IBOutlet NSScrollView *mGenreScroller;
 	IBOutlet NSScrollView *mArtistScroller;
+	IBOutlet NSScrollView *mComposerScroller;
 	IBOutlet NSScrollView *mAlbumScroller;
 	
 	IBOutlet NSView *mTitleSplitView;

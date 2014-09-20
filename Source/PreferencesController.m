@@ -150,6 +150,14 @@ static PreferencesController *_sharedPreferencesController;
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"showGenreInLibrary"];
 }
 
+- (BOOL) showComposerInLibrary {
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"showComposerInLibrary"] boolValue];
+}
+
+- (void) setShowComposerInLibrary:(BOOL)aValue {
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"showComposerInLibrary"];
+}
+
 - (NSString *) coverArtFetchingPropertyName {
   return @"coverArtFetchingEnabled";
 
