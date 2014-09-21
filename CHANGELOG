@@ -2,6 +2,7 @@
     * Menu item to toggle crossfade
     * Support for global media keyboard shortcuts
     * Playlists are now in alphabetical order
+    * Added composer tag to playlist and library UI
 
   Theremin 0.6.4:
     * Nicer and much more useful Growl notifications
