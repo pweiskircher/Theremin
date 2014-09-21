@@ -99,8 +99,7 @@ NSString *nGrowlNotificationPlaying = @"Song Changed Notification";
 	
 	if (_currentSong.artist) {
 		[notableTags addObject:_currentSong.artist];
-	}
-	if (_currentSong.composer) {
+	} else if (_currentSong.composer) {
 		[notableTags addObject:_currentSong.composer];
 	}
 	
