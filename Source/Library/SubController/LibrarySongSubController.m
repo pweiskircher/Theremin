@@ -34,8 +34,8 @@
 			
 			if ([filter isKindOfClass:[LibraryIdFilter class]]) {
 				LibraryIdFilter *idFilter = (LibraryIdFilter *)filter;
-				if ([idFilter type] == eLibraryIdFilterAlbum ||
-					[idFilter type] == eLibraryIdFilterArtist) {
+				if ([idFilter type] == eLibraryIdFilterAlbum || (
+					[idFilter type] == eLibraryIdFilterArtist || [idFilter type] == eLibraryIdFilterComposer)) {
 					fetchTitles = YES;
 					break;					
 				}
@@ -53,6 +53,8 @@
 		return [NSString stringWithFormat:@"%d:%02d", time / 60, time % 60];
 	} else if ([[tableColumn identifier] isEqualToString:@"artist.name"]) {
 		return [[mItems objectAtIndex:row] artist];
+	} else if ([[tableColumn identifier] isEqualToString:@"composer.name"]) {
+		return [[mItems objectAtIndex:row] composer];
 	} else if ([[tableColumn identifier] isEqualToString:@"album.name"]) {
 		return [[mItems objectAtIndex:row] album];
 	} else if ([[tableColumn identifier] isEqualToString:@"title"]) {

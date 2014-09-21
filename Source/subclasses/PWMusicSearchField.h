@@ -13,6 +13,7 @@ typedef enum {
 	eMusicFlagsArtist,
 	eMusicFlagsAlbum,
 	eMusicFlagsTitle,
+	eMusicFlagsComposer,
 	eMusicFlagsLast
 } MusicFlags;
 

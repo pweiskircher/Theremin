@@ -29,6 +29,7 @@
 #import "LibraryImportController.h"
 
 #import "LibraryArtistSubController.h"
+#import "LibraryComposerSubController.h"
 #import "LibraryAlbumSubController.h"
 #import "LibrarySongSubController.h"
 #import "LibraryGenreSubController.h"
@@ -50,6 +51,7 @@ static NSString *tSearchField = @"tSearchField";
 - (void) clearAndDisableViews;
 
 - (void) showGenreView:(BOOL)show;
+- (void) showComposerView:(BOOL)show;
 @end
 
 @implementation LibraryController
@@ -81,9 +83,13 @@ static NSString *tSearchField = @"tSearchField";
 													 name:(NSString *)nProfileSwitched
 												   object:nil];
 		
-		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self 
-																  forKeyPath:@"values.showGenreInLibrary" 
-																	 options:NSKeyValueObservingOptionNew 
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+																  forKeyPath:@"values.showGenreInLibrary"
+																	 options:NSKeyValueObservingOptionNew
+																	 context:NULL];
+		[[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+																  forKeyPath:@"values.showComposerInLibrary"
+																	 options:NSKeyValueObservingOptionNew
 																	 context:NULL];
 
 		mImportController = [[LibraryImportController alloc] init];
@@ -111,9 +117,10 @@ static NSString *tSearchField = @"tSearchField";
 
 	[mWindow setUseGlobalHotkeys:YES];
 	
-	[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary]];
+	[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary] andComposerView:[[PreferencesController sharedInstance] showComposerInLibrary]];
 	
 	mArtistController = [[LibraryArtistSubController alloc] initWithTableView:mArtistView andLibraryController:self andHasAllEntry:YES];
+	mComposerController = [[LibraryComposerSubController alloc] initWithTableView:mComposerView andLibraryController:self andHasAllEntry:YES];
 	mAlbumController = [[LibraryAlbumSubController alloc] initWithTableView:mAlbumView andLibraryController:self andHasAllEntry:YES];
 	mSongController = [[LibrarySongSubController alloc] initWithTableView:mSongView andLibraryController:self andHasAllEntry:NO];
 	mGenreController = [[LibraryGenreSubController alloc] initWithTableView:mGenreView andLibraryController:self andHasAllEntry:YES];
@@ -128,6 +135,7 @@ static NSString *tSearchField = @"tSearchField";
 	[mImportController release];
 	[mArtistController release];
 	[mAlbumController release];
+	[mComposerController release];
 	[mSongController release];
 	
 	
@@ -214,19 +222,37 @@ static NSString *tSearchField = @"tSearchField";
 #pragma mark Misc Functions
 
 - (void) showGenreView:(BOOL)show {
+	[self showGenreView:show andComposerView:[[PreferencesController sharedInstance] showComposerInLibrary]];
+}
+
+- (void) showComposerView:(BOOL)show {
+	[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary] andComposerView:show];
+}
+
+- (void) showGenreView:(BOOL)gvShow andComposerView:(BOOL)cvShow {
 	NSArray *scrollers;
-	if (show == NO)
-		scrollers = [NSArray arrayWithObjects:mArtistScroller, mAlbumScroller, nil];
-	else
-		scrollers = [NSArray arrayWithObjects:mGenreScroller, mArtistScroller, mAlbumScroller, nil];
-	
+	if (gvShow) {
+		if (cvShow) {
+			scrollers = [NSArray arrayWithObjects:mGenreScroller, mArtistScroller, mAlbumScroller, mComposerScroller, nil];
+		} else {
+			scrollers =	[NSArray arrayWithObjects:mGenreScroller, mArtistScroller, mAlbumScroller, nil];
+		}
+	} else {
+		if (cvShow) {
+			scrollers = [NSArray arrayWithObjects:mArtistScroller, mAlbumScroller, mComposerScroller, nil];
+		} else {
+			scrollers =	[NSArray arrayWithObjects:mArtistScroller, mAlbumScroller, nil];
+		}
+	}
 	int width = [mWindow frame].size.width / [scrollers count];
 	int height = [mArtistScroller frame].size.height;
 	
-	for (int i = 0; i < [scrollers count]; i++)
+	for (int i = 0; i < [scrollers count]; i++) {
 		[[scrollers objectAtIndex:i] setFrame:NSMakeRect(i*width, 0, width, height)];
-	
-	[mGenreScroller setHidden:!show];
+	}
+	[mComposerScroller setHidden:!cvShow];
+	[mGenreScroller setHidden:!gvShow];
+
 }
 
 - (void) profileSwitched:(NSNotification *)aNotification {
@@ -234,9 +260,14 @@ static NSString *tSearchField = @"tSearchField";
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:@"values.showGenreInLibrary"])
+	if ([keyPath isEqualToString:@"values.showGenreInLibrary"]) {
 		[self showGenreView:[[PreferencesController sharedInstance] showGenreInLibrary]];
+	} else if ([keyPath isEqualToString:@"values.showComposerInLibrary"]) {
+		[self showComposerView:[[PreferencesController sharedInstance] showComposerInLibrary]];
+	}
 }
+
+
 
 - (void) clearAndDisableViews {
 	[[self getOrderedListOfSubControllers] makeObjectsPerformSelector:@selector(clearAndDisable)];
@@ -244,10 +275,11 @@ static NSString *tSearchField = @"tSearchField";
 
 - (NSArray *) selectedSongsUniqueIdentifiersInTable:(NSTableView *)tableView {
 	NSArray *songs;
-	if (tableView == mArtistView || tableView == mAlbumView || tableView == mGenreView)
+	if (tableView == mArtistView || tableView == mAlbumView || tableView == mGenreView || tableView == mComposerView) {
 		songs = [mSongController allItems];
-	else if (tableView == mSongView)
+	} else if (tableView == mSongView) {
 		songs = [mSongController getSelected:NULL];
+	}
 	
 	NSMutableArray *uniqueIds = [NSMutableArray array];
 	for (int i = 0; i < [songs count]; i++)
@@ -263,6 +295,8 @@ static NSString *tSearchField = @"tSearchField";
 		NSMenu *menu = [sender menu];
 		if (menu == mArtistView.menu) {
 			return mArtistView;
+		} else if (menu == mComposerView.menu) {
+			return mComposerView;
 		} else if (menu == mAlbumView.menu) {
 			return mAlbumView;
 		} else if (menu == mGenreView.menu) {
@@ -290,7 +324,7 @@ static NSString *tSearchField = @"tSearchField";
 }
 
 - (NSArray *) getOrderedListOfSubControllers {
-	return [NSArray arrayWithObjects:mGenreController, mArtistController, mAlbumController, mSongController, nil];
+	return [NSArray arrayWithObjects:mGenreController, mArtistController, mAlbumController, mComposerController, mSongController, nil];
 }
 
 - (void) reloadAll {
@@ -382,6 +416,8 @@ static NSString *tSearchField = @"tSearchField";
 - (void)tableViewBecameFirstResponder:(NSNotification *)aNotification {
 	if ([aNotification object] == mArtistView) {
 		[mAppendSongsItem setLabel:NSLocalizedString(@"Append Artists", @"Library toolbar button Label")];
+	} else if ([aNotification object] == mComposerView) {
+		[mAppendSongsItem setLabel:NSLocalizedString(@"Append Composers", @"Library toolbar button label")];
 	} else if ([aNotification object] == mAlbumView) {
 		[mAppendSongsItem setLabel:NSLocalizedString(@"Append Albums", @"Library toolbar button label")];
 	} else if ([aNotification object] == mSongView) {

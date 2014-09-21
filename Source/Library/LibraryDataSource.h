@@ -33,6 +33,7 @@ typedef enum {
 
 - (void) requestAlbumsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
 - (void) requestArtistsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
+- (void) requestComposersWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
 - (void) requestGenresWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
 - (void) requestSongsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector;
 

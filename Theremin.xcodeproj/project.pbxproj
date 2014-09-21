@@ -80,8 +80,7 @@
 		43A5D1AE0BAC2F7100C29E17 /* PlayListFilesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A5D1AC0BAC2F7100C29E17 /* PlayListFilesController.m */; };
 		43A5D31A0BAC512F00C29E17 /* PlayListFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A5D3180BAC512F00C29E17 /* PlayListFile.m */; };
 		43A8E9B50BE4A8A40078DBD7 /* PWMusicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9B30BE4A8A40078DBD7 /* PWMusicTextField.m */; };
-		43A8E9CD0BE4A9BA0078DBD7 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */; };
-		43A8E9F40BE4AC230078DBD7 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9F20BE4AC230078DBD7 /* Album.m */; };
+		43A8E9CD0BE4A9BA0078DBD7 /* Composer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */; };
 		43ACAC3A0E544811002C8857 /* ImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ACAC390E544811002C8857 /* ImageTextCell.m */; };
 		43B0F8CA0B7F3D1400F3A951 /* UpdateDatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F8C80B7F3D1400F3A951 /* UpdateDatabaseController.m */; };
 		43B0F92E0B7F412E00F3A951 /* Directory.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F92C0B7F412E00F3A951 /* Directory.m */; };
@@ -179,6 +178,9 @@
 		4A2C74DB164EEE8F00F63333 /* shuffleOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DA164EEE8F00F63333 /* shuffleOff.png */; };
 		4A2C74DD164EEE9600F63333 /* shuffleOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DC164EEE9600F63333 /* shuffleOn.png */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		DD6FACD819CD265800BCF49D /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACD619CD265800BCF49D /* Album.m */; };
+		DD6FACD919CD265800BCF49D /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACD719CD265800BCF49D /* Artist.m */; };
+		DD6FACDB19CD27B100BCF49D /* LibraryComposerSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -341,9 +343,8 @@
 		43A8E9B20BE4A8A40078DBD7 /* PWMusicTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWMusicTextField.h; path = Source/subclasses/PWMusicTextField.h; sourceTree = "<group>"; };
 		43A8E9B30BE4A8A40078DBD7 /* PWMusicTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWMusicTextField.m; path = Source/subclasses/PWMusicTextField.m; sourceTree = "<group>"; };
 		43A8E9CA0BE4A9BA0078DBD7 /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Artist.h; path = Source/MusicServer/Artist.h; sourceTree = "<group>"; };
-		43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Artist.m; path = Source/MusicServer/Artist.m; sourceTree = "<group>"; };
+		43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Composer.m; path = Source/MusicServer/Composer.m; sourceTree = "<group>"; };
 		43A8E9F10BE4AC230078DBD7 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Album.h; path = Source/MusicServer/Album.h; sourceTree = "<group>"; };
-		43A8E9F20BE4AC230078DBD7 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Source/MusicServer/Album.m; sourceTree = "<group>"; };
 		43ACAC380E544811002C8857 /* ImageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTextCell.h; path = Source/ImageTextCell.h; sourceTree = "<group>"; };
 		43ACAC390E544811002C8857 /* ImageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTextCell.m; path = Source/ImageTextCell.m; sourceTree = "<group>"; };
 		43B0F8C70B7F3D1400F3A951 /* UpdateDatabaseController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = UpdateDatabaseController.h; path = Source/UpdateDatabaseController.h; sourceTree = "<group>"; };
@@ -470,6 +471,11 @@
 		4A2C74DA164EEE8F00F63333 /* shuffleOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOff.png; sourceTree = "<group>"; };
 		4A2C74DC164EEE9600F63333 /* shuffleOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOn.png; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD6FACD519CD244300BCF49D /* Composer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Composer.h; path = Source/MusicServer/Composer.h; sourceTree = "<group>"; };
+		DD6FACD619CD265800BCF49D /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Source/MusicServer/Album.m; sourceTree = "<group>"; };
+		DD6FACD719CD265800BCF49D /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Artist.m; path = Source/MusicServer/Artist.m; sourceTree = "<group>"; };
+		DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryComposerSubController.m; sourceTree = "<group>"; };
+		DD6FACDC19CD27BD00BCF49D /* LibraryComposerSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryComposerSubController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,6 +807,8 @@
 				43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */,
 				43A0168C0E571A4700AA8198 /* LibraryArtistSubController.h */,
 				43A0168D0E571A4700AA8198 /* LibraryArtistSubController.m */,
+				DD6FACDC19CD27BD00BCF49D /* LibraryComposerSubController.h */,
+				DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */,
 				43A0168E0E571A4700AA8198 /* LibraryGenreSubController.h */,
 				43A0168F0E571A4700AA8198 /* LibraryGenreSubController.m */,
 				43A016900E571A4700AA8198 /* LibrarySongSubController.h */,
@@ -910,9 +918,11 @@
 				43A0091C0DF3D39F00F42212 /* Genre.h */,
 				43A0091D0DF3D39F00F42212 /* Genre.m */,
 				43A8E9F10BE4AC230078DBD7 /* Album.h */,
-				43A8E9F20BE4AC230078DBD7 /* Album.m */,
 				43A8E9CA0BE4A9BA0078DBD7 /* Artist.h */,
-				43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */,
+				DD6FACD519CD244300BCF49D /* Composer.h */,
+				43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */,
+				DD6FACD619CD265800BCF49D /* Album.m */,
+				DD6FACD719CD265800BCF49D /* Artist.m */,
 				432533600B7A722E00DF9E7E /* Song.h */,
 				432533610B7A722E00DF9E7E /* Song.m */,
 				43C45DB10F09064300911191 /* ThereminEntity.h */,
@@ -1110,7 +1120,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Theremin" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1238,6 +1248,7 @@
 				43341FA40B8BA22500B8804A /* UnifiedToolbarButtonCell.m in Sources */,
 				43341FA60B8BA22500B8804A /* UnifiedToolbarItem.m in Sources */,
 				43341FA80B8BA22500B8804A /* UnifiedToolbarItemSegment.m in Sources */,
+				DD6FACDB19CD27B100BCF49D /* LibraryComposerSubController.m in Sources */,
 				43341FAA0B8BA22500B8804A /* UnifiedToolbarItemView.m in Sources */,
 				43341FAC0B8BA22500B8804A /* UnifiedToolbarLabelCell.m in Sources */,
 				43A5D1AE0BAC2F7100C29E17 /* PlayListFilesController.m in Sources */,
@@ -1246,8 +1257,7 @@
 				43215B770BCA3964009E4C18 /* AppGlobalHotkeyController.m in Sources */,
 				43215B7F0BCA3970009E4C18 /* AppGlobalHotkey.m in Sources */,
 				43A8E9B50BE4A8A40078DBD7 /* PWMusicTextField.m in Sources */,
-				43A8E9CD0BE4A9BA0078DBD7 /* Artist.m in Sources */,
-				43A8E9F40BE4AC230078DBD7 /* Album.m in Sources */,
+				43A8E9CD0BE4A9BA0078DBD7 /* Composer.m in Sources */,
 				43A0091E0DF3D39F00F42212 /* Genre.m in Sources */,
 				43858C9D0DFB30A300FEFB5E /* PWTableViewMenuItem.m in Sources */,
 				43858D700DFB432900FEFB5E /* PWTableView.m in Sources */,
@@ -1262,6 +1272,7 @@
 				43A016920E571A4700AA8198 /* CompilationDetector.m in Sources */,
 				43A016930E571A4700AA8198 /* LibraryBooleanFilter.m in Sources */,
 				43A016940E571A4700AA8198 /* LibraryFilterGroup.m in Sources */,
+				DD6FACD819CD265800BCF49D /* Album.m in Sources */,
 				43A016950E571A4700AA8198 /* LibraryIdFilter.m in Sources */,
 				43A016960E571A4700AA8198 /* LibraryStringFilter.m in Sources */,
 				43A016970E571A4700AA8198 /* LibraryController.m in Sources */,
@@ -1272,6 +1283,7 @@
 				43A0169C0E571A4700AA8198 /* SQLController.m in Sources */,
 				43A0169D0E571A4700AA8198 /* SQLiteDatabase.m in Sources */,
 				43A0169E0E571A4700AA8198 /* SQLiteQuery.m in Sources */,
+				DD6FACD919CD265800BCF49D /* Artist.m in Sources */,
 				43A0169F0E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m in Sources */,
 				43A016A10E571A4700AA8198 /* LibraryAlbumSubController.m in Sources */,
 				43A016A20E571A4700AA8198 /* LibraryArtistSubController.m in Sources */,
@@ -1334,7 +1346,6 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1358,7 +1369,6 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1379,13 +1389,14 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = SQL_DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1394,7 +1405,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;

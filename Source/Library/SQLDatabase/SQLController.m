@@ -24,6 +24,7 @@
 #import "SQLiteQuery.h"
 #import "Song.h"
 #import "Artist.h"
+#import "Composer.h"
 #import "Album.h"
 #import "Genre.h"
 #import "SQLUniqueIdentifiersFilter.h"
@@ -169,33 +170,47 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 
 - (BOOL) createTables {
 	if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS "
-								   @"artists(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO)
+		 @"artists(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO) {
         return NO;
-	if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS artist_key_name ON artists(name);"] == NO)
+	}
+	if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS artist_key_name ON artists(name);"] == NO) {
 		return NO;
-	
-    if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS "
-								   @"albums(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO)
-        return NO;
-    if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS album_key_name ON albums(name);"] == NO)
-        return NO;
+	}
 	
 	if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS "
-								   @"genres(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO)
+		 @"composers(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO) {
+        return NO;
+	}
+	if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS composer_key_name ON composers(name);"] == NO) {
 		return NO;
-	if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS genre_key_name ON genres(name);"] == NO)
+	}
+	
+    if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS "
+		 @"albums(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO) {
+        return NO;
+	}
+    if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS album_key_name ON albums(name);"] == NO) {
+        return NO;
+	}
+	
+	if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS "
+		 @"genres(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name TEXT);"] == NO) {
 		return NO;
+	}
+	if ([mDatabase execSimpleQuery:@"CREATE UNIQUE INDEX IF NOT EXISTS genre_key_name ON genres(name);"] == NO) {
+		return NO;
+	}
 	
     if ([mDatabase execSimpleQuery:@"CREATE TABLE IF NOT EXISTS songs("
 		                           @"id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
 								   @"file TEXT, artist INTEGER DEFAULT NULL, "
+								   @"composer INTEGER DEFAULT NULL, "
 								   @"album INTEGER DEFAULT NULL, "
 								   @"genre INTEGER DEFAULT NULL, "
 		                           @"title TEXT, "
 								   @"track TEXT, "
 		                           @"name TEXT, "
 		                           @"date TEXT, "
-		                           @"composer TEXT, "
 		                           @"disc TEXT, "
 		                           @"comment TEXT, "
 		                           @"time INTEGER, "
@@ -255,8 +270,38 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	return array;
 }
 
+
+- (NSArray *) composersFromQuery:(SQLiteQuery *)theQuery {
+	if ([theQuery state] != eSQLiteQueryStateHasData)
+		return nil;
+	
+	BOOL includesCompilations = NO;
+	
+	NSMutableArray *array = [NSMutableArray array];
+	do {
+		Composer *composer = [[[Composer alloc] init] autorelease];
+		[composer setName:[theQuery stringFromColumnIndex:0]];
+		[composer setIdentifier:[theQuery intFromColumnIndex:1]];
+		
+		if ([theQuery intFromColumnIndex:2] == 1) {
+			includesCompilations = YES;
+		} else {
+			[array addObject:composer];
+		}
+	} while ([theQuery next]);
+	
+	if (includesCompilations) {
+		Composer *composer = [[[Composer alloc] init] autorelease];
+		[composer setName:TR_S_COMPILATION];
+		[composer setIdentifier:CompilationSQLIdentifier];
+		[array addObject:composer];
+	}
+	
+	return array;
+}
+
 - (void) requestGenresWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
-	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS identifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT genres.name AS name, songs.genre AS identifier FROM songs LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN composers ON songs.composer = composers.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO)
@@ -267,7 +312,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 }
 
 - (void) requestAlbumsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
-	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS identifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id "];
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT albums.name AS name, songs.album AS identifier FROM songs LEFT JOIN albums ON songs.album = albums.id LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN composers ON songs.composer = composers.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO)
@@ -279,11 +324,11 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 
 - (void) requestSongsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT songs.file AS file, songs.title AS title, songs.track AS track,"
-							@"songs.name AS name, songs.date AS date, songs.composer AS composer, songs.disc AS disc,"
+							@"songs.name AS name, songs.date AS date, composers.name AS composer, songs.disc AS disc,"
 							@"songs.comment AS comment, songs.time AS time, songs.uniqueIdentifier AS uniqueIdentifier,"
 							@"artists.name AS artist, albums.name AS album, songs.id AS identifier, "
 							@"songs.isCompilation AS isCompilation, genres.name AS genre "
-							@"FROM songs LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN genres ON songs.genre = genres.id"];
+							@"FROM songs LEFT JOIN artists ON songs.artist = artists.id LEFT JOIN albums ON songs.album = albums.id LEFT JOIN genres ON songs.genre = genres.id LEFT JOIN composers ON songs.composer = composers.id"];
 
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO)
@@ -296,7 +341,8 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 - (void) requestArtistsWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
 	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT artists.name AS name, songs.artist AS identifier, songs.isCompilation FROM songs "
 		                                                     @"LEFT JOIN artists ON songs.artist = artists.id "
-		                                                     @"LEFT JOIN albums ON songs.album = albums.id"];
+		                                                     @"LEFT JOIN albums ON songs.album = albums.id "
+															@"LEFT JOIN composers ON songs.composer = composers.id "];
 	
 	SQLiteQuery *query = [mDatabase query:sql];
 	if ([query execWithFilters:theFilters] == NO)
@@ -304,6 +350,20 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	
 	NSArray *results = [self artistsFromQuery:query];
 	[aTarget performSelector:aSelector withObject:results];	
+}
+
+- (void) requestComposersWithFilters:(NSArray *)theFilters reportToTarget:(id)aTarget andSelector:(SEL)aSelector {
+	NSMutableString *sql = [NSMutableString stringWithString:@"SELECT DISTINCT composers.name AS name, songs.composer AS identifier, songs.isCompilation FROM songs "
+							@"LEFT JOIN artists ON songs.artist = artists.id "
+							@"LEFT JOIN composers ON songs.composer = composers.id "
+							@"LEFT JOIN albums ON songs.album = albums.id "];
+	
+	SQLiteQuery *query = [mDatabase query:sql];
+	if ([query execWithFilters:theFilters] == NO)
+		[NSException raise:NSGenericException format:@"Couldn't get composers."];
+	
+	NSArray *results = [self composersFromQuery:query];
+	[aTarget performSelector:aSelector withObject:results];
 }
 
 - (int) getIdFromTable:(NSString *)table forItem:(id)item usingKey:(NSString *)key andFallbackIfKeyUnknown:(NSString *)fallback {
@@ -348,6 +408,10 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	return [self getIdFromTable:@"artists" forItem:aSong usingKey:@"artist" andFallbackIfKeyUnknown:gUnknownArtistName];
 }
 
+- (int) composerId:(Song *)aSong {
+	return [self getIdFromTable:@"composers" forItem:aSong usingKey:@"composer" andFallbackIfKeyUnknown:gUnknownComposerName];
+}
+
 - (int) genreId:(Song *)aSong {
 	return [self getIdFromTable:@"genres" forItem:aSong usingKey:@"genre" andFallbackIfKeyUnknown:gUnknownGenreName];
 }
@@ -358,17 +422,21 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 
 - (BOOL) insertSong:(Song *)aSong {
 	int artistId = [self artistId:aSong];
+	int composerId = [self composerId:aSong];
 	int albumId = [self albumId:aSong];
 	int genreId = [self genreId:aSong];
 
 	if (!mSongInsertQuery) {
-		mSongInsertQuery = [[mDatabase query:@"INSERT INTO songs (file, artist, album, title, track, name, date, genre, composer, disc, comment, time, uniqueIdentifier) VALUES(:FILE, :ARTIST, :ALBUM, :TITLE, :TRACK, :NAME, :DATE, :GENRE, :COMPOSER, :DISC, :COMMENT, :TIME, :UNIQUEIDENTIFIER);"] retain];
+		mSongInsertQuery = [[mDatabase query:@"INSERT INTO songs (file, artist, composer, album, title, track, name, date, genre, disc, comment, time, uniqueIdentifier) VALUES(:FILE, :ARTIST, :COMPOSER, :ALBUM, :TITLE, :TRACK, :NAME, :DATE, :GENRE, :DISC, :COMMENT, :TIME, :UNIQUEIDENTIFIER);"] retain];
 	}
 
 	[mSongInsertQuery bindString:[aSong file] toName:@":FILE"];
 	
 	if (artistId != -1)
 		[mSongInsertQuery bindInteger:artistId toName:@":ARTIST"];
+	if (composerId != -1) {
+		[mSongInsertQuery bindInteger:composerId toName:@":COMPOSER"];
+	}
 	if (albumId != -1)
 		[mSongInsertQuery bindInteger:albumId toName:@":ALBUM"];
 	if (genreId != -1)
@@ -378,7 +446,6 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	[mSongInsertQuery bindString:[aSong track] toName:@":TRACK"];
 	[mSongInsertQuery bindString:[aSong name] toName:@":NAME"];
 	[mSongInsertQuery bindString:[aSong date] toName:@":DATE"];
-	[mSongInsertQuery bindString:[aSong composer] toName:@":COMPOSER"];
 	[mSongInsertQuery bindString:[aSong disc] toName:@":DISC"];
 	[mSongInsertQuery bindString:[aSong comment] toName:@":COMMENT"];
 	[mSongInsertQuery bindInteger:[aSong time] toName:@":TIME"];
@@ -500,6 +567,7 @@ const NSString *gDatabaseIdentifier = @"gDatabaseIdentifier";
 	[mDatabase startTransaction];
 	[mDatabase execSimpleQuery:@"DELETE FROM songs;"];
 	[mDatabase execSimpleQuery:@"DELETE FROM artists;"];
+	[mDatabase execSimpleQuery:@"DELETE FROM composers;"];
 	[mDatabase execSimpleQuery:@"DELETE FROM albums;"];
 	[mDatabase execSimpleQuery:@"DELETE FROM genres;"];
 	[mDatabase commitTransaction];

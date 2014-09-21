@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2008  Patrik Weiskircher
+ Copyright (C) 2006-2007  Patrik Weiskircher
  
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU General Public License
@@ -18,20 +18,24 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "ThereminEntity.h"
 
-typedef enum {
-	eLibraryStringFilterAlbum,
-	eLibraryStringFilterArtist,
-	eLibraryStringFilterSong,
-	eLibraryStringFilterComposer
-} LibraryStringFilterType;
+extern NSString *gUnknownComposerName;
 
-@interface LibraryStringFilter : NSObject {
-	LibraryStringFilterType _type;
-	NSArray *_strings;
+#define TR_S_UNKNOWN_COMPOSER	NSLocalizedString(@"Unknown Composer", @"Unknown Composer")
+
+@interface Composer : NSObject <ThereminEntity> {
+	NSString *mName;
+	int _identifier;
 }
-- (id) initWithType:(LibraryStringFilterType)aType andStrings:(NSArray *)someStrings;
+- (id) init;
+- (void) dealloc;
 
-- (LibraryStringFilterType) type;
-- (NSArray *) strings;
+- (NSString *) description;
+
+- (NSString *) name;
+- (int) identifier;
+
+- (void) setName:(NSString *)aName;
+- (void) setIdentifier:(int)aInteger;
 @end

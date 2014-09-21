@@ -122,6 +122,7 @@ static unsigned int gBindCounter;
 
 	switch ([aFilter type]) {
 		case eLibraryIdFilterArtist: [whereClause appendString:@"songs.artist"]; break;
+		case eLibraryIdFilterComposer: [whereClause appendString:@"songs.composer"]; break;
 		case eLibraryIdFilterAlbum:  [whereClause appendString:@"songs.album"]; break;
 		case eLibraryIdFilterGenre:  [whereClause appendString:@"songs.genre"]; break;
 	}
@@ -156,11 +157,13 @@ static unsigned int gBindCounter;
 		}
 	} else {
 		NSString *source;
-		if ([aFilter type] == eLibraryStringFilterArtist)
+		if ([aFilter type] == eLibraryStringFilterArtist) {
 			source = @"artists.name";
-		else if ([aFilter type] == eLibraryStringFilterAlbum)
+		} else if ([aFilter type] == eLibraryStringFilterAlbum) {
 			source = @"albums.name";
-		
+		} else if ([aFilter type] == eLibraryStringFilterComposer) {
+			source = @"composers.name";
+		}
 		NSArray *tokens = [aFilter strings];
 		for (int i = 0; i < [tokens count]; i++) {
 			if (i > 0) [whereClause appendString:@" AND "];

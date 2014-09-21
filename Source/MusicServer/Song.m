@@ -20,6 +20,7 @@
 #import "Song.h"
 #import "Album.h"
 #import "Artist.h"
+#import "Composer.h"
 #import "Genre.h"
 
 NSString *gSongPropertyFile = @"gSongPropertyFile";
@@ -34,6 +35,7 @@ NSString *gSongPropertyDate = @"gSongPropertyDate";
 NSString *gSongPropertyGenre = @"gSongPropertyGenre";
 NSString *gSongPropertyGenreIsUnknown = @"gSongPropertyGenreIsUnknown";
 NSString *gSongPropertyComposer = @"gSongPropertyComposer";
+NSString *gSongPropertyComposerIsUnknown = @"gSongPropertyComposerIsUnknown";
 NSString *gSongPropertyDisc = @"gSongPropertyDisc";
 NSString *gSongPropertyComment = @"gSongPropertyComment";
 NSString *gSongPropertyTime = @"gSongPropertyTime";
@@ -359,8 +361,16 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 
 - (void) setComposer:(NSString *)aString {
 	if (!aString) return;
-	[mValues setObject:aString forKey:gSongPropertyComposer];
+	
+	if ([aString isEqualToString:gUnknownComposerName]) {
+		[mValues setObject:TR_S_UNKNOWN_COMPOSER forKey:gSongPropertyComposer];
+		[mValues setObject:[NSNumber numberWithBool:YES] forKey:gSongPropertyComposerIsUnknown];
+	} else {
+		[mValues setObject:aString forKey:gSongPropertyComposer];
+		[mValues removeObjectForKey:gSongPropertyComposerIsUnknown];
+	}
 }
+
 
 - (void) setDisc:(NSString *)aString {
 	if (!aString) return;
