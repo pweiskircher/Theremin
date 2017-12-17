@@ -38,7 +38,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <action selector="browserCellSelected:" target="-2" id="qxi-gL-q0l"/>
-                                    <action trigger="doubleAction" selector="replacePlaylistWithCurrentDirectory:" target="-2" id="jsZ-eO-taG"/>
+                                    <action trigger="doubleAction" selector="doubleActionForBrowserDirectory:" target="-2" id="DXb-G4-8Jz"/>
                                     <outlet property="delegate" destination="-2" id="J5m-gL-Nbs"/>
                                     <outlet property="menu" destination="u53-ca-HaB" id="G3S-xM-GZH"/>
                                 </connections>
