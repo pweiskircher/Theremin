@@ -39,18 +39,18 @@
 	return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mDirectories release];
 	
 	[super dealloc];
 }
 
-- (void) show {
+- (void)show {
 	[mWindow makeKeyAndOrderFront:self];
 }
 
-- (void) clientConnectionStatusChanged:(NSNotification *)notification {
+- (void)clientConnectionStatusChanged:(NSNotification *)notification {
 	if (!([[[WindowController instance] currentLibraryDataSource] supportsDataSourceCapabilities] & eLibraryDataSourceSupportsImportingSongs))
 		return;
 	
@@ -78,6 +78,8 @@
 	} else {
 		return;
 	}
+	
+	[mTableView reloadData];
 	
 	[mBrowser setEnabled:enableControls];
 }
@@ -183,12 +185,17 @@
 }
 
 - (IBAction)tableAction:(id)sender {
+	NSArray *songIDs = [self selectedSongsUniqueIdentifiersInTable:mTableView];
+	if (songIDs.count == 0) {
+		return;
+	}
+	
 	switch ([[PreferencesController sharedInstance] libraryDoubleClickAction]) {
 		case eLibraryDoubleClickReplaces:
-			[self replacePlaylistWithSongIdentifiers:[self selectedSongsUniqueIdentifiersInTable:mTableView]];
+			[self replacePlaylistWithSongIdentifiers:songIDs];
 			break;
 		case eLibraryDoubleClickAppends:
-			[self appendPlaylistWithSongIdentifiers:[self selectedSongsUniqueIdentifiersInTable:mTableView]];
+			[self appendPlaylistWithSongIdentifiers:songIDs];
 			break;
 	}
 }
