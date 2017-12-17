@@ -211,11 +211,6 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <imageView id="54">
-                        <rect key="frame" x="0.0" y="0.0" width="782" height="22"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="statusbar_background" id="431"/>
-                    </imageView>
                 </subviews>
             </view>
             <connections>
@@ -305,7 +300,4 @@
             </view>
         </window>
     </objects>
-    <resources>
-        <image name="statusbar_background" width="1" height="22"/>
-    </resources>
 </document>

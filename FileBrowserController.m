@@ -184,8 +184,7 @@
 		[self appendPlaylistWithSongIdentifiers:[self selectedSongsUniqueIdentifiersInTable:mTableView]];
 }
 
-- (IBAction)tableAction:(id)sender {
-	NSArray *songIDs = [self selectedSongsUniqueIdentifiersInTable:mTableView];
+- (void)modifyPlaylistWithSongIDs:(NSArray *)songIDs {
 	if (songIDs.count == 0) {
 		return;
 	}
@@ -198,6 +197,16 @@
 			[self appendPlaylistWithSongIdentifiers:songIDs];
 			break;
 	}
+}
+
+- (IBAction)tableAction:(id)sender {
+	NSArray *songIDs = [self selectedSongsUniqueIdentifiersInTable:mTableView];
+	[self modifyPlaylistWithSongIDs:songIDs];
+}
+
+- (IBAction)doubleActionForBrowserDirectory:(id)sender {
+	NSArray *songIDs = [self uniqueSongIdentifiersOfCurrentBrowserSelection];
+	[self modifyPlaylistWithSongIDs:songIDs];
 }
 
 - (IBAction) getInfoOnSongs:(id)sender {
