@@ -119,10 +119,7 @@ NSString *gDirectoryPropertyDirectorySongEntries = @"gDirectoryPropertyDirectory
 	
 	NSArray *entries = [[[WindowController instance] musicClient] entriesInDirectory:self withTypes:eDirectoryType];
 	[mValues setObject:entries forKey:gDirectoryPropertyDirectoryEntries];
-	
-	NSArray *songs = [[[WindowController instance] musicClient] entriesInDirectory:self withTypes:eSongType];
-	[mValues setObject:songs forKey:gDirectoryPropertyDirectorySongEntries];
-	
+
 	return entries;
 }
 
