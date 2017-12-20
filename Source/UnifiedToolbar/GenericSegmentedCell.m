@@ -672,4 +672,8 @@
 	return NO;
 }
 
+- (int)_compressibleOptionsForControlView:(id)v {
+	return 0;
+}
+
 @end

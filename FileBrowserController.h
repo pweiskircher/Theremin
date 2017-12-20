@@ -11,7 +11,7 @@
 
 @class PWWindow;
 
-@interface FileBrowserController : NSObject <NSTableViewDataSource, NSTableViewDelegate, NSBrowserDelegate> {
+@interface FileBrowserController : NSObject <NSTableViewDataSource, NSTableViewDelegate> {
 	IBOutlet PWWindow *mWindow;
 	IBOutlet NSBrowser *mBrowser;
 	IBOutlet NSTreeController *mTreeController;

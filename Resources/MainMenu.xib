@@ -32,7 +32,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView id="230">
-                                    <rect key="frame" x="0.0" y="0.0" width="583.5" height="55"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="584" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="empty" id="2104"/>
                                 </imageView>
@@ -794,22 +794,8 @@ Gw
                 <outlet property="mTableView" destination="286" id="415"/>
             </connections>
         </customObject>
-        <customObject id="Lzy-cb-p76" userLabel="PlayListController" customClass="FileBrowserController">
+        <customObject id="Lzy-cb-p76" userLabel="FileBrowserController" customClass="FileBrowserController">
             <connections>
-                <outlet property="mColumnAlbum" destination="287" id="TQ4-06-RHI"/>
-                <outlet property="mColumnArtist" destination="290" id="XcE-4f-XFq"/>
-                <outlet property="mColumnComposer" destination="u4Z-Hh-kO9" id="Oxj-fl-urC"/>
-                <outlet property="mColumnDisc" destination="709" id="tM9-qG-eQE"/>
-                <outlet property="mColumnGenre" destination="675" id="QbU-au-aNk"/>
-                <outlet property="mColumnTime" destination="350" id="yss-bQ-ncV"/>
-                <outlet property="mColumnTrackName" destination="289" id="Zl9-iy-J63"/>
-                <outlet property="mColumnTrackNumber" destination="288" id="EGr-EY-R0L"/>
-                <outlet property="mController" destination="206" id="CcQ-AM-ND6"/>
-                <outlet property="mCurrentPlaylistInfo" destination="852" id="eHI-26-TCF"/>
-                <outlet property="mRandomizePanel" destination="637" id="rTQ-LL-5YF"/>
-                <outlet property="mRandomizePanelProgressIndicator" destination="639" id="wWX-0E-FsL"/>
-                <outlet property="mSearchingPanel" destination="406" id="axQ-Lu-qMm"/>
-                <outlet property="mSearchingPanelProgressIndicator" destination="410" id="T5Q-It-xEY"/>
                 <outlet property="mTableView" destination="286" id="Xbp-xb-Xim"/>
             </connections>
         </customObject>

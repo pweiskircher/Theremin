@@ -73,6 +73,4 @@
 - (float)autosizeWidthForSegment:(int)segment;
 - (float)minimumWidthForSegment:(int)segment;
 
-- (BOOL)_anySegmentShowsBadge;
-
 @end

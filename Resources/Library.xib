@@ -12,13 +12,6 @@
                 <outlet property="mAlbumView" destination="334" id="354"/>
                 <outlet property="mArtistScroller" destination="331" id="355"/>
                 <outlet property="mArtistView" destination="346" id="356"/>
-                <outlet property="mColumnAlbum" destination="321" id="357"/>
-                <outlet property="mColumnArtist" destination="322" id="358"/>
-                <outlet property="mColumnDisc" destination="317" id="359"/>
-                <outlet property="mColumnGenre" destination="318" id="7RV-WJ-WCW"/>
-                <outlet property="mColumnTime" destination="319" id="361"/>
-                <outlet property="mColumnTrackName" destination="320" id="363"/>
-                <outlet property="mColumnTrackNumber" destination="323" id="364"/>
                 <outlet property="mComposerScroller" destination="da8-9R-zaa" id="y7X-gK-ndH"/>
                 <outlet property="mComposerView" destination="Sco-jT-8bs" id="pCs-9U-Onh"/>
                 <outlet property="mGenreScroller" destination="332" id="365"/>
