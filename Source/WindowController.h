@@ -26,6 +26,7 @@
 @class PWWindow;
 @class PWVolumeSlider;
 @class LibraryController;
+@class LicenseController;
 @class PWTableView;
 @class InfoAreaController;
 @class UpdateDatabaseController;
@@ -33,19 +34,23 @@
 @class OutputDeviceHandler;
 @class MainPlayerToolbarController;
 @class AppleRemoteController;
+@class SPMediaKeyTap;
+@class FileBrowserController;
 
 extern const NSString *nProfileSwitched;
 extern const NSString *dProfile;
 
 @class SUUpdater;
 
-@interface WindowController : NSObject {
+@interface WindowController : NSObject <NSApplicationDelegate> {
 	// controller
 	IBOutlet PlayListController *mPlaylistController;
 	IBOutlet InfoAreaController *mInfoAreaController;
 	LibraryController *mLibraryController;
 	UpdateDatabaseController *mUpdateDatabaseController;
 	PlayListFilesController *mPlayListFilesController;
+	LicenseController *_licenseController;
+	FileBrowserController *mFileBrowserController;
 	
 	IBOutlet SUUpdater *mUpdater;
 		
@@ -53,10 +58,12 @@ extern const NSString *dProfile;
 	IBOutlet PWWindow *mWindow;
 	IBOutlet PWTableView *mPlaylist;
 	IBOutlet NSButton *mLibraryButton;
+	IBOutlet NSButton *fileBrowserButton;
 	IBOutlet NSMenuItem *mConnectItem;
 	IBOutlet NSMenuItem *mDisconnectItem;
 	IBOutlet NSMenuItem *mShuffleItem;
 	IBOutlet NSMenuItem *mRepeatItem;
+	IBOutlet NSMenuItem *mCrossfadeItem;
 	IBOutlet NSMenu *_fileMenu;
 	
 	IBOutlet NSPopUpButton *_profileChooser;
@@ -88,6 +95,7 @@ extern const NSString *dProfile;
 	
 	MainPlayerToolbarController *_mainPlayerToolbarController;
 	AppleRemoteController *_appleRemoteController;
+	SPMediaKeyTap *_mediaKeyTap;
 }
 
 + (id) instance;
@@ -100,6 +108,7 @@ extern const NSString *dProfile;
 - (int) currentPlayerState;
 
 - (PlayListController *) playlistController;
+@property (retain, nonatomic) LicenseController *licenseController;
 
 - (NSWindow *)window;
 - (NSString *)applicationSupportFolder;
@@ -121,15 +130,18 @@ extern const NSString *dProfile;
 - (IBAction) nextAlbum:(id)sender;
 - (IBAction) prevAlbum:(id)sender;	
 - (IBAction) stop:(id)sender;
+- (IBAction) shuffle:(id)sender;
 - (IBAction) showPlayerWindow:(id)sender;
 - (IBAction) showLicense:(id)sender;
 - (IBAction) showLibrary:(id)sender;
+- (IBAction) showFileBrowser:(id)sender;
 - (IBAction) showUpdateDatabase:(id)sender;
 - (IBAction) updateCompleteDatabase:(id)sender;
-- (IBAction) deleteSelectedSongs:(id)sender;
+- (IBAction) deleteSelectedItems:(id)sender;
 - (IBAction) seekSliderChanged:(id)sender;
 - (IBAction) toggleShuffle:(id)sender;
 - (IBAction) toggleRepeat:(id)sender;
+- (IBAction) toggleCrossfade:(id)sender;
 - (IBAction) find:(id)sender;
 
 

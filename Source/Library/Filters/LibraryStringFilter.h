@@ -22,7 +22,8 @@
 typedef enum {
 	eLibraryStringFilterAlbum,
 	eLibraryStringFilterArtist,
-	eLibraryStringFilterSong
+	eLibraryStringFilterSong,
+	eLibraryStringFilterComposer
 } LibraryStringFilterType;
 
 @interface LibraryStringFilter : NSObject {

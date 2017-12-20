@@ -27,6 +27,7 @@
 
 NSString *tPlayControlItemIdentifier = @"tPlayControlItemIdentifier";
 NSString *tStopItemIdentifier = @"tStopItemIdentifier";
+NSString *tShuffleItemIdentifier = @"tShuffleItemIdentifier";
 NSString *tVolumeSlider = @"tVolumeSlider";
 NSString *tSearchField = @"tSearchField";
 
@@ -35,6 +36,7 @@ NSString *tSearchField = @"tSearchField";
 #define TR_S_TOOLBAR_LABEL_NEXT		NSLocalizedString(@"Next", @"Main Window toolbar items label")
 #define TR_S_TOOLBAR_LABEL_PAUSE	NSLocalizedString(@"Pause", @"Main Window toolbar items label")
 #define TR_S_TOOLBAR_LABEL_STOP		NSLocalizedString(@"Stop", @"Main Window toolbar items label")
+#define TR_S_TOOLBAR_LABEL_SHUFFLE	NSLocalizedString(@"Shuffle", @"Main Window toolbar items label")
 
 @interface MainPlayerToolbarController (PrivateMethods)
 - (void) setupToolbar;
@@ -67,6 +69,11 @@ NSString *tSearchField = @"tSearchField";
 												 selector:@selector(volumeChanged:)
 													 name:nMusicServerClientVolumeChanged
 												   object:nil];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(shuffleOptionChanged:)
+													 name:nMusicServerClientShuffleOptionChanged
+												   object:nil];
 	}
 	return self;
 }
@@ -79,6 +86,7 @@ NSString *tSearchField = @"tSearchField";
 	[_volumeSlider release];
 	[_playerItem release];
 	[_stopItem release];
+    [_shuffleItem release];
 	[_musicSearch release];
 	[super dealloc];
 }
@@ -106,6 +114,7 @@ NSString *tSearchField = @"tSearchField";
 	[_playerItem setEnabled:enable forSegment:2];
 	
 	[_stopItem setEnabled:enable];
+	[_shuffleItem setEnabled:enable forSegment:0];
 	[_volumeSlider setEnabled:enable];
 	[[self musicSearchField] setEnabled:enable];	
 }
@@ -146,6 +155,15 @@ NSString *tSearchField = @"tSearchField";
 	}
 	
 	[_volumeSlider setFloatValue:volume];
+}
+
+- (void) shuffleOptionChanged:(NSNotification *)notification {
+	bool shuffleState = [[[notification userInfo] objectForKey:@"shuffleState"] boolValue];
+	
+	if (shuffleState)
+		[_shuffleItem setImage:[NSImage imageNamed:@"shuffleOn"]];
+	else
+		[_shuffleItem setImage:[NSImage imageNamed:@"shuffleOff"]];
 }
 
 - (void) volumeShouldChange:(id)sender {
@@ -194,7 +212,18 @@ NSString *tSearchField = @"tSearchField";
 		[_toolbarItems setObject:uitem forKey:itemIdentifier];
 		item = uitem;
 		_stopItem = [uitem retain];
-	} else if ([itemIdentifier isEqualToString:tVolumeSlider]) {
+	} else if ([itemIdentifier isEqualToString:tShuffleItemIdentifier]) {
+        UnifiedToolbarItem *uitem = [[[UnifiedToolbarItem alloc] initWithItemIdentifier:itemIdentifier segmentCount:1] autorelease];
+        
+		[uitem setImage:[NSImage imageNamed:@"shuffleOff"]];
+        [uitem setLabel:TR_S_TOOLBAR_LABEL_SHUFFLE];
+		[uitem setTarget:[WindowController instance]];
+		[uitem setAction:@selector(shuffle:)];
+        
+        [_toolbarItems setObject:uitem forKey:itemIdentifier];
+        item = uitem;
+        _shuffleItem = [uitem retain];
+    } else if ([itemIdentifier isEqualToString:tVolumeSlider]) {
 		_volumeSlider = [[PWVolumeSlider alloc] initWithFrame:NSMakeRect(0,0,0,0)];
 		[_volumeSlider setFrame:NSMakeRect(0, 0, [_volumeSlider size].width, [_volumeSlider size].height)];
 		
@@ -218,11 +247,11 @@ NSString *tSearchField = @"tSearchField";
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar {
-	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, tVolumeSlider, tSearchField, nil];
+	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, tShuffleItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, tVolumeSlider, tSearchField, nil];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar {
-	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, tVolumeSlider, NSToolbarFlexibleSpaceItemIdentifier, tSearchField, nil];
+	return [NSArray arrayWithObjects:tPlayControlItemIdentifier, tStopItemIdentifier, tShuffleItemIdentifier, tVolumeSlider, NSToolbarFlexibleSpaceItemIdentifier, tSearchField, nil];
 }
 
 - (PWMusicSearchField *)musicSearchField {

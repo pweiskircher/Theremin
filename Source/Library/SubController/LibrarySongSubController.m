@@ -34,8 +34,8 @@
 			
 			if ([filter isKindOfClass:[LibraryIdFilter class]]) {
 				LibraryIdFilter *idFilter = (LibraryIdFilter *)filter;
-				if ([idFilter type] == eLibraryIdFilterAlbum ||
-					[idFilter type] == eLibraryIdFilterArtist) {
+				if ([idFilter type] == eLibraryIdFilterAlbum || (
+					[idFilter type] == eLibraryIdFilterArtist || [idFilter type] == eLibraryIdFilterComposer)) {
 					fetchTitles = YES;
 					break;					
 				}
@@ -47,23 +47,25 @@
 		[[self libraryDataSource] requestSongsWithFilters:filters reportToTarget:self andSelector:@selector(receivedResults:)];
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-	if ([[aTableColumn identifier] isEqualToString:@"length"]) {
-		int time = [[[mItems objectAtIndex:rowIndex] valueForKey:@"time"] intValue];
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	if ([[tableColumn identifier] isEqualToString:@"length"]) {
+		int time = [[[mItems objectAtIndex:row] valueForKey:@"time"] intValue];
 		return [NSString stringWithFormat:@"%d:%02d", time / 60, time % 60];
-	} else if ([[aTableColumn identifier] isEqualToString:@"artist.name"]) {
-		return [[mItems objectAtIndex:rowIndex] artist];
-	} else if ([[aTableColumn identifier] isEqualToString:@"album.name"]) {
-		return [[mItems objectAtIndex:rowIndex] album];
-	} else if ([[aTableColumn identifier] isEqualToString:@"title"]) {
-		NSString *title = [[mItems objectAtIndex:rowIndex] title];
+	} else if ([[tableColumn identifier] isEqualToString:@"artist.name"]) {
+		return [[mItems objectAtIndex:row] artist];
+	} else if ([[tableColumn identifier] isEqualToString:@"composer.name"]) {
+		return [[mItems objectAtIndex:row] composer];
+	} else if ([[tableColumn identifier] isEqualToString:@"album.name"]) {
+		return [[mItems objectAtIndex:row] album];
+	} else if ([[tableColumn identifier] isEqualToString:@"title"]) {
+		NSString *title = [[mItems objectAtIndex:row] title];
 		if (title == nil || [title length] == 0)
-			return [[[mItems objectAtIndex:rowIndex] file] lastPathComponent];
+			return [[[mItems objectAtIndex:row] file] lastPathComponent];
 		else
 			return title;
 	}
 	
-	return [[mItems objectAtIndex:rowIndex] valueForKeyPath:[aTableColumn identifier]];
+	return [[mItems objectAtIndex:row] valueForKeyPath:[tableColumn identifier]];
 }
 
 - (NSArray *)allItems {

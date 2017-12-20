@@ -24,7 +24,7 @@
 #import "PWTableView.h"
 #import "LibraryDataSource.h"
 
-@interface LibrarySubControllerBase : NSObject {
+@interface LibrarySubControllerBase : NSObject <NSTableViewDataSource, NSTableViewDelegate> {
 	IBOutlet PWTableView *mTableView;
 	IBOutlet LibraryController *mLibraryController;
 	

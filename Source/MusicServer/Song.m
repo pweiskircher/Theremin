@@ -20,6 +20,7 @@
 #import "Song.h"
 #import "Album.h"
 #import "Artist.h"
+#import "Composer.h"
 #import "Genre.h"
 
 NSString *gSongPropertyFile = @"gSongPropertyFile";
@@ -34,6 +35,7 @@ NSString *gSongPropertyDate = @"gSongPropertyDate";
 NSString *gSongPropertyGenre = @"gSongPropertyGenre";
 NSString *gSongPropertyGenreIsUnknown = @"gSongPropertyGenreIsUnknown";
 NSString *gSongPropertyComposer = @"gSongPropertyComposer";
+NSString *gSongPropertyComposerIsUnknown = @"gSongPropertyComposerIsUnknown";
 NSString *gSongPropertyDisc = @"gSongPropertyDisc";
 NSString *gSongPropertyComment = @"gSongPropertyComment";
 NSString *gSongPropertyTime = @"gSongPropertyTime";
@@ -41,8 +43,6 @@ NSString *gSongPropertyIdentifier = @"gSongPropertyIdentifier";
 NSString *gSongPropertyUniqueIdentifier = @"gSongPropertyUniqueIdentifier";
 NSString *gSongPropertySqlIdentifier = @"gSongPropertySqlIdentifier";
 NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
-
-#warning FIXME: remove libmpdclient dependency.
 
 @interface Song (PrivateMethods)
 - (NSDictionary *) values;
@@ -138,7 +138,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 }
 
 - (NSString *)description {
-	NSString *str = [NSString stringWithFormat:@"Song <0x%08x>. Name: %@ Artist: %@ Album: %@ Filename: %@", self, 
+	NSString *str = [NSString stringWithFormat:@"Song <%p>. Name: %@ Artist: %@ Album: %@ Filename: %@", self, 
 		[self name], [self artist], [self album], [self file]];
 	return str;
 }
@@ -361,8 +361,16 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 
 - (void) setComposer:(NSString *)aString {
 	if (!aString) return;
-	[mValues setObject:aString forKey:gSongPropertyComposer];
+	
+	if ([aString isEqualToString:gUnknownComposerName]) {
+		[mValues setObject:TR_S_UNKNOWN_COMPOSER forKey:gSongPropertyComposer];
+		[mValues setObject:[NSNumber numberWithBool:YES] forKey:gSongPropertyComposerIsUnknown];
+	} else {
+		[mValues setObject:aString forKey:gSongPropertyComposer];
+		[mValues removeObjectForKey:gSongPropertyComposerIsUnknown];
+	}
 }
+
 
 - (void) setDisc:(NSString *)aString {
 	if (!aString) return;
@@ -410,7 +418,7 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 	self = [super init];
 	mValues = [[decoder decodeObject] retain];
 	
-	unsigned length;
+	NSUInteger length;
 	memcpy(&mValid, [decoder decodeBytesWithReturnedLength:&length], sizeof(mValid));
 	
 	return self;
@@ -428,6 +436,11 @@ NSString *gSongPropertyIsCompilation = @"gSongPropertyIsCompilation";
 
 - (BOOL)isEqualToSong:(Song *)aSong {
 	return [mValues isEqualToDictionary:[aSong values]];
+}
+
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity> *)entity
+{
+	return [self.name localizedCaseInsensitiveCompare:entity.name];
 }
 
 @end

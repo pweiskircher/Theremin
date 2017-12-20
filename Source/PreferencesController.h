@@ -50,6 +50,7 @@ typedef enum {
 - (LibraryDoubleClickMode) libraryDoubleClickAction;
 
 - (BOOL) pauseOnSleep;
+- (NSUInteger) crossfadeSeconds;
 
 - (NSString *) currentServerNameWithPort;
 
@@ -63,6 +64,9 @@ typedef enum {
 
 - (BOOL) showGenreInLibrary;
 - (void) setShowGenreInLibrary:(BOOL)aValue;
+
+- (BOOL) showComposerInLibrary;
+- (void) setShowComposerInLibrary:(BOOL)aValue;
 
 - (BOOL) fetchingOfCoverArtEnabled;
 - (void) setFetchingOfCoverArt:(BOOL)aValue;

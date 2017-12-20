@@ -18,7 +18,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import "Growl/GrowlApplicationBridge.h"
+#import <Growl/Growl.h>
 
 @class Song;
 
@@ -26,6 +26,7 @@
 	Song *_currentSong;
 	id _delegate;
 	NSString *_lastSongIdentifier;
+	NSString *_lastSongTitle;
 	NSDictionary *_growlDictionary;
 }
 - (id) initWithDelegate:(id)aDelegate;

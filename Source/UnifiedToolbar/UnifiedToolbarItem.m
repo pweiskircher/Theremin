@@ -239,8 +239,8 @@
 - (void)setToolTip:(NSString *)toolTip { [self setToolTip:toolTip forSegment:0]; }
 - (NSString *)toolTip { return [self toolTipForSegment:0]; }
 
-- (void)setTag:(int)tag { [self setTag:tag forSegment:0]; }
-- (int)tag { return [self tagForSegment:0]; }
+- (void)setTag:(NSInteger)tag { [self setTag:tag forSegment:0]; }
+- (NSInteger)tag { return [self tagForSegment:0]; }
 
 - (void)setTarget:(id)target { [self setTarget:target forSegment:0]; }
 - (id)target { return [self targetForSegment:0]; }
@@ -304,10 +304,10 @@
  */
 - (void)setTag:(int)tag forSegment:(int)segment
 {
-	[[segments objectAtIndex:segment] setTag:tag];
+	[((UnifiedToolbarItemSegment *)[segments objectAtIndex:segment]) setTag:tag];
 }
 - (int)tagForSegment:(int)segment {
-	return [[segments objectAtIndex:segment] tag];
+	return [((UnifiedToolbarItemSegment *)[segments objectAtIndex:segment]) tag];
 }
 
 /*!

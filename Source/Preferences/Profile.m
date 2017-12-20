@@ -199,11 +199,11 @@ const char *gKeychainServiceName = "Theremin";
 									   [accountName UTF8String], &passwordLength, &password, NULL) != noErr)
 		return nil;
 	
-	NSString *s = [[NSMutableString alloc] initWithCString:password length:passwordLength];
+	NSString *s = [[NSString alloc] initWithBytes:password length:passwordLength encoding:NSUTF8StringEncoding];
 	memset(password,0xFF,passwordLength);
 	
 	SecKeychainItemFreeContent(NULL, password);
-	return [s autorelease];
+	return s;
 }
 
 - (void) setPassword:(NSString *)aPassword {

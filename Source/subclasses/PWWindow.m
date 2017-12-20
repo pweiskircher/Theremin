@@ -50,4 +50,5 @@
 - (BOOL) useGlobalHotkeys {
 	return mUseGlobalHotkeys;
 }
+
 @end

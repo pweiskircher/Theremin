@@ -41,7 +41,7 @@ NSString *gPlayListFilePropertyFilePath = @"gPlayListFilePropertyFilePath";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"PlayListFile <0x%08x> Path: %@", self, [self filePath]];
+	return [NSString stringWithFormat:@"PlayListFile <%p> Path: %@", self, [self filePath]];
 }
 
 - (void) dealloc {
@@ -78,7 +78,7 @@ NSString *gPlayListFilePropertyFilePath = @"gPlayListFilePropertyFilePath";
 	self = [super init];
 	mValues = [[decoder decodeObject] retain];
 	
-	unsigned length;
+	NSUInteger length;
 	memcpy(&mValid, [decoder decodeBytesWithReturnedLength:&length], sizeof(mValid));
 	
 	return self;

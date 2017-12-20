@@ -25,24 +25,6 @@
 #import "LibrarySearchController.h"
 #import "WindowController.h"
 
-static int manageableArtistSort(id a1, id a2, void *b) {
-	NSString *artist1 = [a1 name];
-	NSString *artist2 = [a2 name];
-	
-	if ([artist1 isEqualToString:TR_S_COMPILATION])
-		return NSOrderedAscending;
-	if ([artist2 isEqualToString:TR_S_COMPILATION])
-		return NSOrderedDescending;
-	
-	if ([artist1 length] > 4 && [[artist1 substringToIndex:4] caseInsensitiveCompare:@"the "] == NSOrderedSame)
-		artist1 = [artist1 substringFromIndex:4];
-	
-	if ([artist2 length] > 4 && [[artist2 substringToIndex:4] caseInsensitiveCompare:@"the "] == NSOrderedSame)
-		artist2 = [artist2 substringFromIndex:4];
-	
-	return [artist1 caseInsensitiveCompare:artist2];
-}
-
 @interface LibrarySubControllerBase (PrivateMethods)
 - (int) convertToDisplayIndex:(int)i;
 - (int) convertToListIndex:(int)i;
@@ -138,10 +120,10 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 		}
 		return [NSArray arrayWithArray:mItems];
 	} else {
-		unsigned int indexes[20];
+		NSUInteger indexes[20];
 		NSRange range = NSMakeRange([self convertToDisplayIndex:0], [self convertToDisplayIndex:[mItems count]]);
 		
-		unsigned int returnValue;
+		NSUInteger returnValue;
 		NSMutableArray *selectedItems = [NSMutableArray array];
 		
 		while ( (returnValue = [selection getIndexes:indexes maxCount:20 inIndexRange:&range])) {
@@ -270,16 +252,15 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 #pragma mark -
 #pragma mark Table View Stuff
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
 	return mHasAllEntry ? [mItems count] + 1 : [mItems count];
 }
 
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
-	if (rowIndex == 0 && mHasAllEntry)
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+	if (row == 0 && mHasAllEntry)
 		return [self getDisplayTitleOfAllItem];
 	
-	return [[mItems objectAtIndex:[self convertToListIndex:rowIndex]] name];
+	return [[mItems objectAtIndex:[self convertToListIndex:row]] name];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
@@ -341,7 +322,7 @@ static int manageableArtistSort(id a1, id a2, void *b) {
 }
 
 - (NSArray *) sortedArray:(NSArray *)items {
-	return [items sortedArrayUsingFunction:manageableArtistSort context:nil];
+	return [items sortedArrayUsingSelector:@selector(compareTo:)];
 }
 
 @end

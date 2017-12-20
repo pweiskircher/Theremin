@@ -1,3 +1,21 @@
+  Theremin 0.7:
+    * Menu item to toggle crossfade
+    * Support for global media keyboard shortcuts
+    * Playlists are now in alphabetical order
+    * Added composer tag to playlist and library UI
+
+  Theremin 0.6.4:
+    * Nicer and much more useful Growl notifications
+    * Fixed library context menu
+    * Added icon for shuffle toolbar button
+
+  Theremin 0.6.3:
+    * Added shuffle button to the toolbar
+    * Updated Apple Remote support for newer OS X.
+    * Updated Growl support, now falls back to to 10.8 Notification Center.
+    * Now growls on stream title change
+    * Universal binary with 64bit support
+
   Theremin 0.6.2.3:
     * Fix some oddities on Snow Leopard regarding the Profile systems.
     * Fix several memory leaks.
@@ -29,7 +47,6 @@
       into an open source app.
     * Updated Sparkle to 1.5 b6 and enabled optional anonymous usage
       statistics.
-
 
   Theremin 0.5.3.1:
     * Batch re-setting of compilation info on import. This fixes a crash on startup experienced by some users.

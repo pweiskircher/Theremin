@@ -18,7 +18,7 @@
  */
 
 #import "LicenseController.h"
-
+#import "WindowController.h"
 
 @implementation LicenseController
 - (id) init {
@@ -30,20 +30,19 @@
 }
 
 - (void)windowWillClose:(NSNotification *)notification {
-	[self release];
+	WindowController *windowController = [WindowController instance];
+	
+	windowController.licenseController = nil;
 }
-
-- (void) dealloc
-{
-	[super dealloc];
-}
-
 
 - (void) show {
 	if (mLoaded == NO) {
+		// Why it won't set through InterfaceBuilder?
+		[mTextField setFont:[NSFont fontWithName:@"Monaco" size:10]];
+		
 		NSString *filename = [[NSBundle mainBundle] pathForResource:@"COPYING" ofType:@""];
 		if (filename != nil) {
-			NSString *license = [NSString stringWithContentsOfFile:filename];
+			NSString *license = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:nil];
 			[mTextField setString:license];
 		} else {
 			[mTextField setString:@"License file not found. Please see http://www.gnu.org/licenses/gpl.txt"];
@@ -54,4 +53,5 @@
 	
 	[mWindow makeKeyAndOrderFront:self];
 }
+
 @end

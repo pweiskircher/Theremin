@@ -26,6 +26,7 @@
 #import "LicenseController.h"
 #import "LibraryController.h"
 #import "MainPlayerToolbarController.h"
+#import "FileBrowserController.h"
 
 #import "PlayListFilesController.h"
 #import "UpdateDatabaseController.h"
@@ -39,6 +40,8 @@
 #import "ProfileRepository.h"
 #import "OutputDeviceHandler.h"
 #import "AppleRemoteController.h"
+
+#import "SPMediaKeyTap.h"
 
 WindowController *globalWindowController = nil;
 
@@ -61,15 +64,24 @@ const NSString *dProfile = @"dProfile";
 
 @implementation WindowController
 
+@synthesize licenseController = _licenseController;
+
 #pragma mark Initializations 
 
 + (void) initialize {
 	NSString *userDefaultsPath = [[NSBundle mainBundle] pathForResource:@"at.justp.theremin.userDefaults" ofType:@"plist"];
 	if ([userDefaultsPath length] > 0) {
-		NSDictionary *userDefaults = [NSDictionary dictionaryWithContentsOfFile:userDefaultsPath];
-		if (userDefaults != nil) {
-			[[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
+		NSMutableDictionary *userDefaults = [NSMutableDictionary dictionaryWithContentsOfFile:userDefaultsPath];
+		if (!userDefaults) {
+			userDefaults = [[[NSMutableDictionary alloc] init] autorelease];
 		}
+		
+		// SPMediaKeyTap
+		// Register defaults for the whitelist of apps that want to use media keys
+		[userDefaults setObject:[SPMediaKeyTap defaultMediaKeyUserBundleIdentifiers]
+						 forKey:kMediaKeyUsingBundleIdentifiersDefaultsKey];
+		
+		[[NSUserDefaults standardUserDefaults] registerDefaults:userDefaults];
 	}
 }
 
@@ -116,6 +128,7 @@ const NSString *dProfile = @"dProfile";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientStateChanged:) name:nMusicServerClientStateChanged object:nil];	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientShuffleChanged:) name:nMusicServerClientShuffleOptionChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientRepeatChanged:) name:nMusicServerClientRepeatOptionChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clientCrossfadeChanged:) name:nMusicServerClientCrossfadeSecondsChanged object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(elapsedTimeChanged:) name:nMusicServerClientElapsedTimeChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(totalTimeChanged:) name:nMusicServerClientTotalTimeChanged object:nil];
@@ -224,6 +237,7 @@ const NSString *dProfile = @"dProfile";
 	mPlayListFilesController = [[PlayListFilesController alloc] init];
 	mLibraryController = [[LibraryController alloc] init];
 	mUpdateDatabaseController = [[UpdateDatabaseController alloc] init];
+	mFileBrowserController = [[FileBrowserController alloc] init];
 	
 	[self setupConnectionWithMusicClient];
 	
@@ -240,13 +254,64 @@ const NSString *dProfile = @"dProfile";
 	[mLibraryController release];
 	[mUpdateDatabaseController release];
 	[mPlayListFilesController release], mPlayListFilesController = nil;
+	[mFileBrowserController release];
 	
 	[_outputDeviceHandler release];
 	[_appleRemoteController release];
+	[_mediaKeyTap release];
 	
+	[_licenseController release];
 
 	
 	[super dealloc];
+}
+
+#pragma mark NSApplicationDelegate
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+	_mediaKeyTap = [[SPMediaKeyTap alloc] initWithDelegate:self];
+	
+	if ([SPMediaKeyTap usesGlobalMediaKeyTap]) {
+		[_mediaKeyTap startWatchingMediaKeys];
+	} else {
+		NSLog(@"Media key monitoring not supported");
+	}
+}
+
+#pragma mark - SPMediaKeyTapDelegate
+
+-(void)mediaKeyTap:(SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event; {
+	NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys, @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
+	// here be dragons...
+	int keyCode = (([event data1] & 0xFFFF0000) >> 16);
+	int keyFlags = ([event data1] & 0x0000FFFF);
+	BOOL keyIsPressed = (((keyFlags & 0xFF00) >> 8)) == 0xA;
+	int keyRepeat = (keyFlags & 0x1);
+	
+	if (keyIsPressed) {
+		NSString *debugString = [NSString stringWithFormat:@"%@", keyRepeat?@", repeated.":@"."];
+		switch (keyCode) {
+			case NX_KEYTYPE_PLAY:
+				debugString = [@"Play/pause pressed" stringByAppendingString:debugString];
+				[self togglePlayPause:keyTap];
+				break;
+				
+			case NX_KEYTYPE_FAST:
+				debugString = [@"Ffwd pressed" stringByAppendingString:debugString];
+				[self nextSong:keyTap];
+				break;
+				
+			case NX_KEYTYPE_REWIND:
+				debugString = [@"Rewind pressed" stringByAppendingString:debugString];
+				[self previousSong:keyTap];
+				break;
+			default:
+				debugString = [NSString stringWithFormat:@"Key %d pressed%@", keyCode, debugString];
+				break;
+				// More cases defined in hidsystem/ev_keymap.h
+		}
+		NSLog(@"%@", debugString);
+	}
 }
 
 #pragma mark -
@@ -296,7 +361,7 @@ const NSString *dProfile = @"dProfile";
 	Profile *currentProfile = [[PreferencesController sharedInstance] currentProfile];
 
 	for (int i = 0; i < [[profilesMenu itemArray] count]; i++) {
-		ProfileMenuItem *item = [profilesMenu itemAtIndex:i];
+		ProfileMenuItem *item = (ProfileMenuItem *)[profilesMenu itemAtIndex:i];
 		if ([[item profile] isEqualToProfile:currentProfile])
 			[item setState:NSOnState];
 		else
@@ -304,7 +369,7 @@ const NSString *dProfile = @"dProfile";
 	}
 	
 	for (int i = 0; i < [[[_profileChooser menu] itemArray] count]; i++) {
-		ProfileMenuItem *item = [[_profileChooser menu] itemAtIndex:i];
+		ProfileMenuItem *item = (ProfileMenuItem *)[[_profileChooser menu] itemAtIndex:i];
 		if ([[item profile] isEqualToProfile:currentProfile]) {
 			[_profileChooser selectItem:item];
 			break;
@@ -391,7 +456,6 @@ const NSString *dProfile = @"dProfile";
 	else if ([item action] == @selector(disconnect:) ||
 		     [item action] == @selector(saveCurrentPlaylist:) ||
 			 [item action] == @selector(scrollToCurrentSong:) ||
-			 [item action] == @selector(deleteSelectedSongs:) ||
 			 [item action] == @selector(togglePlayPause:) ||
 			 [item action] == @selector(stop:) ||
 			 [item action] == @selector(nextSong:) ||
@@ -400,11 +464,20 @@ const NSString *dProfile = @"dProfile";
 			 [item action] == @selector(prevAlbum:) ||
 			 [item action] == @selector(toggleShuffle:) ||
 			 [item action] == @selector(toggleRepeat:) ||
+			 [item action] == @selector(toggleCrossfade:) ||
 			 [item action] == @selector(increaseVolume:) ||
 			 [item action] == @selector(decreaseVolume:) ||
 			 [item action] == @selector(find:))
 		return connected;
 
+	if ([item action] == @selector(deleteSelectedItems:)) {
+		return (connected && (
+							  ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist)
+							  || ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlayListFilesController.playlistFilesView)
+							)
+		);
+	}
+	
 	if ([item action] == @selector(getInfoOnKeyWindow:)) {
 		if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist)
 			return connected;
@@ -486,6 +559,16 @@ const NSString *dProfile = @"dProfile";
 	}
 }
 
+- (void) clientCrossfadeChanged:(NSNotification *)notification {
+	NSInteger crossfadeSeconds = [[[notification userInfo] objectForKey:@"crossfadeSeconds"] integerValue];
+	
+	if (crossfadeSeconds) {
+		[mCrossfadeItem setState:NSOnState];
+	} else {
+		[mCrossfadeItem setState:NSOffState];
+	}
+}
+
 #pragma mark Actions.
 
 - (IBAction) preferencesClicked:(id)sender {
@@ -564,6 +647,10 @@ const NSString *dProfile = @"dProfile";
 	[mClient stopPlayback];
 }
 
+- (IBAction) shuffle:(id)sender {
+	[mClient toggleShuffle];
+}
+
 - (IBAction) showPlayerWindow:(id)sender {
 	if ([[NSApp keyWindow] isEqualTo:mWindow])
 		[mClient playerWindowFocused];
@@ -572,11 +659,19 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) showLicense:(id)sender {
-	[[[LicenseController alloc] init] show];
+	if ( ! self.licenseController) {
+		self.licenseController = [[[LicenseController alloc] init] autorelease];
+	}
+	
+	[self.licenseController show];
 }
 
 - (IBAction) showLibrary:(id)sender {
 	[mLibraryController show];
+}
+
+- (IBAction)showFileBrowser:(id)sender {
+	[mFileBrowserController show];
 }
 
 - (IBAction) showUpdateDatabase:(id)sender {
@@ -587,8 +682,12 @@ const NSString *dProfile = @"dProfile";
 	[mUpdateDatabaseController updateCompleteDatabase];
 }
 
-- (IBAction) deleteSelectedSongs:(id)sender {
-	[mPlaylistController deleteSelectedSongs:self];
+- (IBAction) deleteSelectedItems:(id)sender {
+	if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlaylist) {
+		[mPlaylistController deleteSelectedSongs:sender];
+	} else if ([NSApp keyWindow] == mWindow && [mWindow firstResponder] == mPlayListFilesController.playlistFilesView) {
+		[mPlayListFilesController deleteSelectedPlaylist:sender];
+	}
 }
 
 - (IBAction) seekSliderChanged:(id)sender {
@@ -614,6 +713,11 @@ const NSString *dProfile = @"dProfile";
 
 - (IBAction) toggleRepeat:(id)sender {
 	[mClient toggleRepeat];
+}
+
+- (void)toggleCrossfade:(id)sender
+{
+	[mClient toggleCrossfade];
 }
 
 - (IBAction) find:(id)sender {
@@ -644,11 +748,11 @@ const NSString *dProfile = @"dProfile";
 }
 
 - (IBAction) increaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]+5)];
+	[mClient setPlaybackVolume:MIN(([[_mainPlayerToolbarController volumeSlider] intValue]+5), 100)];
 }
 
 - (IBAction) decreaseVolume:(id)sender {
-	[mClient setPlaybackVolume:([[_mainPlayerToolbarController volumeSlider] intValue]-5)];
+	[mClient setPlaybackVolume:MAX(0, ([[_mainPlayerToolbarController volumeSlider] intValue]-5))];
 }
 
 - (IBAction) getInfo:(id)sender {

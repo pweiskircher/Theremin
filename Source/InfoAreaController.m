@@ -64,6 +64,8 @@
 - (void) awakeFromNib {
 	_originTitle = [mTitle frame].origin;
 	_originArtist = [mArtist frame].origin;
+	_originComposer = [mComposer frame].origin;
+	
 	_originProgressLabel = [mProgressLabel frame].origin;
 	
 	[_coverArtImageView setFallbackImage:[NSImage imageNamed:@"FallbackCover"]];
@@ -91,8 +93,9 @@
 		[_coverArtImageView setDataSourceClass:[LastFmCoverArtDataSource class]];
 		
 		[mTitle setFrameOrigin:_originTitle]; 
-		[mArtist setFrameOrigin:_originArtist]; 
-		[mProgressLabel setFrameOrigin:_originProgressLabel]; 
+		[mArtist setFrameOrigin:_originArtist];
+		[mComposer setFrameOrigin:_originComposer];
+		[mProgressLabel setFrameOrigin:_originProgressLabel];
 			 	                 
 		[[mTitle window] display];
 		
@@ -107,14 +110,19 @@
 		point = [mArtist frame].origin; 
 		point.x = [_coverArtImageView frame].origin.x; 
 		[mArtist setFrameOrigin:point]; 
-			 	                 
-		point = [mProgressLabel frame].origin; 
+			
+		point = [mComposer frame].origin;
+		point.x = [_coverArtImageView frame].origin.x;
+		[mComposer setFrameOrigin:point];
+
+		point = [mProgressLabel frame].origin;
 		point.x = [_coverArtImageView frame].origin.x; 
 		[mProgressLabel setFrameOrigin:point]; 
 	}
 	
 	[mTitle setNeedsDisplay]; 
-	[mArtist setNeedsDisplay]; 
+	[mArtist setNeedsDisplay];
+	[mComposer setNeedsDisplay];
 	[mProgressLabel setNeedsDisplay];
 }
 
@@ -143,6 +151,7 @@
 	
 	NSString *title = @"";
 	NSString *artist = @"";
+	NSString *composer = @"";
 	NSString *album = @"";
 	
 	if ([[wc musicClient] isConnected] == YES) {
@@ -160,9 +169,13 @@
 				title = [mCurrentSong title];
 			}
 			
-			if ([mCurrentSong artist])
+			if ([mCurrentSong artist]) {
 				artist = [mCurrentSong artist];
-			
+			}
+			if ([mCurrentSong composer]) {
+				composer = [mCurrentSong composer];
+			}
+
 			if ([mCurrentSong album])
 				album = [mCurrentSong album];
 		}
@@ -180,6 +193,7 @@
 	[mTitle setStringValue:title];
 	[mAlbum setStringValue:album];
 	[mArtist setStringValue:artist];
+	[mComposer setStringValue:composer];
 }
 
 - (void) updateSeekBarWithTotalTime:(int)total {

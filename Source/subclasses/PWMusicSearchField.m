@@ -37,6 +37,12 @@
 		[item setTarget:self];
 		[searchMenu insertItem:item atIndex:3];
 		
+		item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Composer", @"Search Field Menu Item") action:@selector(limitSearch:) keyEquivalent:@""] autorelease];
+		[item setTag:eMusicFlagsComposer];
+		[item setTarget:self];
+		[searchMenu insertItem:item atIndex:4];
+
+		
 		[[self cell] setSearchMenuTemplate:searchMenu];
 		
 		mSearchState = eMusicFlagsAll;
@@ -71,12 +77,11 @@
 
 - (int) mpdSongFlagsForSearchState {
 	switch ([self searchState]) {
-		case eMusicFlagsAll:
-			return eArtist | eAlbum | eTitle;
-			break;
-			
 		case eMusicFlagsArtist:
 			return eArtist;
+			break;
+		case eMusicFlagsComposer:
+			return eComposer;
 			break;
 			
 		case eMusicFlagsAlbum:
@@ -86,6 +91,9 @@
 		case eMusicFlagsTitle:
 			return eTitle;
 			break;
+			
+		default:
+			return eArtist | eAlbum | eTitle;
 	}
 	return 0;
 }

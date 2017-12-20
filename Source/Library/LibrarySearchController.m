@@ -70,8 +70,12 @@
 														 andStrings:tokens] autorelease]];
 
 	if (state == eMusicFlagsAll || state == eMusicFlagsArtist)
-		 [group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterArtist
-														  andStrings:tokens] autorelease]];
+		[group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterArtist
+														 andStrings:tokens] autorelease]];
+	if (state == eMusicFlagsAll || state == eMusicFlagsComposer) {
+		[group addFilter:[[[LibraryStringFilter alloc] initWithType:eLibraryStringFilterComposer
+														 andStrings:tokens] autorelease]];
+	}
 	
 	return filters;
 }

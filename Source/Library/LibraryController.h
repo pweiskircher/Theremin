@@ -18,18 +18,19 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#import <RBSplitView/RBSplitView.h>
-#import <RBSplitView/RBSplitSubview.h>
 
 @class LibraryImportController, PWTableView, PWMusicSearchField, PWWindow;
 @class LibraryArtistSubController, LibraryAlbumSubController, LibrarySongSubController;
-@class LibrarySearchController, LibraryGenreSubController;
+@class LibrarySearchController, LibraryGenreSubController, LibraryComposerSubController;
 
-@interface LibraryController : NSObject {
+@interface LibraryController : NSObject <NSToolbarDelegate> {
 	IBOutlet PWWindow *mWindow;
 	
 	LibraryArtistSubController *mArtistController;
 	IBOutlet PWTableView *mArtistView;
+	
+	LibraryComposerSubController *mComposerController;
+	IBOutlet PWTableView *mComposerView;
 	
 	LibraryAlbumSubController *mAlbumController;
 	IBOutlet PWTableView *mAlbumView;
@@ -42,11 +43,11 @@
 	
 	IBOutlet NSScrollView *mGenreScroller;
 	IBOutlet NSScrollView *mArtistScroller;
+	IBOutlet NSScrollView *mComposerScroller;
 	IBOutlet NSScrollView *mAlbumScroller;
 	
-	IBOutlet RBSplitSubview *mTitleSplitView;
-	IBOutlet RBSplitView *mSplitView;
-	BOOL _titleShown;
+	IBOutlet NSView *mTitleSplitView;
+	IBOutlet NSSplitView *mSplitView;
 	
 	IBOutlet NSPanel *mProgressPanel;
 	IBOutlet NSProgressIndicator *mProgressPanelIndicator;

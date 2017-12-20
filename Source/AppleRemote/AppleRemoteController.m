@@ -169,6 +169,8 @@
 		case kRemoteButtonRight:
 			[[WindowController instance] nextSong:self];
 			break;
+		default:
+			break;
 	}
 }
 

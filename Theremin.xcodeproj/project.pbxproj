@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02FEFB791FE6D6DD00507D46 /* FileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02FEFB781FE6D6DC00507D46 /* FileBrowser.xib */; };
+		02FEFB7C1FE6D73D00507D46 /* FileBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FEFB7B1FE6D73D00507D46 /* FileBrowserController.m */; };
+		428B50B116FA613B00415CBA /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = 428B50A316FA613B00415CBA /* NSObject+SPInvocationGrabbing.m */; };
+		428B50B216FA613B00415CBA /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 428B50A516FA613B00415CBA /* SPMediaKeyTap.m */; };
+		428B50B816FA66F300415CBA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 428B50B716FA66F300415CBA /* Carbon.framework */; };
 		43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */; };
 		43156DC20FBF020C00EF3ECA /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 43156DC10FBF020C00EF3ECA /* empty.png */; };
 		43156E050FBF097E00EF3ECA /* CoverArtAsker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43156E040FBF097E00EF3ECA /* CoverArtAsker.m */; };
@@ -41,7 +46,6 @@
 		436DB37E0E5258C500907E0F /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 436DB37D0E5258C500907E0F /* Profile.m */; };
 		437BDB270B74F42E001C1057 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437BDB260B74F42E001C1057 /* Security.framework */; };
 		437C5F750B403BA2008B8DEC /* PlayListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437C5F740B403BA2008B8DEC /* PlayListController.m */; };
-		437EB69B0BBDB8930033AE88 /* InfoPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = 437EB6990BBDB8930033AE88 /* InfoPanel.nib */; };
 		437EB6A20BBDBA480033AE88 /* SongInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 437EB6A00BBDBA480033AE88 /* SongInfoController.m */; };
 		43858C9D0DFB30A300FEFB5E /* PWTableViewMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43858C9C0DFB30A300FEFB5E /* PWTableViewMenuItem.m */; };
 		43858D700DFB432900FEFB5E /* PWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43858D6F0DFB432900FEFB5E /* PWTableView.m */; };
@@ -70,19 +74,15 @@
 		43A0169D0E571A4700AA8198 /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016810E571A4700AA8198 /* SQLiteDatabase.m */; };
 		43A0169E0E571A4700AA8198 /* SQLiteQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016830E571A4700AA8198 /* SQLiteQuery.m */; };
 		43A0169F0E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016850E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m */; };
-		43A016A00E571A4700AA8198 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 43A016870E571A4700AA8198 /* sqlite3.c */; };
 		43A016A10E571A4700AA8198 /* LibraryAlbumSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */; };
 		43A016A20E571A4700AA8198 /* LibraryArtistSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168D0E571A4700AA8198 /* LibraryArtistSubController.m */; };
 		43A016A30E571A4700AA8198 /* LibraryGenreSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A0168F0E571A4700AA8198 /* LibraryGenreSubController.m */; };
 		43A016A40E571A4700AA8198 /* LibrarySongSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016910E571A4700AA8198 /* LibrarySongSubController.m */; };
 		43A016AC0E571AA100AA8198 /* LibraryDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A016AB0E571AA100AA8198 /* LibraryDataSource.m */; };
-		43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A1ADAF0E5794B200226081 /* RBSplitView.framework */; };
-		43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43A1ADAF0E5794B200226081 /* RBSplitView.framework */; };
 		43A5D1AE0BAC2F7100C29E17 /* PlayListFilesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A5D1AC0BAC2F7100C29E17 /* PlayListFilesController.m */; };
 		43A5D31A0BAC512F00C29E17 /* PlayListFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A5D3180BAC512F00C29E17 /* PlayListFile.m */; };
 		43A8E9B50BE4A8A40078DBD7 /* PWMusicTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9B30BE4A8A40078DBD7 /* PWMusicTextField.m */; };
-		43A8E9CD0BE4A9BA0078DBD7 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */; };
-		43A8E9F40BE4AC230078DBD7 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9F20BE4AC230078DBD7 /* Album.m */; };
+		43A8E9CD0BE4A9BA0078DBD7 /* Composer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */; };
 		43ACAC3A0E544811002C8857 /* ImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 43ACAC390E544811002C8857 /* ImageTextCell.m */; };
 		43B0F8CA0B7F3D1400F3A951 /* UpdateDatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F8C80B7F3D1400F3A951 /* UpdateDatabaseController.m */; };
 		43B0F92E0B7F412E00F3A951 /* Directory.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B0F92C0B7F412E00F3A951 /* Directory.m */; };
@@ -97,21 +97,13 @@
 		43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 43BD36651052E628001E30F0 /* libmpd-version.h.in */; };
 		43BD36731052E628001E30F0 /* libmpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36661052E628001E30F0 /* libmpd.c */; };
 		43BD36741052E628001E30F0 /* libmpdclient.c in Sources */ = {isa = PBXBuildFile; fileRef = 43BD36681052E628001E30F0 /* libmpdclient.c */; };
-		43BF744C0F06FFB000420B56 /* LicenseWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF744A0F06FFB000420B56 /* LicenseWindow.nib */; };
-		43BF74750F0701EB00420B56 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF74730F0701EB00420B56 /* Preferences.nib */; };
-		43BF77790BB52CCD00715336 /* Library.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77700BB52CCD00715336 /* Library.nib */; };
-		43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77720BB52CCD00715336 /* MainMenu.nib */; };
-		43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77740BB52CCD00715336 /* PlayListFiles.nib */; };
-		43BF777C0BB52CCD00715336 /* UpdateDatabase.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43BF77760BB52CCD00715336 /* UpdateDatabase.nib */; };
 		43CA16D80FC1E44200E14FE7 /* OutputDeviceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */; };
 		43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43D0126C0B8B66BA00711A1B /* IOKit.framework */; };
 		43D0C8B70C13F25900940B39 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43D0C8B50C13F25900940B39 /* Localizable.strings */; };
 		43D254AA0B4D80F200660DD9 /* MPSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D254A90B4D80F200660DD9 /* MPSlider.m */; };
 		43E7F6450B415860005FEC19 /* LicenseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E7F6440B415860005FEC19 /* LicenseController.m */; };
 		43E887320F0977EB003F708D /* NSArray+Transformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E887310F0977EB003F708D /* NSArray+Transformations.m */; };
-		43E91FF615224EF5003FFDF5 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E91FF415224EF5003FFDF5 /* Growl.framework */; };
 		43E91FF715224EF5003FFDF5 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E91FF515224EF5003FFDF5 /* Sparkle.framework */; };
-		43E91FF9152250BB003FFDF5 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43E91FF415224EF5003FFDF5 /* Growl.framework */; };
 		43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 43E91FF515224EF5003FFDF5 /* Sparkle.framework */; };
 		43F0BACF0BBE980A00018704 /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BA980BBE980A00018704 /* appicon.icns */; };
 		43F0BAD00BBE980A00018704 /* at.justp.theremin.userDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */; };
@@ -159,7 +151,6 @@
 		43F0BAFA0BBE980A00018704 /* volume66.tif in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BACB0BBE980A00018704 /* volume66.tif */; };
 		43F0BAFB0BBE980A00018704 /* volume_knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BACC0BBE980A00018704 /* volume_knob.png */; };
 		43F0BAFC0BBE980A00018704 /* volumeZero.tif in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BACD0BBE980A00018704 /* volumeZero.tif */; };
-		43F0BAFD0BBE980A00018704 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BACE0BBE980A00018704 /* white.png */; };
 		43F0BB100BBE9A3700018704 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 43F0BB0E0BBE9A3700018704 /* COPYING */; };
 		43F3446E0E5343AD007E72E1 /* ProfileMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F3446D0E5343AD007E72E1 /* ProfileMenuItem.m */; };
 		43F5BA4F0E5219EB00655E7B /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 43F5BA4E0E5219EB00655E7B /* addButton.png */; };
@@ -173,7 +164,25 @@
 		43FFC4060FC202C7002620C0 /* RemoteControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4000FC202C7002620C0 /* RemoteControl.m */; };
 		43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */; };
 		43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */; };
+		480249D815E7AC1F0029CBC7 /* InfoPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249D715E7AC1F0029CBC7 /* InfoPanel.xib */; };
+		480249DF15E7AD030029CBC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 480249DD15E7AD030029CBC7 /* InfoPlist.strings */; };
+		480249E115E7ADE40029CBC7 /* PlayListFiles.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E015E7ADE40029CBC7 /* PlayListFiles.xib */; };
+		480249E315E7AFB40029CBC7 /* LicenseWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E215E7AFB40029CBC7 /* LicenseWindow.xib */; };
+		480249E515E7B10B0029CBC7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E415E7B10B0029CBC7 /* Preferences.xib */; };
+		480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E615E7B3310029CBC7 /* UpdateDatabase.xib */; };
+		480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249E815E7B3990029CBC7 /* MainMenu.xib */; };
+		480249EB15E7B7580029CBC7 /* Library.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480249EA15E7B7580029CBC7 /* Library.xib */; };
+		48121D231620C9BC00C6626B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 48121D221620C9B900C6626B /* libsqlite3.dylib */; };
+		48A954F515E71FE100289B16 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
+		48A954F615E7206700289B16 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 48A954F415E71FE100289B16 /* Growl.framework */; };
+		48A954F815E72ED300289B16 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 48A954F715E72ED300289B16 /* README.markdown */; };
+		48A9551315E7705900289B16 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 48A9551215E7705900289B16 /* CHANGELOG */; };
+		4A2C74DB164EEE8F00F63333 /* shuffleOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DA164EEE8F00F63333 /* shuffleOff.png */; };
+		4A2C74DD164EEE9600F63333 /* shuffleOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A2C74DC164EEE9600F63333 /* shuffleOn.png */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		DD6FACD819CD265800BCF49D /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACD619CD265800BCF49D /* Album.m */; };
+		DD6FACD919CD265800BCF49D /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACD719CD265800BCF49D /* Artist.m */; };
+		DD6FACDB19CD27B100BCF49D /* LibraryComposerSubController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -183,21 +192,28 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				43A1ADB60E5794C600226081 /* RBSplitView.framework in CopyFiles */,
-				43E91FF9152250BB003FFDF5 /* Growl.framework in CopyFiles */,
 				43E91FFA152250BD003FFDF5 /* Sparkle.framework in CopyFiles */,
+				48A954F615E7206700289B16 /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02FEFB781FE6D6DC00507D46 /* FileBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FileBrowser.xib; path = Resources/FileBrowser.xib; sourceTree = "<group>"; };
+		02FEFB7A1FE6D73D00507D46 /* FileBrowserController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileBrowserController.h; sourceTree = "<group>"; };
+		02FEFB7B1FE6D73D00507D46 /* FileBrowserController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileBrowserController.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		428B50A216FA613B00415CBA /* NSObject+SPInvocationGrabbing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SPInvocationGrabbing.h"; path = "SPInvocationGrabbing/NSObject+SPInvocationGrabbing.h"; sourceTree = "<group>"; };
+		428B50A316FA613B00415CBA /* NSObject+SPInvocationGrabbing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SPInvocationGrabbing.m"; path = "SPInvocationGrabbing/NSObject+SPInvocationGrabbing.m"; sourceTree = "<group>"; };
+		428B50A416FA613B00415CBA /* SPMediaKeyTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
+		428B50A516FA613B00415CBA /* SPMediaKeyTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
+		428B50B716FA66F300415CBA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = lastfm_red.gif; path = Resources/lastfm_red.gif; sourceTree = "<group>"; };
-		43156DC10FBF020C00EF3ECA /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty.png; path = Resources/empty.png; sourceTree = "<group>"; };
+		43156DC10FBF020C00EF3ECA /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty.png; path = ../empty.png; sourceTree = "<group>"; };
 		43156E030FBF097E00EF3ECA /* CoverArtAsker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtAsker.h; sourceTree = "<group>"; };
 		43156E040FBF097E00EF3ECA /* CoverArtAsker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArtAsker.m; sourceTree = "<group>"; };
 		431CCBAF0FBB5F880042E376 /* CoverArtDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArtDataSourceProtocol.h; sourceTree = "<group>"; };
@@ -259,7 +275,6 @@
 		437BDB260B74F42E001C1057 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		437C5F730B403BA2008B8DEC /* PlayListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListController.h; path = Source/PlayListController.h; sourceTree = "<group>"; };
 		437C5F740B403BA2008B8DEC /* PlayListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayListController.m; path = Source/PlayListController.m; sourceTree = "<group>"; };
-		437EB69A0BBDB8930033AE88 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/InfoPanel.nib; sourceTree = "<group>"; };
 		437EB69F0BBDBA480033AE88 /* SongInfoController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SongInfoController.h; path = Source/SongInfoController.h; sourceTree = "<group>"; };
 		437EB6A00BBDBA480033AE88 /* SongInfoController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SongInfoController.m; path = Source/SongInfoController.m; sourceTree = "<group>"; };
 		43858C9B0DFB30A300FEFB5E /* PWTableViewMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWTableViewMenuItem.h; path = Source/TableView/PWTableViewMenuItem.h; sourceTree = "<group>"; };
@@ -315,8 +330,6 @@
 		43A016830E571A4700AA8198 /* SQLiteQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteQuery.m; sourceTree = "<group>"; };
 		43A016840E571A4700AA8198 /* SQLUniqueIdentifiersFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLUniqueIdentifiersFilter.h; sourceTree = "<group>"; };
 		43A016850E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLUniqueIdentifiersFilter.m; sourceTree = "<group>"; };
-		43A016870E571A4700AA8198 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
-		43A016880E571A4700AA8198 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		43A0168A0E571A4700AA8198 /* LibraryAlbumSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryAlbumSubController.h; sourceTree = "<group>"; };
 		43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryAlbumSubController.m; sourceTree = "<group>"; };
 		43A0168C0E571A4700AA8198 /* LibraryArtistSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryArtistSubController.h; sourceTree = "<group>"; };
@@ -328,7 +341,6 @@
 		43A016AA0E571AA100AA8198 /* LibraryDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryDataSource.h; sourceTree = "<group>"; };
 		43A016AB0E571AA100AA8198 /* LibraryDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryDataSource.m; sourceTree = "<group>"; };
 		43A13E8E0B42F94F000CBD59 /* Theremin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Theremin_Prefix.pch; sourceTree = "<group>"; };
-		43A1ADAF0E5794B200226081 /* RBSplitView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RBSplitView.framework; sourceTree = "<group>"; };
 		43A5D1AB0BAC2F7100C29E17 /* PlayListFilesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListFilesController.h; path = Source/PlayListFiles/PlayListFilesController.h; sourceTree = "<group>"; };
 		43A5D1AC0BAC2F7100C29E17 /* PlayListFilesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayListFilesController.m; path = Source/PlayListFiles/PlayListFilesController.m; sourceTree = "<group>"; };
 		43A5D3170BAC512F00C29E17 /* PlayListFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayListFile.h; path = Source/MusicServer/PlayListFile.h; sourceTree = "<group>"; };
@@ -336,9 +348,8 @@
 		43A8E9B20BE4A8A40078DBD7 /* PWMusicTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWMusicTextField.h; path = Source/subclasses/PWMusicTextField.h; sourceTree = "<group>"; };
 		43A8E9B30BE4A8A40078DBD7 /* PWMusicTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWMusicTextField.m; path = Source/subclasses/PWMusicTextField.m; sourceTree = "<group>"; };
 		43A8E9CA0BE4A9BA0078DBD7 /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Artist.h; path = Source/MusicServer/Artist.h; sourceTree = "<group>"; };
-		43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Artist.m; path = Source/MusicServer/Artist.m; sourceTree = "<group>"; };
+		43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Composer.m; path = Source/MusicServer/Composer.m; sourceTree = "<group>"; };
 		43A8E9F10BE4AC230078DBD7 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Album.h; path = Source/MusicServer/Album.h; sourceTree = "<group>"; };
-		43A8E9F20BE4AC230078DBD7 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Source/MusicServer/Album.m; sourceTree = "<group>"; };
 		43ACAC380E544811002C8857 /* ImageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTextCell.h; path = Source/ImageTextCell.h; sourceTree = "<group>"; };
 		43ACAC390E544811002C8857 /* ImageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTextCell.m; path = Source/ImageTextCell.m; sourceTree = "<group>"; };
 		43B0F8C70B7F3D1400F3A951 /* UpdateDatabaseController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = UpdateDatabaseController.h; path = Source/UpdateDatabaseController.h; sourceTree = "<group>"; };
@@ -368,24 +379,17 @@
 		43BD36681052E628001E30F0 /* libmpdclient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = libmpdclient.c; path = "libmpdclient-0.18.96/src/libmpdclient.c"; sourceTree = "<group>"; };
 		43BD36691052E628001E30F0 /* libmpdclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libmpdclient.h; path = "libmpdclient-0.18.96/src/libmpdclient.h"; sourceTree = "<group>"; };
 		43BD367D1052E699001E30F0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "libmpdclient-0.18.96/src/config.h"; sourceTree = "<group>"; };
-		43BF744B0F06FFB000420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/LicenseWindow.nib; sourceTree = "<group>"; };
-		43BF74740F0701EB00420B56 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
-		43BF77710BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Library.nib; sourceTree = "<group>"; };
-		43BF77730BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		43BF77750BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PlayListFiles.nib; sourceTree = "<group>"; };
-		43BF77770BB52CCD00715336 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UpdateDatabase.nib; sourceTree = "<group>"; };
 		43C45DB10F09064300911191 /* ThereminEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThereminEntity.h; path = Source/MusicServer/ThereminEntity.h; sourceTree = "<group>"; };
 		43CA16D60FC1E44200E14FE7 /* OutputDeviceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputDeviceHandler.h; sourceTree = "<group>"; };
 		43CA16D70FC1E44200E14FE7 /* OutputDeviceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputDeviceHandler.m; sourceTree = "<group>"; };
 		43D0126C0B8B66BA00711A1B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		43D0C8B60C13F25900940B39 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		43D2549B0B4D80B900660DD9 /* MPSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MPSlider.h; path = Source/subclasses/MPSlider.h; sourceTree = "<group>"; };
 		43D254A90B4D80F200660DD9 /* MPSlider.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = MPSlider.m; path = Source/subclasses/MPSlider.m; sourceTree = "<group>"; };
 		43E7F6430B415860005FEC19 /* LicenseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LicenseController.h; path = Source/LicenseController.h; sourceTree = "<group>"; };
 		43E7F6440B415860005FEC19 /* LicenseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LicenseController.m; path = Source/LicenseController.m; sourceTree = "<group>"; };
 		43E887300F0977EB003F708D /* NSArray+Transformations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Transformations.h"; path = "Source/Additions/NSArray+Transformations.h"; sourceTree = "<group>"; };
 		43E887310F0977EB003F708D /* NSArray+Transformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Transformations.m"; path = "Source/Additions/NSArray+Transformations.m"; sourceTree = "<group>"; };
-		43E91FF415224EF5003FFDF5 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		43E91FF515224EF5003FFDF5 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		43F0BA980BBE980A00018704 /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = appicon.icns; path = Resources/appicon.icns; sourceTree = "<group>"; };
 		43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; name = at.justp.theremin.userDefaults.plist; path = Resources/at.justp.theremin.userDefaults.plist; sourceTree = "<group>"; };
@@ -433,7 +437,6 @@
 		43F0BACB0BBE980A00018704 /* volume66.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = volume66.tif; sourceTree = "<group>"; };
 		43F0BACC0BBE980A00018704 /* volume_knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume_knob.png; sourceTree = "<group>"; };
 		43F0BACD0BBE980A00018704 /* volumeZero.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = volumeZero.tif; sourceTree = "<group>"; };
-		43F0BACE0BBE980A00018704 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white.png; path = Resources/white.png; sourceTree = "<group>"; };
 		43F0BB0E0BBE9A3700018704 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = COPYING; path = Resources/COPYING; sourceTree = "<group>"; };
 		43F0BB400BBE9BC600018704 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43F3446C0E5343AD007E72E1 /* ProfileMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileMenuItem.h; path = Source/subclasses/ProfileMenuItem.h; sourceTree = "<group>"; };
@@ -458,7 +461,26 @@
 		43FFC4020FC202C7002620C0 /* RemoteControlContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlContainer.m; sourceTree = "<group>"; };
 		43FFC4090FC202D2002620C0 /* AppleRemoteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleRemoteController.h; sourceTree = "<group>"; };
 		43FFC40A0FC202D2002620C0 /* AppleRemoteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleRemoteController.m; sourceTree = "<group>"; };
+		480249D715E7AC1F0029CBC7 /* InfoPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InfoPanel.xib; path = Resources/InfoPanel.xib; sourceTree = "<group>"; };
+		480249DE15E7AD030029CBC7 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		480249E015E7ADE40029CBC7 /* PlayListFiles.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayListFiles.xib; path = Resources/PlayListFiles.xib; sourceTree = "<group>"; };
+		480249E215E7AFB40029CBC7 /* LicenseWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LicenseWindow.xib; path = Resources/LicenseWindow.xib; sourceTree = "<group>"; };
+		480249E415E7B10B0029CBC7 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Preferences.xib; path = Resources/Preferences.xib; sourceTree = "<group>"; };
+		480249E615E7B3310029CBC7 /* UpdateDatabase.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateDatabase.xib; path = Resources/UpdateDatabase.xib; sourceTree = "<group>"; };
+		480249E815E7B3990029CBC7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Resources/MainMenu.xib; sourceTree = "<group>"; };
+		480249EA15E7B7580029CBC7 /* Library.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Library.xib; path = Resources/Library.xib; sourceTree = "<group>"; };
+		48121D221620C9B900C6626B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
+		48A954F415E71FE100289B16 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		48A954F715E72ED300289B16 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		48A9551215E7705900289B16 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; usesTabs = 0; };
+		4A2C74DA164EEE8F00F63333 /* shuffleOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOff.png; sourceTree = "<group>"; };
+		4A2C74DC164EEE9600F63333 /* shuffleOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffleOn.png; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Theremin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Theremin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD6FACD519CD244300BCF49D /* Composer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Composer.h; path = Source/MusicServer/Composer.h; sourceTree = "<group>"; };
+		DD6FACD619CD265800BCF49D /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Album.m; path = Source/MusicServer/Album.m; sourceTree = "<group>"; };
+		DD6FACD719CD265800BCF49D /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Artist.m; path = Source/MusicServer/Artist.m; sourceTree = "<group>"; };
+		DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryComposerSubController.m; sourceTree = "<group>"; };
+		DD6FACDC19CD27BD00BCF49D /* LibraryComposerSubController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryComposerSubController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,13 +488,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428B50B816FA66F300415CBA /* Carbon.framework in Frameworks */,
+				48121D231620C9BC00C6626B /* libsqlite3.dylib in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				437BDB270B74F42E001C1057 /* Security.framework in Frameworks */,
 				43D0126D0B8B66BA00711A1B /* IOKit.framework in Frameworks */,
 				43FA42A10C1AB2D8005D0893 /* ExceptionHandling.framework in Frameworks */,
-				43A1ADB00E5794B200226081 /* RBSplitView.framework in Frameworks */,
-				43E91FF615224EF5003FFDF5 /* Growl.framework in Frameworks */,
 				43E91FF715224EF5003FFDF5 /* Sparkle.framework in Frameworks */,
+				48A954F515E71FE100289B16 /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +505,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				428B508E16FA613B00415CBA /* SPMediaKeyTap */,
 				43CA16D50FC1E42800E14FE7 /* OutputDevices */,
 				431CCBAE0FBB5F640042E376 /* CoverArt */,
 				436D30ED0FB72AA30063DC8D /* Growl */,
@@ -509,32 +533,26 @@
 				43A5D1AC0BAC2F7100C29E17 /* PlayListFilesController.m */,
 				437EB69F0BBDBA480033AE88 /* SongInfoController.h */,
 				437EB6A00BBDBA480033AE88 /* SongInfoController.m */,
+				02FEFB7A1FE6D73D00507D46 /* FileBrowserController.h */,
+				02FEFB7B1FE6D73D00507D46 /* FileBrowserController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+		1058C7A2FEA54F0111CA2CBB /* System Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43E91FF415224EF5003FFDF5 /* Growl.framework */,
-				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
-				43A1ADAF0E5794B200226081 /* RBSplitView.framework */,
-				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
-				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
-				437BDB260B74F42E001C1057 /* Security.framework */,
+				428B50B716FA66F300415CBA /* Carbon.framework */,
+				48121D221620C9B900C6626B /* libsqlite3.dylib */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
+				437BDB260B74F42E001C1057 /* Security.framework */,
+				43D0126C0B8B66BA00711A1B /* IOKit.framework */,
+				43FA42A00C1AB2D8005D0893 /* ExceptionHandling.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
-			name = "Other Frameworks";
+			name = "System Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -551,13 +569,15 @@
 				43BF776D0BB52CB600715336 /* Nib Files */,
 				43CD56E40B354EBE00C42092 /* libmpdclient */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				48A954FA15E737D700289B16 /* Images */,
 				43F0BA300BBE97DC00018704 /* Resources */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = Theremin;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
@@ -571,10 +591,23 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				48A954F415E71FE100289B16 /* Growl.framework */,
+				43E91FF515224EF5003FFDF5 /* Sparkle.framework */,
+				1058C7A2FEA54F0111CA2CBB /* System Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		428B508E16FA613B00415CBA /* SPMediaKeyTap */ = {
+			isa = PBXGroup;
+			children = (
+				428B50A216FA613B00415CBA /* NSObject+SPInvocationGrabbing.h */,
+				428B50A316FA613B00415CBA /* NSObject+SPInvocationGrabbing.m */,
+				428B50A416FA613B00415CBA /* SPMediaKeyTap.h */,
+				428B50A516FA613B00415CBA /* SPMediaKeyTap.m */,
+			);
+			name = SPMediaKeyTap;
+			path = Source/SPMediaKeyTap;
 			sourceTree = "<group>";
 		};
 		431CCBAE0FBB5F640042E376 /* CoverArt */ = {
@@ -657,7 +690,6 @@
 				43A016780E571A4700AA8198 /* LibrarySearchController.m */,
 				43A016790E571A4700AA8198 /* LibrarySubControllerBase.h */,
 				43A0167A0E571A4700AA8198 /* LibrarySubControllerBase.m */,
-				43A016860E571A4700AA8198 /* SQLite3 */,
 				43A0167B0E571A4700AA8198 /* SQLDatabase */,
 			);
 			name = Library;
@@ -775,15 +807,6 @@
 			path = SQLDatabase;
 			sourceTree = "<group>";
 		};
-		43A016860E571A4700AA8198 /* SQLite3 */ = {
-			isa = PBXGroup;
-			children = (
-				43A016870E571A4700AA8198 /* sqlite3.c */,
-				43A016880E571A4700AA8198 /* sqlite3.h */,
-			);
-			path = SQLite3;
-			sourceTree = "<group>";
-		};
 		43A016890E571A4700AA8198 /* SubController */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,6 +814,8 @@
 				43A0168B0E571A4700AA8198 /* LibraryAlbumSubController.m */,
 				43A0168C0E571A4700AA8198 /* LibraryArtistSubController.h */,
 				43A0168D0E571A4700AA8198 /* LibraryArtistSubController.m */,
+				DD6FACDC19CD27BD00BCF49D /* LibraryComposerSubController.h */,
+				DD6FACDA19CD27B100BCF49D /* LibraryComposerSubController.m */,
 				43A0168E0E571A4700AA8198 /* LibraryGenreSubController.h */,
 				43A0168F0E571A4700AA8198 /* LibraryGenreSubController.m */,
 				43A016900E571A4700AA8198 /* LibrarySongSubController.h */,
@@ -802,14 +827,14 @@
 		43BF776D0BB52CB600715336 /* Nib Files */ = {
 			isa = PBXGroup;
 			children = (
-				43BF744A0F06FFB000420B56 /* LicenseWindow.nib */,
-				43BF74730F0701EB00420B56 /* Preferences.nib */,
-				43D0C8B50C13F25900940B39 /* Localizable.strings */,
-				43BF77700BB52CCD00715336 /* Library.nib */,
-				43BF77720BB52CCD00715336 /* MainMenu.nib */,
-				43BF77740BB52CCD00715336 /* PlayListFiles.nib */,
-				43BF77760BB52CCD00715336 /* UpdateDatabase.nib */,
-				437EB6990BBDB8930033AE88 /* InfoPanel.nib */,
+				480249E215E7AFB40029CBC7 /* LicenseWindow.xib */,
+				480249E415E7B10B0029CBC7 /* Preferences.xib */,
+				480249E615E7B3310029CBC7 /* UpdateDatabase.xib */,
+				02FEFB781FE6D6DC00507D46 /* FileBrowser.xib */,
+				480249EA15E7B7580029CBC7 /* Library.xib */,
+				480249E815E7B3990029CBC7 /* MainMenu.xib */,
+				480249E015E7ADE40029CBC7 /* PlayListFiles.xib */,
+				480249D715E7AC1F0029CBC7 /* InfoPanel.xib */,
 			);
 			name = "Nib Files";
 			sourceTree = "<group>";
@@ -901,9 +926,11 @@
 				43A0091C0DF3D39F00F42212 /* Genre.h */,
 				43A0091D0DF3D39F00F42212 /* Genre.m */,
 				43A8E9F10BE4AC230078DBD7 /* Album.h */,
-				43A8E9F20BE4AC230078DBD7 /* Album.m */,
 				43A8E9CA0BE4A9BA0078DBD7 /* Artist.h */,
-				43A8E9CB0BE4A9BA0078DBD7 /* Artist.m */,
+				DD6FACD519CD244300BCF49D /* Composer.h */,
+				43A8E9CB0BE4A9BA0078DBD7 /* Composer.m */,
+				DD6FACD619CD265800BCF49D /* Album.m */,
+				DD6FACD719CD265800BCF49D /* Artist.m */,
 				432533600B7A722E00DF9E7E /* Song.h */,
 				432533610B7A722E00DF9E7E /* Song.m */,
 				43C45DB10F09064300911191 /* ThereminEntity.h */,
@@ -914,32 +941,26 @@
 		43F0BA300BBE97DC00018704 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				43156DC10FBF020C00EF3ECA /* empty.png */,
-				43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */,
-				43F0BA9A0BBE980A00018704 /* CoverStuff */,
-				43F0BA9E0BBE980A00018704 /* Playlist */,
-				43F0BAA20BBE980A00018704 /* Seekbar */,
-				43F0BAA50BBE980A00018704 /* Statusbar */,
-				43F0BAAB0BBE980A00018704 /* Toolbar */,
-				43F0BAC80BBE980A00018704 /* Volume */,
-				43F0BA980BBE980A00018704 /* appicon.icns */,
-				43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */,
+				48A954F715E72ED300289B16 /* README.markdown */,
 				43F0BA9C0BBE980A00018704 /* Credits.rtf */,
+				48A9551215E7705900289B16 /* CHANGELOG */,
+				43F0BA980BBE980A00018704 /* appicon.icns */,
+				43D0C8B50C13F25900940B39 /* Localizable.strings */,
+				43F0BA990BBE980A00018704 /* at.justp.theremin.userDefaults.plist */,
 				43F0BB0E0BBE9A3700018704 /* COPYING */,
-				43F0BA9D0BBE980A00018704 /* folder.tiff */,
 				43F0BB400BBE9BC600018704 /* Info.plist */,
-				43F0BAA10BBE980A00018704 /* PlayListIcon.png */,
-				43F0BACE0BBE980A00018704 /* white.png */,
+				480249DD15E7AD030029CBC7 /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		43F0BA9A0BBE980A00018704 /* CoverStuff */ = {
+		43F0BA9A0BBE980A00018704 /* AlbumArt fallbacks */ = {
 			isa = PBXGroup;
 			children = (
 				43F0BA9B0BBE980A00018704 /* FallbackCover.png */,
+				43156DC10FBF020C00EF3ECA /* empty.png */,
 			);
-			name = CoverStuff;
+			name = "AlbumArt fallbacks";
 			path = Resources/CoverStuff;
 			sourceTree = "<group>";
 		};
@@ -1024,6 +1045,8 @@
 				43F0BAB10BBE980A00018704 /* playSong.png */,
 				43F0BAB20BBE980A00018704 /* prevSong.png */,
 				43F0BAB30BBE980A00018704 /* stopSong.png */,
+				4A2C74DA164EEE8F00F63333 /* shuffleOff.png */,
+				4A2C74DC164EEE9600F63333 /* shuffleOn.png */,
 			);
 			path = overlays;
 			sourceTree = "<group>";
@@ -1053,6 +1076,30 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		48A954F915E7365F00289B16 /* 3rd party logos */ = {
+			isa = PBXGroup;
+			children = (
+				43156D3D0FBEFC1200EF3ECA /* lastfm_red.gif */,
+			);
+			name = "3rd party logos";
+			sourceTree = "<group>";
+		};
+		48A954FA15E737D700289B16 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				48A954F915E7365F00289B16 /* 3rd party logos */,
+				43F0BA9A0BBE980A00018704 /* AlbumArt fallbacks */,
+				43F0BA9E0BBE980A00018704 /* Playlist */,
+				43F0BAA20BBE980A00018704 /* Seekbar */,
+				43F0BAA50BBE980A00018704 /* Statusbar */,
+				43F0BAAB0BBE980A00018704 /* Toolbar */,
+				43F0BAC80BBE980A00018704 /* Volume */,
+				43F0BAA10BBE980A00018704 /* PlayListIcon.png */,
+				43F0BA9D0BBE980A00018704 /* folder.tiff */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1080,12 +1127,16 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Theremin" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Theremin */;
 			projectDirPath = "";
@@ -1101,11 +1152,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43BF77790BB52CCD00715336 /* Library.nib in Resources */,
-				43BF777A0BB52CCD00715336 /* MainMenu.nib in Resources */,
-				43BF777B0BB52CCD00715336 /* PlayListFiles.nib in Resources */,
-				43BF777C0BB52CCD00715336 /* UpdateDatabase.nib in Resources */,
-				437EB69B0BBDB8930033AE88 /* InfoPanel.nib in Resources */,
 				43F0BACF0BBE980A00018704 /* appicon.icns in Resources */,
 				43F0BAD00BBE980A00018704 /* at.justp.theremin.userDefaults.plist in Resources */,
 				43F0BAD10BBE980A00018704 /* FallbackCover.png in Resources */,
@@ -1140,6 +1186,7 @@
 				43F0BAEE0BBE980A00018704 /* TB_Segment_LeftCapPress.tiff in Resources */,
 				43F0BAEF0BBE980A00018704 /* TB_Segment_LeftCapRoll.tiff in Resources */,
 				43F0BAF00BBE980A00018704 /* TB_Segment_RightCap.tiff in Resources */,
+				02FEFB791FE6D6DD00507D46 /* FileBrowser.xib in Resources */,
 				43F0BAF10BBE980A00018704 /* TB_Segment_RightCapInactive.tiff in Resources */,
 				43F0BAF20BBE980A00018704 /* TB_Segment_RightCapPress.tiff in Resources */,
 				43F0BAF30BBE980A00018704 /* TB_Segment_RightCapRoll.tiff in Resources */,
@@ -1152,17 +1199,26 @@
 				43F0BAFA0BBE980A00018704 /* volume66.tif in Resources */,
 				43F0BAFB0BBE980A00018704 /* volume_knob.png in Resources */,
 				43F0BAFC0BBE980A00018704 /* volumeZero.tif in Resources */,
-				43F0BAFD0BBE980A00018704 /* white.png in Resources */,
 				43F0BB100BBE9A3700018704 /* COPYING in Resources */,
 				43D0C8B70C13F25900940B39 /* Localizable.strings in Resources */,
 				43F5BA4F0E5219EB00655E7B /* addButton.png in Resources */,
 				435A43190E53312F00EF425A /* Default.png in Resources */,
-				43BF744C0F06FFB000420B56 /* LicenseWindow.nib in Resources */,
-				43BF74750F0701EB00420B56 /* Preferences.nib in Resources */,
 				4350F0780F079D4F00FB6EDF /* PreferencesWindowController.m in Resources */,
 				43156D3E0FBEFC1200EF3ECA /* lastfm_red.gif in Resources */,
 				43156DC20FBF020C00EF3ECA /* empty.png in Resources */,
 				43BD36721052E628001E30F0 /* libmpd-version.h.in in Resources */,
+				48A954F815E72ED300289B16 /* README.markdown in Resources */,
+				48A9551315E7705900289B16 /* CHANGELOG in Resources */,
+				480249D815E7AC1F0029CBC7 /* InfoPanel.xib in Resources */,
+				480249DF15E7AD030029CBC7 /* InfoPlist.strings in Resources */,
+				480249E115E7ADE40029CBC7 /* PlayListFiles.xib in Resources */,
+				480249E315E7AFB40029CBC7 /* LicenseWindow.xib in Resources */,
+				480249E515E7B10B0029CBC7 /* Preferences.xib in Resources */,
+				480249E715E7B3310029CBC7 /* UpdateDatabase.xib in Resources */,
+				480249E915E7B3990029CBC7 /* MainMenu.xib in Resources */,
+				480249EB15E7B7580029CBC7 /* Library.xib in Resources */,
+				4A2C74DB164EEE8F00F63333 /* shuffleOff.png in Resources */,
+				4A2C74DD164EEE9600F63333 /* shuffleOn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1201,6 +1257,7 @@
 				43341FA40B8BA22500B8804A /* UnifiedToolbarButtonCell.m in Sources */,
 				43341FA60B8BA22500B8804A /* UnifiedToolbarItem.m in Sources */,
 				43341FA80B8BA22500B8804A /* UnifiedToolbarItemSegment.m in Sources */,
+				DD6FACDB19CD27B100BCF49D /* LibraryComposerSubController.m in Sources */,
 				43341FAA0B8BA22500B8804A /* UnifiedToolbarItemView.m in Sources */,
 				43341FAC0B8BA22500B8804A /* UnifiedToolbarLabelCell.m in Sources */,
 				43A5D1AE0BAC2F7100C29E17 /* PlayListFilesController.m in Sources */,
@@ -1209,8 +1266,7 @@
 				43215B770BCA3964009E4C18 /* AppGlobalHotkeyController.m in Sources */,
 				43215B7F0BCA3970009E4C18 /* AppGlobalHotkey.m in Sources */,
 				43A8E9B50BE4A8A40078DBD7 /* PWMusicTextField.m in Sources */,
-				43A8E9CD0BE4A9BA0078DBD7 /* Artist.m in Sources */,
-				43A8E9F40BE4AC230078DBD7 /* Album.m in Sources */,
+				43A8E9CD0BE4A9BA0078DBD7 /* Composer.m in Sources */,
 				43A0091E0DF3D39F00F42212 /* Genre.m in Sources */,
 				43858C9D0DFB30A300FEFB5E /* PWTableViewMenuItem.m in Sources */,
 				43858D700DFB432900FEFB5E /* PWTableView.m in Sources */,
@@ -1225,6 +1281,7 @@
 				43A016920E571A4700AA8198 /* CompilationDetector.m in Sources */,
 				43A016930E571A4700AA8198 /* LibraryBooleanFilter.m in Sources */,
 				43A016940E571A4700AA8198 /* LibraryFilterGroup.m in Sources */,
+				DD6FACD819CD265800BCF49D /* Album.m in Sources */,
 				43A016950E571A4700AA8198 /* LibraryIdFilter.m in Sources */,
 				43A016960E571A4700AA8198 /* LibraryStringFilter.m in Sources */,
 				43A016970E571A4700AA8198 /* LibraryController.m in Sources */,
@@ -1235,8 +1292,8 @@
 				43A0169C0E571A4700AA8198 /* SQLController.m in Sources */,
 				43A0169D0E571A4700AA8198 /* SQLiteDatabase.m in Sources */,
 				43A0169E0E571A4700AA8198 /* SQLiteQuery.m in Sources */,
+				DD6FACD919CD265800BCF49D /* Artist.m in Sources */,
 				43A0169F0E571A4700AA8198 /* SQLUniqueIdentifiersFilter.m in Sources */,
-				43A016A00E571A4700AA8198 /* sqlite3.c in Sources */,
 				43A016A10E571A4700AA8198 /* LibraryAlbumSubController.m in Sources */,
 				43A016A20E571A4700AA8198 /* LibraryArtistSubController.m in Sources */,
 				43A016A30E571A4700AA8198 /* LibraryGenreSubController.m in Sources */,
@@ -1256,6 +1313,7 @@
 				43FFC4040FC202C7002620C0 /* HIDRemoteControlDevice.m in Sources */,
 				43FFC4050FC202C7002620C0 /* MultiClickRemoteBehavior.m in Sources */,
 				43FFC4060FC202C7002620C0 /* RemoteControl.m in Sources */,
+				02FEFB7C1FE6D73D00507D46 /* FileBrowserController.m in Sources */,
 				43FFC4070FC202C7002620C0 /* RemoteControlContainer.m in Sources */,
 				43FFC40B0FC202D2002620C0 /* AppleRemoteController.m in Sources */,
 				43BD366A1052E628001E30F0 /* debug_printf.c in Sources */,
@@ -1268,68 +1326,14 @@
 				43BD36711052E628001E30F0 /* libmpd-strfsong.c in Sources */,
 				43BD36731052E628001E30F0 /* libmpd.c in Sources */,
 				43BD36741052E628001E30F0 /* libmpdclient.c in Sources */,
+				428B50B116FA613B00415CBA /* NSObject+SPInvocationGrabbing.m in Sources */,
+				428B50B216FA613B00415CBA /* SPMediaKeyTap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		437EB6990BBDB8930033AE88 /* InfoPanel.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				437EB69A0BBDB8930033AE88 /* English */,
-			);
-			name = InfoPanel.nib;
-			sourceTree = "<group>";
-		};
-		43BF744A0F06FFB000420B56 /* LicenseWindow.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF744B0F06FFB000420B56 /* English */,
-			);
-			name = LicenseWindow.nib;
-			sourceTree = "<group>";
-		};
-		43BF74730F0701EB00420B56 /* Preferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF74740F0701EB00420B56 /* English */,
-			);
-			name = Preferences.nib;
-			sourceTree = "<group>";
-		};
-		43BF77700BB52CCD00715336 /* Library.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77710BB52CCD00715336 /* English */,
-			);
-			name = Library.nib;
-			sourceTree = "<group>";
-		};
-		43BF77720BB52CCD00715336 /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77730BB52CCD00715336 /* English */,
-			);
-			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		43BF77740BB52CCD00715336 /* PlayListFiles.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77750BB52CCD00715336 /* English */,
-			);
-			name = PlayListFiles.nib;
-			sourceTree = "<group>";
-		};
-		43BF77760BB52CCD00715336 /* UpdateDatabase.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43BF77770BB52CCD00715336 /* English */,
-			);
-			name = UpdateDatabase.nib;
-			sourceTree = "<group>";
-		};
 		43D0C8B50C13F25900940B39 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1338,78 +1342,56 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		480249DD15E7AD030029CBC7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				480249DE15E7AD030029CBC7 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(PROJECT_DIR)/**",
 					"\"$(SRCROOT)\"",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../squeezelib/build/Debug\"";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DTHREADSAFE=1";
 				PRODUCT_NAME = Theremin;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
-				USER_HEADER_SEARCH_PATHS = "<Multiple values> $(PROJECT_DIR)/";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
+					"$(PROJECT_DIR)/**",
 					"\"$(SRCROOT)\"",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_2 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../../SqueezeLib/build/Release\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_3 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_4 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_5 = "\"$(SRCROOT)/../../../squeezelib/build/Release\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/glib\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Theremin;
 				SDKROOT = macosx;
-				SYMROOT = ../../build;
-				USER_HEADER_SEARCH_PATHS = "<Multiple values> $(PROJECT_DIR)/";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1417,17 +1399,15 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.0;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = SQL_DEBUG;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
-				SYMROOT = ../../../build;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1435,19 +1415,15 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};

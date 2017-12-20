@@ -30,4 +30,5 @@
 
 - (void) setUseGlobalHotkeys:(BOOL)aValue;
 - (BOOL) useGlobalHotkeys;
+
 @end

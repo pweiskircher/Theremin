@@ -6,6 +6,8 @@
 	<false/>
 	<key>pauseOnSleep</key>
 	<false/>
+	<key>crossfadeSeconds</key>
+	<integer>5</integer>
 	<key>NoConfirmationNeededForDeletionOfPlaylist</key>
 	<false/>
 	<key>appleRemoteMode</key>
@@ -17,6 +19,8 @@
 	<key>libraryDoubleClickAction</key>
 	<integer>0</integer>
 	<key>showGenreInLibrary</key>
+	<false/>
+	<key>showComposerInLibrary</key>
 	<false/>
 	<key>coverArtFetchingEnabled</key>
 	<false/>

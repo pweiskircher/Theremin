@@ -26,7 +26,7 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 }
 
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Genre <0x%08x> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
+	return [NSString stringWithFormat:@"Genre <%p> Name: %@ SQLIdentifier: %d", self, [self name], [self identifier]];
 }
 
 - (NSString *) name {
@@ -66,9 +66,15 @@ NSString *gUnknownGenreName = @"gUnknownGenreName";
 	self = [super init];
 	mName = [[decoder decodeObject] retain];
 	
-	unsigned length;
+	NSUInteger length;
 	memcpy(&_identifier, [decoder decodeBytesWithReturnedLength:&length], sizeof(_identifier));
 	
 	return self;
 }
+
+- (NSComparisonResult)compareTo:(NSObject<ThereminEntity> *)entity
+{
+	return [self.name localizedCaseInsensitiveCompare:entity.name];
+}
+
 @end

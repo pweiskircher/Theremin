@@ -99,6 +99,10 @@ static PreferencesController *_sharedPreferencesController;
 	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"pauseOnSleep"] boolValue];
 }
 
+- (NSUInteger)crossfadeSeconds
+{
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"crossfadeSeconds"] unsignedIntegerValue];
+}
 
 - (void) setNoConfirmationNeededForDeletionOfPlaylist:(BOOL)aValue {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"NoConfirmationNeededForDeletionOfPlaylist"];
@@ -144,6 +148,14 @@ static PreferencesController *_sharedPreferencesController;
 
 - (void) setShowGenreInLibrary:(BOOL)aValue {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"showGenreInLibrary"];
+}
+
+- (BOOL) showComposerInLibrary {
+	return [[[NSUserDefaults standardUserDefaults] objectForKey:@"showComposerInLibrary"] boolValue];
+}
+
+- (void) setShowComposerInLibrary:(BOOL)aValue {
+	[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:aValue] forKey:@"showComposerInLibrary"];
 }
 
 - (NSString *) coverArtFetchingPropertyName {

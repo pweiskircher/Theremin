@@ -19,6 +19,7 @@
 
 #import "MpdMusicServerClient.h"
 #import "WindowController.h"
+#import "PreferencesController.h"
 #import "NSNotificationAdditions.h"
 #import "Song.h"
 #import "Directory.h"
@@ -184,7 +185,11 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	}
 	
 	if (what & MPD_CST_CROSSFADE) {
-		//NSLog(@"crossfade changed");
+		int crossfade = mpd_player_get_crossfade(mConnection);
+		NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:crossfade] forKey:@"crossfadeSeconds"];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCrossfadeSecondsChanged
+																			object:self
+																		  userInfo:dict];
 	}
 	
 	if (what & MPD_CST_RANDOM) {
@@ -329,7 +334,7 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 }
 
 - (NSData *) databaseIdentifier {
-	NSString *string = [NSString stringWithFormat:@"%08d", mpd_server_get_database_update_time(mConnection)];
+	NSString *string = [NSString stringWithFormat:@"%08ld", mpd_server_get_database_update_time(mConnection)];
 	return [string dataUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -378,6 +383,10 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientFetchedPlaylist
 																		object:self
 																	  userInfo:dict];
+	
+	// Growl if current song's title has changed (for radio streams)
+	dict = [NSDictionary dictionaryWithObjectsAndKeys:[array objectAtIndex:self.currentSongPosition], dSong, [NSNumber numberWithInt:[self currentSongPosition]], dSongPosition, nil];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:nMusicServerClientCurrentSongChanged object:self userInfo:dict];
 }
 
 - (oneway void) removeSongsFromPlaylist:(NSArray *)songs {
@@ -504,6 +513,11 @@ static void MpdClientConnectionChangedCallback(MpdObj *mi, int connect, void *us
 
 - (oneway void) toggleRepeat {
 	mpd_player_set_repeat(mConnection, !mpd_player_get_repeat(mConnection));
+}
+
+- (oneway void)toggleCrossfade
+{
+	mpd_player_set_crossfade(mConnection, mpd_player_get_crossfade(mConnection)?0:[[PreferencesController sharedInstance] crossfadeSeconds]);
 }
 
 - (oneway void) playerWindowFocused {

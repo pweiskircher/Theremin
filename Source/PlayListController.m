@@ -87,13 +87,6 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	[mTableView setDataSource:self];
 	[mTableView registerForDraggedTypes:[NSArray arrayWithObjects:gMpdPlaylistPositionType, gMpdUniqueIdentifierType, nil]];
 	
-	unichar actionCharacters[] = { NSBackspaceCharacter, NSDeleteCharacter };
-	NSString *ac = [NSString stringWithCharacters:actionCharacters length:2];
-	NSMutableCharacterSet *mcs = [[[NSMutableCharacterSet alloc] init] autorelease];
-	[mcs addCharactersInString:ac];
-	[mcs addCharactersInRange:NSMakeRange(NSDeleteFunctionKey,1)];
-	[mTableView setActionForCharacters:mcs onTarget:mController usingSelector:@selector(deleteSelectedSongs:)];
-	
 	[mTableView setTarget:self];
 	[mTableView setDoubleAction:@selector(playSelectedSong:)];
 	
@@ -143,7 +136,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	if (mDisallowPlaylistUpdates == YES)
 		return;
 	
-	NSArray *songs = [[notification userInfo] objectForKey:dSongs];
+	NSMutableArray *songs = [[notification userInfo] objectForKey:dSongs];
 	[mPlayList release];
 	mPlayList = [songs retain];
 	
@@ -228,7 +221,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			}
 		}
 	} else {
-		if (!mPlayList || [mPlayList count] < 0)
+		if ( ! [mPlayList count])
 			return -1;
 		
 		row = mCurrentPlayingSongPosition;
@@ -274,28 +267,28 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		[mTableView setNeedsDisplayInRect:[mTableView rectOfRow:row]];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
 	if (mFilteredPlaylist != nil)
 		return [mFilteredPlaylist count];
 	return [mPlayList count];
 }
 
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex {
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 	Song *song;
 	int playlistPosition;
 	
 	if (mFilteredPlaylist) {
-		NSDictionary *dict = [mFilteredPlaylist objectAtIndex:rowIndex];
+		NSDictionary *dict = [mFilteredPlaylist objectAtIndex:row];
 		song = [dict objectForKey:dSong];
 		playlistPosition = [[dict objectForKey:@"playlistPosition"] intValue];
 	} else {
-		song = [self songAtRow:rowIndex];
-		playlistPosition = rowIndex;
+		song = [self songAtRow:row];
+		playlistPosition = row;
 	}
 	
-	if ([[aTableColumn identifier] isEqualToString:@"time"]) {
+	if ([[tableColumn identifier] isEqualToString:@"time"]) {
 		return [NSString convertSecondsToTime:[song time] andIsValid:NULL];
-	} else if ([[aTableColumn identifier] isEqualToString:@"isPlaying"]) {
+	} else if ([[tableColumn identifier] isEqualToString:@"isPlaying"]) {
 		if (mCurrentPlayingSongPosition == playlistPosition) {
 			if ([mController currentPlayerState] == eStatePlaying) {
 				return [NSImage imageNamed:@"isPlaying"];
@@ -312,12 +305,12 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		}
 	} else {
 		NSString *key;
-		if ([[aTableColumn identifier] isEqualToString:@"trackNumber"])
+		if ([[tableColumn identifier] isEqualToString:@"trackNumber"])
 			key = @"track";
-		else if ([[aTableColumn identifier] isEqualToString:@"track"])
+		else if ([[tableColumn identifier] isEqualToString:@"track"])
 			key = @"title";
 		else
-			key = [aTableColumn identifier];
+			key = [tableColumn identifier];
 		
 		if ([key isEqualToString:@"title"]) {
 			NSString *title = [song title];
@@ -336,7 +329,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		return NO;
 	
 	unsigned last_index = -1;
-	unsigned current_index = [rowIndexes firstIndex];
+	NSUInteger current_index = [rowIndexes firstIndex];
 	while (current_index != NSNotFound) {
 		if (last_index != -1 && current_index - last_index != 1)
 			return NO;
@@ -354,13 +347,13 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 	return YES;
 }
 
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(int)row proposedDropOperation:(NSTableViewDropOperation)op {
-	if (op == NSTableViewDropOn)
+- (NSDragOperation)tableView:(NSTableView *)tableView validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)dropOperation {
+	if (dropOperation == NSTableViewDropOn)
 		return NSDragOperationNone;
 	return NSDragOperationEvery;
 }
 
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id <NSDraggingInfo>)info row:(int)row dropOperation:(NSTableViewDropOperation)operation {
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)dropOperation {
 	NSPasteboard *pboard = [info draggingPasteboard];
 	
 	if ([[pboard types] containsObject:gMpdPlaylistPositionType]) {
@@ -369,12 +362,12 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 		
 		BOOL expandSelection = NO;
 		int dest = row;
-		unsigned current_index = [rowIndexes firstIndex];
+		NSUInteger current_index = [rowIndexes firstIndex];
 		if (current_index > row) {
 			while (current_index != NSNotFound)
 			{
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
+				[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				dest++;
 				current_index = [rowIndexes indexGreaterThanIndex: current_index];
@@ -385,7 +378,7 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 			{
 				dest--;
 				[[mController musicClient] moveSongFromPosition:current_index toPosition:dest];
-				[aTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
+				[tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:dest] byExtendingSelection:expandSelection];
 				expandSelection = YES;
 				current_index = [rowIndexes indexLessThanIndex: current_index];
 			}		
@@ -434,9 +427,9 @@ NSString *gMpdUniqueIdentifierType = @"gMpdUniqueIdentifierType";
 
 - (NSArray *)getSelectedSongs {
 	NSIndexSet *songSelection = [mTableView selectedRowIndexes];
-	unsigned int indexes[20];
+	NSUInteger indexes[20];
 	NSRange range = NSMakeRange(0, [mPlayList count]);
-	unsigned int returnValue;
+	NSUInteger returnValue;
 	
 	NSMutableArray *selectedSongs = [NSMutableArray array];
 	while ( (returnValue = [songSelection getIndexes:indexes maxCount:20 inIndexRange:&range])) {

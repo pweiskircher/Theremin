@@ -36,6 +36,7 @@ NSString *nMusicServerClientElapsedTimeChanged = @"nMusicServerClientElapsedTime
 NSString *nMusicServerClientTotalTimeChanged = @"nMusicServerClientTotalTimeChanged";
 NSString *nMusicServerClientShuffleOptionChanged = @"nMusicServerClientShuffleOptionChanged";
 NSString *nMusicServerClientRepeatOptionChanged = @"nMusicServerClientRepeatOptionChanged";
+NSString *nMusicServerClientCrossfadeSecondsChanged = @"nMusicServerClientCrossfadeSecondsChanged";
 
 NSString *nMusicServerClientFetchedDatabase = @"nMusicServerClientFetchedDatabase";
 NSString *nMusicServerClientFetchedPlaylist = @"nMusicServerClientFetchedPlaylist";
@@ -198,7 +199,7 @@ NSString *dEnabled = @"dEnabled";
 - (oneway void) moveSongFromPosition:(int)src toPosition:(int)dest {
 }
 
-- (oneway void) loadPlaylist:(PlayListFile *)aPlayListFile {
+- (oneway void) loadPlaylist:(bycopy PlayListFile *)aPlayListFile {
 	[NSException raise:NSInternalInconsistencyException format:@"You need to overwrite the loadPlaylist: method."];
 }
 
@@ -262,6 +263,9 @@ NSString *dEnabled = @"dEnabled";
 }
 
 - (oneway void) toggleRepeat {
+}
+
+- (oneway void) toggleCrossfade {
 }
 
 - (oneway void) playerWindowClosed {

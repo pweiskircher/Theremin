@@ -92,6 +92,10 @@ const NSTimeInterval HOLD_RECOGNITION_TIME_INTERVAL=0.4;
 	maxClickTimeDifference = timeDiff;
 }
 
+- (void) sendPressedDownEventToMainThread: (NSNumber*) event {
+	[delegate remoteButton:[event intValue] pressedDown:YES clickCount:1];
+}
+
 - (void) sendSimulatedHoldEvent: (id) time {
 	BOOL startSimulateHold = NO;
 	RemoteControlEventIdentifier event = lastHoldEvent;
@@ -101,7 +105,7 @@ const NSTimeInterval HOLD_RECOGNITION_TIME_INTERVAL=0.4;
 	if (startSimulateHold) {
 		lastEventSimulatedHold = YES;
 		event = (event << EVENT_TO_HOLD_EVENT_OFFSET);
-		[delegate remoteButton:event pressedDown: YES clickCount: 1];
+		[self performSelectorOnMainThread:@selector(sendPressedDownEventToMainThread:) withObject:[NSNumber numberWithInt:event] waitUntilDone:NO];
 	}
 }
 

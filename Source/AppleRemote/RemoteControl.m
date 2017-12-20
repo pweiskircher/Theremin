@@ -30,51 +30,58 @@
 // notifaction names that are being used to signal that an application wants to 
 // have access to the remote control device or if the application has finished
 // using the remote control device
-NSString* REQUEST_FOR_REMOTE_CONTROL_NOTIFCATION     = @"mac.remotecontrols.RequestForRemoteControl";
-NSString* FINISHED_USING_REMOTE_CONTROL_NOTIFICATION = @"mac.remotecontrols.FinishedUsingRemoteControl";
+NSString* const REQUEST_FOR_REMOTE_CONTROL_NOTIFCATION     = @"mac.remotecontrols.RequestForRemoteControl";
+NSString* const FINISHED_USING_REMOTE_CONTROL_NOTIFICATION = @"mac.remotecontrols.FinishedUsingRemoteControl";
 
 // keys used in user objects for distributed notifications
-NSString* kRemoteControlDeviceName = @"RemoteControlDeviceName";
-NSString* kApplicationIdentifier   = @"CFBundleIdentifier";
+NSString* const kRemoteControlDeviceName = @"RemoteControlDeviceName";
+NSString* const kApplicationIdentifier   = @"CFBundleIdentifier";
 // bundle identifier of the application that should get access to the remote control
 // this key is being used in the FINISHED notification only
-NSString* kTargetApplicationIdentifier = @"TargetBundleIdentifier";
+NSString* const kTargetApplicationIdentifier = @"TargetBundleIdentifier";
 
 
 @implementation RemoteControl
 
+
 // returns nil if the remote control device is not available
 - (id) initWithDelegate: (id) _remoteControlDelegate {	
-	if (self = [super init]) {
-		delegate = [_remoteControlDelegate retain];
+	if ( (self = [super init]) ) {
+		// as per Cocoa convention, delegates shouldn't be retained
+		delegate = _remoteControlDelegate;
 	}
 	return self;
 }
 
 - (void) dealloc {
-	[delegate release];
 	[super dealloc];
 }
 
+@synthesize delegate;
+
 - (void) setListeningToRemote: (BOOL) value {
+	(void)value;
 }
 - (BOOL) isListeningToRemote {
 	return NO;
 }
 
 - (IBAction) startListening: (id) sender {
+	(void)sender;
 }
 - (IBAction) stopListening: (id) sender {
-	
+	(void)sender;	
 }
 
 - (BOOL) isOpenInExclusiveMode {
 	return YES;
 }
 - (void) setOpenInExclusiveMode: (BOOL) value {
+	(void)value;
 }
 
 - (BOOL) sendsEventForButtonIdentifier: (RemoteControlEventIdentifier) identifier {
+	(void)identifier;
 	return YES;
 }
 
